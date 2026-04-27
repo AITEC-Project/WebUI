@@ -4,15 +4,22 @@
 const ApiService = {
     async fetchCases() {
         // 模擬從後端獲取的 JSON 數據
+        // 為符合需求，將原本單一 image 改為 images 陣列
         return [
             {
                 id: 'AA-0000',
-                type: '超速(65 in 45)',
+                type: '超速行駛 (限速 45, 實測 65)',
                 plate: 'K82-LMP',
                 time: '2m ago',
                 confidence: 88,
                 timestamp: '2026-04-08 23:12:05',
-                image: 'https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=1200',
+                // 存放三張不同角度的影像
+                images: [
+                    'pictures/AA-0000-1.jpg', // 左上：違規當下
+                    'pictures/AA-0000-2.jpg', // 右上：車牌特寫
+                    'pictures/AA-0000-3.jpg'  // 左下：標線與環境
+                ],
+                video: 'https://www.w3schools.com/html/mov_bbb.mp4',
                 aiReport: [
                     { type: 'env', text: '環境感測：測速雷達偵測該車速為 65km/h，超過該路段限速 45km/h。' },
                     { type: 'obj', text: '物件辨識：標的車輛為黑色 Sedan，車牌 K82-LMP 清晰可見。' },
@@ -20,31 +27,21 @@ const ApiService = {
                 ]
             },
             {
-                id: 'AA-0002',
-                type: '闖紅燈',
-                plate: 'H55-EES',
-                time: '22m ago',
-                confidence: 93,
-                timestamp: '2026-04-07 14:22:05',
-                image: 'https://via.placeholder.com/1200x675/111/fff?text=Red+Light+Violation',
-                aiReport: [
-                    { type: 'env', text: '環境感測：偵測到紅燈亮起，該車輛於紅燈啟動後 2.3 秒進入路口。' },
-                    { type: 'obj', text: '物件辨識：標的車輛為白色 SUV，車牌 H55-EES 辨識度極高。' },
-                    { type: 'law', text: '法規匹配：符合《道路交通管理處罰條例》第 53 條第 1 項：闖紅燈。' }
-                ]
-            },
-            {
-                id: 'AA-0005',
+                id: 'BB-1234',
                 type: '違規停車',
-                plate: 'E41-CJA',
-                time: '1h ago',
-                confidence: 100,
-                timestamp: '2026-04-07 11:30:00',
-                image: 'https://via.placeholder.com/1200x675/222/ccc?text=Illegal+Parking',
+                plate: 'ABC-5678',
+                time: '15m ago',
+                confidence: 95,
+                timestamp: '2026-04-08 22:55:10',
+                images: [
+                    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800',
+                    'https://via.placeholder.com/800x450/222/fff?text=Cam+2',
+                    'https://via.placeholder.com/800x450/222/fff?text=Cam+3'
+                ],
                 aiReport: [
-                    { type: 'env', text: '環境感測：該區域為紅線禁止停車路段，且設有明確告示牌。' },
-                    { type: 'obj', text: '物件辨識：偵測到車輛靜止於禁停區超過 3 分鐘，車牌 E41-CJA。' },
-                    { type: 'law', text: '法規匹配：符合《道路交通管理處罰條例》第 56 條第 1 項：違規停車。' }
+                    { type: 'env', text: '環境感測：該區域為紅線路段，禁止臨時停車。' },
+                    { type: 'obj', text: '物件辨識：偵測到車輛於紅線處靜止超過 3 分鐘。' },
+                    { type: 'law', text: '法規匹配：違反《道路交通管理處罰條例》第 56 條。' }
                 ]
             }
         ];
@@ -62,15 +59,15 @@ const UIRenderer = {
                  onclick="app.handleCaseClick('${c.id}')">
                 <div class="flex items-center space-x-3">
                     <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden">
-                        <img src="https://via.placeholder.com/150/222/fff?text=Car" class="w-full h-full object-cover">
+                        <img src="${c.images[0]}" class="w-full h-full object-cover">
                     </div>
                     <div class="flex-1">
                         <div class="flex justify-between">
                             <span class="text-sm font-bold text-gray-200">#${c.id}</span>
                             <span class="text-[10px] text-gray-500">${c.time}</span>
                         </div>
-                        <p class="text-xs text-gray-400">違規事項：${c.type}</p>
-                        <p class="text-[10px] text-gray-500">車牌號碼：${c.plate}</p>
+                        <p class="text-xs text-gray-400">事項：${c.type.split(' ')[0]}</p>
+                        <p class="text-[10px] text-gray-500">車牌：${c.plate}</p>
                         <div class="mt-1 flex items-center justify-between">
                             <span class="text-[10px] text-red-500 font-bold">信心值：${c.confidence}%</span>
                             <i class="fas fa-chevron-right text-gray-700 group-hover:text-blue-500 text-xs"></i>
@@ -88,17 +85,53 @@ const UIRenderer = {
         // 1. 更新基本資訊 (案號、標題、時間)
         document.querySelector('header h2').innerText = `Case #${c.id}`;
         document.querySelector('header p').innerText = `違規事項：${c.type}`;
-        document.querySelector('.font-mono').innerText = `TIMESTAMP: ${c.timestamp}`;
 
-        // 2. 更新證據影像
-        const evidenceImg = document.querySelector('img[alt="Evidence"]');
-        if (evidenceImg) evidenceImg.src = c.image;
+        const tsElement = document.querySelector('.font-mono');
+        if (tsElement) tsElement.innerText = `TIMESTAMP: ${c.timestamp}`;
+
+        // 2. 渲染三張影像 (左上、右上、左下排列)
+        const gridContainer = document.getElementById('evidence-grid');
+        if (gridContainer) {
+            const labels = ['違規主景 (CAM 1)', '車牌特寫 (CAM 2)', '環境關聯 (CAM 3)'];
+            let gridHTML = '';
+
+            // 生成三張圖片的 HTML
+            for (let i = 0; i < 3; i++) {
+                const imgSrc = c.images[i] || 'https://via.placeholder.com/400x225?text=No+Data';
+                gridHTML += `
+                    <div class="relative rounded-xl overflow-hidden bg-black aspect-video group cursor-zoom-in border border-gray-800">
+                        <img src="${imgSrc}" 
+                             class="evidence-img w-full h-full object-cover opacity-90 group-hover:opacity-100 transition duration-300" 
+                             onclick="app.openLightbox('${imgSrc}')"
+                             alt="Evidence ${i+1}">
+                        <div class="absolute bottom-2 left-2 text-[10px] bg-black/60 text-gray-300 px-2 py-0.5 rounded backdrop-blur-sm">
+                            ${labels[i]}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 第四格填入資訊或留白
+            const videoSrc = c.video || '';
+            gridHTML += `
+                <div class="relative rounded-xl overflow-hidden bg-black aspect-video border border-gray-800">
+                    <video class="w-full h-full object-cover" controls muted loop>
+                        <source src="${videoSrc}" type="video/mp4">
+                        您的瀏覽器不支援影片播放。
+                    </video>
+                    <div class="absolute top-2 left-2 text-[10px] bg-blue-600/80 text-white px-2 py-0.5 rounded backdrop-blur-sm">
+                        <i class="fas fa-video mr-1"></i> 動態追蹤錄影
+                    </div>
+                </div>
+            `;
+
+            gridContainer.innerHTML = gridHTML;
+        }
 
         // 3. 渲染 AI 分析列表
         const reportList = document.getElementById('ai-report-list');
         if (reportList) {
             reportList.innerHTML = c.aiReport.map(item => {
-                // 根據類型選擇圖標與顏色
                 let iconClass = 'fa-check-circle text-green-500';
                 let label = '分析項目';
 
@@ -144,12 +177,17 @@ const app = {
             this.handleCaseClick(this.state.cases[0].id);
         }
 
-        console.log('交通執法系統已啟動，模式：數據驅動');
+        // 4. 初始化燈箱點擊關閉事件
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox) {
+            lightbox.onclick = () => lightbox.classList.add('hidden');
+        }
+
+        console.log('交通執法系統已啟動，版本：v2.0 (多視角支援)');
     },
 
     /**
      * 處理案件點擊事件
-     * @param {string} id - 案號
      */
     handleCaseClick(id) {
         this.state.selectedCaseId = id;
@@ -158,8 +196,29 @@ const app = {
         // 更新 UI
         UIRenderer.renderDetail(selectedData);
 
-        // 可以在這裡添加點擊後的樣式切換 (如 Highlight 點擊項)
+        // 視覺反饋：切換選中狀態樣式
+        document.querySelectorAll('#case-list > div').forEach(el => {
+            if (el.getAttribute('onclick').includes(id)) {
+                el.classList.add('border-blue-500', 'bg-blue-900/10');
+            } else {
+                el.classList.remove('border-blue-500', 'bg-blue-900/10');
+            }
+        });
+
         console.log(`已切換至案件: ${id}`);
+    },
+
+    /**
+     * 開啟全螢幕燈箱
+     * @param {string} src - 圖片來源路徑
+     */
+    openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        if (lightbox && lightboxImg) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+        }
     }
 };
 

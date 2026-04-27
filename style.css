@@ -60,3 +60,33 @@ body {
     box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
     pointer-events: none;
 }
+
+/* 證據圖片基本樣式 */
+.evidence-img {
+    width: 100%;
+    height: 100%;
+    object-cover: cover;
+    transition: transform 0.3s ease; /* 平滑縮放 */
+}
+
+/* 懸停微放大 */
+.group:hover .evidence-img {
+    transform: scale(1.1);
+}
+
+/* 偵測框適配 (如果需要在多圖上顯示，需調整為相對定位容器) */
+.detection-box {
+    z-index: 10;
+}
+
+/* 全螢幕燈箱動畫 */
+#lightbox.hidden {
+    display: none;
+}
+#lightbox {
+    animation: fadeIn 0.2s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
