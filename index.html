@@ -22,15 +22,26 @@
     </div>
 
     <nav class="flex-1 space-y-2">
-        <a href="#" class="sidebar-active flex items-center justify-between p-3 rounded-lg text-blue-400">
+        <a href="#" id="nav-all" class="sidebar-active flex items-center justify-between p-3 rounded-lg text-blue-400" onclick="app.filterCases('all', this)">
             <span><i class="fas fa-home mr-3"></i>各地通報案件</span>
-            <span class="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">142</span>
+            <span id="total-cases-count" class="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">0</span>
         </a>
-        <div class="pl-8 space-y-2 text-sm text-gray-500">
-            <p class="flex items-center hover:text-white cursor-pointer"><span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>確信違規 (80)</p>
-            <p class="flex items-center hover:text-white cursor-pointer"><span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>疑似違規 (42)</p>
-            <p class="flex items-center hover:text-white cursor-pointer"><span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>邊界案例 (20)</p>
+
+        <div class="pl-8 space-y-1 text-sm text-gray-500">
+            <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('high', this)">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                確信違規 (<span id="high-confidence-count">0</span>)
+            </p>
+            <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('mid', this)">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                疑似違規 (<span id="mid-confidence-count">0</span>)
+            </p>
+            <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('low', this)">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                邊界案例 (<span id="low-confidence-count">0</span>)
+            </p>
         </div>
+
         <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
             <i class="fas fa-chart-line mr-3"></i>數據儀表板
         </a>
@@ -44,98 +55,94 @@
     </div>
 </aside>
 
-<main class="w-96 border-r border-gray-800 flex flex-col">
+<section class="w-80 border-r border-gray-800 flex flex-col">
     <div class="p-4 border-b border-gray-800">
-        <div class="relative">
-            <i class="fas fa-search absolute left-3 top-3 text-gray-500"></i>
-            <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-blue-500" placeholder="搜尋案號、車牌...">
-        </div>
-        <div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar">
-            <button class="bg-blue-600 px-4 py-1 rounded-full text-xs shrink-0">全部</button>
-            <button class="bg-gray-800 hover:bg-gray-700 px-4 py-1 rounded-full text-xs shrink-0 transition">常率超速</button>
-            <button class="bg-gray-800 hover:bg-gray-700 px-4 py-1 rounded-full text-xs shrink-0 transition">闖紅燈</button>
-            <button class="bg-gray-800 hover:bg-gray-700 px-4 py-1 rounded-full text-xs shrink-0 transition">違規停車</button>
-        </div>
-    </div>
+        <div class="flex items-stretch gap-2">
+            <div class="relative flex-1">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                <input type="text" id="keyword-search" oninput="app.applyFilters()" class="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-blue-500" placeholder="搜尋案號、車牌...">
+            </div>
+            <div class="relative">
+                <button onclick="app.toggleFilterPanel()" class="h-full bg-gray-800 hover:bg-gray-700 text-gray-300 px-3.5 rounded-lg border border-gray-700 transition flex items-center justify-center">
+                    <i class="fas fa-sliders text-sm"></i>
+                </button>
 
-    <div class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-3" id="case-list">
+                <div id="filter-panel" class="hidden absolute right-0 mt-2 w-72 bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl z-50 p-4 space-y-4">
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">違規樣態</p>
+                        <div class="grid grid-cols-1 gap-2 text-xs">
+                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+                                <input type="checkbox" value="超速" onchange="app.applyFilters()" class="filter-type rounded border-gray-700 bg-gray-900 text-blue-600">
+                                <span>超速行駛</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+                                <input type="checkbox" value="闖紅燈" onchange="app.applyFilters()" class="filter-type rounded border-gray-700 bg-gray-900 text-blue-600">
+                                <span>闖紅燈</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+                                <input type="checkbox" value="違規停車" onchange="app.applyFilters()" class="filter-type rounded border-gray-700 bg-gray-900 text-blue-600">
+                                <span>違規停車</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-800 pt-3">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">路段篩選</p>
+                        <div class="grid grid-cols-1 gap-2 text-xs">
+                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+                                <input type="checkbox" value="環中路" onchange="app.applyFilters()" class="filter-location rounded border-gray-700 bg-gray-900 text-blue-600">
+                                <span>環中路</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+                                <input type="checkbox" value="黎明路" onchange="app.applyFilters()" class="filter-location rounded border-gray-700 bg-gray-900 text-blue-600">
+                                <span>黎明路</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="app.resetFilters()" class="w-full py-1.5 bg-gray-800 hover:bg-red-900/30 text-red-400 text-[10px] rounded transition font-bold uppercase">重設篩選</button>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+    <div id="case-list" class="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
+    </div>
+</section>
 
 <section class="flex-1 flex flex-col overflow-y-auto custom-scrollbar p-8">
-    <header class="flex justify-between items-center mb-8">
-        <div>
-            <h2 class="text-2xl font-bold tracking-tight">Case #AA-0000</h2>
-            <p class="text-gray-400 mt-1">違規事項：超速 (限速 45, 實測 65)</p>
-        </div>
-        <div class="flex space-x-6 text-gray-400">
-            <button class="hover:text-blue-400 transition"><i class="fas fa-print fa-lg"></i></button>
-            <button class="hover:text-blue-400 transition"><i class="fas fa-external-link-alt fa-lg"></i></button>
-            <button class="hover:text-blue-400 transition"><i class="fas fa-ellipsis-v fa-lg"></i></button>
-        </div>
+    <header class="mb-8" id="detail-header">
     </header>
 
     <div class="space-y-6">
-        <div class="card-bg p-5 rounded-2xl border border-gray-800 shadow-xl">
-            <div class="flex items-center justify-between mb-4">
-        <span class="text-blue-400 font-semibold flex items-center">
-            <i class="fas fa-camera mr-2"></i> 違規證據影像 (多視角)
-        </span>
-                <span class="text-xs text-gray-500 font-mono" id="detail-timestamp">TIMESTAMP: 2026-04-08 23:12:05</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3" id="evidence-grid">
-                <div class="relative rounded-lg overflow-hidden bg-black aspect-video group cursor-zoom-in border border-gray-700">
-                    <img src="pictures/AA-0000-1.jpg" class="evidence-img" onclick="app.fullScreen(this.src)">
-                    <div class="absolute bottom-1 left-2 text-[10px] bg-black/50 px-1">CAM 01 - 車牌特寫</div>
-                </div>
-                <div class="relative rounded-lg overflow-hidden bg-black aspect-video group cursor-zoom-in border border-gray-700">
-                    <img src="pictures/AA-0000-2.jpg" class="evidence-img" onclick="app.fullScreen(this.src)">
-                    <div class="absolute bottom-1 left-2 text-[10px] bg-black/50 px-1">CAM 02 - 全景遠照</div>
-                </div>
-                <div class="relative rounded-lg overflow-hidden bg-black aspect-video group cursor-zoom-in border border-gray-700">
-                    <img src="pictures/AA-0000-3.jpg" class="evidence-img" onclick="app.fullScreen(this.src)">
-                    <div class="absolute bottom-1 left-2 text-[10px] bg-black/50 px-1">CAM 03 - 標線關聯</div>
-                </div>
-                <div class="flex items-center justify-center border border-dashed border-gray-800 rounded-lg text-gray-700 text-xs">
-                    No More Data
-                </div>
-            </div>
+        <div id="evidence-grid">
         </div>
 
-        <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-10 cursor-pointer" onclick="this.classList.add('hidden')">
-            <img id="lightbox-img" src="" class="max-w-full max-h-full shadow-2xl">
-            <div class="absolute top-5 right-5 text-white text-2xl"><i class="fas fa-times"></i></div>
-        </div>
-    <span class="text-blue-400 font-semibold flex items-center mb-4">
-        <i class="fas fa-brain mr-2"></i> AI 影像 & 法律條文分析
-    </span>
-            <div class="bg-black/30 p-5 rounded-xl border border-gray-800/50 leading-relaxed">
-                <div class="flex items-center text-purple-400 font-bold mb-3">
-                    <i class="fas fa-wand-magic-sparkles mr-2"></i> Qwen-VL 分析報告
-                </div>
-                <ul id="ai-report-list" class="space-y-4 text-gray-300 text-sm">
-                </ul>
-            </div>
+        <div id="analysis-container">
+            <ul id="ai-report-list" class="hidden"></ul>
         </div>
     </div>
 
     <footer class="mt-12 pt-6 border-t border-gray-800 flex justify-between items-center">
         <div class="flex items-center space-x-4">
-            <select class="bg-gray-800 border border-gray-700 text-sm rounded-lg px-4 py-2 text-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
+            <select class="bg-gray-800 border border-gray-700 text-sm rounded-lg px-4 py-2 text-gray-300 outline-none">
                 <option>請選擇撤銷理由...</option>
-                <option>救護車執行勤務</option>
+                <option>未明顯違規</option>
+                <option>緊急車輛執行勤務</option>
                 <option>影像模糊無法辨識</option>
-                <option>現場員警指揮</option>
             </select>
             <button class="text-red-400 hover:bg-red-900/30 px-6 py-2 rounded-lg font-medium transition">撤銷案件</button>
         </div>
-        <button class="bg-blue-600 hover:bg-blue-500 text-white px-10 py-3 rounded-xl font-bold transition shadow-lg shadow-blue-900/40 transform hover:-translate-y-0.5">
+        <button onclick="app.openTicket()" class="bg-blue-600 hover:bg-blue-500 text-white px-10 py-3 rounded-xl font-bold transition shadow-lg shadow-blue-900/40">
             案件成立 & 寄送通知
         </button>
     </footer>
 </section>
 
+<div id="lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex items-center justify-center p-4 cursor-pointer">
+    <img id="lightbox-img" src="" class="max-w-full max-h-full rounded shadow-2xl transition-transform duration-300">
+    <div class="absolute top-5 right-8 text-white/50 text-2xl hover:text-white"><i class="fas fa-times"></i></div>
+</div>
+
+<script src="data.js"></script>
+<script src="ticketModel.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,59 +1,46 @@
 /**
- * API 服務層 - 未來串接 FastAPI 時，將 fetchCases 改為非同步請求後端接口
+ * API 服務層 - 負責獲取後端（目前為 data.js）的資料
  */
 const ApiService = {
     async fetchCases() {
-        // 模擬從後端獲取的 JSON 數據
-        // 為符合需求，將原本單一 image 改為 images 陣列
-        return [
-            {
-                id: 'AA-0000',
-                type: '超速行駛 (限速 45, 實測 65)',
-                plate: 'K82-LMP',
-                time: '2m ago',
-                confidence: 88,
-                timestamp: '2026-04-08 23:12:05',
-                // 存放三張不同角度的影像
-                images: [
-                    'pictures/AA-0000-1.jpg', // 左上：違規當下
-                    'pictures/AA-0000-2.jpg', // 右上：車牌特寫
-                    'pictures/AA-0000-3.jpg'  // 左下：標線與環境
-                ],
-                video: 'https://www.w3schools.com/html/mov_bbb.mp4',
-                aiReport: [
-                    { type: 'env', text: '環境感測：測速雷達偵測該車速為 65km/h，超過該路段限速 45km/h。' },
-                    { type: 'obj', text: '物件辨識：標的車輛為黑色 Sedan，車牌 K82-LMP 清晰可見。' },
-                    { type: 'law', text: '法規匹配：符合《道路交通管理處罰條例》第 40 條：超速行駛。' }
-                ]
-            },
-            {
-                id: 'BB-1234',
-                type: '違規停車',
-                plate: 'ABC-5678',
-                time: '15m ago',
-                confidence: 95,
-                timestamp: '2026-04-08 22:55:10',
-                images: [
-                    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800',
-                    'https://via.placeholder.com/800x450/222/fff?text=Cam+2',
-                    'https://via.placeholder.com/800x450/222/fff?text=Cam+3'
-                ],
-                aiReport: [
-                    { type: 'env', text: '環境感測：該區域為紅線路段，禁止臨時停車。' },
-                    { type: 'obj', text: '物件辨識：偵測到車輛於紅線處靜止超過 3 分鐘。' },
-                    { type: 'law', text: '法規匹配：違反《道路交通管理處罰條例》第 56 條。' }
-                ]
-            }
-        ];
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                // mockCases 定義於 data.js 中
+                resolve(typeof mockCases !== 'undefined' ? mockCases : []);
+            }, 300);
+        });
     }
 };
 
 /**
- * UI 渲染引擎 - 負責將數據轉化為 HTML 標籤
+ * 工具函數：處理時間格式與相對時間計算
+ */
+const TimeUtils = {
+    formatRelativeTime(dateString) {
+        const now = new Date();
+        const past = new Date(dateString);
+        const diffInMs = now - past;
+        const diffInMins = Math.floor(diffInMs / (1000 * 60));
+        const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+        const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+        if (diffInMins < 1) return '剛剛';
+        if (diffInMins < 60) return `${diffInMins}m ago`;
+        if (diffInHours < 24) return `${diffInHours}h ago`;
+        return `${diffInDays}d ago`;
+    },
+    formatFullTime(dateString) {
+        if (!dateString) return '';
+        return dateString.replace('T', ' ').split('.')[0];
+    }
+};
+
+/**
+ * UI 渲染引擎
  */
 const UIRenderer = {
-    // 渲染左側列表的單一項目
     createCaseItemHTML(c) {
+        const displayTime = TimeUtils.formatRelativeTime(c.timestamp);
         return `
             <div class="card-bg p-3 rounded-lg border border-transparent hover:border-blue-500 cursor-pointer transition group" 
                  onclick="app.handleCaseClick('${c.id}')">
@@ -64,154 +51,287 @@ const UIRenderer = {
                     <div class="flex-1">
                         <div class="flex justify-between">
                             <span class="text-sm font-bold text-gray-200">#${c.id}</span>
-                            <span class="text-[10px] text-gray-500">${c.time}</span>
+                            <span class="text-[10px] text-gray-500">${displayTime}</span>
                         </div>
-                        <p class="text-xs text-gray-400">事項：${c.type.split(' ')[0]}</p>
-                        <p class="text-[10px] text-gray-500">車牌：${c.plate}</p>
-                        <div class="mt-1 flex items-center justify-between">
-                            <span class="text-[10px] text-red-500 font-bold">信心值：${c.confidence}%</span>
-                            <i class="fas fa-chevron-right text-gray-700 group-hover:text-blue-500 text-xs"></i>
-                        </div>
+                        <p class="text-[10px] text-gray-400">車牌：${c.plate}</p>
                     </div>
                 </div>
             </div>
         `;
     },
 
-    // 更新右側詳細內容區塊
     renderDetail(c) {
         if (!c) return;
-
-        // 1. 更新基本資訊 (案號、標題、時間)
-        document.querySelector('header h2').innerText = `Case #${c.id}`;
-        document.querySelector('header p').innerText = `違規事項：${c.type}`;
-
-        const tsElement = document.querySelector('.font-mono');
-        if (tsElement) tsElement.innerText = `TIMESTAMP: ${c.timestamp}`;
-
-        // 2. 渲染三張影像 (左上、右上、左下排列)
-        const gridContainer = document.getElementById('evidence-grid');
-        if (gridContainer) {
-            const labels = ['違規主景 (CAM 1)', '車牌特寫 (CAM 2)', '環境關聯 (CAM 3)'];
-            let gridHTML = '';
-
-            // 生成三張圖片的 HTML
-            for (let i = 0; i < 3; i++) {
-                const imgSrc = c.images[i] || 'https://via.placeholder.com/400x225?text=No+Data';
-                gridHTML += `
-                    <div class="relative rounded-xl overflow-hidden bg-black aspect-video group cursor-zoom-in border border-gray-800">
-                        <img src="${imgSrc}" 
-                             class="evidence-img w-full h-full object-cover opacity-90 group-hover:opacity-100 transition duration-300" 
-                             onclick="app.openLightbox('${imgSrc}')"
-                             alt="Evidence ${i+1}">
-                        <div class="absolute bottom-2 left-2 text-[10px] bg-black/60 text-gray-300 px-2 py-0.5 rounded backdrop-blur-sm">
-                            ${labels[i]}
+        const headerArea = document.getElementById('detail-header');
+        if (headerArea) {
+            headerArea.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-2xl font-black tracking-tighter text-white">Case #${c.id}</h2>
+                        <div class="flex items-center space-x-4 mt-1">
+                            <span class="text-blue-400 font-mono text-sm"><i class="fas fa-car mr-1"></i> ${c.plate}</span>
+                            <span class="text-gray-400 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> ${c.location}</span>
                         </div>
                     </div>
-                `;
-            }
-
-            // 第四格填入資訊或留白
-            const videoSrc = c.video || '';
-            gridHTML += `
-                <div class="relative rounded-xl overflow-hidden bg-black aspect-video border border-gray-800">
-                    <video class="w-full h-full object-cover" controls muted loop>
-                        <source src="${videoSrc}" type="video/mp4">
-                        您的瀏覽器不支援影片播放。
-                    </video>
-                    <div class="absolute top-2 left-2 text-[10px] bg-blue-600/80 text-white px-2 py-0.5 rounded backdrop-blur-sm">
-                        <i class="fas fa-video mr-1"></i> 動態追蹤錄影
+                    <div class="text-right">
+                        <span class="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-[10px] px-2 py-1 rounded border font-bold uppercase">待審核</span>
                     </div>
                 </div>
             `;
-
-            gridContainer.innerHTML = gridHTML;
         }
 
-        // 3. 渲染 AI 分析列表
-        const reportList = document.getElementById('ai-report-list');
-        if (reportList) {
-            reportList.innerHTML = c.aiReport.map(item => {
-                let iconClass = 'fa-check-circle text-green-500';
-                let label = '分析項目';
+        const evidenceBox = document.getElementById('evidence-grid');
+        if (evidenceBox) {
+            const fullTime = TimeUtils.formatFullTime(c.timestamp);
+            evidenceBox.className = "card-bg p-4 rounded-2xl border border-gray-800 shadow-xl space-y-3";
+            evidenceBox.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-blue-400 font-semibold text-sm flex items-center">
+                        <i class="fas fa-camera mr-2"></i> 違規證據影像
+                    </span>
+                    <span class="text-[10px] text-gray-500 font-mono">${fullTime}</span>
+                </div>
+                <div id="main-display-area" class="relative rounded-xl overflow-hidden bg-black aspect-video border border-gray-700 group">
+                    <img id="main-img-view" src="${c.images[0]}" class="w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
+                    <video id="main-video-view" class="hidden w-full h-full object-contain" controls muted loop>
+                        <source src="${c.video}" type="video/mp4">
+                    </video>
+                    <div id="display-label" class="absolute bottom-3 left-3 text-[10px] bg-black/60 text-gray-300 px-2 py-1 rounded backdrop-blur-sm">違規主景 (CAM 1)</div>
+                </div>
+                <div class="grid grid-cols-4 gap-2">
+                    ${c.images.map((img, idx) => `
+                        <div class="relative aspect-video rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800 hover:border-gray-600'}" 
+                             onclick="app.switchMainDisplay('img', '${img}', ${idx}, this)">
+                            <img src="${img}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
+                        </div>
+                    `).join('')}
+                    <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-gray-800 cursor-pointer flex items-center justify-center bg-gray-900 hover:border-gray-600 transition" 
+                         onclick="app.switchMainDisplay('video', '${c.video}', 3, this)">
+                        <i class="fas fa-play text-blue-500 text-xs"></i>
+                    </div>
+                </div>
+            `;
+        }
 
-                if (item.type === 'env') label = '環境感測';
-                if (item.type === 'obj') label = '物件辨識';
-                if (item.type === 'law') {
-                    label = '法規匹配';
-                    iconClass = 'fa-info-circle text-blue-400';
-                }
-
-                return `
-                    <li class="flex items-start">
-                        <i class="fas ${iconClass} mt-1 mr-3"></i>
-                        <div><strong>${label}：</strong>${item.text.replace(`${label}：`, '')}</div>
-                    </li>
-                `;
-            }).join('');
+        const analysisArea = document.getElementById('analysis-container');
+        if (analysisArea) {
+            analysisArea.innerHTML = `
+                <div class="mt-6 space-y-4">
+                    <div class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/20">
+                        <h3 class="text-blue-400 font-bold mb-2 flex items-center text-sm"><i class="fas fa-file-alt mr-2"></i> 違規敘述</h3>
+                        <p class="text-white text-lg font-semibold">${c.type}</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-purple-500/5 border border-purple-500/20">
+                        <h3 class="text-purple-400 font-bold mb-2 flex items-center text-sm"><i class="fas fa-gavel mr-2"></i> 適用法條</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">${c.legalBasis}</p>
+                    </div>
+                </div>
+            `;
         }
     }
 };
 
 /**
- * 主程式控制器 - 負責狀態管理與事件分發
+ * 主程式控制器
  */
 const app = {
     state: {
-        cases: [],
-        selectedCaseId: null
+        allCases: [],
+        pendingCases: [],
+        filteredCases: [],
+        selectedCaseId: null,
+        currentLevel: 'all' // 紀錄左側分級狀態
     },
 
     async init() {
-        // 1. 初始化獲取資料
-        this.state.cases = await ApiService.fetchCases();
+        // 1. 載入外部元件
+        await this.loadComponent('ticketModel.html');
 
-        // 2. 渲染左側案件列表
-        const listContainer = document.getElementById('case-list');
-        if (listContainer) {
-            listContainer.innerHTML = this.state.cases.map(c => UIRenderer.createCaseItemHTML(c)).join('');
-        }
+        // 2. 初始化資料
+        const rawData = await ApiService.fetchCases();
+        this.state.allCases = rawData;
+        this.state.pendingCases = rawData.filter(c => c.status === 'pending');
 
-        // 3. 預設選中第一筆案件
-        if (this.state.cases.length > 0) {
-            this.handleCaseClick(this.state.cases[0].id);
-        }
+        // 3. 執行初始篩選與渲染
+        this.applyFilters();
+        this.updateStatistics();
 
-        // 4. 初始化燈箱點擊關閉事件
         const lightbox = document.getElementById('lightbox');
-        if (lightbox) {
-            lightbox.onclick = () => lightbox.classList.add('hidden');
-        }
-
-        console.log('交通執法系統已啟動，版本：v2.0 (多視角支援)');
+        if (lightbox) lightbox.onclick = () => lightbox.classList.add('hidden');
     },
 
-    /**
-     * 處理案件點擊事件
-     */
-    handleCaseClick(id) {
-        this.state.selectedCaseId = id;
-        const selectedData = this.state.cases.find(c => c.id === id);
+    async loadComponent(file) {
+        try {
+            const response = await fetch(file);
+            const html = await response.text();
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            document.body.appendChild(div);
+        } catch (e) { console.error("Component load error:", e); }
+    },
 
-        // 更新 UI
-        UIRenderer.renderDetail(selectedData);
+    // 切換篩選面板
+    toggleFilterPanel() {
+        const panel = document.getElementById('filter-panel');
+        if (panel) panel.classList.toggle('hidden');
+    },
 
-        // 視覺反饋：切換選中狀態樣式
-        document.querySelectorAll('#case-list > div').forEach(el => {
-            if (el.getAttribute('onclick').includes(id)) {
-                el.classList.add('border-blue-500', 'bg-blue-900/10');
-            } else {
-                el.classList.remove('border-blue-500', 'bg-blue-900/10');
-            }
+    // 綜合篩選邏輯
+    applyFilters() {
+        const keyword = document.getElementById('keyword-search').value.toLowerCase();
+        const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(el => el.value);
+        const selectedLocations = Array.from(document.querySelectorAll('.filter-location:checked')).map(el => el.value);
+
+        this.state.filteredCases = this.state.pendingCases.filter(c => {
+            // A. 左側信心分級
+            let matchLevel = true;
+            if (this.state.currentLevel === 'high') matchLevel = c.confidence >= 90;
+            if (this.state.currentLevel === 'mid') matchLevel = c.confidence >= 80 && c.confidence < 90;
+            if (this.state.currentLevel === 'low') matchLevel = c.confidence < 80;
+
+            // B. 關鍵字 (案號、車牌、地點)
+            const matchKeyword = c.id.toLowerCase().includes(keyword) ||
+                c.plate.toLowerCase().includes(keyword) ||
+                c.location.toLowerCase().includes(keyword);
+
+            // C. 違規樣態 (勾選項目)
+            const matchType = selectedTypes.length === 0 || selectedTypes.some(t => c.type.includes(t));
+
+            // D. 路段 (勾選項目)
+            const matchLocation = selectedLocations.length === 0 || selectedLocations.some(l => c.location.includes(l));
+
+            return matchLevel && matchKeyword && matchType && matchLocation;
         });
 
-        console.log(`已切換至案件: ${id}`);
+        this.renderCaseList();
+
+        if (this.state.filteredCases.length > 0) {
+            this.handleCaseClick(this.state.filteredCases[0].id);
+        } else {
+            this.clearDetail();
+        }
     },
 
-    /**
-     * 開啟全螢幕燈箱
-     * @param {string} src - 圖片來源路徑
-     */
+    // 重置篩選
+    resetFilters() {
+        document.querySelectorAll('#filter-panel input[type="checkbox"]').forEach(cb => cb.checked = false);
+        document.getElementById('keyword-search').value = '';
+        this.applyFilters();
+    },
+
+    // 左側導覽列分級篩選
+    filterCases(level, el) {
+        const navAll = document.getElementById('nav-all');
+        if (navAll) {
+            navAll.classList.remove('sidebar-active', 'text-blue-400');
+            navAll.classList.add('text-gray-400');
+        }
+        document.querySelectorAll('.filter-item').forEach(item => item.classList.remove('filter-active'));
+
+        if (el) {
+            if (level === 'all') {
+                el.classList.add('sidebar-active', 'text-blue-400');
+                el.classList.remove('text-gray-400');
+            } else {
+                el.classList.add('filter-active');
+            }
+        }
+
+        this.state.currentLevel = level;
+        this.applyFilters();
+    },
+
+    updateStatistics() {
+        const stats = { total: this.state.pendingCases.length, high: 0, mid: 0, low: 0 };
+        this.state.pendingCases.forEach(c => {
+            if (c.confidence >= 90) stats.high++;
+            else if (c.confidence >= 80) stats.mid++;
+            else stats.low++;
+        });
+
+        const setVal = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = val;
+        };
+        setVal('total-cases-count', stats.total);
+        setVal('high-confidence-count', stats.high);
+        setVal('mid-confidence-count', stats.mid);
+        setVal('low-confidence-count', stats.low);
+    },
+
+    renderCaseList() {
+        const listContainer = document.getElementById('case-list');
+        if (listContainer) {
+            listContainer.innerHTML = this.state.filteredCases
+                .map(c => UIRenderer.createCaseItemHTML(c))
+                .join('');
+        }
+    },
+
+    handleCaseClick(id) {
+        this.state.selectedCaseId = id;
+        const selectedData = this.state.allCases.find(c => c.id === id);
+        UIRenderer.renderDetail(selectedData);
+
+        document.querySelectorAll('#case-list > div').forEach(item => {
+            const isTarget = item.getAttribute('onclick').includes(id);
+            item.classList.toggle('border-blue-500', isTarget);
+            item.classList.toggle('bg-blue-900/10', isTarget);
+        });
+    },
+
+    clearDetail() {
+        document.getElementById('detail-header').innerHTML = '<p class="text-gray-500 text-center mt-10">查無待處理案件</p>';
+        document.getElementById('evidence-grid').innerHTML = '';
+        document.getElementById('analysis-container').innerHTML = '';
+    },
+
+    openTicket() {
+        const c = this.state.allCases.find(item => item.id === this.state.selectedCaseId);
+        if (c && typeof TicketModal !== 'undefined') TicketModal.open(c);
+    },
+
+    closeTicket() {
+        if (typeof TicketModal !== 'undefined') TicketModal.close();
+    },
+
+    confirmTicket() {
+        const target = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+        if (target) {
+            target.status = 'verified';
+            alert(`案件 ${this.state.selectedCaseId} 舉發成功，已寄送通知。`);
+        }
+        this.closeTicket();
+        this.init(); // 重新整理狀態
+    },
+
+    switchMainDisplay(type, src, idx, el) {
+        const imgView = document.getElementById('main-img-view');
+        const videoView = document.getElementById('main-video-view');
+        const label = document.getElementById('display-label');
+        const labels = ['違規主景 (CAM 1)', '車牌特寫 (CAM 2)', '環境關聯 (CAM 3)', '動態追蹤錄影'];
+        if (label) label.innerText = labels[idx];
+
+        if (type === 'img') {
+            if (videoView) videoView.pause();
+            videoView.classList.add('hidden');
+            imgView.classList.remove('hidden');
+            imgView.src = src;
+        } else {
+            imgView.classList.add('hidden');
+            videoView.classList.remove('hidden');
+            videoView.play();
+        }
+
+        const thumbnails = el.parentElement.children;
+        Array.from(thumbnails).forEach(thumb => {
+            thumb.classList.remove('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
+            thumb.classList.add('border-gray-800');
+        });
+        el.classList.add('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
+        el.classList.remove('border-gray-800');
+    },
+
     openLightbox(src) {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -222,5 +342,4 @@ const app = {
     }
 };
 
-// 確保 DOM 載入後再初始化程式
 document.addEventListener('DOMContentLoaded', () => app.init());
