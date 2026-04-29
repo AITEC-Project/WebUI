@@ -96,7 +96,7 @@ const UIRenderer = {
                     <video id="main-video-view" class="hidden w-full h-full object-contain" controls muted loop>
                         <source src="${c.video}" type="video/mp4">
                     </video>
-                    <div id="display-label" class="absolute bottom-3 left-3 text-[10px] bg-black/60 text-gray-300 px-2 py-1 rounded backdrop-blur-sm">違規主景 (CAM 1)</div>
+                    <div id="display-label" class="hidden absolute bottom-3 left-3 text-[10px] bg-black/60 text-gray-300 px-2 py-1 rounded backdrop-blur-sm"></div>
                 </div>
                 <div class="grid grid-cols-4 gap-2">
                     ${c.images.map((img, idx) => `
@@ -308,9 +308,6 @@ const app = {
     switchMainDisplay(type, src, idx, el) {
         const imgView = document.getElementById('main-img-view');
         const videoView = document.getElementById('main-video-view');
-        const label = document.getElementById('display-label');
-        const labels = ['違規主景 (CAM 1)', '車牌特寫 (CAM 2)', '環境關聯 (CAM 3)', '動態追蹤錄影'];
-        if (label) label.innerText = labels[idx];
 
         if (type === 'img') {
             if (videoView) videoView.pause();
