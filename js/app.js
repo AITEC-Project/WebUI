@@ -1,6 +1,3 @@
-/**
- * API 服務層 - 負責獲取後端（目前為 data.js）的資料
- */
 const ApiService = {
     async fetchCases() {
         return new Promise((resolve) => {
@@ -12,9 +9,6 @@ const ApiService = {
     }
 };
 
-/**
- * 工具函數：處理時間格式與相對時間計算
- */
 const TimeUtils = {
     formatRelativeTime(dateString) {
         const now = new Date();
@@ -35,9 +29,6 @@ const TimeUtils = {
     }
 };
 
-/**
- * UI 渲染引擎
- */
 const UIRenderer = {
     createCaseItemHTML(c) {
         const displayTime = TimeUtils.formatRelativeTime(c.timestamp);
@@ -46,7 +37,7 @@ const UIRenderer = {
                  onclick="app.handleCaseClick('${c.id}')">
                 <div class="flex items-center space-x-3">
                     <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden">
-                        <img src="${c.images[0]}" class="w-full h-full object-cover">
+                        <img src="${c.images[0]}" alt="Case ${c.id} 縮圖" class="w-full h-full object-cover">
                     </div>
                     <div class="flex-1">
                         <div class="flex justify-between">
@@ -92,7 +83,7 @@ const UIRenderer = {
                     <span class="text-[10px] text-gray-500 font-mono">${fullTime}</span>
                 </div>
                 <div id="main-display-area" class="relative rounded-xl overflow-hidden bg-black aspect-video border border-gray-700 group">
-                    <img id="main-img-view" src="${c.images[0]}" class="w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
+                    <img id="main-img-view" src="${c.images[0]}" alt="Case ${c.id} 證據影像" class="w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
                     <video id="main-video-view" class="hidden w-full h-full object-contain" controls muted loop>
                         <source src="${c.video}" type="video/mp4">
                     </video>
@@ -102,7 +93,7 @@ const UIRenderer = {
                     ${c.images.map((img, idx) => `
                         <div class="relative aspect-video rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800 hover:border-gray-600'}" 
                              onclick="app.switchMainDisplay('img', '${img}', ${idx}, this)">
-                            <img src="${img}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
+                            <img src="${img}" alt="Case ${c.id} - 圖 ${idx + 1}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
                         </div>
                     `).join('')}
                     <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-gray-800 cursor-pointer flex items-center justify-center bg-gray-900 hover:border-gray-600 transition" 
@@ -131,28 +122,22 @@ const UIRenderer = {
     }
 };
 
-/**
- * 主程式控制器
- */
 const app = {
     state: {
         allCases: [],
         pendingCases: [],
         filteredCases: [],
         selectedCaseId: null,
-        currentLevel: 'all' // 紀錄左側分級狀態
+        currentLevel: 'all'
     },
 
     async init() {
-        // 1. 載入外部元件
         await this.loadComponent('ticketModel.html');
 
-        // 2. 初始化資料
         const rawData = await ApiService.fetchCases();
         this.state.allCases = rawData;
         this.state.pendingCases = rawData.filter(c => c.status === 'pending');
 
-        // 3. 執行初始篩選與渲染
         this.applyFilters();
         this.updateStatistics();
 
@@ -170,34 +155,28 @@ const app = {
         } catch (e) { console.error("Component load error:", e); }
     },
 
-    // 切換篩選面板
     toggleFilterPanel() {
         const panel = document.getElementById('filter-panel');
         if (panel) panel.classList.toggle('hidden');
     },
 
-    // 綜合篩選邏輯
     applyFilters() {
         const keyword = document.getElementById('keyword-search').value.toLowerCase();
         const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(el => el.value);
         const selectedLocations = Array.from(document.querySelectorAll('.filter-location:checked')).map(el => el.value);
 
         this.state.filteredCases = this.state.pendingCases.filter(c => {
-            // A. 左側信心分級
             let matchLevel = true;
             if (this.state.currentLevel === 'high') matchLevel = c.confidence >= 90;
             if (this.state.currentLevel === 'mid') matchLevel = c.confidence >= 80 && c.confidence < 90;
             if (this.state.currentLevel === 'low') matchLevel = c.confidence < 80;
 
-            // B. 關鍵字 (案號、車牌、地點)
             const matchKeyword = c.id.toLowerCase().includes(keyword) ||
                 c.plate.toLowerCase().includes(keyword) ||
                 c.location.toLowerCase().includes(keyword);
 
-            // C. 違規樣態 (勾選項目)
             const matchType = selectedTypes.length === 0 || selectedTypes.some(t => c.type.includes(t));
 
-            // D. 路段 (勾選項目)
             const matchLocation = selectedLocations.length === 0 || selectedLocations.some(l => c.location.includes(l));
 
             return matchLevel && matchKeyword && matchType && matchLocation;
@@ -212,14 +191,12 @@ const app = {
         }
     },
 
-    // 重置篩選
     resetFilters() {
         document.querySelectorAll('#filter-panel input[type="checkbox"]').forEach(cb => cb.checked = false);
         document.getElementById('keyword-search').value = '';
         this.applyFilters();
     },
 
-    // 左側導覽列分級篩選
     filterCases(level, el) {
         const navAll = document.getElementById('nav-all');
         if (navAll) {
@@ -302,7 +279,7 @@ const app = {
             alert(`案件 ${this.state.selectedCaseId} 舉發成功，已寄送通知。`);
         }
         this.closeTicket();
-        this.init(); // 重新整理狀態
+        this.init();
     },
 
     switchMainDisplay(type, src, idx, el) {

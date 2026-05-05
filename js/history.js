@@ -1,12 +1,7 @@
-/**
- * 歷史案件紀錄控制器 - 抓取 data.js 中的 mockCases
- */
 const HistoryController = {
     rawRecords: [],
 
     init() {
-        // 1. 從 data.js 抓取資料 (mockCases 是全域變數)
-        // 篩選出非 pending 的案件作為歷史紀錄
         if (typeof mockCases !== 'undefined') {
             this.rawRecords = mockCases.filter(c => c.status !== 'pending').map(c => ({
                 id: c.id,
@@ -81,12 +76,10 @@ const HistoryController = {
             const matchType = type === 'all' || r.type.includes(type);
             const matchStatus = status === 'all' || r.status === status;
 
-            // 時間篩選邏輯 (這裡示範今日 2026-04-29)
             let matchRange = true;
             if (range === 'today') {
                 matchRange = r.date.includes('2026-04-29');
             } else if (range === 'weekly') {
-                // 簡化逻辑：只要是 4 月份都算
                 matchRange = r.date.includes('2026-04');
             }
 
@@ -97,5 +90,4 @@ const HistoryController = {
     }
 };
 
-// 確保在 DOM 載入後初始化
 document.addEventListener('DOMContentLoaded', () => HistoryController.init());

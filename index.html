@@ -60,7 +60,7 @@
         <div class="flex items-stretch gap-2">
             <div class="relative flex-1">
                 <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                <input type="text" id="keyword-search" oninput="app.applyFilters()" class="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-blue-500" placeholder="搜尋案號、車牌...">
+                <input type="text" id="keyword-search" aria-label="搜尋案號或車牌" oninput="app.applyFilters()" class="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-blue-500" placeholder="搜尋案號、車牌...">
             </div>
             <div class="relative">
                 <button onclick="app.toggleFilterPanel()" class="h-full bg-gray-800 hover:bg-gray-700 text-gray-300 px-3.5 rounded-lg border border-gray-700 transition flex items-center justify-center">
@@ -122,7 +122,7 @@
 
     <footer class="mt-12 pt-6 border-t border-gray-800 flex justify-between items-center">
         <div class="flex items-center space-x-4">
-            <select class="bg-gray-800 border border-gray-700 text-sm rounded-lg px-4 py-2 text-gray-300 outline-none focus:border-blue-500 transition">
+            <select aria-label="撤銷理由" class="bg-gray-800 border border-gray-700 text-sm rounded-lg px-4 py-2 text-gray-300 outline-none focus:border-blue-500 transition">
                 <option>請選擇撤銷理由...</option>
                 <option>未明顯違規</option>
                 <option>緊急車輛執行勤務</option>
@@ -137,12 +137,12 @@
 </section>
 
 <div id="lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex items-center justify-center p-4 cursor-pointer">
-    <img id="lightbox-img" src="" class="max-w-full max-h-full rounded shadow-2xl transition-transform duration-300">
+    <img id="lightbox-img" src="" alt="違規影像燈箱檢視" class="max-w-full max-h-full rounded shadow-2xl transition-transform duration-300">
     <div class="absolute top-5 right-8 text-white/50 text-2xl hover:text-white"><i class="fas fa-times"></i></div>
 </div>
 
-<script src="data.js"></script>
-<script src="ticketModel.js"></script>
-<script src="app.js"></script>
+<script src="js/data.js"></script>
+<script src="js/ticketModel.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

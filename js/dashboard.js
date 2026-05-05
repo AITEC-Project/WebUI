@@ -16,16 +16,13 @@ const DashboardApp = {
 
     calculateLocationRank(event, range) {
         const data = this.getFilteredData(range);
-        // 如果不是「全部事件」，則過濾出特定類型的違規
         const filtered = event === '全部事件' ? data : data.filter(i => i.type === event);
 
-        // 統計各路口出現次數
         const counts = filtered.reduce((acc, curr) => {
             acc[curr.location] = (acc[curr.location] || 0) + 1;
             return acc;
         }, {});
 
-        // 轉為陣列並按次數降序排列
         const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
 
         return {
@@ -34,9 +31,6 @@ const DashboardApp = {
         };
     },
 
-    /**
-     * 3. 模式二：分析特定路口的違規事件組成 (事件構成)
-     */
     calculateEventComposition(location, range) {
         const data = this.getFilteredData(range);
         const filtered = data.filter(i => i.location === location);
@@ -55,9 +49,6 @@ const DashboardApp = {
         };
     },
 
-    /**
-     * 4. 違規時間熱度分析：計算 0-23 小時的分佈
-     */
     calculateHourlyTrend(filterValue, mode, range) {
         const data = this.getFilteredData(range);
         const filtered = mode === 'location-rank'
@@ -72,16 +63,11 @@ const DashboardApp = {
         return hours;
     },
 
-    /**
-     * 5. AI 診斷告警邏輯：從數據中抓取異常
-     * 範例：如果某路口的「未禮讓行人」佔該路口總違規 > 30%，觸發告警
-     */
     generateAnomalies() {
         const data = window.SHARED_HISTORY_DATA || [];
         const alerts = [];
 
-        // 邏輯 A: 找出低信心值聚集地
-        const lowConfLocation = "西屯路/逢甲路"; // 模擬分析結論
+        const lowConfLocation = "西屯路/逢甲路";
         alerts.push({
             type: 'env',
             location: lowConfLocation,
@@ -89,7 +75,6 @@ const DashboardApp = {
             level: 'medium'
         });
 
-        // 邏輯 B: 分析路口設計缺陷 (文心路範例)
         const wenxinData = data.filter(i => i.location === "文心路/台灣大道");
         const pedestrianIssues = wenxinData.filter(i => i.type === "未禮讓行人").length;
         if (pedestrianIssues / wenxinData.length > 0.2) {
@@ -105,11 +90,6 @@ const DashboardApp = {
     }
 };
 
-/**
- * ======================================================
- * 圖表與 UI 控制
- * ======================================================
- */
 let rankingChart = null;
 let heatmapChart = null;
 
@@ -217,7 +197,6 @@ const handleModeChange = () => {
 
     secondaryFilter.innerHTML = '';
 
-    // 從共享資料中動態獲取清單，確保不重複
     const data = window.SHARED_HISTORY_DATA || [];
     const eventTypes = ["全部事件", ...new Set(data.map(i => i.type))];
     const locationList = [...new Set(data.map(i => i.location))];
@@ -234,16 +213,11 @@ const handleModeChange = () => {
     updateDashboard();
 };
 
-/**
- * 初始化
- */
 document.addEventListener('DOMContentLoaded', () => {
-    // 監聽器設定
     document.getElementById('analysis-mode').addEventListener('change', handleModeChange);
     document.getElementById('secondary-filter').addEventListener('change', updateDashboard);
     document.getElementById('time-range').addEventListener('change', updateDashboard);
 
-    // 啟動首屏渲染
     handleModeChange();
     renderAlerts();
 });

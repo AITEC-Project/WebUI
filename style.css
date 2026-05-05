@@ -1,4 +1,3 @@
-/* 自定義變數 */
 :root {
     --bg-main: #0d1117;
     --bg-card: #161b22;
@@ -15,18 +14,15 @@ body {
     margin: 0;
 }
 
-/* 側邊欄活動狀態 */
 .sidebar-active {
     background-color: var(--bg-sidebar-active);
     border-left: 4px solid var(--accent-blue);
 }
 
-/* 卡片背景 */
 .card-bg {
     background-color: var(--bg-card);
 }
 
-/* 自定義滾動條 (Chrome, Safari, Edge) */
 .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
 }
@@ -44,7 +40,6 @@ body {
     background: #484f58;
 }
 
-/* 隱藏原生滾動條但保持滾動功能 (針對標籤欄) */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -53,7 +48,6 @@ body {
     scrollbar-width: none;
 }
 
-/* 圖片上的紅框標註動畫 (模擬 AI 辨識) */
 .detection-box {
     position: absolute;
     border: 2px solid #ef4444;
@@ -61,25 +55,21 @@ body {
     pointer-events: none;
 }
 
-/* 證據圖片基本樣式 */
 .evidence-img {
     width: 100%;
     height: 100%;
-    object-cover: cover;
-    transition: transform 0.3s ease; /* 平滑縮放 */
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-/* 懸停微放大 */
 .group:hover .evidence-img {
     transform: scale(1.1);
 }
 
-/* 偵測框適配 (如果需要在多圖上顯示，需調整為相對定位容器) */
 .detection-box {
     z-index: 10;
 }
 
-/* 全螢幕燈箱動畫 */
 #lightbox.hidden {
     display: none;
 }
@@ -91,13 +81,11 @@ body {
     to { opacity: 1; }
 }
 
-/* 被選取時的底色與文字顏色 */
 .filter-active {
-    background-color: rgba(59, 130, 246, 0.15) !important; /* 淡淡的藍色背景 */
-    color: #3b82f6 !important; /* 文字變藍色 */
+    background-color: rgba(59, 130, 246, 0.15) !important;
+    color: #3b82f6 !important;
 }
 
-/* 讓選取後的圓點保持亮度 */
 .filter-active .rounded-full {
     box-shadow: 0 0 5px currentColor;
 }
