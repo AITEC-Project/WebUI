@@ -8,9 +8,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T06:28:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000464.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000438.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000228.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -34,9 +34,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-28T23:09:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000065.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000209.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000008.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -60,9 +60,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T13:47:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000040.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000001.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -86,9 +86,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T22:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000425.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000485.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000091.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -112,9 +112,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T08:06:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000091.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000226.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000345.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -138,9 +138,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T13:10:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000342.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000234.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000364.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -164,9 +164,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T07:31:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000103.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000195.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -190,9 +190,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T17:58:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000027.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000273.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000162.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -216,9 +216,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T11:43:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000255.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000180.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -242,9 +242,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T17:47:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000044.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000351.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000359.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -268,9 +268,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T19:06:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000257.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000016.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -294,9 +294,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T01:28:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000058.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000115.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -320,9 +320,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T13:49:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000375.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000486.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -346,9 +346,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T03:39:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000391.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000269.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000369.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -372,9 +372,9 @@ const mockCases = [
         "confidence": 75,
         "timestamp": "2026-04-29T08:04:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000357.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000350.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000389.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -398,9 +398,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T07:32:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000402.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000323.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000386.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -424,9 +424,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T10:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000426.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000358.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000113.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -450,9 +450,9 @@ const mockCases = [
         "confidence": 75,
         "timestamp": "2026-04-29T21:24:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000308.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000449.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -476,9 +476,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T07:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000284.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000314.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -502,9 +502,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T21:54:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000351.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000481.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000447.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -528,9 +528,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T10:03:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000100.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000383.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000405.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -554,9 +554,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T20:05:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000235.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000461.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000213.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -580,9 +580,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T02:51:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000328.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000443.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000190.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -606,9 +606,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T07:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000160.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000236.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000116.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -632,9 +632,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T13:51:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000199.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000257.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000036.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -658,9 +658,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T00:06:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000250.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000357.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000175.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -684,9 +684,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T16:56:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000043.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000149.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000296.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -710,9 +710,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T04:25:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000272.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000104.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000216.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -736,9 +736,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T12:47:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000002.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000141.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000040.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -762,9 +762,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T01:24:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000009.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000311.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -788,9 +788,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T15:12:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000368.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000019.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000435.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -814,9 +814,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T20:58:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000228.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000106.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -840,9 +840,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T18:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000420.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000380.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000014.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -866,9 +866,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T11:56:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000112.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000459.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -892,9 +892,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T11:16:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000316.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000270.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000144.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -918,9 +918,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T20:32:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000349.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000120.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000449.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -944,9 +944,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T16:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000259.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000295.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000403.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -970,9 +970,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T06:24:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000359.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000292.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000255.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -996,9 +996,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T01:15:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000260.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000187.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000380.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1022,9 +1022,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T02:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000172.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000437.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000367.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1048,9 +1048,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T12:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000250.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000088.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1074,9 +1074,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T12:10:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000064.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000429.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000142.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1100,9 +1100,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T09:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000415.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000327.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000199.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1126,9 +1126,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T12:35:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000312.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000218.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1152,9 +1152,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T16:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000499.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000161.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000319.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1178,9 +1178,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T21:31:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000303.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000039.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1204,9 +1204,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T06:01:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000215.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000203.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000123.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1230,9 +1230,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T15:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000085.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000355.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000407.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1256,9 +1256,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T05:58:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000017.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000375.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000250.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1282,9 +1282,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T16:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000406.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000443.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000495.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1308,9 +1308,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T04:16:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000185.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000210.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000193.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1334,9 +1334,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T11:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000105.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000088.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000240.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1360,9 +1360,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-28T23:12:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000054.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000141.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000023.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1386,9 +1386,9 @@ const mockCases = [
         "confidence": 75,
         "timestamp": "2026-04-29T12:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000465.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000187.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000179.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1412,9 +1412,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T05:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000060.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000477.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000291.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1438,9 +1438,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T20:34:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000439.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000451.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000429.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1464,9 +1464,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T14:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000238.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000147.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000034.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1490,9 +1490,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T20:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000402.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000371.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000415.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1516,9 +1516,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T14:29:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000470.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000095.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1542,9 +1542,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T18:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000077.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000005.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1568,9 +1568,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T13:54:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000383.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000303.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000247.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1594,9 +1594,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T21:48:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000115.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000287.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000021.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1620,9 +1620,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T14:42:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000257.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000199.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000498.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1646,9 +1646,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T13:54:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000100.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000173.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000388.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1672,9 +1672,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T00:20:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000155.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000290.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000249.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1698,9 +1698,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T15:07:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000140.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000029.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1724,9 +1724,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T22:52:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000337.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000499.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000302.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1750,9 +1750,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T21:45:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000034.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000363.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1776,9 +1776,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T19:18:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000097.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000152.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000299.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1802,9 +1802,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T09:36:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000341.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000374.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -1828,9 +1828,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T01:41:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000023.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000274.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000216.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1854,9 +1854,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T12:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000117.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000242.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000422.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1880,9 +1880,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T22:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000276.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000369.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -1906,9 +1906,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T10:36:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000225.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000460.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000214.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1932,9 +1932,9 @@ const mockCases = [
         "confidence": 75,
         "timestamp": "2026-04-29T08:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000097.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000030.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -1958,9 +1958,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T18:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000379.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000322.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000150.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -1984,9 +1984,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T14:48:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000429.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000194.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000271.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2010,9 +2010,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T10:08:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000314.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000480.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2036,9 +2036,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T11:02:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000409.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000341.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000154.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2062,9 +2062,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T17:01:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000463.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000263.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2088,9 +2088,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T04:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000437.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000471.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000370.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2114,9 +2114,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T04:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000261.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000447.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000040.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2140,9 +2140,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T18:08:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000314.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000006.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000400.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2166,9 +2166,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T09:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000354.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000230.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000403.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2192,9 +2192,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T00:04:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000276.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000131.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000430.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2218,9 +2218,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T04:33:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000267.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000191.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000132.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2244,9 +2244,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T11:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000498.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000009.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000440.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2270,9 +2270,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T21:09:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000056.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000400.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2296,9 +2296,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T04:10:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000149.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000281.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000180.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2322,9 +2322,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T08:50:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000193.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000415.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000088.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2348,9 +2348,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T08:59:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000128.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000248.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000364.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2374,9 +2374,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T13:38:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000314.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000031.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000030.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2400,9 +2400,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T18:49:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000271.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000060.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000262.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2426,9 +2426,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T05:44:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000292.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000046.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2452,9 +2452,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T08:10:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000241.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000130.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2478,9 +2478,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T13:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000020.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000057.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000199.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2504,9 +2504,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T20:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000413.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000030.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2530,9 +2530,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T19:59:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000050.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000197.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000205.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2556,9 +2556,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T05:01:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000196.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000319.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000330.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2582,9 +2582,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T16:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000418.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000458.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2608,9 +2608,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T04:04:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000413.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000061.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2634,9 +2634,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T05:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000234.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000458.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2660,9 +2660,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T04:50:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000178.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000320.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000113.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2686,9 +2686,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T04:03:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000416.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000054.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000154.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2712,9 +2712,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T00:52:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000104.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000342.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2738,9 +2738,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T09:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000392.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000247.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000449.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2764,9 +2764,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T05:44:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000372.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000246.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000079.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2790,9 +2790,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T08:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000330.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000008.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000004.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -2816,9 +2816,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T20:29:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000384.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000102.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000429.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2842,9 +2842,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T11:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000435.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000498.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000129.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2868,9 +2868,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T15:20:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000043.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000479.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000383.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2894,9 +2894,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T19:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000207.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000198.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000017.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -2920,9 +2920,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T11:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000059.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000069.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000241.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2946,9 +2946,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T04:31:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000480.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000351.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -2972,9 +2972,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T06:29:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000138.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -2998,9 +2998,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T19:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000165.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000224.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000190.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3024,9 +3024,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T08:08:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000435.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000299.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000360.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3050,9 +3050,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T16:52:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000098.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000294.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000367.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3076,9 +3076,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T17:24:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000451.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000389.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3102,9 +3102,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T13:29:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000055.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000041.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000093.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3128,9 +3128,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T09:58:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000249.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000487.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000436.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3154,9 +3154,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T18:34:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000057.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000439.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000269.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3180,9 +3180,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T19:06:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000236.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000387.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000218.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3206,9 +3206,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T09:01:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000023.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000358.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000012.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3232,9 +3232,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T05:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000456.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000326.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000091.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3258,9 +3258,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T15:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000044.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000379.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000456.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3284,9 +3284,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T02:01:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000144.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000333.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000307.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3310,9 +3310,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T13:59:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000084.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000483.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000331.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3336,9 +3336,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T21:03:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000119.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000167.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000260.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3362,9 +3362,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T03:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000499.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000283.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000305.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3388,9 +3388,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T04:06:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000184.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000229.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000294.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3414,9 +3414,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T00:36:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000396.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000261.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000452.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3440,9 +3440,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T15:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000313.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000269.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000135.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3466,9 +3466,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T02:11:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000269.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000191.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000100.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3492,9 +3492,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-28T23:24:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000183.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000003.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000256.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3518,9 +3518,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T03:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000419.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000078.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3544,9 +3544,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T11:47:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000202.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000042.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000190.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3570,9 +3570,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T07:51:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000495.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000273.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000325.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3596,9 +3596,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T13:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000420.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000151.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3622,9 +3622,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T10:30:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000464.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000116.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000089.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -3648,9 +3648,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T07:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000407.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000206.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000453.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3674,9 +3674,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T18:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000362.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000449.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000496.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3700,9 +3700,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T07:15:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000331.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000325.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000262.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3726,9 +3726,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T09:49:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000007.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000419.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000311.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3752,9 +3752,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T05:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000370.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000403.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000451.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3778,9 +3778,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T18:25:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000070.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000070.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000141.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3804,9 +3804,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T18:11:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000454.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000245.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000154.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3830,9 +3830,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-28T23:28:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000221.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000466.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000469.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3856,9 +3856,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T19:06:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000275.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000336.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3882,9 +3882,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T05:12:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000322.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000212.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000170.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -3908,9 +3908,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T01:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000149.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000267.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000207.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3934,9 +3934,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T03:42:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000479.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000060.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000307.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -3960,9 +3960,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T12:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000036.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000447.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000351.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -3986,9 +3986,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T10:08:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000180.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000213.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000331.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4012,9 +4012,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T06:48:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000438.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000010.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000397.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4038,9 +4038,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T02:08:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000107.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000311.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000340.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4064,9 +4064,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T06:34:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000492.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000375.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000372.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4090,9 +4090,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T14:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000148.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000007.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000389.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4116,9 +4116,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T03:02:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000247.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000243.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4142,9 +4142,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T12:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000028.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000027.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000112.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4168,9 +4168,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T01:47:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000002.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000318.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000150.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4194,9 +4194,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T13:02:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000455.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000115.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000285.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4220,9 +4220,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T16:05:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000495.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000024.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000453.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4246,9 +4246,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T22:02:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000364.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000049.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4272,9 +4272,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T12:50:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000361.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000486.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000115.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4298,9 +4298,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T08:25:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000230.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4324,9 +4324,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T00:26:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000469.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000222.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000414.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4350,9 +4350,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T08:50:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000112.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000306.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000403.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4376,9 +4376,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T16:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000018.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000446.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000379.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4402,9 +4402,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T01:00:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000183.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000202.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000441.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4428,9 +4428,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T00:59:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000409.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000084.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000105.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4454,9 +4454,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T09:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000442.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000489.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000158.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4480,9 +4480,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T11:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000467.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000457.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000405.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4506,9 +4506,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T05:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000015.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000255.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000229.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4532,9 +4532,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T22:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000422.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000047.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000367.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4558,9 +4558,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T11:04:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000444.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000174.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000265.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4584,9 +4584,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T10:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000291.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000439.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000060.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4610,9 +4610,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T19:02:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000209.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000179.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4636,9 +4636,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T17:29:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000239.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000313.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000429.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4662,9 +4662,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T02:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000329.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000176.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000332.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4688,9 +4688,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T07:27:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000472.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000441.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000060.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4714,9 +4714,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T08:45:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000360.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000158.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4740,9 +4740,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-28T23:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000230.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000025.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000297.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4766,9 +4766,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T11:16:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000036.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000320.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000416.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -4792,9 +4792,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T08:18:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000387.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000271.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000303.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4818,9 +4818,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T03:15:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000401.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000417.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4844,9 +4844,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T09:36:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000319.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000084.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000278.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -4870,9 +4870,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T16:43:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000447.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000364.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4896,9 +4896,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T03:41:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000283.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000089.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000160.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -4922,9 +4922,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T06:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000278.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000354.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4948,9 +4948,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T12:49:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000116.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000071.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000500.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -4974,9 +4974,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T03:17:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000336.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000088.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000385.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5000,9 +5000,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-28T23:15:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000440.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000256.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000388.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5026,9 +5026,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T05:33:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000448.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000446.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000015.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5052,9 +5052,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T14:17:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000141.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000319.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000407.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5078,9 +5078,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T15:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000462.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000375.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000480.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5104,9 +5104,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T21:17:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000200.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000143.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000161.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5130,9 +5130,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T10:22:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000178.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000393.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000016.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5156,9 +5156,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T04:45:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000402.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000061.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5182,9 +5182,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T21:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000182.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000361.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000203.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5208,9 +5208,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T12:18:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000249.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000369.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000291.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5234,9 +5234,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T21:42:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000448.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000156.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000408.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5260,9 +5260,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T22:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000291.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000324.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000457.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5286,9 +5286,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T21:00:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000210.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000141.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000388.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5312,9 +5312,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T15:16:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000176.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000293.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5338,9 +5338,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T20:34:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000379.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000473.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000231.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5364,9 +5364,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T18:11:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000332.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000029.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5390,9 +5390,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T04:27:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000231.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000320.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000295.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5416,9 +5416,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T13:44:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000061.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000254.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000236.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5442,9 +5442,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T04:50:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000058.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000197.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000333.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5468,9 +5468,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T07:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000016.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000468.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000170.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5494,9 +5494,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T11:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000206.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000297.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000055.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5520,9 +5520,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T00:56:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000329.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000261.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000288.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5546,9 +5546,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T19:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000299.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000303.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000244.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5572,9 +5572,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T01:17:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000074.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000255.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000281.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5598,9 +5598,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T05:05:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000242.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000332.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000366.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5624,9 +5624,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T09:48:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000146.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000232.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000400.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5650,9 +5650,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T06:17:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000145.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000288.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5676,9 +5676,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T04:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000422.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000323.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000186.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5702,9 +5702,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T03:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000131.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000286.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000325.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5728,9 +5728,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-28T23:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000136.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000401.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5754,9 +5754,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T04:08:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000500.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000339.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000328.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -5780,9 +5780,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T10:11:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000431.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000229.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000296.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5806,9 +5806,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T21:39:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000186.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000121.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000008.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5832,9 +5832,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T06:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000163.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000358.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000274.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5858,9 +5858,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T00:52:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000407.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000448.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5884,9 +5884,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T09:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000376.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000321.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000293.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -5910,9 +5910,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T18:28:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000364.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000199.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -5936,9 +5936,9 @@ const mockCases = [
         "confidence": 75,
         "timestamp": "2026-04-29T00:05:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000321.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000482.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000266.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5962,9 +5962,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T00:15:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000313.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000350.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -5988,9 +5988,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T01:10:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000316.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000308.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000195.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6014,9 +6014,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T22:29:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000458.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000099.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000408.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6040,9 +6040,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T02:28:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000035.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000128.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6066,9 +6066,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T10:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000225.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000391.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000208.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6092,9 +6092,9 @@ const mockCases = [
         "confidence": 77,
         "timestamp": "2026-04-29T01:04:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000315.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000332.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000434.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6118,9 +6118,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T02:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000230.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000038.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000010.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6144,9 +6144,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T12:52:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000383.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000124.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000447.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6170,9 +6170,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T14:59:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000030.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000107.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000485.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6196,9 +6196,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T05:52:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000219.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000377.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000447.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6222,9 +6222,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-28T23:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000460.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000301.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000025.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6248,9 +6248,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T18:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000462.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000022.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000260.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6274,9 +6274,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T09:28:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000042.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000106.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000125.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6300,9 +6300,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T01:55:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000440.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000405.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000256.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6326,9 +6326,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T07:35:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000081.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000023.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6352,9 +6352,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T04:20:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000393.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000194.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000385.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6378,9 +6378,9 @@ const mockCases = [
         "confidence": 84,
         "timestamp": "2026-04-29T01:43:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000363.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000116.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6404,9 +6404,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T09:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000215.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000000.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000405.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6430,9 +6430,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T21:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000086.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000129.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6456,9 +6456,9 @@ const mockCases = [
         "confidence": 96,
         "timestamp": "2026-04-29T07:38:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000473.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000215.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000500.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6482,9 +6482,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T05:12:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000461.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000020.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000312.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6508,9 +6508,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T11:44:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000494.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000119.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000002.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6534,9 +6534,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T04:48:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000403.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000061.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000022.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6560,9 +6560,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T08:35:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000420.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000024.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000381.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6586,9 +6586,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T09:09:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000137.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000003.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000275.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6612,9 +6612,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T06:59:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000036.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000218.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6638,9 +6638,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T21:35:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000425.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000364.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000387.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6664,9 +6664,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T22:03:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000371.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000442.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000098.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6690,9 +6690,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-28T23:01:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000001.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6716,9 +6716,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T02:43:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000310.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000351.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000371.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6742,9 +6742,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T07:42:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000160.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000139.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000001.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6768,9 +6768,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-28T23:57:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000152.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000357.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000338.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -6794,9 +6794,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T04:00:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000040.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000085.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000114.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6820,9 +6820,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T00:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000038.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000186.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000136.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6846,9 +6846,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T20:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000005.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000048.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000260.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6872,9 +6872,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T08:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000433.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000044.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000130.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -6898,9 +6898,9 @@ const mockCases = [
         "confidence": 75,
         "timestamp": "2026-04-29T12:05:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000477.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000494.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000338.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6924,9 +6924,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T14:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000475.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000333.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000321.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -6950,9 +6950,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T06:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000457.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000367.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000316.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -6976,9 +6976,9 @@ const mockCases = [
         "confidence": 86,
         "timestamp": "2026-04-29T00:37:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000238.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000160.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000213.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -7002,9 +7002,9 @@ const mockCases = [
         "confidence": 83,
         "timestamp": "2026-04-29T13:16:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000288.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000259.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000163.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -7028,9 +7028,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T04:33:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000471.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000259.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000158.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7054,9 +7054,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T10:14:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000210.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000135.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000466.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7080,9 +7080,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T07:26:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000056.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000424.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000439.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7106,9 +7106,9 @@ const mockCases = [
         "confidence": 98,
         "timestamp": "2026-04-29T14:54:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000047.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000378.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000120.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7132,9 +7132,9 @@ const mockCases = [
         "confidence": 81,
         "timestamp": "2026-04-29T16:21:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000462.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000149.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000408.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7158,9 +7158,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T01:50:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000064.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000156.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000184.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7184,9 +7184,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T05:51:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000480.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000344.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000228.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7210,9 +7210,9 @@ const mockCases = [
         "confidence": 82,
         "timestamp": "2026-04-29T15:04:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000094.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000028.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7236,9 +7236,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T21:23:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000417.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000051.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000489.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7262,9 +7262,9 @@ const mockCases = [
         "confidence": 85,
         "timestamp": "2026-04-29T20:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000079.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000035.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000237.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -7288,9 +7288,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T05:07:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000124.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000007.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000498.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -7314,9 +7314,9 @@ const mockCases = [
         "confidence": 89,
         "timestamp": "2026-04-29T15:10:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000218.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000013.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000363.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7340,9 +7340,9 @@ const mockCases = [
         "confidence": 95,
         "timestamp": "2026-04-29T18:00:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000464.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000245.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000206.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -7366,9 +7366,9 @@ const mockCases = [
         "confidence": 92,
         "timestamp": "2026-04-29T11:19:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000299.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000044.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000182.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7392,9 +7392,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T09:53:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000288.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000008.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000419.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7418,9 +7418,9 @@ const mockCases = [
         "confidence": 91,
         "timestamp": "2026-04-29T20:47:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000244.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000174.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000040.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7444,9 +7444,9 @@ const mockCases = [
         "confidence": 80,
         "timestamp": "2026-04-29T02:45:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000176.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000431.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000070.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7470,9 +7470,9 @@ const mockCases = [
         "confidence": 88,
         "timestamp": "2026-04-29T09:44:00",
         "images": [
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000382.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000123.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000236.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7496,9 +7496,9 @@ const mockCases = [
         "confidence": 76,
         "timestamp": "2026-04-29T03:09:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000433.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000049.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000372.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7522,9 +7522,9 @@ const mockCases = [
         "confidence": 79,
         "timestamp": "2026-04-29T04:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000387.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000166.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7548,9 +7548,9 @@ const mockCases = [
         "confidence": 99,
         "timestamp": "2026-04-29T07:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000396.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000109.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000182.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
@@ -7574,9 +7574,9 @@ const mockCases = [
         "confidence": 90,
         "timestamp": "2026-04-29T18:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1544365558-35aa4afcf11f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000153.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000193.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000131.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7600,9 +7600,9 @@ const mockCases = [
         "confidence": 78,
         "timestamp": "2026-04-29T14:56:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000496.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000483.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000300.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7626,9 +7626,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T17:56:00",
         "images": [
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000220.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000182.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000051.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
@@ -7652,9 +7652,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T04:13:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000147.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000209.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000344.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7678,9 +7678,9 @@ const mockCases = [
         "confidence": 93,
         "timestamp": "2026-04-29T01:49:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000328.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000444.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000207.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7704,9 +7704,9 @@ const mockCases = [
         "confidence": 97,
         "timestamp": "2026-04-29T08:46:00",
         "images": [
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000008.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000371.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000158.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
@@ -7730,9 +7730,9 @@ const mockCases = [
         "confidence": 94,
         "timestamp": "2026-04-29T00:40:00",
         "images": [
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000059.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000423.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000460.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7756,9 +7756,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T14:07:00",
         "images": [
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000354.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000328.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
@@ -7782,9 +7782,9 @@ const mockCases = [
         "confidence": 87,
         "timestamp": "2026-04-29T00:02:00",
         "images": [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800"
+            "https://c01.twipcam.com/cam/snapshot/tpe-000135.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000417.jpg",
+            "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg"
         ],
         "video": "https://www.w3schools.com/html/mov_bbb.mp4",
         "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
