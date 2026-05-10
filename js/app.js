@@ -83,23 +83,23 @@ const UIRenderer = {
                     <span class="text-[10px] text-gray-500 font-mono">${fullTime}</span>
                 </div>
                 <div id="main-display-area" class="relative rounded-xl overflow-hidden bg-black aspect-video border border-gray-700 group">
-                    <img id="main-img-view" src="${c.images[0]}" alt="Case ${c.id} 證據影像" class="w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
-                    <video id="main-video-view" class="hidden w-full h-full object-contain" controls muted loop>
+                    <video id="main-video-view" class="w-full h-full object-contain" controls autoplay muted loop>
                         <source src="${c.video}" type="video/mp4">
                     </video>
+                    <img id="main-img-view" src="${c.images[0]}" alt="Case ${c.id} 證據影像" class="hidden w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
                     <div id="display-label" class="hidden absolute bottom-3 left-3 text-[10px] bg-black/60 text-gray-300 px-2 py-1 rounded backdrop-blur-sm"></div>
                 </div>
                 <div class="grid grid-cols-4 gap-2">
+                    <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-blue-500 shadow-lg shadow-blue-500/20 cursor-pointer flex items-center justify-center bg-gray-900 transition" 
+                         onclick="app.switchMainDisplay('video', '${c.video}', 0, this)">
+                        <i class="fas fa-play text-blue-500 text-xs"></i>
+                    </div>
                     ${c.images.map((img, idx) => `
-                        <div class="relative aspect-video rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800 hover:border-gray-600'}" 
-                             onclick="app.switchMainDisplay('img', '${img}', ${idx}, this)">
+                        <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-gray-800 cursor-pointer transition-all hover:border-gray-600" 
+                             onclick="app.switchMainDisplay('img', '${img}', ${idx + 1}, this)">
                             <img src="${img}" alt="Case ${c.id} - 圖 ${idx + 1}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
                         </div>
                     `).join('')}
-                    <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-gray-800 cursor-pointer flex items-center justify-center bg-gray-900 hover:border-gray-600 transition" 
-                         onclick="app.switchMainDisplay('video', '${c.video}', 3, this)">
-                        <i class="fas fa-play text-blue-500 text-xs"></i>
-                    </div>
                 </div>
             `;
         }
@@ -140,6 +140,7 @@ const app = {
 
         this.applyFilters();
         this.updateStatistics();
+        this.initHotkeys();
 
         const lightbox = document.getElementById('lightbox');
         if (lightbox) lightbox.onclick = () => lightbox.classList.add('hidden');
@@ -153,6 +154,52 @@ const app = {
             div.innerHTML = html;
             document.body.appendChild(div);
         } catch (e) { console.error("Component load error:", e); }
+    },
+
+    initHotkeys() {
+        document.addEventListener('keydown', (e) => {
+            // 排除輸入框，避免在搜尋時誤觸
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+            if (!currentCase) return;
+
+            const thumbnails = document.querySelectorAll('#evidence-grid .grid > div');
+
+            switch (e.key) {
+                case '1': // 切換至影片
+                    if (thumbnails[0]) {
+                        this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
+                    }
+                    break;
+
+                case '2': // 切換至圖片 1
+                case '3': // 切換至圖片 2
+                case '4': // 切換至圖片 3
+                    const imgIdx = parseInt(e.key) - 2; // 2->0, 3->1, 4->2
+                    if (currentCase.images[imgIdx] && thumbnails[imgIdx + 1]) {
+                        this.switchMainDisplay('img', currentCase.images[imgIdx], imgIdx + 1, thumbnails[imgIdx + 1]);
+                    }
+                    break;
+
+                case ' ': // 空白鍵：播放或暫停影片
+                    e.preventDefault();
+                    const video = document.getElementById('main-video-view');
+                    if (video && !video.classList.contains('hidden')) {
+                        video.paused ? video.play() : video.pause();
+                    }
+                    break;
+
+                case 'Enter': // Enter：開啟開單視窗
+                    e.preventDefault();
+                    const modal = document.getElementById('ticket-modal');
+                    // 檢查 modal 是否處於隱藏狀態 (含有 hidden 類別)
+                    if (this.state.selectedCaseId && modal && modal.classList.contains('hidden')) {
+                        this.openTicket();
+                    }
+                    break;
+            }
+        });
     },
 
     toggleFilterPanel() {

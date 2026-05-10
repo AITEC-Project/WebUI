@@ -1,10 +1,12 @@
 const DashboardApp = {
-    baseDate: new Date('2026-04-16 23:59:59'),
+    // 使用動態基準時間（現在），方便依據 data.js 的 timestamp 計算區間
+    baseDate: new Date(),
 
     getFilteredData(range) {
-        const data = window.SHARED_HISTORY_DATA || [];
+        // 優先使用 data.js 裡的 mockCases，若不存在則回退到舊的 window.SHARED_HISTORY_DATA
+        const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
         return data.filter(item => {
-            const itemDate = new Date(item.date);
+            const itemDate = new Date(item.timestamp || item.date);
             const diffDays = (this.baseDate - itemDate) / (1000 * 60 * 60 * 24);
 
             if (range === '24h') return diffDays <= 1;
@@ -57,14 +59,52 @@ const DashboardApp = {
 
         const hours = new Array(24).fill(0);
         filtered.forEach(item => {
-            const h = new Date(item.date).getHours();
+            // 使用 timestamp（data.js）或 date（回退）兩者之一
+            const h = new Date(item.timestamp || item.date).getHours();
             hours[h]++;
         });
         return hours;
     },
 
+    updateSummaryStats(range) {
+        const data = this.getFilteredData(range);
+        const accEl = document.getElementById('stat-accuracy');
+        const latEl = document.getElementById('stat-latency');
+        const lowEl = document.getElementById('stat-lowconf');
+
+        if (!data || data.length === 0) {
+            if (accEl) accEl.innerText = '-';
+            if (latEl) latEl.innerText = '-';
+            if (lowEl) lowEl.innerText = '-';
+            return;
+        }
+
+        // AI 辨識準確率：使用 confidence 欄位平均值
+        const avgConf = Math.round(data.reduce((s, i) => s + (i.confidence || 0), 0) / data.length);
+        if (accEl) accEl.innerText = `${avgConf}%`;
+
+        // 系統平均延遲：若資料中提供 processingMs 則計算平均，否則保留原始顯示
+        const procList = data.map(i => i.processingMs).filter(n => typeof n === 'number');
+        if (procList.length > 0) {
+            const avgProc = Math.round(procList.reduce((s, n) => s + n, 0) / procList.length);
+            if (latEl) latEl.innerText = `${avgProc}ms`;
+        }
+
+        // 低信心值聚集地：計算每個地點的平均 confidence，取最小者
+        const locAgg = {};
+        data.forEach(i => {
+            const loc = i.location || '未知';
+            if (!locAgg[loc]) locAgg[loc] = { sum: 0, count: 0 };
+            locAgg[loc].sum += (i.confidence || 0);
+            locAgg[loc].count += 1;
+        });
+        const locAvgs = Object.entries(locAgg).map(([loc, v]) => ({ loc, avg: v.sum / v.count }));
+        locAvgs.sort((a, b) => a.avg - b.avg);
+        if (locAvgs.length > 0 && lowEl) lowEl.innerText = locAvgs[0].loc;
+    },
+
     generateAnomalies() {
-        const data = window.SHARED_HISTORY_DATA || [];
+        const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
         const alerts = [];
 
         const lowConfLocation = "西屯路/逢甲路";
@@ -75,9 +115,10 @@ const DashboardApp = {
             level: 'medium'
         });
 
-        const wenxinData = data.filter(i => i.location === "文心路/台灣大道");
+        // 示例：檢查文心路相關路段是否有「未禮讓行人」比例過高
+        const wenxinData = data.filter(i => (i.location || '').includes("文心路") || (i.location || '').includes("台灣大道"));
         const pedestrianIssues = wenxinData.filter(i => i.type === "未禮讓行人").length;
-        if (pedestrianIssues / wenxinData.length > 0.2) {
+        if (wenxinData.length > 0 && (pedestrianIssues / wenxinData.length) > 0.2) {
             alerts.push({
                 type: 'design',
                 location: '文心路/台灣大道',
@@ -188,6 +229,7 @@ const updateDashboard = () => {
 
     renderRankingChart(mainChartData);
     renderHeatmap(DashboardApp.calculateHourlyTrend(filter, mode, range));
+    DashboardApp.updateSummaryStats(range);
 };
 
 const handleModeChange = () => {
@@ -197,7 +239,7 @@ const handleModeChange = () => {
 
     secondaryFilter.innerHTML = '';
 
-    const data = window.SHARED_HISTORY_DATA || [];
+    const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
     const eventTypes = ["全部事件", ...new Set(data.map(i => i.type))];
     const locationList = [...new Set(data.map(i => i.location))];
 

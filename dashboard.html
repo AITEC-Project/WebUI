@@ -50,15 +50,15 @@
     </div>
     <div class="card-bg p-5 rounded-xl border border-gray-800">
       <p class="text-gray-500 text-xs font-bold uppercase mb-1">AI 辨識準確率</p>
-      <h3 class="text-2xl font-mono font-bold text-green-400">94.2%</h3>
+      <h3 id="stat-accuracy" class="text-2xl font-mono font-bold text-green-400">94.2%</h3>
     </div>
     <div class="card-bg p-5 rounded-xl border border-gray-800">
       <p class="text-gray-500 text-xs font-bold uppercase mb-1">系統平均延遲</p>
-      <h3 class="text-2xl font-mono font-bold text-blue-400">42ms</h3>
+      <h3 id="stat-latency" class="text-2xl font-mono font-bold text-blue-400">42ms</h3>
     </div>
     <div class="card-bg p-5 rounded-xl border border-gray-800">
       <p class="text-gray-500 text-xs font-bold uppercase mb-1">低信心值聚集地</p>
-      <h3 class="text-lg font-bold text-red-400">西屯路/逢甲路</h3>
+      <h3 id="stat-lowconf" class="text-lg font-bold text-red-400">西屯路/逢甲路</h3>
     </div>
   </div>
 
@@ -102,6 +102,7 @@
   </div>
 </main>
 
+<script src="js/data.js"></script>
 <script src="js/history.js"></script>
 <script src="js/dashboard.js"></script>
 </body>
