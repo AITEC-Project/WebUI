@@ -2,7 +2,6 @@ const ApiService = {
     async fetchCases() {
         return new Promise((resolve) => {
             setTimeout(() => {
-                // mockCases 定義於 data.js 中
                 resolve(typeof mockCases !== 'undefined' ? mockCases : []);
             }, 300);
         });
@@ -37,7 +36,7 @@ const UIRenderer = {
                  onclick="app.handleCaseClick('${c.id}')">
                 <div class="flex items-center space-x-3">
                     <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden">
-                        <img src="${c.images[0]}" alt="Case ${c.id} 縮圖" class="w-full h-full object-cover">
+                        <img src="${c.images[0].src}" alt="Case ${c.id}" class="w-full h-full object-cover">
                     </div>
                     <div class="flex-1">
                         <div class="flex justify-between">
@@ -86,18 +85,25 @@ const UIRenderer = {
                     <video id="main-video-view" class="w-full h-full object-contain" controls autoplay muted loop>
                         <source src="${c.video}" type="video/mp4">
                     </video>
-                    <img id="main-img-view" src="${c.images[0]}" alt="Case ${c.id} 證據影像" class="hidden w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
-                    <div id="display-label" class="hidden absolute bottom-3 left-3 text-[10px] bg-black/60 text-gray-300 px-2 py-1 rounded backdrop-blur-sm"></div>
+                    <img id="main-img-view" src="${c.images[0].src}" class="hidden w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
+                    <div class="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition">
+                        <span class="bg-black/70 text-white text-[9px] px-2 py-1 rounded border border-white/10 flex items-center">
+                            <i class="fas fa-arrow-left mr-1"></i> <i class="fas fa-arrow-right mr-1"></i> 跳轉關鍵幀
+                        </span>
+                    </div>
                 </div>
                 <div class="grid grid-cols-4 gap-2">
-                    <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-blue-500 shadow-lg shadow-blue-500/20 cursor-pointer flex items-center justify-center bg-gray-900 transition" 
+                    <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-blue-500 cursor-pointer flex items-center justify-center bg-gray-900 transition" 
                          onclick="app.switchMainDisplay('video', '${c.video}', 0, this)">
                         <i class="fas fa-play text-blue-500 text-xs"></i>
+                        <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1 rounded font-bold">1</span>
                     </div>
                     ${c.images.map((img, idx) => `
                         <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-gray-800 cursor-pointer transition-all hover:border-gray-600" 
-                             onclick="app.switchMainDisplay('img', '${img}', ${idx + 1}, this)">
-                            <img src="${img}" alt="Case ${c.id} - 圖 ${idx + 1}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
+                             onclick="app.switchMainDisplay('img', '${img.src}', ${idx + 1}, this)">
+                            <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
+                            <span class="absolute top-1 left-1 bg-gray-700 text-white text-[9px] px-1 rounded font-bold">${idx + 2}</span>
+                            <div class="absolute bottom-1 right-1 bg-black/60 text-[8px] text-white px-1 rounded">${img.time}s</div>
                         </div>
                     `).join('')}
                 </div>
@@ -133,11 +139,9 @@ const app = {
 
     async init() {
         await this.loadComponent('ticketModel.html');
-
         const rawData = await ApiService.fetchCases();
         this.state.allCases = rawData;
         this.state.pendingCases = rawData.filter(c => c.status === 'pending');
-
         this.applyFilters();
         this.updateStatistics();
         this.initHotkeys();
@@ -153,53 +157,134 @@ const app = {
             const div = document.createElement('div');
             div.innerHTML = html;
             document.body.appendChild(div);
-        } catch (e) { console.error("Component load error:", e); }
+        } catch (e) { console.error("Component error:", e); }
     },
 
     initHotkeys() {
         document.addEventListener('keydown', (e) => {
-            // 排除輸入框，避免在搜尋時誤觸
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
             const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
             if (!currentCase) return;
 
+            const video = document.getElementById('main-video-view');
             const thumbnails = document.querySelectorAll('#evidence-grid .grid > div');
 
             switch (e.key) {
-                case '1': // 切換至影片
-                    if (thumbnails[0]) {
-                        this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
+                case '1': // 切換影片並跳回開頭
+                    this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
+                    video.currentTime = 0;
+                    break;
+                case '2':
+                case '3':
+                case '4': // 切換圖片並同步影片時間點
+                    const idx = parseInt(e.key) - 2;
+                    const imgData = currentCase.images[idx];
+                    if (imgData && thumbnails[idx + 1]) {
+                        this.switchMainDisplay('img', imgData.src, idx + 1, thumbnails[idx + 1]);
                     }
                     break;
-
-                case '2': // 切換至圖片 1
-                case '3': // 切換至圖片 2
-                case '4': // 切換至圖片 3
-                    const imgIdx = parseInt(e.key) - 2; // 2->0, 3->1, 4->2
-                    if (currentCase.images[imgIdx] && thumbnails[imgIdx + 1]) {
-                        this.switchMainDisplay('img', currentCase.images[imgIdx], imgIdx + 1, thumbnails[imgIdx + 1]);
-                    }
-                    break;
-
-                case ' ': // 空白鍵：播放或暫停影片
+                case ' ':
                     e.preventDefault();
-                    const video = document.getElementById('main-video-view');
                     if (video && !video.classList.contains('hidden')) {
                         video.paused ? video.play() : video.pause();
                     }
                     break;
+                case 'ArrowRight': // 方向鍵右：跳轉至下一個關鍵幀
+                    e.preventDefault();
+                    this.navigateKeyframe(1);
+                    break;
 
-                case 'Enter': // Enter：開啟開單視窗
+                case 'ArrowLeft': // 方向鍵左：跳轉至上一個關鍵幀
+                    e.preventDefault();
+                    this.navigateKeyframe(-1);
+                    break;
+
+                case 'Enter':
                     e.preventDefault();
                     const modal = document.getElementById('ticket-modal');
-                    // 檢查 modal 是否處於隱藏狀態 (含有 hidden 類別)
                     if (this.state.selectedCaseId && modal && modal.classList.contains('hidden')) {
                         this.openTicket();
                     }
                     break;
             }
         });
+    },
+
+    handleCaseClick(id) {
+        this.state.selectedCaseId = id;
+        const selectedData = this.state.allCases.find(c => c.id === id);
+        UIRenderer.renderDetail(selectedData);
+
+        document.querySelectorAll('#case-list > div').forEach(item => {
+            const isTarget = item.getAttribute('onclick').includes(id);
+            item.classList.toggle('border-blue-500', isTarget);
+            item.classList.toggle('bg-blue-900/10', isTarget);
+        });
+    },
+
+    switchMainDisplay(type, src, idx, el) {
+        const imgView = document.getElementById('main-img-view');
+        const videoView = document.getElementById('main-video-view');
+        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+
+        if (type === 'img') {
+            videoView.pause();
+            videoView.classList.add('hidden');
+            imgView.classList.remove('hidden');
+            imgView.src = src;
+
+            // 同步跳轉影片時間點
+            const time = currentCase.images[idx - 1]?.time;
+            if (time !== undefined) videoView.currentTime = time;
+        } else {
+            imgView.classList.add('hidden');
+            videoView.classList.remove('hidden');
+            videoView.play();
+        }
+
+        if (el) {
+            Array.from(el.parentElement.children).forEach(t => {
+                t.classList.remove('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
+                t.classList.add('border-gray-800');
+            });
+            el.classList.add('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
+            el.classList.remove('border-gray-800');
+        }
+    },
+
+    navigateKeyframe(direction) {
+        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+        const video = document.getElementById('main-video-view');
+        const thumbnails = document.querySelectorAll('#evidence-grid .grid > div');
+        if (!currentCase || !video) return;
+
+        // 取得所有關鍵幀的時間點 (3s, 5s, 13s 等)
+        const keyframeTimes = currentCase.images.map(img => img.time);
+        const currentTime = video.currentTime;
+
+        let targetIdx;
+        if (direction === 1) {
+            // 找下一個比現在時間大的關鍵幀
+            targetIdx = keyframeTimes.findIndex(t => t > currentTime + 0.5);
+            if (targetIdx === -1) targetIdx = 0; // 若到底則循環回第一個
+        } else {
+            // 找上一個比現在時間小的關鍵幀
+            targetIdx = keyframeTimes.filter(t => t < currentTime - 0.5).length - 1;
+            if (targetIdx < 0) targetIdx = keyframeTimes.length - 1; // 若到頭則循環回最後一個
+        }
+
+        // 執行跳轉：切換回影片顯示模式，並設定時間點
+        if (targetIdx >= 0) {
+            const targetTime = keyframeTimes[targetIdx];
+
+            // 強制切換回影片顯示 (type 為 'video')
+            this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
+
+            // 設定影片秒數並播放
+            video.currentTime = targetTime;
+            video.play();
+        }
     },
 
     toggleFilterPanel() {
@@ -284,75 +369,16 @@ const app = {
     },
 
     renderCaseList() {
-        const listContainer = document.getElementById('case-list');
-        if (listContainer) {
-            listContainer.innerHTML = this.state.filteredCases
-                .map(c => UIRenderer.createCaseItemHTML(c))
-                .join('');
+        const container = document.getElementById('case-list');
+        if (container) {
+            container.innerHTML = this.state.filteredCases.map(c => UIRenderer.createCaseItemHTML(c)).join('');
         }
-    },
-
-    handleCaseClick(id) {
-        this.state.selectedCaseId = id;
-        const selectedData = this.state.allCases.find(c => c.id === id);
-        UIRenderer.renderDetail(selectedData);
-
-        document.querySelectorAll('#case-list > div').forEach(item => {
-            const isTarget = item.getAttribute('onclick').includes(id);
-            item.classList.toggle('border-blue-500', isTarget);
-            item.classList.toggle('bg-blue-900/10', isTarget);
-        });
-    },
-
-    clearDetail() {
-        document.getElementById('detail-header').innerHTML = '<p class="text-gray-500 text-center mt-10">查無待處理案件</p>';
-        document.getElementById('evidence-grid').innerHTML = '';
-        document.getElementById('analysis-container').innerHTML = '';
     },
 
     openTicket() {
         const c = this.state.allCases.find(item => item.id === this.state.selectedCaseId);
         if (c && typeof TicketModal !== 'undefined') TicketModal.open(c);
     },
-
-    closeTicket() {
-        if (typeof TicketModal !== 'undefined') TicketModal.close();
-    },
-
-    confirmTicket() {
-        const target = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
-        if (target) {
-            target.status = 'verified';
-            alert(`案件 ${this.state.selectedCaseId} 舉發成功，已寄送通知。`);
-        }
-        this.closeTicket();
-        this.init();
-    },
-
-    switchMainDisplay(type, src, idx, el) {
-        const imgView = document.getElementById('main-img-view');
-        const videoView = document.getElementById('main-video-view');
-
-        if (type === 'img') {
-            if (videoView) videoView.pause();
-            videoView.classList.add('hidden');
-            imgView.classList.remove('hidden');
-            imgView.src = src;
-        } else {
-            imgView.classList.add('hidden');
-            videoView.classList.remove('hidden');
-            videoView.play();
-        }
-
-        const thumbnails = el.parentElement.children;
-        Array.from(thumbnails).forEach(thumb => {
-            thumb.classList.remove('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
-            thumb.classList.add('border-gray-800');
-        });
-        el.classList.add('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
-        el.classList.remove('border-gray-800');
-    },
-
     openLightbox(src) {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -360,7 +386,34 @@ const app = {
             lightboxImg.src = src;
             lightbox.classList.remove('hidden');
         }
-    }
+    },
+
+    closeTicket() {
+        const modal = document.getElementById('ticket-modal');
+        const video = document.getElementById('m-video');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+        if (video) {
+            video.pause(); // 關閉時停止彈窗內的影片播放
+            video.src = "";
+        }
+    },
+
+    confirmTicket() {
+        // 取得當前案件資料
+        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+
+        if (currentCase) {
+            // 模擬狀態更新
+            currentCase.status = 'verified';
+            alert(`案件 #${currentCase.id} 已成立。`);
+
+            // 重新初始化介面
+            this.closeTicket();
+            this.init(); // 刷新統計數據與列表
+        }
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => app.init());
