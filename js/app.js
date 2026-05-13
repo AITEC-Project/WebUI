@@ -134,17 +134,23 @@ const app = {
         pendingCases: [],
         filteredCases: [],
         selectedCaseId: null,
-        currentLevel: 'all'
+        currentLevel: 'all',
+        hotkeysInitialized: false
     },
 
     async init() {
-        await this.loadComponent('ticketModel.html');
+        if (!document.getElementById('ticket-modal')) {
+            await this.loadComponent('ticketModel.html');
+        }
         const rawData = await ApiService.fetchCases();
         this.state.allCases = rawData;
         this.state.pendingCases = rawData.filter(c => c.status === 'pending');
         this.applyFilters();
         this.updateStatistics();
-        this.initHotkeys();
+        if (!this.state.hotkeysInitialized) {
+            this.initHotkeys();
+            this.state.hotkeysInitialized = true;
+        }
 
         const lightbox = document.getElementById('lightbox');
         if (lightbox) lightbox.onclick = () => lightbox.classList.add('hidden');
@@ -389,29 +395,22 @@ const app = {
     },
 
     closeTicket() {
-        const modal = document.getElementById('ticket-modal');
-        const video = document.getElementById('m-video');
-        if (modal) {
-            modal.classList.add('hidden');
-        }
-        if (video) {
-            video.pause(); // 關閉時停止彈窗內的影片播放
-            video.src = "";
+        if (typeof TicketModal !== 'undefined') {
+            TicketModal.close();
         }
     },
 
     confirmTicket() {
-        // 取得當前案件資料
-        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+        const currentCase = this.state.allCases.find(
+            c => c.id === this.state.selectedCaseId
+        );
+
+        this.closeTicket();
 
         if (currentCase) {
-            // 模擬狀態更新
             currentCase.status = 'verified';
             alert(`案件 #${currentCase.id} 已成立。`);
-
-            // 重新初始化介面
-            this.closeTicket();
-            this.init(); // 刷新統計數據與列表
+            this.init();
         }
     },
 };

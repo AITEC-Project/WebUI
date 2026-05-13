@@ -1,4 +1,6 @@
 const TicketModal = {
+    // 儲存事件監聽器的引用，以便後續移除
+    _handleKeyDown: null,
 
     /**
      * 開啟彈窗並填充案件資料
@@ -46,38 +48,65 @@ const TicketModal = {
             imgContainer.innerHTML = c.images.map(img => `
                 <div class="relative">
                     <img src="${img.src}" class="w-full aspect-video object-cover rounded border border-gray-200 shadow-sm">
+                    <div class="absolute bottom-1 right-1 bg-black/60 text-[10px] text-white px-1.5 py-0.5 rounded backdrop-blur-sm">
+                        ${img.time}s
+                    </div>
                 </div>
             `).join('');
         }
 
-        // 6. 處理影片預覽
-        const video = document.getElementById('m-video');
-        if (video) {
-            video.src = c.video;
-            video.load(); // 重新載入影片資源以確保正確切換
-            video.play().catch(e => console.warn("影片自動播放受阻:", e));
-        }
-
-        // 7. 顯示彈窗 (移除 hidden)
+        // 7. 顯示彈窗
         const modal = document.getElementById('ticket-modal');
         if (modal) {
             modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
+
+        if (this._handleKeyDown) {
+            window.removeEventListener(
+                'keydown',
+                this._handleKeyDown,
+                true
+            );
+
+            this._handleKeyDown = null;
+        }
+
+        // 綁定「第二次 Enter」監聽器
+        // 使用 setTimeout 延遲掛載，防止第一個 Enter 產生的事件冒泡立即觸發第二次確認
+        setTimeout(() => {
+            // 定義彈窗專用的 Enter 處理
+            this._handleKeyDown = (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.stopImmediatePropagation(); // 阻止事件傳遞到 app.js
+
+                    console.log("彈窗內 Enter：確認送出");
+                    if (typeof app !== 'undefined') app.confirmTicket();
+                } else if (e.key === 'Escape') {
+                    if (typeof app !== 'undefined') app.closeTicket();
+                }
+            };
+            window.addEventListener('keydown', this._handleKeyDown, true); // 使用 Capture 模式優先攔截
+        }, 250);
     },
 
     /**
      * 關閉彈窗並停止資源
      */
     close() {
-        const video = document.getElementById('m-video');
-        if (video) {
-            video.pause();
-            video.src = ""; // 清空來源以釋放記憶體
-        }
-
+        // 1. 隱藏 UI
         const modal = document.getElementById('ticket-modal');
         if (modal) {
             modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 3. 關鍵修復：徹底移除鍵盤監聽器
+        if (this._handleKeyDown) {
+            console.log("移除彈窗 Enter 監聽器");
+            window.removeEventListener('keydown', this._handleKeyDown, true);
+            this._handleKeyDown = null; // 清空引用防止重複觸發
         }
     }
 };
