@@ -1,164 +1,312 @@
+/**
+ * AI 交通診斷儀表板 - 核心邏輯
+ */
+
+// --- 模擬數據存儲區 (僅用於監控區，不影響統計數據) ---
+let simulatedLiveCases = [];
+
+const DataSimulator = {
+    locations: [
+        { name: "西屯路/逢甲路", lat: 24.1786, lng: 120.6450 },
+        { name: "文心路/台灣大道", lat: 24.1617, lng: 120.6467 },
+        { name: "崇德路/漢口路", lat: 24.1661, lng: 120.6853 },
+        { name: "五權西路/忠明南路", lat: 24.1378, lng: 120.6592 },
+        { name: "三民路/精武路", lat: 24.1485, lng: 120.6841 },
+        { name: "公益路/美村路", lat: 24.1512, lng: 120.6625 },
+        { name: "台灣大道/廣三SOGO", lat: 24.1556, lng: 120.6631 }
+    ],
+    types: ["闖紅燈", "未禮讓行人", "違規左轉", "超速", "不依標誌指示"],
+
+    generateOne() {
+        const loc = this.locations[Math.floor(Math.random() * this.locations.length)];
+        return {
+            id: `SIM-${Date.now()}`,
+            location: loc.name,
+            lat: loc.lat + (Math.random() - 0.5) * 0.008,
+            lng: loc.lng + (Math.random() - 0.5) * 0.008,
+            type: this.types[Math.floor(Math.random() * this.types.length)],
+            timestamp: new Date(),
+            confidence: Math.floor(Math.random() * 15) + 84,
+            processingMs: Math.floor(Math.random() * 150) + 40
+        };
+    },
+
+    start() {
+        for(let i=0; i<8; i++) simulatedLiveCases.push(this.generateOne());
+        const loop = () => {
+            const nextTime = Math.random() * 5000 + 3000;
+            setTimeout(() => {
+                simulatedLiveCases.push(this.generateOne());
+                const limit = new Date(Date.now() - 30 * 60000);
+                simulatedLiveCases = simulatedLiveCases.filter(c => c.timestamp > limit);
+                refreshLivePanel();
+                loop();
+            }, nextTime);
+        };
+        loop();
+    }
+};
+
 const DashboardApp = {
-    // 使用動態基準時間（現在），方便依據 data.js 的 timestamp 計算區間
     baseDate: new Date(),
 
+    // 通用數據過濾 (僅反映審核後的歷史數據)
     getFilteredData(range) {
-        // 優先使用 data.js 裡的 mockCases，若不存在則回退到舊的 window.SHARED_HISTORY_DATA
         const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
         return data.filter(item => {
             const itemDate = new Date(item.timestamp || item.date);
             const diffDays = (this.baseDate - itemDate) / (1000 * 60 * 60 * 24);
-
             if (range === '24h') return diffDays <= 1;
             if (range === '7d') return diffDays <= 7;
             if (range === '30d') return diffDays <= 30;
-            return true; // 'all'
+            return true;
         });
     },
 
-    calculateLocationRank(event, range) {
-        const data = this.getFilteredData(range);
-        const filtered = event === '全部事件' ? data : data.filter(i => i.type === event);
+    // 取得 30 分鐘內的即時數據 (包含模擬數據，僅用於監控區)
+    getRecentData() {
+        const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
+        const now = new Date();
+        const recentHistory = data.filter(item => {
+            const itemDate = new Date(item.timestamp || item.date);
+            const diffMinutes = (now - itemDate) / (1000 * 60);
+            return diffMinutes >= 0 && diffMinutes <= 30;
+        });
+        return [...recentHistory, ...simulatedLiveCases];
+    },
 
-        const counts = filtered.reduce((acc, curr) => {
+    getLiveTypeStats() {
+        const recentData = this.getRecentData();
+        const counts = recentData.reduce((acc, curr) => {
+            const type = curr.type || '未分類';
+            acc[type] = (acc[type] || 0) + 1;
+            return acc;
+        }, {});
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+        return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
+    },
+
+    // --- 圖表分析函式 (固定傳入 30d) ---
+
+    getTopLocations(range = '30d') {
+        const data = this.getFilteredData(range);
+        const counts = data.reduce((acc, curr) => {
             acc[curr.location] = (acc[curr.location] || 0) + 1;
             return acc;
         }, {});
-
-        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-
-        return {
-            labels: sorted.map(i => i[0]),
-            values: sorted.map(i => i[1])
-        };
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+        return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
     },
 
-    calculateEventComposition(location, range) {
+    getTopViolationTypes(range = '30d') {
         const data = this.getFilteredData(range);
-        const filtered = data.filter(i => i.location === location);
-
-        const counts = filtered.reduce((acc, curr) => {
-            acc[curr.type] = (acc[curr.type] || 0) + 1;
+        const counts = data.reduce((acc, curr) => {
+            const type = curr.type || '未分類';
+            acc[type] = (acc[type] || 0) + 1;
             return acc;
         }, {});
-
-        // 排序：次數多的排前面
-        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-
-        return {
-            labels: sorted.map(i => i[0]),
-            values: sorted.map(i => i[1])
-        };
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+        return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
     },
 
-    calculateHourlyTrend(filterValue, mode, range) {
+    getGlobalHourlyTrend(range = '30d') {
         const data = this.getFilteredData(range);
-        const filtered = mode === 'location-rank'
-            ? (filterValue === '全部事件' ? data : data.filter(i => i.type === filterValue))
-            : data.filter(i => i.location === filterValue);
-
         const hours = new Array(24).fill(0);
-        filtered.forEach(item => {
-            // 使用 timestamp（data.js）或 date（回退）兩者之一
+        data.forEach(item => {
             const h = new Date(item.timestamp || item.date).getHours();
             hours[h]++;
         });
         return hours;
     },
 
-    updateSummaryStats(range) {
-        const data = this.getFilteredData(range);
-        const accEl = document.getElementById('stat-accuracy');
-        const latEl = document.getElementById('stat-latency');
-        const lowEl = document.getElementById('stat-lowconf');
+    // 核心更新邏輯：CPM、撤銷率、異常診斷
+    updateSummaryStats() {
+        const data = this.getFilteredData('30d');
+        const avgRateEl = document.getElementById('stat-avg-rate');
+        const cancelRateEl = document.getElementById('stat-cancel-rate');
+        const volAnomalyEl = document.getElementById('stat-vol-anomaly');
+        const cancelAnomalyEl = document.getElementById('stat-cancel-anomaly');
+        const typeAnomalyEl = document.getElementById('stat-type-anomaly');
 
-        if (!data || data.length === 0) {
-            if (accEl) accEl.innerText = '-';
-            if (latEl) latEl.innerText = '-';
-            if (lowEl) lowEl.innerText = '-';
-            return;
+        if (!data || data.length === 0) return;
+
+        // 1. 每分鐘案件量 (固定 0.2 CPM)
+        const fixedCPM = 0.2;
+        if (avgRateEl) {
+            const minPerCase = (1 / fixedCPM).toFixed(0);
+            avgRateEl.innerHTML = `
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold text-white">每 ${minPerCase} 分鐘 / 筆</span>
+                    <span class="text-[10px] text-gray-500 font-normal mt-1">基準: ${fixedCPM} CPM</span>
+                </div>`;
         }
 
-        // AI 辨識準確率：使用 confidence 欄位平均值
-        const avgConf = Math.round(data.reduce((s, i) => s + (i.confidence || 0), 0) / data.length);
-        if (accEl) accEl.innerText = `${avgConf}%`;
+        // 2. 數據準備
+        const locStats = {};
+        const globalTypeCounts = {};
+        let globalCanceled = 0;
 
-        // 系統平均延遲：若資料中提供 processingMs 則計算平均，否則保留原始顯示
-        const procList = data.map(i => i.processingMs).filter(n => typeof n === 'number');
-        if (procList.length > 0) {
-            const avgProc = Math.round(procList.reduce((s, n) => s + n, 0) / procList.length);
-            if (latEl) latEl.innerText = `${avgProc}ms`;
+        data.forEach(item => {
+            const { location, type, status } = item;
+            const isCanceled = (status === 'cancelled' || status === 'canceled' || status === 'rejected');
+
+            globalTypeCounts[type] = (globalTypeCounts[type] || 0) + 1;
+            if (isCanceled) globalCanceled++;
+
+            if (!locStats[location]) locStats[location] = { total: 0, canceled: 0, types: {} };
+            locStats[location].total++;
+            if (isCanceled) locStats[location].canceled++;
+            locStats[location].types[type] = (locStats[location].types[type] || 0) + 1;
+        });
+
+        // 3. 平均撤銷率
+        if (cancelRateEl) {
+            const globalCancelRate = ((globalCanceled / data.length) * 100).toFixed(1);
+            cancelRateEl.innerHTML = `
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold ${globalCancelRate > 5 ? 'text-orange-400' : 'text-white'}">${globalCancelRate}%</span>
+                    <span class="text-[10px] text-gray-500 font-normal mt-1">目標: < 5.0%</span>
+                </div>`;
         }
 
-        // 低信心值聚集地：計算每個地點的平均 confidence，取最小者
-        const locAgg = {};
-        data.forEach(i => {
-            const loc = i.location || '未知';
-            if (!locAgg[loc]) locAgg[loc] = { sum: 0, count: 0 };
-            locAgg[loc].sum += (i.confidence || 0);
-            locAgg[loc].count += 1;
-        });
-        const locAvgs = Object.entries(locAgg).map(([loc, v]) => ({ loc, avg: v.sum / v.count }));
-        locAvgs.sort((a, b) => a.avg - b.avg);
-        if (locAvgs.length > 0 && lowEl) lowEl.innerText = locAvgs[0].loc;
-    },
+        // 4. 路口違規量異常偵測
+        const totalMinutes = 30 * 24 * 60;
+        const locations = Object.keys(locStats);
+        const expectedCountPerLoc = (fixedCPM * totalMinutes) / locations.length;
 
-    generateAnomalies() {
-        const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
-        const alerts = [];
+        const volAnomalies = Object.entries(locStats)
+            .map(([loc, stat]) => ({ loc, ratio: (stat.total / expectedCountPerLoc).toFixed(1) }))
+            .filter(item => item.ratio > 1.2)
+            .sort((a, b) => b.ratio - a.ratio).slice(0, 2);
 
-        const lowConfLocation = "西屯路/逢甲路";
-        alerts.push({
-            type: 'env',
-            location: lowConfLocation,
-            reason: '偵測到該處 AI 信心值波動較大。診斷：可能是夜間照明不足或攝影機反光，建議優化光源環境。',
-            level: 'medium'
-        });
+        if (volAnomalyEl) {
+            volAnomalyEl.innerHTML = volAnomalies.map(a => `
+                <div class="flex justify-between items-center">
+                    <span class="text-[13px] text-gray-300 truncate mr-2">${a.loc}</span>
+                    <span class="text-[11px] font-bold text-red-400">高於平均 ${a.ratio}x</span>
+                </div>`).join('') || '<p class="text-[13px] text-green-500">尚無明顯異常</p>';
+        }
 
-        // 示例：檢查文心路相關路段是否有「未禮讓行人」比例過高
-        const wenxinData = data.filter(i => (i.location || '').includes("文心路") || (i.location || '').includes("台灣大道"));
-        const pedestrianIssues = wenxinData.filter(i => i.type === "未禮讓行人").length;
-        if (wenxinData.length > 0 && (pedestrianIssues / wenxinData.length) > 0.2) {
-            alerts.push({
-                type: 'design',
-                location: '文心路/台灣大道',
-                reason: `「未禮讓行人」佔比達 ${Math.floor((pedestrianIssues/wenxinData.length)*100)}%。診斷：行人穿越量大且轉彎車流未分離，建議增設專用時相。`,
-                level: 'high'
+        // 5. 路口撤銷量異常偵測
+        const globalAvgCancelRate = globalCanceled / data.length;
+        let cancelAnomalies = Object.entries(locStats)
+            .map(([loc, stat]) => {
+                const locCancelRate = stat.canceled / stat.total;
+                return { loc, ratio: (locCancelRate / globalAvgCancelRate).toFixed(1), count: stat.canceled };
+            })
+            .filter(a => a.count >= 3 && a.ratio > 1.5)
+            .sort((a, b) => b.ratio - a.ratio).slice(0, 2);
+
+        if (cancelAnomalyEl) {
+            cancelAnomalyEl.innerHTML = cancelAnomalies.map(a => `
+                <div class="flex justify-between items-center">
+                    <span class="text-[13px] text-gray-300 truncate mr-2">${a.loc}</span>
+                    <span class="text-[11px] font-bold text-orange-400">撤銷偏高 ${a.ratio}x</span>
+                </div>`).join('') || '<p class="text-[13px] text-green-500">撤銷比例正常</p>';
+        }
+
+        // 6. 路口違規樣態異常偵測 (強化統計顯著性)
+        let typeAnomalies = [];
+        const globalTotal = data.length;
+        Object.entries(locStats).forEach(([loc, stat]) => {
+            if (stat.total < 5) return;
+            Object.entries(stat.types).forEach(([type, count]) => {
+                const locTypeRatio = count / stat.total;
+                const globalTypeRatio = globalTypeCounts[type] / globalTotal;
+                const ratio = (locTypeRatio / globalTypeRatio).toFixed(1);
+                if (ratio > 1.5 && count >= 3) {
+                    typeAnomalies.push({ loc, type, ratio: parseFloat(ratio) });
+                }
             });
-        }
+        });
 
-        return alerts;
+        if (typeAnomalyEl) {
+            typeAnomalies.sort((a, b) => b.ratio - a.ratio).slice(0, 2);
+            typeAnomalyEl.innerHTML = typeAnomalies.map(a => `
+                <div class="flex flex-col mb-1 border-b border-gray-800 pb-1">
+                    <div class="flex justify-between">
+                        <span class="text-[11px] text-blue-400 font-bold">${a.type}</span>
+                        <span class="text-[11px] text-red-400">偏高 ${a.ratio}x</span>
+                    </div>
+                    <span class="text-[11px] text-gray-500 truncate">${a.loc}</span>
+                </div>`).join('') || '<p class="text-[13px] text-green-500">樣態分佈正常</p>';
+        }
     }
 };
 
-let rankingChart = null;
-let heatmapChart = null;
+/**
+ * 實例與渲染
+ */
+let rankingChart = null, typePieChart = null, heatmapChart = null, liveFlowChart = null, liveMap = null, markersLayer = null;
 
-const renderRankingChart = (data) => {
-    const ctx = document.getElementById('rankingChart').getContext('2d');
-    if (rankingChart) rankingChart.destroy();
+const refreshLivePanel = () => {
+    renderLiveFlowChart(DashboardApp.getLiveTypeStats());
+    updateLiveMapMarkers();
+};
 
-    const gradient = ctx.createLinearGradient(0, 0, 600, 0);
-    gradient.addColorStop(0, 'rgba(59, 130, 246, 0.1)');
-    gradient.addColorStop(1, 'rgba(59, 130, 246, 0.7)');
-
-    rankingChart = new Chart(ctx, {
+const renderLiveFlowChart = (data) => {
+    const ctx = document.getElementById('liveFlowChart');
+    if (!ctx) return;
+    if (liveFlowChart) liveFlowChart.destroy();
+    liveFlowChart = new Chart(ctx.getContext('2d'), {
         type: 'bar',
         data: {
             labels: data.labels,
             datasets: [{
-                label: '案件數量',
                 data: data.values,
-                backgroundColor: gradient,
+                backgroundColor: 'rgba(59, 130, 246, 0.5)',
                 borderColor: '#3b82f6',
                 borderWidth: 1,
                 borderRadius: 4
             }]
         },
         options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: '#1f2937' }, ticks: { color: '#8b949e', font: { size: 10 } }, beginAtZero: true },
+                y: { grid: { display: false }, ticks: { color: '#e6edf3', font: { size: 12, weight: 'bold' } } }
+            }
+        }
+    });
+};
+
+const initLiveMap = () => {
+    const mapEl = document.getElementById('live-map');
+    if (!mapEl) return;
+    liveMap = L.map('live-map', { zoomControl: false }).setView([24.162, 120.647], 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(liveMap);
+    markersLayer = L.layerGroup().addTo(liveMap);
+};
+
+const updateLiveMapMarkers = () => {
+    if (!markersLayer) return;
+    markersLayer.clearLayers();
+    DashboardApp.getRecentData().forEach(item => {
+        const lat = item.lat || (24.14 + Math.random() * 0.05);
+        const lng = item.lng || (120.63 + Math.random() * 0.04);
+        L.circleMarker([lat, lng], {
+            radius: 8, fillColor: '#ff4d4d', color: '#fff', weight: 1, opacity: 0.8, fillOpacity: 0.6
+        }).bindPopup(`<b>${item.location}</b><br>${item.type}`).addTo(markersLayer);
+    });
+};
+
+const renderRankingChart = (data) => {
+    const ctx = document.getElementById('rankingChart');
+    if (!ctx) return;
+    if (rankingChart) rankingChart.destroy();
+    const chartCtx = ctx.getContext('2d');
+    const gradient = chartCtx.createLinearGradient(0, 0, 600, 0);
+    gradient.addColorStop(0, 'rgba(59, 130, 246, 0.1)');
+    gradient.addColorStop(1, 'rgba(59, 130, 246, 0.7)');
+    rankingChart = new Chart(chartCtx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{ label: '案件數量', data: data.values, backgroundColor: gradient, borderColor: '#3b82f6', borderWidth: 1, borderRadius: 4 }]
+        },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: {
                 x: { grid: { color: '#1f2937' }, ticks: { color: '#8b949e' }, beginAtZero: true },
@@ -168,98 +316,57 @@ const renderRankingChart = (data) => {
     });
 };
 
-const renderHeatmap = (hourlyData) => {
-    const ctx = document.getElementById('timeHeatmap').getContext('2d');
-    if (heatmapChart) heatmapChart.destroy();
-
-    heatmapChart = new Chart(ctx, {
-        type: 'line',
+const renderTypePieChart = (data) => {
+    const ctx = document.getElementById('typePieChart');
+    if (!ctx) return;
+    if (typePieChart) typePieChart.destroy();
+    typePieChart = new Chart(ctx.getContext('2d'), {
+        type: 'doughnut',
         data: {
-            labels: Array.from({length: 24}, (_, i) => `${i}h`),
+            labels: data.labels,
             datasets: [{
-                data: hourlyData,
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 2,
-                pointBackgroundColor: '#3b82f6'
+                data: data.values,
+                backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(16, 185, 129, 0.7)', 'rgba(245, 158, 11, 0.7)', 'rgba(239, 68, 68, 0.7)', 'rgba(139, 92, 246, 0.7)'],
+                borderColor: '#0d1117', borderWidth: 2
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { display: false, beginAtZero: true },
-                x: { grid: { color: '#1f2937' }, ticks: { color: '#666', font: { size: 10 } } }
-            }
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'right', labels: { color: '#e6edf3', font: { size: 12 }, padding: 20 } } },
+            cutout: '60%'
         }
     });
 };
 
-const renderAlerts = () => {
-    const container = document.getElementById('anomaly-alerts');
-    const anomalies = DashboardApp.generateAnomalies();
-    container.innerHTML = anomalies.map(a => `
-        <div class="bg-blue-900/10 border border-blue-500/30 p-4 rounded-xl flex items-start space-x-4">
-            <i class="fas fa-microchip ${a.level === 'high' ? 'text-red-400' : 'text-blue-400'} text-lg mt-1"></i>
-            <div>
-                <div class="flex items-center space-x-2">
-                    <span class="font-bold text-white">${a.location}</span>
-                    <span class="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 uppercase font-bold">診斷建議</span>
-                </div>
-                <p class="text-sm text-gray-400 mt-1">${a.reason}</p>
-            </div>
-        </div>
-    `).join('');
+const renderHeatmap = (hourlyData) => {
+    const ctx = document.getElementById('timeHeatmap');
+    if (!ctx) return;
+    if (heatmapChart) heatmapChart.destroy();
+    heatmapChart = new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: Array.from({length: 24}, (_, i) => `${i}h`),
+            datasets: [{ data: hourlyData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, pointRadius: 2, pointBackgroundColor: '#3b82f6' }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { display: false, beginAtZero: true }, x: { grid: { color: '#1f2937' }, ticks: { color: '#666', font: { size: 10 } } } }
+        }
+    });
 };
 
 const updateDashboard = () => {
-    const range = document.getElementById('time-range').value;
-    const mode = document.getElementById('analysis-mode').value;
-    const filter = document.getElementById('secondary-filter').value;
-
-    const filteredDataCount = DashboardApp.getFilteredData(range).length;
-    document.getElementById('stat-total').innerText = filteredDataCount.toLocaleString();
-
-    let mainChartData = mode === 'location-rank'
-        ? DashboardApp.calculateLocationRank(filter, range)
-        : DashboardApp.calculateEventComposition(filter, range);
-
-    renderRankingChart(mainChartData);
-    renderHeatmap(DashboardApp.calculateHourlyTrend(filter, mode, range));
-    DashboardApp.updateSummaryStats(range);
-};
-
-const handleModeChange = () => {
-    const mode = document.getElementById('analysis-mode').value;
-    const secondaryFilter = document.getElementById('secondary-filter');
-    const label = document.getElementById('secondary-label');
-
-    secondaryFilter.innerHTML = '';
-
-    const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
-    const eventTypes = ["全部事件", ...new Set(data.map(i => i.type))];
-    const locationList = [...new Set(data.map(i => i.location))];
-
-    const options = mode === 'location-rank' ? eventTypes : locationList;
-    label.innerText = mode === 'location-rank' ? '篩選違規類型' : '選擇分析路口';
-
-    options.forEach(optText => {
-        const opt = document.createElement('option');
-        opt.value = optText;
-        opt.innerText = optText;
-        secondaryFilter.appendChild(opt);
-    });
-    updateDashboard();
+    refreshLivePanel();
+    // 固定傳入 30d
+    renderRankingChart(DashboardApp.getTopLocations('30d'));
+    renderTypePieChart(DashboardApp.getTopViolationTypes('30d'));
+    renderHeatmap(DashboardApp.getGlobalHourlyTrend('30d'));
+    DashboardApp.updateSummaryStats();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('analysis-mode').addEventListener('change', handleModeChange);
-    document.getElementById('secondary-filter').addEventListener('change', updateDashboard);
-    document.getElementById('time-range').addEventListener('change', updateDashboard);
-
-    handleModeChange();
-    renderAlerts();
+    initLiveMap();
+    updateDashboard();
+    DataSimulator.start();
 });
