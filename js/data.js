@@ -57,7 +57,7 @@ const mockCases = [
         "type": "未依標誌標線行駛",
         "plate": "STP-9968",
         "location": "台中市北區文心路四段",
-        "confidence": 79,
+        "confidence": 95,
         "timestamp": "2026-04-29T13:47:00",
         "images": [
             { "src": "video/image01.jpg", "time": 3 },
@@ -69,11 +69,11 @@ const mockCases = [
         "aiReport": [
             {
                 "type": "ai",
-                "text": "環境感測：紅燈亮起後 2.2 秒，車輛仍強行通過停止線。"
+                "text": "環境感測：偵測到該車道地面標線為「雙黃線」，車輛違規跨越雙黃線。"
             },
             {
                 "type": "ai",
-                "text": "物件辨識：偵測到車牌 STP-9968 於紅燈狀態下跨越路口。"
+                "text": "物件辨識：偵測到車牌 STP-9968 未依規定車道行駛，跨越禁止變換車道線。"
             }
         ]
     },
@@ -106,26 +106,26 @@ const mockCases = [
     {
         "id": "AA-0004",
         "status": "pending",
-        "type": "闖紅燈",
+        "type": "未依標誌標線行駛",
         "plate": "PVF-6988",
         "location": "台中市大里區中清路",
         "confidence": 96,
         "timestamp": "2026-04-29T08:06:00",
         "images": [
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000091.jpg", "time": 4 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000226.jpg", "time": 8 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000345.jpg", "time": 10 }
+            { "src": "video/image04.jpg", "time": 1 },
+            { "src": "video/image05.jpg", "time": 2 },
+            { "src": "video/image06.jpg", "time": 12 }
         ],
-        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
+        "video": "video/video02.mp4",
+        "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
         "aiReport": [
             {
                 "type": "ai",
-                "text": "環境感測：紅燈亮起後 2.4 秒，車輛仍強行通過停止線。"
+                "text": "環境感測：偵測到該車道地面標線為「雙黃線」，車輛違規跨越雙黃線。"
             },
             {
                 "type": "ai",
-                "text": "物件辨識：偵測到車牌 PVF-6988 於紅燈狀態下跨越路口。"
+                "text": "物件辨識：偵測到車牌 PVF-6988 未依規定車道行駛，跨越禁止變換車道線。"
             }
         ]
     },
@@ -158,78 +158,78 @@ const mockCases = [
     {
         "id": "AA-0006",
         "status": "pending",
-        "type": "闖紅燈",
+        "type": "未禮讓行人",
         "plate": "TFG-0423",
         "location": "台中市西區公益路",
-        "confidence": 77,
+        "confidence": 95,
         "timestamp": "2026-04-29T07:31:00",
         "images": [
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000103.jpg", "time": 4 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg", "time": 5 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000195.jpg", "time": 7 }
+            { "src": "video/image07.jpg", "time": 0 },
+            { "src": "video/image08.jpg", "time": 1 },
+            { "src": "video/image09.jpg", "time": 2 }
         ],
-        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "legalBasis": "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
+        "video": "video/video03.mp4",
+        "legalBasis": "《道路交通管理處罰條例》第 44 條：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
         "aiReport": [
             {
                 "type": "ai",
-                "text": "環境感測：紅燈亮起後 1.1 秒，車輛仍強行通過停止線。"
+                "text": "環境感測：偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離。"
             },
             {
                 "type": "ai",
-                "text": "物件辨識：偵測到車牌 TFG-0423 於紅燈狀態下跨越路口。"
+                "text": "物件辨識：偵測到車牌 TFG-0423 於行人過馬路期間加速通過，且車頭已進入行人通行路徑。"
             }
         ]
     },
     {
         "id": "AA-0007",
         "status": "pending",
-        "type": "超速行駛 (限速 45, 實測 65)",
+        "type": "未禮讓行人",
         "plate": "AXG-3009",
         "location": "台中市北屯區環中路",
-        "confidence": 76,
+        "confidence": 93,
         "timestamp": "2026-04-29T17:58:00",
         "images": [
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000027.jpg", "time": 2 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000273.jpg", "time": 4 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000162.jpg", "time": 7 }
+            { "src": "video/image10.jpg", "time": 6 },
+            { "src": "video/image11.jpg", "time": 8 },
+            { "src": "video/image12.jpg", "time": 10 }
         ],
-        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
+        "video": "video/video04.mp4",
+        "legalBasis": "《道路交通管理處罰條例》第 44 條：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
         "aiReport": [
             {
                 "type": "ai",
-                "text": "環境感測：測速雷達偵測該車速為 84km/h，超過該路段限速 60km/h。"
+                "text": "環境感測：偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離。"
             },
             {
                 "type": "ai",
-                "text": "物件辨識：標的車輛為灰色 Sedan，車牌 AXG-3009 清晰可見。"
+                "text": "物件辨識：偵測到車牌 AXG-3009 於行人過馬路期間加速通過，且車頭已進入行人通行路徑。"
             }
         ]
     },
     {
         "id": "AA-0008",
         "status": "pending",
-        "type": "未依標誌指示行駛",
+        "type": "未禮讓行人",
         "plate": "FTK-4888",
         "location": "台中市西區復興路",
-        "confidence": 92,
+        "confidence": 82,
         "timestamp": "2026-04-29T11:43:00",
         "images": [
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000255.jpg", "time": 1 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000180.jpg", "time": 6 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg", "time": 9 }
+            { "src": "video/image13.jpg", "time": 3 },
+            { "src": "video/image14.jpg", "time": 6 },
+            { "src": "video/image15.jpg", "time": 13 }
         ],
-        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "legalBasis": "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
+        "video": "video/video05.mp4",
+        "legalBasis": "《道路交通管理處罰條例》第 44 條：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
         "aiReport": [
             {
                 "type": "ai",
-                "text": "環境感測：該車道僅准左轉，車輛違規直行。"
+                "text": "環境感測：偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離。"
             },
             {
                 "type": "ai",
-                "text": "物件辨識：偵測到車牌 FTK-4888 未依地面標線指示行駛。"
+                "text": "物件辨識：偵測到車牌 FTK-4888 於行人過馬路期間加速通過，且車頭已進入行人通行路徑。"
             }
         ]
     },
@@ -262,26 +262,26 @@ const mockCases = [
     {
         "id": "AA-0010",
         "status": "pending",
-        "type": "超速行駛 (限速 45, 實測 65)",
+        "type": "未禮讓行人",
         "plate": "IBC-0156",
         "location": "台中市北區公益路",
         "confidence": 79,
         "timestamp": "2026-04-29T19:06:00",
         "images": [
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000257.jpg", "time": 3 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000016.jpg", "time": 7 },
-            { "src": "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg", "time": 8 }
+            { "src": "video/image16.jpg", "time": 5 },
+            { "src": "video/image17.jpg", "time": 10 },
+            { "src": "video/image18.jpg", "time": 12 }
         ],
-        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "legalBasis": "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
+        "video": "video/video06.mp4",
+        "legalBasis": "《道路交通管理處罰條例》第 44 條：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
         "aiReport": [
             {
                 "type": "ai",
-                "text": "環境感測：測速雷達偵測該車速為 70km/h，超過該路段限速 60km/h。"
+                "text": "環境感測：偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離。"
             },
             {
                 "type": "ai",
-                "text": "物件辨識：標的車輛為黑色 Sedan，車牌 IBC-0156 清晰可見。"
+                "text": "物件辨識：偵測到車牌 IBC-0156 為特殊車輛。"
             }
         ]
     },

@@ -36,7 +36,7 @@ const UIRenderer = {
                  onclick="app.handleCaseClick('${c.id}')">
                 <div class="flex items-center space-x-3">
                     <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden">
-                        <img src="${c.images[0].src}" alt="Case ${c.id}" class="w-full h-full object-cover">
+                        <img src="${c.images[1].src}" alt="Case ${c.id}" class="w-full h-full object-cover">
                     </div>
                     <div class="flex-1">
                         <div class="flex justify-between">
@@ -112,14 +112,24 @@ const UIRenderer = {
 
         const analysisArea = document.getElementById('analysis-container');
         if (analysisArea) {
+            const envData = c.aiReport.find(item => item.type === 'ai' && item.text.includes('物件辨識'));
+            const description = envData ? envData.text.replace('物件辨識：', '') : '';
+
             analysisArea.innerHTML = `
                 <div class="mt-6 space-y-4">
                     <div class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/20">
-                        <h3 class="text-blue-400 font-bold mb-2 flex items-center text-sm"><i class="fas fa-file-alt mr-2"></i> 違規敘述</h3>
+                        <h3 class="text-blue-400 font-bold mb-2 flex items-center text-sm">
+                            <i class="fas fa-file-alt mr-2"></i> 違規敘述
+                        </h3>
                         <p class="text-white text-lg font-semibold">${c.type}</p>
+                        
+                        ${description ? `<p class="text-gray-400 text-sm mt-1 leading-relaxed">${description}</p>` : ''}
                     </div>
+                    
                     <div class="p-4 rounded-xl bg-purple-500/5 border border-purple-500/20">
-                        <h3 class="text-purple-400 font-bold mb-2 flex items-center text-sm"><i class="fas fa-gavel mr-2"></i> 適用法條</h3>
+                        <h3 class="text-purple-400 font-bold mb-2 flex items-center text-sm">
+                            <i class="fas fa-gavel mr-2"></i> 適用法條
+                        </h3>
                         <p class="text-gray-300 text-sm leading-relaxed">${c.legalBasis}</p>
                     </div>
                 </div>
