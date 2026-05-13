@@ -219,8 +219,18 @@ const app = {
 
     handleCaseClick(id) {
         this.state.selectedCaseId = id;
-        const selectedData = this.state.allCases.find(c => c.id === id);
+        const selectedData =
+            this.state.allCases.find(c => c.id === id);
         UIRenderer.renderDetail(selectedData);
+
+        // 回到案件最上方
+        const detailSection = document.querySelector(
+            'section.flex-1.flex.flex-col.overflow-y-auto'
+        );
+
+        if (detailSection) {
+            detailSection.scrollTop = 0;
+        }
 
         document.querySelectorAll('#case-list > div').forEach(item => {
             const isTarget = item.getAttribute('onclick').includes(id);

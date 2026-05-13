@@ -60,6 +60,13 @@ const TicketModal = {
         if (modal) {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+
+            // 回到彈窗最上方
+            const modalScroll = modal.querySelector('.overflow-y-auto');
+
+            if (modalScroll) {
+                modalScroll.scrollTop = 0;
+            }
         }
 
         if (this._handleKeyDown) {
