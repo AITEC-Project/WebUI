@@ -176,6 +176,8 @@ const app = {
             const video = document.getElementById('main-video-view');
             const thumbnails = document.querySelectorAll('#evidence-grid .grid > div');
 
+            const modal = document.getElementById('ticket-modal');
+
             switch (e.key) {
                 case '1': // 切換影片並跳回開頭
                     this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
@@ -206,9 +208,16 @@ const app = {
                     this.navigateKeyframe(-1);
                     break;
 
+                case 'Delete':
+                    e.preventDefault();
+                    if (!modal || modal.classList.contains('hidden')) {
+                        this.cancelCase();
+                    }
+
+                    break;
+
                 case 'Enter':
                     e.preventDefault();
-                    const modal = document.getElementById('ticket-modal');
                     if (this.state.selectedCaseId && modal && modal.classList.contains('hidden')) {
                         this.openTicket();
                     }
@@ -422,6 +431,26 @@ const app = {
             alert(`案件 #${currentCase.id} 已成立。`);
             this.init();
         }
+    },
+
+    cancelCase() {
+        const currentCase = this.state.allCases.find(
+            c => c.id === this.state.selectedCaseId
+        );
+
+        if (!currentCase) return;
+
+        const confirmed = confirm(
+            `確定要撤銷案件 #${currentCase.id} 嗎？`
+        );
+
+        if (!confirmed) return;
+
+        currentCase.status = 'cancelled';
+
+        alert(`案件 #${currentCase.id} 已撤銷。`);
+
+        this.init();
     },
 };
 

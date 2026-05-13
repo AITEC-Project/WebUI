@@ -121,9 +121,14 @@
     </div>
 
     <footer class="mt-12 pt-6 border-t border-gray-800 flex justify-between items-center">
-        <button class="text-red-400 hover:bg-red-900/30 px-6 py-2 rounded-lg font-medium transition">
-            撤銷案件
+        <button
+                onclick="app.cancelCase()"
+                class="group flex items-center text-red-400 hover:bg-red-900/30 px-6 py-2 rounded-lg font-medium transition"
+        >
+            <span>撤銷案件</span>
+            <span class="ml-2 bg-red-500/20 text-[10px] px-1.5 py-0.5 rounded border border-red-500/30 group-hover:bg-red-500/40 transition">Delete</span>
         </button>
+
         <button onclick="app.openTicket()" class="relative flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg shadow-blue-900/20 group">
             <span>案件成立</span>
             <span class="ml-2 bg-blue-500 text-[10px] px-1.5 py-0.5 rounded border border-blue-400 group-hover:bg-white group-hover:text-blue-600 transition">Enter</span>
