@@ -30,20 +30,27 @@ const TimeUtils = {
 
 const UIRenderer = {
     createCaseItemHTML(c) {
-        const displayTime = TimeUtils.formatRelativeTime(c.timestamp);
+        const absoluteTime = TimeUtils.formatFullTime(c.timestamp).substring(0, 16);
+
         return `
             <div class="card-bg p-3 rounded-lg border border-transparent hover:border-blue-500 cursor-pointer transition group" 
                  onclick="app.handleCaseClick('${c.id}')">
                 <div class="flex items-center space-x-3">
-                    <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden">
-                        <img src="${c.images[1].src}" alt="Case ${c.id}" class="w-full h-full object-cover">
+                    <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden flex-shrink-0">
+                        <img src="${c.images[0]?.src || ''}" alt="Case ${c.id}" class="w-full h-full object-cover">
                     </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-center">
                             <span class="text-sm font-bold text-gray-200">#${c.id}</span>
-                            <span class="text-[10px] text-gray-500">${displayTime}</span>
+                            <span class="text-[10px] text-gray-500 font-mono tracking-tighter">${absoluteTime}</span>
                         </div>
-                        <p class="text-[10px] text-gray-400">車牌：${c.plate}</p>
+                        <div class="mt-0.5 space-y-0.5">
+                            <p class="text-[11px] text-gray-300 font-medium">車牌：${c.plate}</p>
+                            <p class="text-[10px] text-gray-400 truncate flex items-center">
+                                <i class="fas fa-map-marker-alt text-gray-500 mr-1 text-[9px]"></i>
+                                ${c.location || '未知地點'}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,60 +59,44 @@ const UIRenderer = {
 
     renderDetail(c) {
         if (!c) return;
+
+        // 1. 清空或隱藏原本最上方的標頭區域（編號、車牌、路段、待審核）
         const headerArea = document.getElementById('detail-header');
         if (headerArea) {
-            headerArea.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h2 class="text-2xl font-black tracking-tighter text-white">Case #${c.id}</h2>
-                        <div class="flex items-center space-x-4 mt-1">
-                            <span class="text-blue-400 font-mono text-sm"><i class="fas fa-car mr-1"></i> ${c.plate}</span>
-                            <span class="text-gray-400 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> ${c.location}</span>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <span class="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-[10px] px-2 py-1 rounded border font-bold uppercase">待審核</span>
-                    </div>
-                </div>
-            `;
+            headerArea.innerHTML = ''; // 直接清空，移除了編號、車牌、路段與待審核標籤
+            headerArea.className = 'hidden'; // 將容器隱藏，避免留白影響排版
         }
 
         const evidenceBox = document.getElementById('evidence-grid');
         if (evidenceBox) {
-            const fullTime = TimeUtils.formatFullTime(c.timestamp);
             evidenceBox.className = "card-bg p-4 rounded-2xl border border-gray-800 shadow-xl space-y-3";
             evidenceBox.innerHTML = `
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-blue-400 font-semibold text-sm flex items-center">
-                        <i class="fas fa-camera mr-2"></i> 違規證據影像
-                    </span>
-                    <span class="text-[10px] text-gray-500 font-mono">${fullTime}</span>
-                </div>
-                <div id="main-display-area" class="relative rounded-xl overflow-hidden bg-black aspect-video border border-gray-700 group">
-                    <video id="main-video-view" class="w-full h-full object-contain" controls autoplay muted loop>
-                        <source src="${c.video}" type="video/mp4">
-                    </video>
-                    <img id="main-img-view" src="${c.images[0].src}" class="hidden w-full h-full object-contain cursor-zoom-in" onclick="app.openLightbox(this.src)">
-                    <div class="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition">
-                        <span class="bg-black/70 text-white text-[9px] px-2 py-1 rounded border border-white/10 flex items-center">
-                            <i class="fas fa-arrow-left mr-1"></i> <i class="fas fa-arrow-right mr-1"></i> 跳轉關鍵幀
-                        </span>
+                <div class="flex flex-col md:flex-row gap-4 h-auto">
+                    <div class="w-full md:w-[60%] relative rounded-xl overflow-hidden bg-black border border-gray-700 aspect-video">
+                        <video id="main-video-view" class="w-full h-full object-cover" controls autoplay muted loop>
+                            <source src="${c.video}" type="video/mp4">
+                        </video>
                     </div>
-                </div>
-                <div class="grid grid-cols-4 gap-2">
-                    <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-blue-500 cursor-pointer flex items-center justify-center bg-gray-900 transition" 
-                         onclick="app.switchMainDisplay('video', '${c.video}', 0, this)">
-                        <i class="fas fa-play text-blue-500 text-xs"></i>
-                        <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1 rounded font-bold">1</span>
-                    </div>
-                    ${c.images.map((img, idx) => `
-                        <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-gray-800 cursor-pointer transition-all hover:border-gray-600" 
-                             onclick="app.switchMainDisplay('img', '${img.src}', ${idx + 1}, this)">
-                            <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
-                            <span class="absolute top-1 left-1 bg-gray-700 text-white text-[9px] px-1 rounded font-bold">${idx + 2}</span>
-                            <div class="absolute bottom-1 right-1 bg-black/60 text-[8px] text-white px-1 rounded">${img.time}s</div>
+                    
+                    <div class="w-full md:w-[40%] flex flex-col justify-between gap-2">
+                        <div class="relative rounded-xl overflow-hidden bg-black border border-gray-700 group aspect-video">
+                            <img id="main-img-view" src="${c.images[0]?.src || ''}" class="w-full h-full object-cover cursor-zoom-in" onclick="app.openLightbox(this.src)">
+                            <div class="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded border border-white/10 z-10">
+                                關鍵影格時間：<span id="img-time-tag">${c.images[0]?.time || 0}</span>s
+                            </div>
                         </div>
-                    `).join('')}
+                        
+                        <div class="grid grid-cols-3 gap-2">
+                            ${c.images.slice(0, 3).map((img, idx) => `
+                                <div class="thumbnail-item relative aspect-video rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800'} cursor-pointer transition-all hover:border-gray-600" 
+                                     onclick="app.switchPhoto(${idx}, '${img.src}', ${img.time}, this)">
+                                    <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
+                                    <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">${idx + 1}</span>
+                                    <div class="absolute bottom-1 right-1 bg-black/60 text-[8px] text-white px-1 rounded">${img.time}s</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
                 </div>
             `;
         }
@@ -145,7 +136,8 @@ const app = {
         filteredCases: [],
         selectedCaseId: null,
         currentLevel: 'all',
-        hotkeysInitialized: false
+        hotkeysInitialized: false,
+        isSidebarCollapsed: false
     },
 
     async init() {
@@ -184,48 +176,41 @@ const app = {
             if (!currentCase) return;
 
             const video = document.getElementById('main-video-view');
-            const thumbnails = document.querySelectorAll('#evidence-grid .grid > div');
-
+            const thumbnails = document.querySelectorAll('.thumbnail-item');
             const modal = document.getElementById('ticket-modal');
 
             switch (e.key) {
-                case '1': // 切換影片並跳回開頭
-                    this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
-                    video.currentTime = 0;
-                    break;
+                case '1':
                 case '2':
-                case '3':
-                case '4': // 切換圖片並同步影片時間點
-                    const idx = parseInt(e.key) - 2;
+                case '3': {
+                    e.preventDefault();
+                    const idx = parseInt(e.key) - 1;
                     const imgData = currentCase.images[idx];
-                    if (imgData && thumbnails[idx + 1]) {
-                        this.switchMainDisplay('img', imgData.src, idx + 1, thumbnails[idx + 1]);
+                    if (imgData && thumbnails[idx]) {
+                        this.switchPhoto(idx, imgData.src, imgData.time, thumbnails[idx]);
                     }
                     break;
+                }
                 case ' ':
                     e.preventDefault();
-                    if (video && !video.classList.contains('hidden')) {
+                    if (video) {
                         video.paused ? video.play() : video.pause();
                     }
                     break;
-                case 'ArrowRight': // 方向鍵右：跳轉至下一個關鍵幀
+                case 'ArrowRight':
                     e.preventDefault();
                     this.navigateKeyframe(1);
                     break;
-
-                case 'ArrowLeft': // 方向鍵左：跳轉至上一個關鍵幀
+                case 'ArrowLeft':
                     e.preventDefault();
                     this.navigateKeyframe(-1);
                     break;
-
                 case 'Delete':
                     e.preventDefault();
                     if (!modal || modal.classList.contains('hidden')) {
                         this.cancelCase();
                     }
-
                     break;
-
                 case 'Enter':
                     e.preventDefault();
                     if (this.state.selectedCaseId && modal && modal.classList.contains('hidden')) {
@@ -236,17 +221,130 @@ const app = {
         });
     },
 
+    updateCategoryNotch() {
+        const notch = document.getElementById('category-notch');
+        if (!notch) return;
+
+        // 條件：必須是側邊欄收起，且當前不是 'all' 狀態
+        if (this.state.isSidebarCollapsed && this.state.currentLevel !== 'all') {
+            let colorClass = '';
+            let labelText = '';
+
+            switch (this.state.currentLevel) {
+                case 'high':
+                    colorClass = 'bg-green-500';
+                    labelText = '確信違規';
+                    break;
+                case 'mid':
+                    colorClass = 'bg-yellow-500';
+                    labelText = '疑似違規';
+                    break;
+                case 'low':
+                    colorClass = 'bg-red-500';
+                    labelText = '邊界案例';
+                    break;
+            }
+
+            // 渲染精緻的橫條標籤，並帶有閃爍動態與分類文字
+            notch.innerHTML = `
+                <div class="mx-3 mt-2 p-2 rounded-lg ${colorClass}/10 border border-${colorClass}/30 flex items-center justify-between text-[11px] font-bold">
+                    <span class="flex items-center text-gray-200">
+                        <span class="w-2 h-2 ${colorClass} rounded-full mr-2 animate-pulse"></span>
+                        ${labelText}
+                    </span>
+                    <span class="text-gray-500 font-mono text-[10px]">共 ${this.state.filteredCases.length} 件</span>
+                </div>
+            `;
+            notch.classList.remove('h-0', 'opacity-0');
+        } else {
+            // 展開狀態或 'all' 狀態時，優雅地收起並隱藏
+            notch.innerHTML = '';
+            notch.classList.add('h-0', 'opacity-0');
+        }
+    },
+
+    toggleSidebar() {
+        this.state.isSidebarCollapsed = !this.state.isSidebarCollapsed;
+
+        const sidebar = document.getElementById('sidebar-panel');
+        const toggleIcon = document.getElementById('toggle-icon');
+        const userInfo = document.getElementById('sidebar-user-info');
+        const subMenu = document.getElementById('sidebar-sub-menu');
+        const texts = document.querySelectorAll('.sidebar-text');
+
+        // 取得導覽列中所有的超連結項目（包含首頁、數據儀表板、歷史案件等）
+        const navItems = document.querySelectorAll('nav > a');
+
+        if (this.state.isSidebarCollapsed) {
+            // === 執行「收納」 ===
+            sidebar.classList.remove('w-64', 'p-4');
+            sidebar.classList.add('w-20', 'p-2');
+
+            // 使用者資訊區塊置中
+            if (userInfo) {
+                userInfo.classList.add('justify-center');
+                // 隱藏頭像右側的外距，確保單獨頭像完美置中
+                userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
+            }
+
+            // 隱藏子選單
+            if (subMenu) subMenu.classList.add('hidden');
+
+            // 隱藏所有純文字與數量標籤
+            texts.forEach(el => el.classList.add('hidden'));
+
+            // 【核心修改】將所有導覽按鈕改為水平置中
+            navItems.forEach(item => {
+                item.classList.remove('justify-between');
+                item.classList.add('justify-center');
+                // 移除 Icon 右側原本的 mr-3 外距，避免置中時產生微幅右偏
+                item.querySelector('i')?.classList.remove('mr-3');
+            });
+
+            // 改變收折箭頭方向
+            if (toggleIcon) {
+                toggleIcon.classList.remove('fa-angle-left');
+                toggleIcon.classList.add('fa-angle-right');
+            }
+        } else {
+            // === 執行「展開」 ===
+            sidebar.classList.remove('w-20', 'p-2');
+            sidebar.classList.add('w-64', 'p-4');
+
+            if (userInfo) {
+                userInfo.classList.remove('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.add('mr-3');
+            }
+
+            if (subMenu) subMenu.classList.remove('hidden');
+            texts.forEach(el => el.classList.remove('hidden'));
+
+            // 恢復原本的靠左與分散對齊樣式，並補回 Icon 右側外距
+            navItems.forEach(item => {
+                item.classList.remove('justify-center');
+                // 只有第一個首頁按鈕原本是 justify-between（因為有數量標籤）
+                if (item.id === 'nav-all') {
+                    item.classList.add('justify-between');
+                }
+                item.querySelector('i')?.classList.add('mr-3');
+            });
+
+            if (toggleIcon) {
+                toggleIcon.classList.remove('fa-angle-right');
+                toggleIcon.classList.add('fa-angle-left');
+            }
+        }
+
+        // 確保收合側邊欄時，註記條能即時顯示或消失
+        this.updateCategoryNotch();
+    },
+
     handleCaseClick(id) {
         this.state.selectedCaseId = id;
-        const selectedData =
-            this.state.allCases.find(c => c.id === id);
+        const selectedData = this.state.allCases.find(c => c.id === id);
         UIRenderer.renderDetail(selectedData);
 
-        // 回到案件最上方
-        const detailSection = document.querySelector(
-            'section.flex-1.flex.flex-col.overflow-y-auto'
-        );
-
+        const detailSection = document.querySelector('section.flex-1.flex.flex-col.overflow-y-auto');
         if (detailSection) {
             detailSection.scrollTop = 0;
         }
@@ -258,24 +356,18 @@ const app = {
         });
     },
 
-    switchMainDisplay(type, src, idx, el) {
+    // 專注於右側照片切換，同時連動影片時間點
+    switchPhoto(idx, src, time, el) {
         const imgView = document.getElementById('main-img-view');
         const videoView = document.getElementById('main-video-view');
-        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
+        const timeTag = document.getElementById('img-time-tag');
 
-        if (type === 'img') {
-            videoView.pause();
-            videoView.classList.add('hidden');
-            imgView.classList.remove('hidden');
-            imgView.src = src;
+        if (imgView) imgView.src = src;
+        if (timeTag) timeTag.innerText = time;
 
-            // 同步跳轉影片時間點
-            const time = currentCase.images[idx - 1]?.time;
-            if (time !== undefined) videoView.currentTime = time;
-        } else {
-            imgView.classList.add('hidden');
-            videoView.classList.remove('hidden');
-            videoView.play();
+        // 影片固定存在，切換照片時同步變更影片進度秒數，但不中斷播放狀態
+        if (videoView && time !== undefined) {
+            videoView.currentTime = time;
         }
 
         if (el) {
@@ -291,34 +383,24 @@ const app = {
     navigateKeyframe(direction) {
         const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
         const video = document.getElementById('main-video-view');
-        const thumbnails = document.querySelectorAll('#evidence-grid .grid > div');
+        const thumbnails = document.querySelectorAll('.thumbnail-item');
         if (!currentCase || !video) return;
 
-        // 取得所有關鍵幀的時間點 (3s, 5s, 13s 等)
-        const keyframeTimes = currentCase.images.map(img => img.time);
+        const keyframeTimes = currentCase.images.slice(0, 3).map(img => img.time);
         const currentTime = video.currentTime;
 
         let targetIdx;
         if (direction === 1) {
-            // 找下一個比現在時間大的關鍵幀
             targetIdx = keyframeTimes.findIndex(t => t > currentTime + 0.5);
-            if (targetIdx === -1) targetIdx = 0; // 若到底則循環回第一個
+            if (targetIdx === -1) targetIdx = 0;
         } else {
-            // 找上一個比現在時間小的關鍵幀
             targetIdx = keyframeTimes.filter(t => t < currentTime - 0.5).length - 1;
-            if (targetIdx < 0) targetIdx = keyframeTimes.length - 1; // 若到頭則循環回最後一個
+            if (targetIdx < 0) targetIdx = keyframeTimes.length - 1;
         }
 
-        // 執行跳轉：切換回影片顯示模式，並設定時間點
-        if (targetIdx >= 0) {
-            const targetTime = keyframeTimes[targetIdx];
-
-            // 強制切換回影片顯示 (type 為 'video')
-            this.switchMainDisplay('video', currentCase.video, 0, thumbnails[0]);
-
-            // 設定影片秒數並播放
-            video.currentTime = targetTime;
-            video.play();
+        if (targetIdx >= 0 && targetIdx < currentCase.images.length) {
+            const imgData = currentCase.images[targetIdx];
+            this.switchPhoto(targetIdx, imgData.src, imgData.time, thumbnails[targetIdx]);
         }
     },
 
@@ -343,13 +425,14 @@ const app = {
                 c.location.toLowerCase().includes(keyword);
 
             const matchType = selectedTypes.length === 0 || selectedTypes.some(t => c.type.includes(t));
-
             const matchLocation = selectedLocations.length === 0 || selectedLocations.some(l => c.location.includes(l));
 
             return matchLevel && matchKeyword && matchType && matchLocation;
         });
 
         this.renderCaseList();
+
+        this.updateCategoryNotch();
 
         if (this.state.filteredCases.length > 0) {
             this.handleCaseClick(this.state.filteredCases[0].id);
@@ -410,6 +493,15 @@ const app = {
         }
     },
 
+    clearDetail() {
+        const headerArea = document.getElementById('detail-header');
+        const evidenceBox = document.getElementById('evidence-grid');
+        const analysisArea = document.getElementById('analysis-container');
+        if (headerArea) headerArea.innerHTML = `<p class="text-gray-500">暫無待審核案件</p>`;
+        if (evidenceBox) { evidenceBox.innerHTML = ''; evidenceBox.className = ''; }
+        if (analysisArea) analysisArea.innerHTML = '';
+    },
+
     openTicket() {
         const c = this.state.allCases.find(item => item.id === this.state.selectedCaseId);
         if (c && typeof TicketModal !== 'undefined') TicketModal.open(c);
@@ -430,12 +522,8 @@ const app = {
     },
 
     confirmTicket() {
-        const currentCase = this.state.allCases.find(
-            c => c.id === this.state.selectedCaseId
-        );
-
+        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
         this.closeTicket();
-
         if (currentCase) {
             currentCase.status = 'verified';
             alert(`案件 #${currentCase.id} 已成立。`);
@@ -444,24 +532,14 @@ const app = {
     },
 
     cancelCase() {
-        const currentCase = this.state.allCases.find(
-            c => c.id === this.state.selectedCaseId
-        );
-
+        const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
         if (!currentCase) return;
-
-        const confirmed = confirm(
-            `確定要撤銷案件 #${currentCase.id} 嗎？`
-        );
-
+        const confirmed = confirm(`確定要撤銷案件 #${currentCase.id} 嗎？`);
         if (!confirmed) return;
-
         currentCase.status = 'cancelled';
-
         alert(`案件 #${currentCase.id} 已撤銷。`);
-
         this.init();
-    },
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => app.init());

@@ -10,24 +10,29 @@
 </head>
 <body class="h-screen flex overflow-hidden">
 
-<aside class="w-64 border-r border-gray-800 flex flex-col p-4 space-y-6 flex-shrink-0 bg-[#0d1117]">
-    <div class="flex items-center space-x-3 p-2">
-        <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-            <i class="fas fa-user text-gray-400"></i>
+<aside id="sidebar-panel" class="w-64 border-r border-gray-800 flex flex-col p-4 space-y-6 flex-shrink-0 bg-[#0d1117] transition-all duration-300">
+    <div class="flex items-center justify-between p-2">
+        <div id="sidebar-user-info" class="flex items-center space-x-3 transition-opacity duration-200">
+            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <div class="sidebar-text">
+                <p class="text-sm font-bold whitespace-nowrap">警員 某韋坪 #0123</p>
+                <p class="text-xs text-gray-500 whitespace-nowrap">台中市 北屯區</p>
+            </div>
         </div>
-        <div>
-            <p class="text-sm font-bold">警員 某韋坪 #0123</p>
-            <p class="text-xs text-gray-500">台中市 北屯區</p>
-        </div>
+        <button id="toggle-sidebar" onclick="app.toggleSidebar()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800 transition">
+            <i id="toggle-icon" class="fas fa-angle-left text-lg"></i>
+        </button>
     </div>
 
     <nav class="flex-1 space-y-2">
         <a href="#" id="nav-all" class="sidebar-active flex items-center justify-between p-3 rounded-lg text-blue-400" onclick="app.filterCases('all', this)">
-            <span><i class="fas fa-home mr-3"></i>各地通報案件</span>
-            <span id="total-cases-count" class="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+            <span class="flex items-center"><i class="fas fa-home w-5 text-center mr-3"></i><span class="sidebar-text">各地通報案件</span></span>
+            <span id="total-cases-count" class="sidebar-text bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">0</span>
         </a>
 
-        <div class="pl-8 space-y-1 text-sm text-gray-500">
+        <div id="sidebar-sub-menu" class="pl-8 space-y-1 text-sm text-gray-500 transition-all duration-200">
             <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('high', this)">
                 <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                 確信違規 (<span id="high-confidence-count">0</span>)
@@ -43,15 +48,16 @@
         </div>
 
         <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
-            <i class="fas fa-chart-line mr-3"></i>數據儀表板
+            <i class="fas fa-chart-line w-5 text-center mr-3"></i><span class="sidebar-text">數據儀表板</span>
         </a>
         <a href="history.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
-            <i class="fas fa-file-alt mr-3"></i>歷史案件
+            <i class="fas fa-file-alt w-5 text-center mr-3"></i><span class="sidebar-text">歷史案件</span>
         </a>
     </nav>
 
     <div class="text-xs text-green-500 flex items-center p-2">
-        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span> AI Server: Online
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse flex-shrink-0"></span>
+        <span class="sidebar-text">AI Server: Online</span>
     </div>
 </aside>
 
@@ -103,6 +109,7 @@
             </div>
         </div>
     </div>
+    <div id="category-notch" class="transition-all duration-300"></div>
     <div id="case-list" class="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
     </div>
 </section>
