@@ -208,28 +208,37 @@ const DashboardApp = {
         // 6. 路口違規樣態異常偵測 (強化統計顯著性)
         let typeAnomalies = [];
         const globalTotal = data.length;
+
         Object.entries(locStats).forEach(([loc, stat]) => {
-            if (stat.total < 5) return;
+            // 🚦 修改 1：提高該路口總樣本數門檻 (原為 5，提高至 15)
+            // 確保該路口有足夠的違規總數，計算出的比例才具統計意義
+            if (stat.total < 15) return;
+
             Object.entries(stat.types).forEach(([type, count]) => {
                 const locTypeRatio = count / stat.total;
                 const globalTypeRatio = globalTypeCounts[type] / globalTotal;
                 const ratio = (locTypeRatio / globalTypeRatio).toFixed(1);
-                if (ratio > 1.5 && count >= 3) {
+
+                // 🚦 修改 2 & 3：倍數提高至 2.0 倍以上 (原 1.5)，且該違規樣態至少發生 5 次 (原 3)
+                // 確保不是因為分母太小導致的「假性倍數飆高」
+                if (ratio >= 2.0 && count >= 5) {
                     typeAnomalies.push({ loc, type, ratio: parseFloat(ratio) });
                 }
             });
         });
 
         if (typeAnomalyEl) {
-            typeAnomalies.sort((a, b) => b.ratio - a.ratio).slice(0, 2);
-            typeAnomalyEl.innerHTML = typeAnomalies.map(a => `
-                <div class="flex flex-col mb-1 border-b border-gray-800 pb-1">
-                    <div class="flex justify-between">
-                        <span class="text-[11px] text-blue-400 font-bold">${a.type}</span>
-                        <span class="text-[11px] text-red-400">偏高 ${a.ratio}x</span>
-                    </div>
-                    <span class="text-[11px] text-gray-500 truncate">${a.loc}</span>
-                </div>`).join('') || '<p class="text-[13px] text-green-500">樣態分佈正常</p>';
+            // 這裡我將顯示數量從 slice(0, 2) 改成 slice(0, 3)，你可以依需求改回來
+            const topAnomalies = typeAnomalies.sort((a, b) => b.ratio - a.ratio).slice(0, 3);
+
+            typeAnomalyEl.innerHTML = topAnomalies.map(a => `
+        <div class="flex flex-col mb-1 border-b border-gray-800 pb-1">
+            <div class="flex justify-between">
+                <span class="text-[11px] text-blue-400 font-bold">${a.type}</span>
+                <span class="text-[11px] text-red-400">偏高 ${a.ratio}x</span>
+            </div>
+            <span class="text-[11px] text-gray-500 truncate">${a.loc}</span>
+        </div>`).join('') || '<p class="text-[13px] text-green-500">樣態分佈正常</p>';
         }
     }
 };
