@@ -143,9 +143,60 @@
     </footer>
 </section>
 
-<div id="lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex items-center justify-center p-4 cursor-pointer">
+<div id="lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex items-center justify-center p-4 cursor-pointer is-modal">
     <img id="lightbox-img" src="" alt="違規影像燈箱檢視" class="max-w-full max-h-full rounded shadow-2xl transition-transform duration-300">
     <div class="absolute top-5 right-8 text-white/50 text-2xl hover:text-white"><i class="fas fa-times"></i></div>
+</div>
+
+<div id="cancel-modal" class="fixed inset-0 bg-black/80 z-[9999] hidden flex items-center justify-center p-4 transition-opacity duration-300 is-modal">
+    <div class="bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-transform scale-95 md:scale-100">
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+            <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+            確認撤銷案件
+        </h3>
+
+        <div class="space-y-3 mb-6">
+            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+                <div class="flex items-center space-x-3">
+                    <input type="radio" name="cancel-reason" value="車牌模糊無法辨識" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900">
+                    <span class="text-gray-300 group-hover:text-white transition">車牌模糊無法辨識</span>
+                </div>
+                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm">1</kbd>
+            </label>
+
+            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+                <div class="flex items-center space-x-3">
+                    <input type="radio" name="cancel-reason" value="未達明顯違規標準" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900">
+                    <span class="text-gray-300 group-hover:text-white transition">未達明顯違規標準</span>
+                </div>
+                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm">2</kbd>
+            </label>
+
+            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+                <div class="flex items-center space-x-3">
+                    <input type="radio" name="cancel-reason" value="系統誤判(非目標車輛)" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900">
+                    <span class="text-gray-300 group-hover:text-white transition">系統誤判 (非目標車輛)</span>
+                </div>
+                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm">3</kbd>
+            </label>
+
+            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+                <div class="flex items-center space-x-3 w-full">
+                    <input type="radio" name="cancel-reason" value="other" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900" onchange="document.getElementById('other-reason-input').focus()">
+                    <span class="text-gray-300 group-hover:text-white transition whitespace-nowrap">其他原因</span>
+                    <input type="text" id="other-reason-input" class="flex-1 bg-gray-900 border border-gray-700 rounded-md py-1.5 px-3 text-sm focus:outline-none focus:border-red-500 text-white transition-colors" placeholder="請輸入具體撤銷原因..." onclick="document.querySelector('input[value=\'other\']').checked = true">
+                </div>
+                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm ml-3">4</kbd>
+            </label>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-2 border-t border-gray-800">
+            <button onclick="app.closeCancelModal()" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition font-medium">取消</button>
+            <button onclick="app.confirmCancelCase()" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition shadow-lg shadow-red-900/20 font-medium flex items-center">
+                <i class="fas fa-trash-alt mr-2"></i>確認撤銷
+            </button>
+        </div>
+    </div>
 </div>
 
 <script src="js/data.js"></script>

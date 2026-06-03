@@ -170,6 +170,38 @@ const app = {
 
     initHotkeys() {
         document.addEventListener('keydown', (e) => {
+            const cancelModal = document.getElementById('cancel-modal');
+            if (cancelModal && !cancelModal.classList.contains('hidden')) {
+                // 檢查是否正在「其他原因」輸入框打字
+                const isTyping = document.activeElement.tagName === 'INPUT' && document.activeElement.type === 'text';
+
+                if (isTyping) {
+                    // 如果正在打字，只允許 Enter(確認) 跟 Escape(取消)
+                    if (e.key === 'Enter') { e.preventDefault(); this.confirmCancelCase(); }
+                    if (e.key === 'Escape') { e.preventDefault(); this.closeCancelModal(); }
+                    return; // 結束執行，避免輸入文字時觸發下方邏輯
+                }
+
+                // 處理彈窗內的 1234 與 Enter/Esc
+                const radios = document.querySelectorAll('input[name="cancel-reason"]');
+                if (radios.length > 0) {
+                    switch (e.key) {
+                        case '1': radios[0].checked = true; e.preventDefault(); break;
+                        case '2': radios[1].checked = true; e.preventDefault(); break;
+                        case '3': radios[2].checked = true; e.preventDefault(); break;
+                        case '4':
+                            radios[3].checked = true;
+                            document.getElementById('other-reason-input').focus();
+                            e.preventDefault();
+                            break;
+                        case 'Enter': this.confirmCancelCase(); e.preventDefault(); break;
+                        case 'Escape': this.closeCancelModal(); e.preventDefault(); break;
+                    }
+                }
+                // ★ 核心機制：只要彈窗開著，按鍵處理到這裡就強制 return，絕不干擾下方原本的邏輯！
+                return;
+            }
+
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
             const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
@@ -531,14 +563,76 @@ const app = {
         }
     },
 
-    cancelCase() {
+    cancelCase: function() {
+        const modal = document.getElementById('cancel-modal');
+        if (modal) {
+            // 顯示彈窗
+            modal.classList.remove('hidden');
+
+            // 重置先前的選擇狀態
+            const radios = document.querySelectorAll('input[name="cancel-reason"]');
+            radios.forEach(r => r.checked = false);
+            document.getElementById('other-reason-input').value = '';
+        }
+    },
+
+    // 2. 關閉彈窗
+    closeCancelModal: function() {
+        const modal = document.getElementById('cancel-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    },
+
+    // 3. 確認送出撤銷原因
+    confirmCancelCase: function() {
+        // 1. 尋找被選中的選項
+        const selectedRadio = document.querySelector('input[name="cancel-reason"]:checked');
+
+        if (!selectedRadio) {
+            alert('請先選擇撤銷原因！');
+            return;
+        }
+
+        let reason = selectedRadio.value;
+
+        if (reason === 'other') {
+            const otherInput = document.getElementById('other-reason-input').value.trim();
+            if (!otherInput) {
+                alert('請輸入具體的其他原因！');
+                document.getElementById('other-reason-input').focus();
+                return;
+            }
+            reason = otherInput;
+        }
+
+        // 2. 找到當前正在審核的案件
         const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
-        if (!currentCase) return;
-        const confirmed = confirm(`確定要撤銷案件 #${currentCase.id} 嗎？`);
-        if (!confirmed) return;
-        currentCase.status = 'cancelled';
-        alert(`案件 #${currentCase.id} 已撤銷。`);
-        this.init();
+
+        if (currentCase) {
+            // 更新狀態與附加撤銷原因 (這樣資料庫或後端就能收到這筆紀錄)
+            currentCase.status = 'canceled';
+            currentCase.cancelReason = reason;
+
+            // 重新過濾出剩餘的待審核案件
+            this.state.pendingCases = this.state.allCases.filter(c => c.status === 'pending');
+
+            // 重新計算側邊欄的數字統計
+            this.updateStatistics();
+
+            // 重新套用篩選與渲染清單
+            // (這會自動更新左側列表，並自動選取下一個案件，或清空右側畫面)
+            this.applyFilters();
+
+            console.log(`[系統紀錄] 案件 #${currentCase.id} 已撤銷。原因：${reason}`);
+
+            // 關閉彈窗並給予提示
+            this.closeCancelModal();
+            alert(`案件 #${currentCase.id} 已成功撤銷。\n紀錄原因：${reason}`);
+        } else {
+            // 系統防呆
+            this.closeCancelModal();
+        }
     }
 };
 
