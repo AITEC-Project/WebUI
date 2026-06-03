@@ -376,7 +376,7 @@ const app = {
         const selectedData = this.state.allCases.find(c => c.id === id);
         UIRenderer.renderDetail(selectedData);
 
-        const detailSection = document.querySelector('section.flex-1.flex.flex-col.overflow-y-auto');
+        const detailSection = document.getElementById('detail-scroll-area');
         if (detailSection) {
             detailSection.scrollTop = 0;
         }
