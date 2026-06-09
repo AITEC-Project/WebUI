@@ -67,32 +67,53 @@ const UIRenderer = {
             headerArea.className = 'hidden'; // 將容器隱藏，避免留白影響排版
         }
 
+        // 在 UIRenderer.renderDetail 中替換原有的 video 區塊：
         const evidenceBox = document.getElementById('evidence-grid');
         if (evidenceBox) {
             evidenceBox.className = "card-bg p-4 rounded-2xl border border-gray-800 shadow-xl space-y-3";
             evidenceBox.innerHTML = `
                 <div class="flex flex-col md:flex-row gap-4 h-auto">
-                    <div class="w-full md:w-[60%] relative rounded-xl overflow-hidden bg-black border border-gray-700 aspect-video">
-                        <video id="main-video-view" class="w-full h-full object-cover" controls autoplay muted loop>
-                            <source src="${c.video}" type="video/mp4">
-                        </video>
-                    </div>
-                    
-                    <div class="w-full md:w-[40%] flex flex-col justify-between gap-2">
-                        <div class="relative rounded-xl overflow-hidden bg-black border border-gray-700 group aspect-video">
-                            <img id="main-img-view" src="${c.images[0]?.src || ''}" class="w-full h-full object-cover cursor-zoom-in" onclick="app.openLightbox(this.src)">
-                            <div class="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded border border-white/10 z-10">
-                                關鍵影格時間：<span id="img-time-tag">${c.images[0]?.time || 0}</span>s
-                            </div>
+                    <div class="w-full md:w-[60%] flex flex-col gap-2">
+                        <div class="relative rounded-xl overflow-hidden bg-black border border-gray-700 aspect-video">
+                            <video id="main-video-view" class="w-full h-full object-cover" controls autoplay muted loop>
+                                <source src="${c.video}" type="video/mp4">
+                            </video>
                         </div>
                         
-                        <div class="grid grid-cols-3 gap-2">
+                        <div class="w-full px-1 mt-1">
+                            <div class="relative w-full h-1.5 bg-gray-800 rounded-full cursor-pointer hover:h-2 transition-all group" id="custom-progress-container">
+                                <div id="custom-progress-bar" class="absolute top-0 left-0 h-full bg-gray-500 rounded-full pointer-events-none transition-all duration-75 w-0"></div>
+                                <div id="marker-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+                            </div>
+                            <div class="flex justify-between text-[9px] text-gray-500 mt-1.5 px-1 font-mono uppercase tracking-wider">
+                                <span>Video Timeline</span>
+                                <span>Keyframes</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full md:w-[40%] flex flex-col gap-2">
+                        <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-700 bg-black cursor-pointer group" 
+                             onclick="app.openLightbox(document.getElementById('main-img-view').src)">
+                            <img id="main-img-view" src="${c.images[0]?.src || ''}" alt="違規關鍵幀" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                            
+                            <div class="absolute top-2 left-2 bg-black/70 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm flex items-center border border-gray-600">
+                                <i class="fas fa-camera mr-1.5 text-blue-400"></i>
+                                <span id="img-time-tag">${c.images[0]?.time || '0'}</span>s
+                            </div>
+                            
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                                <i class="fas fa-search-plus text-white text-3xl drop-shadow-lg"></i>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 mt-auto">
                             ${c.images.slice(0, 3).map((img, idx) => `
-                                <div class="thumbnail-item relative aspect-video rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800'} cursor-pointer transition-all hover:border-gray-600" 
+                                <div class="thumbnail-item relative aspect-video rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800'} cursor-pointer transition-all hover:border-gray-500" 
                                      onclick="app.switchPhoto(${idx}, '${img.src}', ${img.time}, this)">
                                     <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
                                     <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">${idx + 1}</span>
-                                    <div class="absolute bottom-1 right-1 bg-black/60 text-[8px] text-white px-1 rounded">${img.time}s</div>
+                                    <div class="absolute bottom-1 right-1 bg-black/70 text-[8px] text-white px-1.5 rounded">${img.time}s</div>
                                 </div>
                             `).join('')}
                         </div>
@@ -137,7 +158,8 @@ const app = {
         selectedCaseId: null,
         currentLevel: 'all',
         hotkeysInitialized: false,
-        isSidebarCollapsed: false
+        isSidebarCollapsed: false,
+        currentKeyframeIdx: 0
     },
 
     async init() {
@@ -231,11 +253,11 @@ const app = {
                     break;
                 case 'ArrowRight':
                     e.preventDefault();
-                    this.navigateKeyframe(1);
+                    this.adjustKeyframeTime(0.1);
                     break;
                 case 'ArrowLeft':
                     e.preventDefault();
-                    this.navigateKeyframe(-1);
+                    this.adjustKeyframeTime(-0.1);
                     break;
                 case 'Delete':
                     e.preventDefault();
@@ -373,8 +395,11 @@ const app = {
 
     handleCaseClick(id) {
         this.state.selectedCaseId = id;
+        this.state.currentKeyframeIdx = 0;
         const selectedData = this.state.allCases.find(c => c.id === id);
+
         UIRenderer.renderDetail(selectedData);
+        this.setupVideoMarkers(selectedData);
 
         const detailSection = document.getElementById('detail-scroll-area');
         if (detailSection) {
@@ -388,8 +413,59 @@ const app = {
         });
     },
 
+    // 將此方法加在 app 物件內 (例如放在 handleCaseClick 下方)
+    setupVideoMarkers(caseData) {
+        const video = document.getElementById('main-video-view');
+        const markerContainer = document.getElementById('marker-container');
+        const customProgress = document.getElementById('custom-progress-bar');
+        const customProgressContainer = document.getElementById('custom-progress-container');
+
+        if (!video || !markerContainer) return;
+
+        // 當影片載入詮釋資料後，計算總長度並標記
+        video.addEventListener('loadedmetadata', () => {
+            const duration = video.duration || 10;
+            markerContainer.innerHTML = ''; // 清空舊標記
+
+            caseData.images.slice(0, 3).forEach((img, idx) => {
+                const percent = (img.time / duration) * 100;
+                const marker = document.createElement('div');
+
+                const isActive = idx === (app.state.currentKeyframeIdx || 0);
+                marker.className = `keyframe-marker absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-[#0d1117] shadow cursor-pointer transition-all hover:scale-150 pointer-events-auto ${isActive ? 'bg-blue-500 scale-125 z-20' : 'bg-yellow-500 scale-100 z-10'}`;
+                marker.style.left = `calc(${percent}% - 6px)`;
+                marker.title = `點擊跳至關鍵幀 ${idx + 1} (${img.time}s)`;
+
+                // 點擊標記：跳轉影片並連動右側照片
+                marker.onclick = (e) => {
+                    e.stopPropagation(); // 避免觸發底層進度條點擊
+                    const thumbnails = document.querySelectorAll('.thumbnail-item');
+                    app.switchPhoto(idx, img.src, img.time, thumbnails[idx]);
+                };
+
+                markerContainer.appendChild(marker);
+            });
+        });
+
+        // 連動自訂進度條長度
+        video.addEventListener('timeupdate', () => {
+            if (video.duration) {
+                const percent = (video.currentTime / video.duration) * 100;
+                customProgress.style.width = `${percent}%`;
+            }
+        });
+
+        // 點擊自訂進度條：讓影片跳轉到該時間
+        customProgressContainer.addEventListener('click', (e) => {
+            const rect = customProgressContainer.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            video.currentTime = pos * video.duration;
+        });
+    },
+
     // 專注於右側照片切換，同時連動影片時間點
     switchPhoto(idx, src, time, el) {
+        this.state.currentKeyframeIdx = idx;
         const imgView = document.getElementById('main-img-view');
         const videoView = document.getElementById('main-video-view');
         const timeTag = document.getElementById('img-time-tag');
@@ -397,7 +473,6 @@ const app = {
         if (imgView) imgView.src = src;
         if (timeTag) timeTag.innerText = time;
 
-        // 影片固定存在，切換照片時同步變更影片進度秒數，但不中斷播放狀態
         if (videoView && time !== undefined) {
             videoView.currentTime = time;
         }
@@ -410,30 +485,94 @@ const app = {
             el.classList.add('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
             el.classList.remove('border-gray-800');
         }
+
+        const markers = document.querySelectorAll('.keyframe-marker');
+        markers.forEach((m, mIdx) => {
+            if (mIdx === idx) {
+                m.classList.replace('bg-yellow-500', 'bg-blue-500');
+                m.classList.replace('scale-100', 'scale-125');
+                m.classList.add('z-20');
+            } else {
+                m.classList.replace('bg-blue-500', 'bg-yellow-500');
+                m.classList.replace('scale-125', 'scale-100');
+                m.classList.remove('z-20');
+            }
+        });
     },
 
-    navigateKeyframe(direction) {
+    adjustKeyframeTime(offset) {
         const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
         const video = document.getElementById('main-video-view');
-        const thumbnails = document.querySelectorAll('.thumbnail-item');
         if (!currentCase || !video) return;
 
-        const keyframeTimes = currentCase.images.slice(0, 3).map(img => img.time);
-        const currentTime = video.currentTime;
+        const idx = this.state.currentKeyframeIdx;
+        const currentImgTime = currentCase.images[idx].time;
 
-        let targetIdx;
-        if (direction === 1) {
-            targetIdx = keyframeTimes.findIndex(t => t > currentTime + 0.5);
-            if (targetIdx === -1) targetIdx = 0;
-        } else {
-            targetIdx = keyframeTimes.filter(t => t < currentTime - 0.5).length - 1;
-            if (targetIdx < 0) targetIdx = keyframeTimes.length - 1;
+        // 1. 計算新時間，確保不超出影片範圍，並取至小數第一位
+        let newTime = currentImgTime + offset;
+        newTime = Math.max(0, Math.min(newTime, video.duration || 0));
+        newTime = parseFloat(newTime.toFixed(1));
+
+        // 2. 更新當前案件資料層的關鍵幀時間
+        currentCase.images[idx].time = newTime;
+
+        // 3. 更新 UI: 文字標籤與時間軸標記
+        const timeTag = document.getElementById('img-time-tag');
+        if (timeTag) timeTag.innerText = newTime;
+
+        const thumbnails = document.querySelectorAll('.thumbnail-item');
+        if (thumbnails[idx]) {
+            const thumbTimeTag = thumbnails[idx].querySelector('div.absolute.bottom-1.right-1');
+            if (thumbTimeTag) thumbTimeTag.innerText = newTime + 's';
         }
 
-        if (targetIdx >= 0 && targetIdx < currentCase.images.length) {
-            const imgData = currentCase.images[targetIdx];
-            this.switchPhoto(targetIdx, imgData.src, imgData.time, thumbnails[targetIdx]);
+        const markers = document.querySelectorAll('.keyframe-marker');
+        if (markers[idx] && video.duration) {
+            const percent = (newTime / video.duration) * 100;
+            markers[idx].style.left = `calc(${percent}% - 6px)`;
+            markers[idx].title = `點擊跳至關鍵幀 ${idx + 1} (${newTime}s)`;
         }
+
+        // ★ 4. 核心新增：影片跳轉與動態截圖邏輯
+
+        // 為了避免使用者連續狂按左右鍵導致截圖事件卡頓，先清除前一次未執行的監聽器
+        if (video._seekHandler) {
+            video.removeEventListener('seeked', video._seekHandler);
+        }
+
+        // 定義當影片成功跳轉到指定時間後，要執行的截圖動作
+        video._seekHandler = () => {
+            if (video.videoWidth && video.videoHeight) {
+                // 建立一個隱藏的畫布來繪製影片當下幀
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // 將畫布轉為 Base64 圖片 (使用 0.8 壓縮比維持效能)
+                const newDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+                // 同步更新資料層的圖片網址
+                currentCase.images[idx].src = newDataUrl;
+
+                // 更新右側大圖
+                const mainImg = document.getElementById('main-img-view');
+                if (mainImg) mainImg.src = newDataUrl;
+
+                // 更新右側下方對應的小縮圖
+                if (thumbnails[idx]) {
+                    const thumbImg = thumbnails[idx].querySelector('img');
+                    if (thumbImg) thumbImg.src = newDataUrl;
+                }
+            }
+        };
+
+        // 綁定一次性的 seeked (跳轉完成) 事件
+        video.addEventListener('seeked', video._seekHandler, { once: true });
+
+        // 觸發影片跳轉，跳轉完成後會自動觸發上方的 _seekHandler 進行截圖
+        video.currentTime = newTime;
     },
 
     toggleFilterPanel() {
