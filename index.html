@@ -11,19 +11,25 @@
 <body class="h-screen flex overflow-hidden">
 
 <aside id="sidebar-panel" class="w-64 border-r border-gray-800 flex flex-col p-4 space-y-6 flex-shrink-0 bg-[#0d1117] transition-all duration-300">
-    <div class="flex items-center justify-between p-2">
-        <div id="sidebar-user-info" class="flex items-center space-x-3 transition-opacity duration-200">
-            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
-                <i class="fas fa-user text-gray-400"></i>
+    <div class="flex flex-col space-y-3 p-2 border-b border-gray-800 pb-4">
+        <div id="sidebar-user-info" class="flex items-center space-x-3 transition-opacity duration-200 w-full relative">
+            <div onclick="window.location.href='admin.html';"
+                 title="點擊切換至：系統管理模組"
+                 class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/10 cursor-pointer hover:bg-blue-500 transition-colors group">
+                <i class="fas fa-user-shield text-white text-sm group-hover:scale-110 transition-transform"></i>
             </div>
-            <div class="sidebar-text">
-                <p class="text-sm font-bold whitespace-nowrap">警員 某韋坪 #0123</p>
-                <p class="text-xs text-gray-500 whitespace-nowrap">台中市 北屯區</p>
+
+            <div class="sidebar-text flex-1 min-w-0 pr-6">
+                <p class="text-sm font-bold whitespace-nowrap truncate">警員 某韋坪 #0123</p>
+                <p class="text-[10px] text-gray-500 whitespace-nowrap truncate">交通大隊 (審查人員)</p>
             </div>
+
+            <button id="toggle-sidebar" onclick="app.toggleSidebar()"
+                    title="切換側邊欄狀態"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white p-1 rounded hover:bg-gray-800 transition flex-shrink-0 z-30">
+                <i id="toggle-icon" class="fas fa-angle-left text-xs"></i>
+            </button>
         </div>
-        <button id="toggle-sidebar" onclick="app.toggleSidebar()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800 transition">
-            <i id="toggle-icon" class="fas fa-angle-left text-lg"></i>
-        </button>
     </div>
 
     <nav class="flex-1 space-y-2">
