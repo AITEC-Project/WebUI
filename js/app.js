@@ -60,19 +60,20 @@ const UIRenderer = {
     renderDetail(c) {
         if (!c) return;
 
-        // 1. 清空或隱藏原本最上方的標頭區域（編號、車牌、路段、待審核）
+        // 清空或隱藏原本最上方的標頭區域
         const headerArea = document.getElementById('detail-header');
         if (headerArea) {
-            headerArea.innerHTML = ''; // 直接清空，移除了編號、車牌、路段與待審核標籤
-            headerArea.className = 'hidden'; // 將容器隱藏，避免留白影響排版
+            headerArea.innerHTML = '';
+            headerArea.className = 'hidden';
         }
 
-        // 在 UIRenderer.renderDetail 中替換原有的 video 區塊：
+        // 渲染證物區塊
         const evidenceBox = document.getElementById('evidence-grid');
         if (evidenceBox) {
+            // 【修改重點 1】外層改為 items-stretch，讓左右兩欄高度切齊
             evidenceBox.className = "card-bg p-4 rounded-2xl border border-gray-800 shadow-xl space-y-3";
             evidenceBox.innerHTML = `
-                <div class="flex flex-col md:flex-row gap-4 h-auto">
+                <div class="flex flex-col md:flex-row gap-4 h-auto items-stretch">
                     <div class="w-full md:w-[60%] flex flex-col gap-2">
                         <div class="relative rounded-xl overflow-hidden bg-black border border-gray-700 aspect-video">
                             <video id="main-video-view" class="w-full h-full object-cover" controls autoplay muted loop>
@@ -86,36 +87,45 @@ const UIRenderer = {
                                 <div id="marker-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
                             </div>
                             <div class="flex justify-between text-[9px] text-gray-500 mt-1.5 px-1 font-mono uppercase tracking-wider">
-                                <span>Video Timeline</span>
-                                <span>Keyframes</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="w-full md:w-[40%] flex flex-col gap-2">
-                        <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-700 bg-black cursor-pointer group" 
-                             onclick="app.openLightbox(document.getElementById('main-img-view').src)">
-                            <img id="main-img-view" src="${c.images[0]?.src || ''}" alt="違規關鍵幀" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-                            
-                            <div class="absolute top-2 left-2 bg-black/70 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm flex items-center border border-gray-600">
-                                <i class="fas fa-camera mr-1.5 text-blue-400"></i>
-                                <span id="img-time-tag">${c.images[0]?.time || '0'}</span>s
+                    <div class="w-full md:w-[40%] flex flex-col justify-between gap-2">
+                        
+                        <div class="flex flex-col gap-2">
+                            <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-700 bg-black cursor-pointer group" 
+                                 onclick="app.openLightbox(document.getElementById('main-img-view').src)">
+                                <img id="main-img-view" src="${c.images[0]?.src || ''}" alt="違規關鍵幀" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                                
+                                <div class="absolute top-2 left-2 bg-black/70 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm flex items-center border border-gray-600">
+                                    <i class="fas fa-camera mr-1.5 text-blue-400"></i>
+                                    <span id="img-time-tag">${c.images[0]?.time || '0'}</span>s
+                                </div>
+                                
+                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                                    <i class="fas fa-search-plus text-white text-3xl drop-shadow-lg"></i>
+                                </div>
                             </div>
-                            
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
-                                <i class="fas fa-search-plus text-white text-3xl drop-shadow-lg"></i>
+
+                            <div class="grid grid-cols-3 gap-2">
+                                ${c.images.slice(0, 3).map((img, idx) => `
+                                    <div class="thumbnail-item relative aspect-video rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800'} cursor-pointer transition-all hover:border-gray-500" 
+                                         onclick="app.switchPhoto(${idx}, '${img.src}', ${img.time}, this)">
+                                        <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
+                                        <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">${idx + 1}</span>
+                                        <div class="absolute bottom-1 right-1 bg-black/70 text-[8px] text-white px-1.5 rounded">${img.time}s</div>
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-2 mt-auto">
-                            ${c.images.slice(0, 3).map((img, idx) => `
-                                <div class="thumbnail-item relative aspect-video rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800'} cursor-pointer transition-all hover:border-gray-500" 
-                                     onclick="app.switchPhoto(${idx}, '${img.src}', ${img.time}, this)">
-                                    <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
-                                    <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">${idx + 1}</span>
-                                    <div class="absolute bottom-1 right-1 bg-black/70 text-[8px] text-white px-1.5 rounded">${img.time}s</div>
-                                </div>
-                            `).join('')}
+                        <div class="mt-1 text-[10px] px-0.5 flex items-center gap-1.5 text-gray-500">
+                            <span class="flex items-center gap-1.5 text-gray-400">關鍵幀擷取微調</span>
+                            <span class="font-mono">
+                                <span class="bg-gray-800 text-gray-300 px-1 py-0.5 rounded border border-gray-700 text-[9px]">←</span> 
+                                <span class="bg-gray-800 text-gray-300 px-1 py-0.5 rounded border border-gray-700 text-[9px]">→</span> 鍵 (±0.1s)
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -194,17 +204,14 @@ const app = {
         document.addEventListener('keydown', (e) => {
             const cancelModal = document.getElementById('cancel-modal');
             if (cancelModal && !cancelModal.classList.contains('hidden')) {
-                // 檢查是否正在「其他原因」輸入框打字
                 const isTyping = document.activeElement.tagName === 'INPUT' && document.activeElement.type === 'text';
 
                 if (isTyping) {
-                    // 如果正在打字，只允許 Enter(確認) 跟 Escape(取消)
                     if (e.key === 'Enter') { e.preventDefault(); this.confirmCancelCase(); }
                     if (e.key === 'Escape') { e.preventDefault(); this.closeCancelModal(); }
-                    return; // 結束執行，避免輸入文字時觸發下方邏輯
+                    return;
                 }
 
-                // 處理彈窗內的 1234 與 Enter/Esc
                 const radios = document.querySelectorAll('input[name="cancel-reason"]');
                 if (radios.length > 0) {
                     switch (e.key) {
@@ -220,7 +227,6 @@ const app = {
                         case 'Escape': this.closeCancelModal(); e.preventDefault(); break;
                     }
                 }
-                // ★ 核心機制：只要彈窗開著，按鍵處理到這裡就強制 return，絕不干擾下方原本的邏輯！
                 return;
             }
 
@@ -279,7 +285,6 @@ const app = {
         const notch = document.getElementById('category-notch');
         if (!notch) return;
 
-        // 條件：必須是側邊欄收起，且當前不是 'all' 狀態
         if (this.state.isSidebarCollapsed && this.state.currentLevel !== 'all') {
             let colorClass = '';
             let labelText = '';
@@ -299,7 +304,6 @@ const app = {
                     break;
             }
 
-            // 渲染精緻的橫條標籤，並帶有閃爍動態與分類文字
             notch.innerHTML = `
                 <div class="mx-3 mt-2 p-2 rounded-lg ${colorClass}/10 border border-${colorClass}/30 flex items-center justify-between text-[11px] font-bold">
                     <span class="flex items-center text-gray-200">
@@ -311,7 +315,6 @@ const app = {
             `;
             notch.classList.remove('h-0', 'opacity-0');
         } else {
-            // 展開狀態或 'all' 狀態時，優雅地收起並隱藏
             notch.innerHTML = '';
             notch.classList.add('h-0', 'opacity-0');
         }
@@ -325,43 +328,31 @@ const app = {
         const userInfo = document.getElementById('sidebar-user-info');
         const subMenu = document.getElementById('sidebar-sub-menu');
         const texts = document.querySelectorAll('.sidebar-text');
-
-        // 取得導覽列中所有的超連結項目（包含首頁、數據儀表板、歷史案件等）
         const navItems = document.querySelectorAll('nav > a');
 
         if (this.state.isSidebarCollapsed) {
-            // === 執行「收納」 ===
             sidebar.classList.remove('w-64', 'p-4');
             sidebar.classList.add('w-20', 'p-2');
 
-            // 使用者資訊區塊置中
             if (userInfo) {
                 userInfo.classList.add('justify-center');
-                // 隱藏頭像右側的外距，確保單獨頭像完美置中
                 userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
             }
 
-            // 隱藏子選單
             if (subMenu) subMenu.classList.add('hidden');
-
-            // 隱藏所有純文字與數量標籤
             texts.forEach(el => el.classList.add('hidden'));
 
-            // 【核心修改】將所有導覽按鈕改為水平置中
             navItems.forEach(item => {
                 item.classList.remove('justify-between');
                 item.classList.add('justify-center');
-                // 移除 Icon 右側原本的 mr-3 外距，避免置中時產生微幅右偏
                 item.querySelector('i')?.classList.remove('mr-3');
             });
 
-            // 改變收折箭頭方向
             if (toggleIcon) {
                 toggleIcon.classList.remove('fa-angle-left');
                 toggleIcon.classList.add('fa-angle-right');
             }
         } else {
-            // === 執行「展開」 ===
             sidebar.classList.remove('w-20', 'p-2');
             sidebar.classList.add('w-64', 'p-4');
 
@@ -373,10 +364,8 @@ const app = {
             if (subMenu) subMenu.classList.remove('hidden');
             texts.forEach(el => el.classList.remove('hidden'));
 
-            // 恢復原本的靠左與分散對齊樣式，並補回 Icon 右側外距
             navItems.forEach(item => {
                 item.classList.remove('justify-center');
-                // 只有第一個首頁按鈕原本是 justify-between（因為有數量標籤）
                 if (item.id === 'nav-all') {
                     item.classList.add('justify-between');
                 }
@@ -389,7 +378,6 @@ const app = {
             }
         }
 
-        // 確保收合側邊欄時，註記條能即時顯示或消失
         this.updateCategoryNotch();
     },
 
@@ -413,7 +401,6 @@ const app = {
         });
     },
 
-    // 將此方法加在 app 物件內 (例如放在 handleCaseClick 下方)
     setupVideoMarkers(caseData) {
         const video = document.getElementById('main-video-view');
         const markerContainer = document.getElementById('marker-container');
@@ -422,10 +409,9 @@ const app = {
 
         if (!video || !markerContainer) return;
 
-        // 當影片載入詮釋資料後，計算總長度並標記
         video.addEventListener('loadedmetadata', () => {
             const duration = video.duration || 10;
-            markerContainer.innerHTML = ''; // 清空舊標記
+            markerContainer.innerHTML = '';
 
             caseData.images.slice(0, 3).forEach((img, idx) => {
                 const percent = (img.time / duration) * 100;
@@ -436,9 +422,8 @@ const app = {
                 marker.style.left = `calc(${percent}% - 6px)`;
                 marker.title = `點擊跳至關鍵幀 ${idx + 1} (${img.time}s)`;
 
-                // 點擊標記：跳轉影片並連動右側照片
                 marker.onclick = (e) => {
-                    e.stopPropagation(); // 避免觸發底層進度條點擊
+                    e.stopPropagation();
                     const thumbnails = document.querySelectorAll('.thumbnail-item');
                     app.switchPhoto(idx, img.src, img.time, thumbnails[idx]);
                 };
@@ -447,7 +432,6 @@ const app = {
             });
         });
 
-        // 連動自訂進度條長度
         video.addEventListener('timeupdate', () => {
             if (video.duration) {
                 const percent = (video.currentTime / video.duration) * 100;
@@ -455,7 +439,6 @@ const app = {
             }
         });
 
-        // 點擊自訂進度條：讓影片跳轉到該時間
         customProgressContainer.addEventListener('click', (e) => {
             const rect = customProgressContainer.getBoundingClientRect();
             const pos = (e.clientX - rect.left) / rect.width;
@@ -463,7 +446,6 @@ const app = {
         });
     },
 
-    // 專注於右側照片切換，同時連動影片時間點
     switchPhoto(idx, src, time, el) {
         this.state.currentKeyframeIdx = idx;
         const imgView = document.getElementById('main-img-view');
@@ -508,15 +490,12 @@ const app = {
         const idx = this.state.currentKeyframeIdx;
         const currentImgTime = currentCase.images[idx].time;
 
-        // 1. 計算新時間，確保不超出影片範圍，並取至小數第一位
         let newTime = currentImgTime + offset;
         newTime = Math.max(0, Math.min(newTime, video.duration || 0));
         newTime = parseFloat(newTime.toFixed(1));
 
-        // 2. 更新當前案件資料層的關鍵幀時間
         currentCase.images[idx].time = newTime;
 
-        // 3. 更新 UI: 文字標籤與時間軸標記
         const timeTag = document.getElementById('img-time-tag');
         if (timeTag) timeTag.innerText = newTime;
 
@@ -533,34 +512,25 @@ const app = {
             markers[idx].title = `點擊跳至關鍵幀 ${idx + 1} (${newTime}s)`;
         }
 
-        // ★ 4. 核心新增：影片跳轉與動態截圖邏輯
-
-        // 為了避免使用者連續狂按左右鍵導致截圖事件卡頓，先清除前一次未執行的監聽器
         if (video._seekHandler) {
             video.removeEventListener('seeked', video._seekHandler);
         }
 
-        // 定義當影片成功跳轉到指定時間後，要執行的截圖動作
         video._seekHandler = () => {
             if (video.videoWidth && video.videoHeight) {
-                // 建立一個隱藏的畫布來繪製影片當下幀
                 const canvas = document.createElement('canvas');
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                // 將畫布轉為 Base64 圖片 (使用 0.8 壓縮比維持效能)
                 const newDataUrl = canvas.toDataURL('image/jpeg', 0.8);
 
-                // 同步更新資料層的圖片網址
                 currentCase.images[idx].src = newDataUrl;
 
-                // 更新右側大圖
                 const mainImg = document.getElementById('main-img-view');
                 if (mainImg) mainImg.src = newDataUrl;
 
-                // 更新右側下方對應的小縮圖
                 if (thumbnails[idx]) {
                     const thumbImg = thumbnails[idx].querySelector('img');
                     if (thumbImg) thumbImg.src = newDataUrl;
@@ -568,10 +538,7 @@ const app = {
             }
         };
 
-        // 綁定一次性的 seeked (跳轉完成) 事件
         video.addEventListener('seeked', video._seekHandler, { once: true });
-
-        // 觸發影片跳轉，跳轉完成後會自動觸發上方的 _seekHandler 進行截圖
         video.currentTime = newTime;
     },
 
@@ -602,8 +569,7 @@ const app = {
         });
 
         this.renderCaseList();
-
-        this.updateCategoryNotch();
+        this.updateStatistics();
 
         if (this.state.filteredCases.length > 0) {
             this.handleCaseClick(this.state.filteredCases[0].id);
@@ -705,17 +671,13 @@ const app = {
     cancelCase: function() {
         const modal = document.getElementById('cancel-modal');
         if (modal) {
-            // 顯示彈窗
             modal.classList.remove('hidden');
-
-            // 重置先前的選擇狀態
             const radios = document.querySelectorAll('input[name="cancel-reason"]');
             radios.forEach(r => r.checked = false);
             document.getElementById('other-reason-input').value = '';
         }
     },
 
-    // 2. 關閉彈窗
     closeCancelModal: function() {
         const modal = document.getElementById('cancel-modal');
         if (modal) {
@@ -723,9 +685,7 @@ const app = {
         }
     },
 
-    // 3. 確認送出撤銷原因
     confirmCancelCase: function() {
-        // 1. 尋找被選中的選項
         const selectedRadio = document.querySelector('input[name="cancel-reason"]:checked');
 
         if (!selectedRadio) {
@@ -745,31 +705,21 @@ const app = {
             reason = otherInput;
         }
 
-        // 2. 找到當前正在審核的案件
         const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
 
         if (currentCase) {
-            // 更新狀態與附加撤銷原因 (這樣資料庫或後端就能收到這筆紀錄)
             currentCase.status = 'canceled';
             currentCase.cancelReason = reason;
 
-            // 重新過濾出剩餘的待審核案件
             this.state.pendingCases = this.state.allCases.filter(c => c.status === 'pending');
-
-            // 重新計算側邊欄的數字統計
             this.updateStatistics();
-
-            // 重新套用篩選與渲染清單
-            // (這會自動更新左側列表，並自動選取下一個案件，或清空右側畫面)
             this.applyFilters();
 
             console.log(`[系統紀錄] 案件 #${currentCase.id} 已撤銷。原因：${reason}`);
 
-            // 關閉彈窗並給予提示
             this.closeCancelModal();
             alert(`案件 #${currentCase.id} 已成功撤銷。\n紀錄原因：${reason}`);
         } else {
-            // 系統防呆
             this.closeCancelModal();
         }
     }
