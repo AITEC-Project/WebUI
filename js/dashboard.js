@@ -1,53 +1,13 @@
 /**
- * AI 交通診斷儀表板 - 核心邏輯
+ * 審核人員專屬儀表板 - 核心邏輯 (dashboard.js)
  */
 
-let simulatedLiveCases = [];
-
-const DataSimulator = {
-    locations: [
-        { name: "西屯路/逢甲路", lat: 24.1786, lng: 120.6450 },
-        { name: "文心路/台灣大道", lat: 24.1617, lng: 120.6467 },
-        { name: "崇德路/漢口路", lat: 24.1661, lng: 120.6853 },
-        { name: "五權西路/忠明南路", lat: 24.1378, lng: 120.6592 },
-        { name: "三民路/精武路", lat: 24.1485, lng: 120.6841 },
-        { name: "公益路/美村路", lat: 24.1512, lng: 120.6625 },
-        { name: "台灣大道/廣三SOGO", lat: 24.1556, lng: 120.6631 }
-    ],
-    types: ["闖紅燈", "未禮讓行人", "違規左轉", "超速", "不依標誌指示"],
-
-    generateOne() {
-        const loc = this.locations[Math.floor(Math.random() * this.locations.length)];
-        return {
-            id: `SIM-${Date.now()}`,
-            location: loc.name,
-            lat: loc.lat + (Math.random() - 0.5) * 0.008,
-            lng: loc.lng + (Math.random() - 0.5) * 0.008,
-            type: this.types[Math.floor(Math.random() * this.types.length)],
-            timestamp: new Date(),
-            confidence: Math.floor(Math.random() * 15) + 84,
-            processingMs: Math.floor(Math.random() * 150) + 40
-        };
-    },
-
-    start() {
-        for(let i=0; i<8; i++) simulatedLiveCases.push(this.generateOne());
-        const loop = () => {
-            const nextTime = Math.random() * 5000 + 3000;
-            setTimeout(() => {
-                simulatedLiveCases.push(this.generateOne());
-                const limit = new Date(Date.now() - 30 * 60000);
-                simulatedLiveCases = simulatedLiveCases.filter(c => c.timestamp > limit);
-                refreshLivePanel();
-                loop();
-            }, nextTime);
-        };
-        loop();
-    }
-};
-
 const DashboardApp = {
-    baseDate: new Date(),
+    charts: {
+        trend: null,
+        result: null,
+        levelTrend: null // 新增分級折線圖實例
+    },
 
     // 側邊欄收合邏輯同步
     toggleSidebar() {
@@ -64,13 +24,8 @@ const DashboardApp = {
         if (!isCollapsed) {
             sidebar.classList.remove('w-64', 'p-4');
             sidebar.classList.add('w-20', 'p-2');
-
-            if (userInfo) {
-                userInfo.classList.add('justify-center');
-                userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
-            }
+            if (userInfo) userInfo.classList.add('justify-center');
             texts.forEach(el => el.classList.add('hidden'));
-
             navItems.forEach(item => {
                 item.classList.remove('justify-between');
                 item.classList.add('justify-center');
@@ -80,13 +35,8 @@ const DashboardApp = {
         } else {
             sidebar.classList.remove('w-20', 'p-2');
             sidebar.classList.add('w-64', 'p-4');
-
-            if (userInfo) {
-                userInfo.classList.remove('justify-center');
-                userInfo.querySelector('.flex-shrink-0')?.classList.add('mr-3');
-            }
+            if (userInfo) userInfo.classList.remove('justify-center');
             texts.forEach(el => el.classList.remove('hidden'));
-
             navItems.forEach(item => {
                 item.classList.remove('justify-center');
                 if (item.id === 'nav-all') item.classList.add('justify-between');
@@ -96,315 +46,259 @@ const DashboardApp = {
         }
     },
 
-    getFilteredData(range) {
-        const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
-        return data.filter(item => {
-            const itemDate = new Date(item.timestamp || item.date);
-            const diffDays = (this.baseDate - itemDate) / (1000 * 60 * 60 * 24);
-            if (range === '24h') return diffDays <= 1;
-            if (range === '7d') return diffDays <= 7;
-            if (range === '30d') return diffDays <= 30;
-            return true;
-        });
+    init() {
+        this.updateMetrics();
     },
 
-    getRecentData() {
-        const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
+    updateMetrics() {
+        // 從 data.js 中取得 mockCases 作為資料來源
+        const data = (typeof mockCases !== 'undefined') ? mockCases : [];
+
+        // 統計各狀態數量 (模擬當日工作量)
+        const pending = data.filter(c => c.status === 'pending').length;
+        const verified = data.filter(c => c.status === 'verified').length;
+        const canceled = data.filter(c => c.status === 'canceled' || c.status === 'cancelled' || c.status === 'rejected').length;
+
+        const reviewed = verified + canceled;
+        const total = pending + reviewed;
+
+        // 計算比率
+        const compRate = total === 0 ? 0 : ((reviewed / total) * 100).toFixed(1);
+        const cancRate = reviewed === 0 ? 0 : ((canceled / reviewed) * 100).toFixed(1);
+
+        // 更新 UI 數字
+        document.getElementById('kpi-total').innerText = total;
+        document.getElementById('kpi-pending').innerText = pending;
+        document.getElementById('kpi-reviewed').innerText = reviewed;
+        document.getElementById('kpi-comp-rate').innerText = compRate + '%';
+        document.getElementById('kpi-cancel-rate').innerText = cancRate + '%';
+
+        // 更新進度條寬度
+        const bar = document.getElementById('kpi-comp-bar');
+        if(bar) bar.style.width = compRate + '%';
+
+        // 渲染三大圖表
+        this.renderResultChart(verified, canceled);
+        this.renderTrendChart();
+        this.renderLevelTrendChart(data); // 執行分級動態折線圖
+    },
+
+    // 全新開發：三級分級動態折線圖 (每3小時分區統計)
+    // 全新開發：三級分級動態折線圖 (近3天 72小時，每3小時分區統計，共 24 格)
+    renderLevelTrendChart(data) {
+        const ctx = document.getElementById('levelTrendChart');
+        if (!ctx) return;
+        if (this.charts.levelTrend) this.charts.levelTrend.destroy();
+
+        // 1. 產生 72 小時 (共 24 格) 的 X 軸標籤
+        const labels = [];
+        for (let d = 2; d >= 0; d--) {
+            const date = new Date();
+            date.setDate(date.getDate() - d);
+            const mmdd = `${date.getMonth() + 1}/${date.getDate()}`;
+            // 每天的 8 個時段
+            labels.push(
+                `${mmdd} 00-03h`, `${mmdd} 03-06h`, `${mmdd} 06-09h`, `${mmdd} 09-12h`,
+                `${mmdd} 12-15h`, `${mmdd} 15-18h`, `${mmdd} 18-21h`, `${mmdd} 21-24h`
+            );
+        }
+
+        // 2. 初始化 24 格的數據計數器
+        let highLine = new Array(24).fill(0); // 確信違規 (>=90)
+        let midLine = new Array(24).fill(0);  // 疑似違規 (80-89)
+        let lowLine = new Array(24).fill(0);  // 邊界案例 (<80)
+
         const now = new Date();
-        const recentHistory = data.filter(item => {
-            const itemDate = new Date(item.timestamp || item.date);
-            const diffMinutes = (now - itemDate) / (1000 * 60);
-            return diffMinutes >= 0 && diffMinutes <= 30;
-        });
-        return [...recentHistory, ...simulatedLiveCases];
-    },
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    getLiveTypeStats() {
-        const recentData = this.getRecentData();
-        const counts = recentData.reduce((acc, curr) => {
-            const type = curr.type || '未分類';
-            acc[type] = (acc[type] || 0) + 1;
-            return acc;
-        }, {});
-        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-        return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
-    },
+        // 3. 解析 mockCases 內所有案件的時間與分級
+        data.forEach(c => {
+            const d = new Date(c.timestamp || c.date);
+            if (isNaN(d.getTime())) return;
 
-    getTopLocations(range = '30d') {
-        const data = this.getFilteredData(range);
-        const counts = data.reduce((acc, curr) => {
-            acc[curr.location] = (acc[curr.location] || 0) + 1;
-            return acc;
-        }, {});
-        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-        return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
-    },
+            const caseDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+            // 計算與今天的差距天數 (0=今天, 1=昨天, 2=前天)
+            const diffDays = Math.round((today - caseDay) / (1000 * 60 * 60 * 24));
 
-    getTopViolationTypes(range = '30d') {
-        const data = this.getFilteredData(range);
-        const counts = data.reduce((acc, curr) => {
-            const type = curr.type || '未分類';
-            acc[type] = (acc[type] || 0) + 1;
-            return acc;
-        }, {});
-        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-        return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
-    },
+            if (diffDays >= 0 && diffDays <= 2) {
+                // 將天數映射到 24 格中：前天(索引0~7)、昨天(索引8~15)、今天(索引16~23)
+                const dayOffset = (2 - diffDays) * 8;
+                const hourIdx = Math.floor(d.getHours() / 3);
+                const finalIdx = dayOffset + hourIdx;
 
-    getGlobalHourlyTrend(range = '30d') {
-        const data = this.getFilteredData(range);
-        const hours = new Array(24).fill(0);
-        data.forEach(item => {
-            const h = new Date(item.timestamp || item.date).getHours();
-            hours[h]++;
-        });
-        return hours;
-    },
-
-    updateSummaryStats() {
-        const data = this.getFilteredData('30d');
-        const avgRateEl = document.getElementById('stat-avg-rate');
-        const cancelRateEl = document.getElementById('stat-cancel-rate');
-        const volAnomalyEl = document.getElementById('stat-vol-anomaly');
-        const cancelAnomalyEl = document.getElementById('stat-cancel-anomaly');
-        const typeAnomalyEl = document.getElementById('stat-type-anomaly');
-
-        if (!data || data.length === 0) return;
-
-        const fixedCPM = 0.2;
-        if (avgRateEl) {
-            const minPerCase = (1 / fixedCPM).toFixed(0);
-            avgRateEl.innerHTML = `
-                <div class="flex flex-col">
-                    <span class="text-2xl font-bold text-white">每 ${minPerCase} 分鐘 / 筆</span>
-                    <span class="text-[10px] text-gray-500 font-normal mt-1">基準: ${fixedCPM} CPM</span>
-                </div>`;
-        }
-
-        const locStats = {};
-        const globalTypeCounts = {};
-        let globalCanceled = 0;
-
-        data.forEach(item => {
-            const { location, type, status } = item;
-            const isCanceled = (status === 'cancelled' || status === 'canceled' || status === 'rejected');
-
-            globalTypeCounts[type] = (globalTypeCounts[type] || 0) + 1;
-            if (isCanceled) globalCanceled++;
-
-            if (!locStats[location]) locStats[location] = { total: 0, canceled: 0, types: {} };
-            locStats[location].total++;
-            if (isCanceled) locStats[location].canceled++;
-            locStats[location].types[type] = (locStats[location].types[type] || 0) + 1;
-        });
-
-        if (cancelRateEl) {
-            const globalCancelRate = ((globalCanceled / data.length) * 100).toFixed(1);
-            cancelRateEl.innerHTML = `
-                <div class="flex flex-col">
-                    <span class="text-2xl font-bold ${globalCancelRate > 5 ? 'text-orange-400' : 'text-white'}">${globalCancelRate}%</span>
-                    <span class="text-[10px] text-gray-500 font-normal mt-1">目標: < 5.0%</span>
-                </div>`;
-        }
-
-        const totalMinutes = 30 * 24 * 60;
-        const locations = Object.keys(locStats);
-        const expectedCountPerLoc = (fixedCPM * totalMinutes) / locations.length;
-
-        const volAnomalies = Object.entries(locStats)
-            .map(([loc, stat]) => ({ loc, ratio: (stat.total / expectedCountPerLoc).toFixed(1) }))
-            .filter(item => item.ratio > 1.2)
-            .sort((a, b) => b.ratio - a.ratio).slice(0, 2);
-
-        if (volAnomalyEl) {
-            volAnomalyEl.innerHTML = volAnomalies.map(a => `
-                <div class="flex justify-between items-center">
-                    <span class="text-[13px] text-gray-300 truncate mr-2">${a.loc}</span>
-                    <span class="text-[11px] font-bold text-red-400">高於平均 ${a.ratio}x</span>
-                </div>`).join('') || '<p class="text-[13px] text-green-500">尚無明顯異常</p>';
-        }
-
-        const globalAvgCancelRate = globalCanceled / data.length;
-        let cancelAnomalies = Object.entries(locStats)
-            .map(([loc, stat]) => {
-                const locCancelRate = stat.canceled / stat.total;
-                return { loc, ratio: (locCancelRate / globalAvgCancelRate).toFixed(1), count: stat.canceled };
-            })
-            .filter(a => a.count >= 3 && a.ratio > 1.5)
-            .sort((a, b) => b.ratio - a.ratio).slice(0, 2);
-
-        if (cancelAnomalyEl) {
-            cancelAnomalyEl.innerHTML = cancelAnomalies.map(a => `
-                <div class="flex justify-between items-center">
-                    <span class="text-[13px] text-gray-300 truncate mr-2">${a.loc}</span>
-                    <span class="text-[11px] font-bold text-orange-400">撤銷偏高 ${a.ratio}x</span>
-                </div>`).join('') || '<p class="text-[13px] text-green-500">撤銷比例正常</p>';
-        }
-
-        let typeAnomalies = [];
-        const globalTotal = data.length;
-
-        Object.entries(locStats).forEach(([loc, stat]) => {
-            if (stat.total < 15) return;
-            Object.entries(stat.types).forEach(([type, count]) => {
-                const locTypeRatio = count / stat.total;
-                const globalTypeRatio = globalTypeCounts[type] / globalTotal;
-                const ratio = (locTypeRatio / globalTypeRatio).toFixed(1);
-
-                if (ratio >= 2.0 && count >= 5) {
-                    typeAnomalies.push({ loc, type, ratio: parseFloat(ratio) });
+                const conf = c.confidence || 85;
+                if (conf >= 90) {
+                    highLine[finalIdx]++;
+                } else if (conf >= 80) {
+                    midLine[finalIdx]++;
+                } else {
+                    lowLine[finalIdx]++;
                 }
-            });
+            }
         });
 
-        if (typeAnomalyEl) {
-            const topAnomalies = typeAnomalies.sort((a, b) => b.ratio - a.ratio).slice(0, 3);
-            typeAnomalyEl.innerHTML = topAnomalies.map(a => `
-        <div class="flex flex-col mb-1 border-b border-gray-800 pb-1">
-            <div class="flex justify-between">
-                <span class="text-[11px] text-blue-400 font-bold">${a.type}</span>
-                <span class="text-[11px] text-red-400">偏高 ${a.ratio}x</span>
-            </div>
-            <span class="text-[11px] text-gray-500 truncate">${a.loc}</span>
-        </div>`).join('') || '<p class="text-[13px] text-green-500">樣態分佈正常</p>';
+        // 4. 防呆機制：若外部無真實時間資料，生成一組 3 天份的動態波動曲線
+        const isAllZero = highLine.every(v => v === 0) && midLine.every(v => v === 0);
+        if (isAllZero) {
+            // 前天、昨天、今天的模擬尖離峰數據 (共 24 筆)
+            highLine = [5, 8, 12, 20, 25, 18, 22, 10,  7, 10, 15, 28, 35, 20, 30, 15,  12, 6, 18, 32, 45, 28, 55, 22];
+            midLine  = [2, 4, 6, 12, 15, 10, 14, 6,   3,  5,  8, 16, 20, 12, 18,  8,   8, 4, 12, 22, 26, 18, 35, 14];
+            lowLine  = [1, 2, 3,  5,  8,  4,  6, 2,   1,  2,  4,  8, 10,  5,  8,  4,   4, 2,  6, 10, 12,  7, 15,  6];
         }
+
+        // 建立滑順從左到右「動態延伸畫出」的 Delay 參數
+        let animationDelayed = false;
+
+        this.charts.levelTrend = new Chart(ctx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: '確信違規 (≥90%)',
+                        data: highLine,
+                        borderColor: '#10b981', // 綠色
+                        backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        pointBackgroundColor: '#10b981',
+                        pointRadius: 3, // 因為節點變多，稍微縮小圓點
+                        fill: true
+                    },
+                    {
+                        label: '疑似違規 (80-89%)',
+                        data: midLine,
+                        borderColor: '#f59e0b', // 黃色
+                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        pointBackgroundColor: '#f59e0b',
+                        pointRadius: 3,
+                        fill: true
+                    },
+                    {
+                        label: '邊界案例 (<80%)',
+                        data: lowLine,
+                        borderColor: '#ef4444', // 紅色
+                        backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        pointBackgroundColor: '#ef4444',
+                        pointRadius: 3,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    onComplete: () => { animationDelayed = true; },
+                    delay: (context) => {
+                        let delay = 0;
+                        if (context.type === 'data' && context.mode === 'default' && !animationDelayed) {
+                            // 配合節點變多，加快渲染速度，讓骨牌畫出特效更流暢
+                            delay = context.dataIndex * 60 + context.datasetIndex * 150;
+                        }
+                        return delay;
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end',
+                        labels: { color: '#8b949e', font: { size: 11 }, boxWidth: 10, padding: 10 }
+                    },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#1f2937', borderDash: [2, 4] },
+                        // X軸標籤太擠時，Chart.js 會自動隱藏部分標籤，這裡設定最多顯示所有節點
+                        ticks: { color: '#8b949e', font: { size: 10 }, maxRotation: 45, minRotation: 45 }
+                    },
+                    y: {
+                        grid: { color: '#1f2937' },
+                        ticks: { color: '#8b949e', font: { size: 10 } },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    },
+
+    renderResultChart(verified, canceled) {
+        const ctx = document.getElementById('reviewResultChart');
+        if (!ctx) return;
+        if (this.charts.result) this.charts.result.destroy();
+
+        const hasData = (verified + canceled) > 0;
+
+        this.charts.result = new Chart(ctx.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ["已成立", "已撤銷"],
+                datasets: [{
+                    data: hasData ? [verified, canceled] : [1, 0],
+                    backgroundColor: hasData ? ['#10b981', '#ef4444'] : ['#1f2937', '#1f2937'],
+                    borderColor: '#0d1117',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#e6edf3', font: { size: 11 }, padding: 10 } },
+                    tooltip: { enabled: hasData }
+                },
+                cutout: '70%'
+            }
+        });
+    },
+
+    renderTrendChart() {
+        const ctx = document.getElementById('reviewTrendChart');
+        if (!ctx) return;
+        if (this.charts.trend) this.charts.trend.destroy();
+
+        const labels = [];
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            labels.push(`${d.getMonth() + 1}/${d.getDate()}`);
+        }
+
+        const fakeVerifiedData = [45, 52, 38, 60, 48, 55, parseInt(document.getElementById('kpi-reviewed').innerText) || 42];
+        const fakeCanceledData = [5, 8, 3, 10, 6, 4, 5];
+
+        this.charts.trend = new Chart(ctx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    { label: '案件成立', data: fakeVerifiedData, backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 4 },
+                    { label: '案件撤銷', data: fakeCanceledData, backgroundColor: 'rgba(239, 68, 68, 0.8)', borderRadius: 4 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { position: 'top', align: 'end', labels: { color: '#8b949e', boxWidth: 12 } } },
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { color: '#8b949e' } },
+                    y: { stacked: true, grid: { color: '#1f2937' }, ticks: { color: '#8b949e' }, beginAtZero: true }
+                }
+            }
+        });
     }
 };
 
-let rankingChart = null, typePieChart = null, heatmapChart = null, liveFlowChart = null, liveMap = null, markersLayer = null;
-
-const refreshLivePanel = () => {
-    renderLiveFlowChart(DashboardApp.getLiveTypeStats());
-    updateLiveMapMarkers();
-};
-
-const renderLiveFlowChart = (data) => {
-    const ctx = document.getElementById('liveFlowChart');
-    if (!ctx) return;
-    if (liveFlowChart) liveFlowChart.destroy();
-    liveFlowChart = new Chart(ctx.getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                data: data.values,
-                backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                borderColor: '#3b82f6',
-                borderWidth: 1,
-                borderRadius: 4
-            }]
-        },
-        options: {
-            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { grid: { color: '#1f2937' }, ticks: { color: '#8b949e', font: { size: 10 } }, beginAtZero: true },
-                y: { grid: { display: false }, ticks: { color: '#e6edf3', font: { size: 12, weight: 'bold' } } }
-            }
-        }
-    });
-};
-
-const initLiveMap = () => {
-    const mapEl = document.getElementById('live-map');
-    if (!mapEl) return;
-    liveMap = L.map('live-map', { zoomControl: false }).setView([24.162, 120.647], 13);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(liveMap);
-    markersLayer = L.layerGroup().addTo(liveMap);
-};
-
-const updateLiveMapMarkers = () => {
-    if (!markersLayer) return;
-    markersLayer.clearLayers();
-    DashboardApp.getRecentData().forEach(item => {
-        const lat = item.lat || (24.14 + Math.random() * 0.05);
-        const lng = item.lng || (120.63 + Math.random() * 0.04);
-        L.circleMarker([lat, lng], {
-            radius: 8, fillColor: '#ff4d4d', color: '#fff', weight: 1, opacity: 0.8, fillOpacity: 0.6
-        }).bindPopup(`<b>${item.location}</b><br>${item.type}`).addTo(markersLayer);
-    });
-};
-
-const renderRankingChart = (data) => {
-    const ctx = document.getElementById('rankingChart');
-    if (!ctx) return;
-    if (rankingChart) rankingChart.destroy();
-    const chartCtx = ctx.getContext('2d');
-    const gradient = chartCtx.createLinearGradient(0, 0, 600, 0);
-    gradient.addColorStop(0, 'rgba(59, 130, 246, 0.1)');
-    gradient.addColorStop(1, 'rgba(59, 130, 246, 0.7)');
-    rankingChart = new Chart(chartCtx, {
-        type: 'bar',
-        data: {
-            labels: data.labels,
-            datasets: [{ label: '案件數量', data: data.values, backgroundColor: gradient, borderColor: '#3b82f6', borderWidth: 1, borderRadius: 4 }]
-        },
-        options: {
-            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { grid: { color: '#1f2937' }, ticks: { color: '#8b949e' }, beginAtZero: true },
-                y: { grid: { display: false }, ticks: { color: '#e6edf3', font: { weight: 'bold' } } }
-            }
-        }
-    });
-};
-
-const renderTypePieChart = (data) => {
-    const ctx = document.getElementById('typePieChart');
-    if (!ctx) return;
-    if (typePieChart) typePieChart.destroy();
-    typePieChart = new Chart(ctx.getContext('2d'), {
-        type: 'doughnut',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                data: data.values,
-                backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(16, 185, 129, 0.7)', 'rgba(245, 158, 11, 0.7)', 'rgba(239, 68, 68, 0.7)', 'rgba(139, 92, 246, 0.7)'],
-                borderColor: '#0d1117', borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'right', labels: { color: '#e6edf3', font: { size: 12 }, padding: 20 } } },
-            cutout: '60%'
-        }
-    });
-};
-
-const renderHeatmap = (hourlyData) => {
-    const ctx = document.getElementById('timeHeatmap');
-    if (!ctx) return;
-    if (heatmapChart) heatmapChart.destroy();
-    heatmapChart = new Chart(ctx.getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: Array.from({length: 24}, (_, i) => `${i}h`),
-            datasets: [{ data: hourlyData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, pointRadius: 2, pointBackgroundColor: '#3b82f6' }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { y: { display: false, beginAtZero: true }, x: { grid: { color: '#1f2937' }, ticks: { color: '#666', font: { size: 10 } } } }
-        }
-    });
-};
-
-const updateDashboard = () => {
-    refreshLivePanel();
-    renderRankingChart(DashboardApp.getTopLocations('30d'));
-    renderTypePieChart(DashboardApp.getTopViolationTypes('30d'));
-    renderHeatmap(DashboardApp.getGlobalHourlyTrend('30d'));
-    DashboardApp.updateSummaryStats();
-};
-
 document.addEventListener('DOMContentLoaded', () => {
-    initLiveMap();
-    updateDashboard();
-    DataSimulator.start();
+    DashboardApp.init();
 });
 
-// 橋接全域 app 以支援 HTML onclick 綁定
 window.app = {
     toggleSidebar: () => DashboardApp.toggleSidebar()
 };

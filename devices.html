@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設備運作管理 - 管理者後台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 隱藏捲軸粗曠感，改為精緻的科技風滾動條 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 10px;
+        }
+        .leaflet-container {
+            background: #070a0f !important;
+        }
+        /* 針對小折線圖 (心電圖) 的專屬容器設定 */
+        .sparkline-container {
+            position: relative;
+            width: 80px;
+            height: 28px;
+        }
+        .pipeline-sparkline {
+            position: relative;
+            width: 120px;
+            height: 35px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .active-row {
+            border-color: #3b82f6 !important;
+            background: rgba(59, 130, 246, 0.05);
+        }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden bg-[#0d1117] text-white">
+
+<aside id="sidebar-panel" class="w-64 border-r border-gray-800 flex flex-col p-4 space-y-6 flex-shrink-0 bg-[#0d1117] transition-all duration-300">
+    <div class="flex flex-col space-y-3 p-2 border-b border-gray-800 pb-4">
+        <div id="sidebar-user-info" class="flex items-center space-x-3 transition-opacity duration-200 w-full relative">
+            <div onclick="window.location.href='index.html';" title="點擊切換至：審查人員模組" class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-red-500/10 cursor-pointer hover:bg-red-500 transition-colors group">
+                <i class="fas fa-user-cog text-white text-sm group-hover:scale-110 transition-transform"></i>
+            </div>
+            <div class="sidebar-text flex-1 min-w-0 pr-6">
+                <p class="text-sm font-bold whitespace-nowrap truncate">總管理員 #0001</p>
+                <p class="text-[10px] text-gray-500 whitespace-nowrap truncate">資訊管理中心 (管理人員)</p>
+            </div>
+            <button id="toggle-sidebar" onclick="devicesApp.toggleSidebar()" class="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white p-1 rounded hover:bg-gray-800 transition flex-shrink-0 z-30">
+                <i id="toggle-icon" class="fas fa-angle-left text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <nav class="flex-1 space-y-2">
+        <a href="devices.html" class="sidebar-active flex items-center p-3 rounded-lg text-red-400">
+            <i class="fas fa-server w-5 text-center mr-3"></i><span class="sidebar-text">設備運作管理</span>
+        </a>
+        <a href="admin.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
+            <i class="fas fa-chart-pie w-5 text-center mr-3"></i><span class="sidebar-text">數據儀表版</span>
+        </a>
+        <a href="history.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
+            <i class="fas fa-history w-5 text-center mr-3"></i><span class="sidebar-text">歷史紀錄</span>
+        </a>
+    </nav>
+    <div class="text-xs text-green-500 flex items-center p-2">
+        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse flex-shrink-0"></span><span class="sidebar-text">AI Server: Online</span>
+    </div>
+</aside>
+
+<main class="flex-1 flex flex-col bg-[#070a0f] p-6 overflow-hidden h-screen">
+    <header class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4 flex-shrink-0">
+        <h1 class="text-xl font-bold flex items-center gap-2"><i class="fas fa-server text-red-500"></i> 邊緣端物聯網與科技執法設備管理中心</h1>
+        <div class="text-xs text-gray-400 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-lg">
+            核心運算架構: YOLOv8 / Edge Node Cluster
+        </div>
+    </header>
+
+    <div id="devices-main-content" class="flex-1 flex flex-col gap-4 overflow-hidden min-h-0">
+
+        <div class="h-1/2 flex flex-col md:flex-row gap-4 min-h-0">
+
+            <section class="w-full md:w-1/2 bg-[#0d1117] border border-gray-800 rounded-xl p-4 flex flex-col min-h-0 shadow-lg">
+                <div class="flex items-center justify-between mb-3 border-b border-gray-800/60 pb-2 flex-shrink-0">
+                    <h3 class="text-sm font-bold text-gray-300 flex items-center gap-2">
+                        <i class="fas fa-list-ul text-red-400"></i> 各地科技執法路段設備清單
+                    </h3>
+                    <span class="text-[10px] bg-red-950/40 border border-red-900/60 text-red-400 px-2 py-0.5 rounded-full font-mono">網元連線中</span>
+                </div>
+
+                <div id="equipment-list-panel" class="flex-1 overflow-y-auto custom-scrollbar space-y-2 pr-1">
+                </div>
+            </section>
+
+            <section class="w-full md:w-1/2 bg-[#0d1117] border border-gray-800 rounded-xl p-4 flex flex-col min-h-0 shadow-lg">
+                <div class="flex items-center justify-between mb-3 border-b border-gray-800/60 pb-2 flex-shrink-0">
+                    <h3 class="text-sm font-bold text-gray-300 flex items-center gap-2">
+                        <i class="fas fa-heartbeat text-emerald-400"></i> 地理位置監控與節點事件熱度
+                    </h3>
+                    <div class="flex items-center gap-3 text-[10px] text-gray-500">
+                        <span class="flex items-center gap-1"><span class="status-dot bg-emerald-500"></span>正常</span>
+                        <span class="flex items-center gap-1"><span class="status-dot bg-red-500 animate-pulse"></span>異常</span>
+                    </div>
+                </div>
+
+                <div class="flex-1 flex gap-4 min-h-0">
+                    <div class="w-1/2 h-full rounded-xl overflow-hidden border border-gray-800 relative bg-[#070a0f]">
+                        <div id="live-devices-map" class="w-full h-full"></div>
+                        <div class="absolute bottom-2 left-2 z-[400] bg-black/80 text-[9px] text-gray-400 px-2 py-1 rounded border border-gray-800 backdrop-blur-sm pointer-events-none">
+                            <i class="fas fa-layer-group text-purple-400 mr-1"></i> 熱力指標：1小時事件量
+                        </div>
+                    </div>
+
+                    <div id="map-sparklines-panel" class="w-1/2 h-full overflow-y-auto custom-scrollbar space-y-2.5 pr-1">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <section class="h-1/2 bg-[#0d1117] border border-gray-800 rounded-xl p-4 flex flex-col min-h-0 shadow-xl">
+            <div class="flex items-center justify-between mb-3 border-b border-gray-800/60 pb-2 flex-shrink-0">
+                <h3 class="text-sm font-bold text-gray-200 flex items-center gap-2">
+                    <i class="fas fa-microchip text-blue-400"></i>
+                    選定節點具體運作細節：<span id="detail-node-title" class="text-blue-400 font-extrabold text-sm">載入中...</span>
+                </h3>
+                <span class="text-[10px] bg-blue-950/40 border border-blue-900/50 text-blue-400 px-2.5 py-0.5 rounded-full font-mono">Edge Compute Node Diagnostics</span>
+            </div>
+
+            <div class="flex-1 flex gap-4 min-h-0">
+
+                <div class="w-[30%] h-full flex flex-col gap-2 flex-shrink-0">
+                    <div class="relative flex-1 bg-black rounded-xl border border-gray-800 overflow-hidden flex items-center justify-center shadow-inner">
+                        <canvas id="yolo-canvas" class="absolute inset-0 w-full h-full object-cover"></canvas>
+                        <div class="absolute top-2 left-2 bg-black/75 px-2 py-1 rounded text-[9px] font-mono text-emerald-400 border border-emerald-500/20 backdrop-blur-sm pointer-events-none flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+                            LIVE STREAMING [YOLOv8 DETECT]
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-[45%] h-full flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1">
+
+                    <div class="grid grid-cols-2 gap-3 flex-shrink-0">
+                        <div class="bg-[#070a0f] p-3 rounded-xl border border-gray-800 space-y-1.5 text-xs text-gray-300">
+                            <p class="font-bold border-b border-gray-800 pb-1 text-gray-400 flex items-center gap-1.5"><i class="fas fa-info-circle text-gray-500"></i> 節點通訊參數</p>
+                            <p>路口位置：<span id="meta-location" class="text-white font-medium"></span></p>
+                            <p>路口編號：<span id="meta-loc-id" class="text-gray-400 font-mono"></span></p>
+                            <p>鏡頭編號：<span id="meta-cam-id" class="text-gray-400 font-mono"></span></p>
+                            <p>主機編號：<span id="meta-host-id" class="text-gray-400 font-mono"></span></p>
+                            <p>負責廠商：<span id="meta-vendor" class="text-gray-400"></span></p>
+                            <p class="text-blue-400 font-bold">今日捕獲總件數：<span id="meta-today-count" class="text-white text-sm">0</span> 筆</p>
+                        </div>
+
+                        <div class="bg-[#070a0f] p-3 rounded-xl border border-gray-800 flex flex-col">
+                            <p class="font-bold border-b border-gray-800 pb-1 text-gray-400 text-xs flex items-center gap-1.5 mb-1.5"><i class="fas fa-chart-pie text-gray-500"></i> 違規樣態分佈 (今日)</p>
+                            <div id="type-counts-panel" class="flex-1 flex flex-col justify-center space-y-1 text-[11px] text-gray-400">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 bg-[#070a0f] rounded-xl border border-gray-800 overflow-hidden flex flex-col min-h-[120px]">
+                        <p class="font-bold bg-gray-900/60 border-b border-gray-800 px-3 py-1.5 text-gray-400 text-xs flex items-center gap-1.5 flex-shrink-0">
+                            <i class="fas fa-history text-gray-500"></i> 該節點最新上傳案件軌跡
+                        </p>
+                        <div class="flex-1 overflow-y-auto custom-scrollbar text-xs">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-gray-900/30 text-gray-500 text-[10px] font-bold sticky top-0 uppercase border-b border-gray-800 backdrop-blur-md">
+                                <tr>
+                                    <th class="p-2 pl-3">流水號</th>
+                                    <th class="p-2">時間</th>
+                                    <th class="p-2">類型</th>
+                                    <th class="p-2">車牌</th>
+                                    <th class="p-2 text-right pr-3">AI置信度</th>
+                                </tr>
+                                </thead>
+                                <tbody id="detail-case-tbody" class="text-gray-300 font-mono">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="w-[25%] h-full bg-[#070a0f] border border-gray-800 rounded-xl p-3 flex flex-col gap-2 overflow-y-auto custom-scrollbar flex-shrink-0">
+                    <p class="font-bold text-xs text-gray-400 border-b border-gray-800 pb-1 flex items-center gap-1.5 mb-1 flex-shrink-0">
+                        <i class="fas fa-project-diagram text-purple-400"></i> 內部運作 Pipeline
+                    </p>
+
+                    <div class="bg-black/40 border border-gray-800/60 rounded-lg p-2 flex items-center justify-between">
+                        <div class="text-xs space-y-0.5">
+                            <p class="text-gray-300 font-bold">1. 鏡頭影像擷取</p>
+                            <p class="text-[9px] text-gray-500 font-mono">Frames Streaming</p>
+                        </div>
+                        <div class="pipeline-sparkline"><canvas id="pipe-chart-cam"></canvas></div>
+                    </div>
+
+                    <div class="bg-black/40 border border-gray-800/60 rounded-lg p-2 flex items-center justify-between">
+                        <div class="text-xs space-y-0.5">
+                            <p class="text-gray-300 font-bold">2. 情境關聯生成</p>
+                            <p class="text-[9px] text-gray-500 font-mono">YOLO Object Track</p>
+                        </div>
+                        <div class="pipeline-sparkline"><canvas id="pipe-chart-scene"></canvas></div>
+                    </div>
+
+                    <div class="bg-black/40 border border-gray-800/60 rounded-lg p-2 flex items-center justify-between">
+                        <div class="text-xs space-y-0.5">
+                            <p class="text-gray-300 font-bold">3. 違規法條比對</p>
+                            <p class="text-[9px] text-gray-500 font-mono">Heuristic Engine</p>
+                        </div>
+                        <div class="pipeline-sparkline"><canvas id="pipe-chart-law"></canvas></div>
+                    </div>
+
+                    <div class="bg-black/40 border border-gray-800/60 rounded-lg p-2 flex items-center justify-between">
+                        <div class="text-xs space-y-0.5">
+                            <p class="text-gray-300 font-bold">4. 封包上傳審核</p>
+                            <p class="text-[9px] text-gray-500 font-mono">API Packet Upload</p>
+                        </div>
+                        <div class="pipeline-sparkline"><canvas id="pipe-chart-upload"></canvas></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/devices.js"></script>
+</body>
+</html>

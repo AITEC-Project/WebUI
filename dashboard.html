@@ -3,30 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 交通診斷儀表板</title>
+  <title>審核人員儀表板 - AI 交通系統</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="style.css">
   <style>
-    /* 即時地圖容器樣式 */
-    #live-map {
-      height: 350px;
-      width: 100%;
-      border-radius: 0.75rem;
-      z-index: 1;
-    }
-    .leaflet-container {
-      background: #0d1117 !important;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #30363d;
-      border-radius: 10px;
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #30363d; border-radius: 10px; }
   </style>
 </head>
 <body class="bg-[#0d1117] text-[#e6edf3] h-screen flex overflow-hidden">
@@ -74,98 +58,64 @@
 <main class="flex-1 overflow-y-auto custom-scrollbar p-8">
   <header class="flex justify-between items-end mb-8">
     <div>
-      <h1 class="text-3xl font-bold tracking-tight">數據儀表版</h1>
+      <h1 class="text-3xl font-bold tracking-tight">個人儀表板</h1>
     </div>
   </header>
 
-  <section class="mb-10">
-    <div class="flex items-center space-x-3 mb-6">
-      <span class="relative flex h-3 w-3">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-      </span>
-      <h2 class="text-xl font-bold tracking-widest">即時案件監控 (LIVE)</h2>
+  <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+    <div class="card-bg p-5 rounded-xl border border-gray-800 flex flex-col justify-between">
+      <p class="text-gray-500 text-xs font-bold uppercase mb-2 flex items-center"><i class="fas fa-inbox mr-2"></i>今日案件量</p>
+      <div class="text-3xl font-bold text-white" id="kpi-total">0</div>
     </div>
-
-    <div class="grid grid-cols-12 gap-8">
-      <div class="col-span-12 lg:col-span-5 card-bg p-6 rounded-xl border border-blue-500/30 bg-blue-900/5">
-        <h3 class="text-sm font-bold text-blue-400 uppercase mb-6 flex items-center">
-          <i class="fas fa-stream mr-2"></i> 30min 違規樣態即時排行
-        </h3>
-        <div class="h-[350px]">
-          <canvas id="liveFlowChart"></canvas>
-        </div>
+    <div class="card-bg p-5 rounded-xl border border-gray-800 flex flex-col justify-between">
+      <p class="text-yellow-500/80 text-xs font-bold uppercase mb-2 flex items-center"><i class="fas fa-hourglass-half mr-2"></i>待審核</p>
+      <div class="text-3xl font-bold text-yellow-500" id="kpi-pending">0</div>
+    </div>
+    <div class="card-bg p-5 rounded-xl border border-gray-800 flex flex-col justify-between">
+      <p class="text-green-500/80 text-xs font-bold uppercase mb-2 flex items-center"><i class="fas fa-check-circle mr-2"></i>已審核</p>
+      <div class="text-3xl font-bold text-green-500" id="kpi-reviewed">0</div>
+    </div>
+    <div class="card-bg p-5 rounded-xl border border-blue-500/30 bg-blue-900/10 flex flex-col justify-between">
+      <p class="text-blue-400 text-xs font-bold uppercase mb-2 flex items-center"><i class="fas fa-tachometer-alt mr-2"></i>審核完成率</p>
+      <div class="flex items-end space-x-2">
+        <div class="text-3xl font-bold text-blue-400" id="kpi-comp-rate">0%</div>
       </div>
-
-      <div class="col-span-12 lg:col-span-7 card-bg p-6 rounded-xl border border-gray-800">
-        <h3 class="text-sm font-bold text-gray-400 uppercase mb-6 flex items-center">
-          <i class="fas fa-map-marked-alt mr-2"></i> 台中市即時違規熱點
-        </h3>
-        <div id="live-map"></div>
+      <div class="w-full bg-gray-800 rounded-full h-1.5 mt-3">
+        <div class="bg-blue-500 h-1.5 rounded-full transition-all duration-500" id="kpi-comp-bar" style="width: 0%"></div>
       </div>
     </div>
-  </section>
-
-  <section class="mb-10">
-    <div class="flex items-center space-x-3 mb-6">
-      <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-      <h2 class="text-xl font-bold tracking-widest">案件統計數據 (已審核)</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      <div class="card-bg p-5 rounded-xl border border-gray-800">
-        <p class="text-gray-500 text-xs font-bold uppercase mb-2">平均案件量 (30d)</p>
-        <div id="stat-avg-rate"></div>
-      </div>
-      <div class="card-bg p-5 rounded-xl border border-gray-800">
-        <p class="text-gray-500 text-xs font-bold uppercase mb-2">平均撤銷率 (30d)</p>
-        <div id="stat-cancel-rate"></div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="card-bg p-5 rounded-xl border border-gray-800">
-        <p class="text-gray-500 text-xs font-bold uppercase mb-2 text-blue-400">路口違規量異常偵測</p>
-        <div id="stat-vol-anomaly" class="space-y-3"></div>
-      </div>
-      <div class="card-bg p-5 rounded-xl border border-gray-800">
-        <p class="text-gray-500 text-xs font-bold uppercase mb-2 text-blue-400">路口撤銷量異常偵測</p>
-        <div id="stat-cancel-anomaly" class="space-y-3"></div>
-      </div>
-      <div class="card-bg p-5 rounded-xl border border-gray-800">
-        <p class="text-gray-500 text-xs font-bold uppercase mb-2 text-blue-400">路口違規樣態異常偵測</p>
-        <div id="stat-type-anomaly" class="space-y-3"></div>
-      </div>
+    <div class="card-bg p-5 rounded-xl border border-red-500/30 bg-red-900/10 flex flex-col justify-between">
+      <p class="text-red-400 text-xs font-bold uppercase mb-2 flex items-center"><i class="fas fa-times-circle mr-2"></i>案件撤銷率</p>
+      <div class="text-3xl font-bold text-red-400" id="kpi-cancel-rate">0%</div>
     </div>
   </section>
 
-  <div class="grid grid-cols-12 gap-8 mb-8">
-    <div class="col-span-12 lg:col-span-7 card-bg p-6 rounded-xl border border-gray-800">
-      <h3 class="text-lg font-bold mb-6">前五名違規熱點路口</h3>
-      <div class="h-[350px]">
-        <canvas id="rankingChart"></canvas>
-      </div>
+  <section class="mb-8 card-bg p-6 rounded-xl border border-gray-800">
+    <h3 class="text-lg font-bold mb-6 text-white flex items-center">
+      <i class="fas fa-chart-line mr-2 text-blue-400"></i>72小時總案件分級趨勢
+    </h3>
+    <div class="h-[320px]">
+      <canvas id="levelTrendChart"></canvas>
     </div>
-    <div class="col-span-12 lg:col-span-5 card-bg p-6 rounded-xl border border-gray-800">
-      <h3 class="text-lg font-bold mb-6">前五名違規樣態分析</h3>
-      <div class="h-[350px]">
-        <canvas id="typePieChart"></canvas>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <div class="card-bg p-6 rounded-xl border border-gray-800 mb-8">
-    <h3 class="text-lg font-bold mb-6">全域 24h 違規時段分布趨勢</h3>
-    <div class="h-[250px]">
-      <canvas id="timeHeatmap"></canvas>
+  <section class="grid grid-cols-12 gap-8 mb-8">
+    <div class="col-span-12 lg:col-span-8 card-bg p-6 rounded-xl border border-gray-800">
+      <h3 class="text-lg font-bold mb-6 text-white flex items-center"><i class="fas fa-chart-area mr-2 text-gray-500"></i>近 7 日個人審核量趨勢</h3>
+      <div class="h-[250px]">
+        <canvas id="reviewTrendChart"></canvas>
+      </div>
     </div>
-  </div>
+    <div class="col-span-12 lg:col-span-4 card-bg p-6 rounded-xl border border-gray-800">
+      <h3 class="text-lg font-bold mb-6 text-white flex items-center"><i class="fas fa-chart-pie mr-2 text-gray-500"></i>今日審核結果分佈</h3>
+      <div class="h-[250px]">
+        <canvas id="reviewResultChart"></canvas>
+      </div>
+    </div>
+  </section>
 </main>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script src="js/data.js"></script>
-<script src="js/history.js"></script>
 <script src="js/dashboard.js"></script>
 
 </body>
