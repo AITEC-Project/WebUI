@@ -16,6 +16,53 @@ const HistoryController = {
         this.setupEventListeners();
     },
 
+    // 側邊欄收合邏輯同步
+    toggleSidebar() {
+        const sidebar = document.getElementById('sidebar-panel');
+        const toggleIcon = document.getElementById('toggle-icon');
+        const userInfo = document.getElementById('sidebar-user-info');
+        const texts = document.querySelectorAll('.sidebar-text');
+        const navItems = document.querySelectorAll('nav > a');
+
+        if (!sidebar) return;
+
+        const isCollapsed = sidebar.classList.contains('w-20');
+
+        if (!isCollapsed) {
+            sidebar.classList.remove('w-64', 'p-4');
+            sidebar.classList.add('w-20', 'p-2');
+
+            if (userInfo) {
+                userInfo.classList.add('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
+            }
+            texts.forEach(el => el.classList.add('hidden'));
+
+            navItems.forEach(item => {
+                item.classList.remove('justify-between');
+                item.classList.add('justify-center');
+                item.querySelector('i')?.classList.remove('mr-3');
+            });
+            if (toggleIcon) toggleIcon.className = 'fas fa-angle-right text-xs';
+        } else {
+            sidebar.classList.remove('w-20', 'p-2');
+            sidebar.classList.add('w-64', 'p-4');
+
+            if (userInfo) {
+                userInfo.classList.remove('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.add('mr-3');
+            }
+            texts.forEach(el => el.classList.remove('hidden'));
+
+            navItems.forEach(item => {
+                item.classList.remove('justify-center');
+                if (item.id === 'nav-all') item.classList.add('justify-between');
+                item.querySelector('i')?.classList.add('mr-3');
+            });
+            if (toggleIcon) toggleIcon.className = 'fas fa-angle-left text-xs';
+        }
+    },
+
     renderTable(data) {
         const tbody = document.getElementById('history-table-body');
         if (!tbody) return;
@@ -91,3 +138,8 @@ const HistoryController = {
 };
 
 document.addEventListener('DOMContentLoaded', () => HistoryController.init());
+
+// 橋接全域 app 以支援 HTML onclick 綁定
+window.app = {
+    toggleSidebar: () => HistoryController.toggleSidebar()
+};

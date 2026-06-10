@@ -2,7 +2,6 @@
  * AI 交通診斷儀表板 - 核心邏輯
  */
 
-// --- 模擬數據存儲區 (僅用於監控區，不影響統計數據) ---
 let simulatedLiveCases = [];
 
 const DataSimulator = {
@@ -50,7 +49,53 @@ const DataSimulator = {
 const DashboardApp = {
     baseDate: new Date(),
 
-    // 通用數據過濾 (僅反映審核後的歷史數據)
+    // 側邊欄收合邏輯同步
+    toggleSidebar() {
+        const sidebar = document.getElementById('sidebar-panel');
+        const toggleIcon = document.getElementById('toggle-icon');
+        const userInfo = document.getElementById('sidebar-user-info');
+        const texts = document.querySelectorAll('.sidebar-text');
+        const navItems = document.querySelectorAll('nav > a');
+
+        if (!sidebar) return;
+
+        const isCollapsed = sidebar.classList.contains('w-20');
+
+        if (!isCollapsed) {
+            sidebar.classList.remove('w-64', 'p-4');
+            sidebar.classList.add('w-20', 'p-2');
+
+            if (userInfo) {
+                userInfo.classList.add('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
+            }
+            texts.forEach(el => el.classList.add('hidden'));
+
+            navItems.forEach(item => {
+                item.classList.remove('justify-between');
+                item.classList.add('justify-center');
+                item.querySelector('i')?.classList.remove('mr-3');
+            });
+            if (toggleIcon) toggleIcon.className = 'fas fa-angle-right text-xs';
+        } else {
+            sidebar.classList.remove('w-20', 'p-2');
+            sidebar.classList.add('w-64', 'p-4');
+
+            if (userInfo) {
+                userInfo.classList.remove('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.add('mr-3');
+            }
+            texts.forEach(el => el.classList.remove('hidden'));
+
+            navItems.forEach(item => {
+                item.classList.remove('justify-center');
+                if (item.id === 'nav-all') item.classList.add('justify-between');
+                item.querySelector('i')?.classList.add('mr-3');
+            });
+            if (toggleIcon) toggleIcon.className = 'fas fa-angle-left text-xs';
+        }
+    },
+
     getFilteredData(range) {
         const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
         return data.filter(item => {
@@ -63,7 +108,6 @@ const DashboardApp = {
         });
     },
 
-    // 取得 30 分鐘內的即時數據 (包含模擬數據，僅用於監控區)
     getRecentData() {
         const data = (typeof mockCases !== 'undefined') ? mockCases : (window.SHARED_HISTORY_DATA || []);
         const now = new Date();
@@ -85,8 +129,6 @@ const DashboardApp = {
         const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
         return { labels: sorted.map(i => i[0]), values: sorted.map(i => i[1]) };
     },
-
-    // --- 圖表分析函式 (固定傳入 30d) ---
 
     getTopLocations(range = '30d') {
         const data = this.getFilteredData(range);
@@ -119,7 +161,6 @@ const DashboardApp = {
         return hours;
     },
 
-    // 核心更新邏輯：CPM、撤銷率、異常診斷
     updateSummaryStats() {
         const data = this.getFilteredData('30d');
         const avgRateEl = document.getElementById('stat-avg-rate');
@@ -130,7 +171,6 @@ const DashboardApp = {
 
         if (!data || data.length === 0) return;
 
-        // 1. 每分鐘案件量 (固定 0.2 CPM)
         const fixedCPM = 0.2;
         if (avgRateEl) {
             const minPerCase = (1 / fixedCPM).toFixed(0);
@@ -141,7 +181,6 @@ const DashboardApp = {
                 </div>`;
         }
 
-        // 2. 數據準備
         const locStats = {};
         const globalTypeCounts = {};
         let globalCanceled = 0;
@@ -159,7 +198,6 @@ const DashboardApp = {
             locStats[location].types[type] = (locStats[location].types[type] || 0) + 1;
         });
 
-        // 3. 平均撤銷率
         if (cancelRateEl) {
             const globalCancelRate = ((globalCanceled / data.length) * 100).toFixed(1);
             cancelRateEl.innerHTML = `
@@ -169,7 +207,6 @@ const DashboardApp = {
                 </div>`;
         }
 
-        // 4. 路口違規量異常偵測
         const totalMinutes = 30 * 24 * 60;
         const locations = Object.keys(locStats);
         const expectedCountPerLoc = (fixedCPM * totalMinutes) / locations.length;
@@ -187,7 +224,6 @@ const DashboardApp = {
                 </div>`).join('') || '<p class="text-[13px] text-green-500">尚無明顯異常</p>';
         }
 
-        // 5. 路口撤銷量異常偵測
         const globalAvgCancelRate = globalCanceled / data.length;
         let cancelAnomalies = Object.entries(locStats)
             .map(([loc, stat]) => {
@@ -205,22 +241,16 @@ const DashboardApp = {
                 </div>`).join('') || '<p class="text-[13px] text-green-500">撤銷比例正常</p>';
         }
 
-        // 6. 路口違規樣態異常偵測 (強化統計顯著性)
         let typeAnomalies = [];
         const globalTotal = data.length;
 
         Object.entries(locStats).forEach(([loc, stat]) => {
-            // 🚦 修改 1：提高該路口總樣本數門檻 (原為 5，提高至 15)
-            // 確保該路口有足夠的違規總數，計算出的比例才具統計意義
             if (stat.total < 15) return;
-
             Object.entries(stat.types).forEach(([type, count]) => {
                 const locTypeRatio = count / stat.total;
                 const globalTypeRatio = globalTypeCounts[type] / globalTotal;
                 const ratio = (locTypeRatio / globalTypeRatio).toFixed(1);
 
-                // 🚦 修改 2 & 3：倍數提高至 2.0 倍以上 (原 1.5)，且該違規樣態至少發生 5 次 (原 3)
-                // 確保不是因為分母太小導致的「假性倍數飆高」
                 if (ratio >= 2.0 && count >= 5) {
                     typeAnomalies.push({ loc, type, ratio: parseFloat(ratio) });
                 }
@@ -228,9 +258,7 @@ const DashboardApp = {
         });
 
         if (typeAnomalyEl) {
-            // 這裡我將顯示數量從 slice(0, 2) 改成 slice(0, 3)，你可以依需求改回來
             const topAnomalies = typeAnomalies.sort((a, b) => b.ratio - a.ratio).slice(0, 3);
-
             typeAnomalyEl.innerHTML = topAnomalies.map(a => `
         <div class="flex flex-col mb-1 border-b border-gray-800 pb-1">
             <div class="flex justify-between">
@@ -243,9 +271,6 @@ const DashboardApp = {
     }
 };
 
-/**
- * 實例與渲染
- */
 let rankingChart = null, typePieChart = null, heatmapChart = null, liveFlowChart = null, liveMap = null, markersLayer = null;
 
 const refreshLivePanel = () => {
@@ -367,7 +392,6 @@ const renderHeatmap = (hourlyData) => {
 
 const updateDashboard = () => {
     refreshLivePanel();
-    // 固定傳入 30d
     renderRankingChart(DashboardApp.getTopLocations('30d'));
     renderTypePieChart(DashboardApp.getTopViolationTypes('30d'));
     renderHeatmap(DashboardApp.getGlobalHourlyTrend('30d'));
@@ -379,3 +403,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDashboard();
     DataSimulator.start();
 });
+
+// 橋接全域 app 以支援 HTML onclick 綁定
+window.app = {
+    toggleSidebar: () => DashboardApp.toggleSidebar()
+};
