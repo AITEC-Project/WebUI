@@ -6,7 +6,7 @@ const mockCases = [
         "plate": "GXQ-3629",
         "location": "台中市北屯區環中路",
         "confidence": 96,
-        "timestamp": "2026-05-28T06:28:00",
+        "timestamp": "2026-06-26T06:28:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000464.jpg",
@@ -41,7 +41,7 @@ const mockCases = [
         "plate": "MGA-4354",
         "location": "台中市南區文心路四段",
         "confidence": 90,
-        "timestamp": "2026-05-31T23:09:00",
+        "timestamp": "2026-06-23T23:09:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000065.jpg",
@@ -76,7 +76,7 @@ const mockCases = [
         "plate": "STP-9968",
         "location": "台中市北區文心路四段",
         "confidence": 95,
-        "timestamp": "2026-05-30T13:47:00",
+        "timestamp": "2026-06-24T13:47:00",
         "images": [
             {
                 "src": "video/image01.jpg",
@@ -111,7 +111,7 @@ const mockCases = [
         "plate": "VDZ-2252",
         "location": "台中市南屯區環中路",
         "confidence": 94,
-        "timestamp": "2026-05-25T22:21:00",
+        "timestamp": "2026-06-27T22:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000425.jpg",
@@ -146,7 +146,7 @@ const mockCases = [
         "plate": "PVF-6988",
         "location": "台中市大里區中清路",
         "confidence": 96,
-        "timestamp": "2026-05-25T08:06:00",
+        "timestamp": "2026-06-23T08:06:00",
         "images": [
             {
                 "src": "video/image04.jpg",
@@ -181,7 +181,7 @@ const mockCases = [
         "plate": "ZSH-3267",
         "location": "台中市南區台灣大道二段",
         "confidence": 78,
-        "timestamp": "2026-05-31T13:10:00",
+        "timestamp": "2026-06-23T13:10:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000342.jpg",
@@ -216,7 +216,7 @@ const mockCases = [
         "plate": "TFG-0423",
         "location": "台中市西區公益路",
         "confidence": 95,
-        "timestamp": "2026-05-29T07:31:00",
+        "timestamp": "2026-06-27T07:31:00",
         "images": [
             {
                 "src": "video/image07.jpg",
@@ -251,7 +251,7 @@ const mockCases = [
         "plate": "AXG-3009",
         "location": "台中市北屯區環中路",
         "confidence": 93,
-        "timestamp": "2026-05-27T17:58:00",
+        "timestamp": "2026-06-26T17:58:00",
         "images": [
             {
                 "src": "video/image10.jpg",
@@ -286,7 +286,7 @@ const mockCases = [
         "plate": "FTK-4888",
         "location": "台中市西區復興路",
         "confidence": 82,
-        "timestamp": "2026-05-28T11:43:00",
+        "timestamp": "2026-06-25T11:43:00",
         "images": [
             {
                 "src": "video/image13.jpg",
@@ -321,7 +321,7 @@ const mockCases = [
         "plate": "KGS-7793",
         "location": "台中市西屯區環中路",
         "confidence": 96,
-        "timestamp": "2026-05-25T17:47:00",
+        "timestamp": "2026-06-25T17:47:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000044.jpg",
@@ -356,7 +356,7 @@ const mockCases = [
         "plate": "IBC-0156",
         "location": "台中市北區公益路",
         "confidence": 79,
-        "timestamp": "2026-05-27T19:06:00",
+        "timestamp": "2026-06-30T19:06:00",
         "images": [
             {
                 "src": "video/image16.jpg",
@@ -391,7 +391,7 @@ const mockCases = [
         "plate": "OUI-4636",
         "location": "台中市西屯區中清路",
         "confidence": 85,
-        "timestamp": "2026-05-27T01:28:00",
+        "timestamp": "2026-06-24T01:28:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000058.jpg",
@@ -426,7 +426,7 @@ const mockCases = [
         "plate": "ZWA-9747",
         "location": "台中市南屯區環中路",
         "confidence": 90,
-        "timestamp": "2026-05-30T13:49:00",
+        "timestamp": "2026-06-29T13:49:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
@@ -461,7 +461,7 @@ const mockCases = [
         "plate": "JJB-8639",
         "location": "台中市西屯區復興路",
         "confidence": 88,
-        "timestamp": "2026-05-29T03:39:00",
+        "timestamp": "2026-06-23T03:39:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000391.jpg",
@@ -496,7 +496,7 @@ const mockCases = [
         "plate": "WPQ-7829",
         "location": "台中市北區復興路",
         "confidence": 75,
-        "timestamp": "2026-05-25T08:04:00",
+        "timestamp": "2026-06-26T08:04:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000357.jpg",
@@ -531,7 +531,7 @@ const mockCases = [
         "plate": "YTP-8087",
         "location": "台中市中區黎明路",
         "confidence": 99,
-        "timestamp": "2026-05-25T07:32:00",
+        "timestamp": "2026-06-29T07:32:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000402.jpg",
@@ -566,7 +566,7 @@ const mockCases = [
         "plate": "FXR-7934",
         "location": "台中市南區中清路",
         "confidence": 96,
-        "timestamp": "2026-05-29T10:22:00",
+        "timestamp": "2026-06-26T10:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000426.jpg",
@@ -601,7 +601,7 @@ const mockCases = [
         "plate": "RFO-5067",
         "location": "台中市南屯區精誠路",
         "confidence": 75,
-        "timestamp": "2026-05-29T21:24:00",
+        "timestamp": "2026-06-25T21:24:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
@@ -636,7 +636,7 @@ const mockCases = [
         "plate": "MVH-1998",
         "location": "台中市豐原區黎明路",
         "confidence": 85,
-        "timestamp": "2026-05-30T07:40:00",
+        "timestamp": "2026-06-25T07:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000284.jpg",
@@ -671,7 +671,7 @@ const mockCases = [
         "plate": "EBB-9076",
         "location": "台中市太平區台灣大道二段",
         "confidence": 81,
-        "timestamp": "2026-05-28T21:54:00",
+        "timestamp": "2026-06-27T21:54:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000351.jpg",
@@ -706,7 +706,7 @@ const mockCases = [
         "plate": "RLP-0797",
         "location": "台中市南屯區精誠路",
         "confidence": 76,
-        "timestamp": "2026-05-27T10:03:00",
+        "timestamp": "2026-06-28T10:03:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000100.jpg",
@@ -741,7 +741,7 @@ const mockCases = [
         "plate": "YAV-5909",
         "location": "台中市豐原區崇德路三段",
         "confidence": 91,
-        "timestamp": "2026-05-26T20:05:00",
+        "timestamp": "2026-06-29T20:05:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000235.jpg",
@@ -776,7 +776,7 @@ const mockCases = [
         "plate": "JHC-2395",
         "location": "台中市西屯區復興路",
         "confidence": 95,
-        "timestamp": "2026-05-26T02:51:00",
+        "timestamp": "2026-06-28T02:51:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000328.jpg",
@@ -811,7 +811,7 @@ const mockCases = [
         "plate": "LVX-3171",
         "location": "台中市豐原區五權西路",
         "confidence": 80,
-        "timestamp": "2026-05-30T07:21:00",
+        "timestamp": "2026-06-25T07:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000160.jpg",
@@ -846,7 +846,7 @@ const mockCases = [
         "plate": "AES-0432",
         "location": "台中市北區環中路",
         "confidence": 81,
-        "timestamp": "2026-05-31T13:51:00",
+        "timestamp": "2026-06-27T13:51:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000199.jpg",
@@ -881,7 +881,7 @@ const mockCases = [
         "plate": "JHB-9250",
         "location": "台中市太平區復興路",
         "confidence": 83,
-        "timestamp": "2026-05-29T00:06:00",
+        "timestamp": "2026-06-25T00:06:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000250.jpg",
@@ -916,7 +916,7 @@ const mockCases = [
         "plate": "SZT-6704",
         "location": "台中市西屯區台灣大道二段",
         "confidence": 80,
-        "timestamp": "2026-05-31T16:56:00",
+        "timestamp": "2026-06-29T16:56:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000043.jpg",
@@ -951,7 +951,7 @@ const mockCases = [
         "plate": "TCQ-4991",
         "location": "台中市南屯區公益路",
         "confidence": 82,
-        "timestamp": "2026-05-31T04:25:00",
+        "timestamp": "2026-06-24T04:25:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000272.jpg",
@@ -986,7 +986,7 @@ const mockCases = [
         "plate": "GLN-4295",
         "location": "台中市西屯區精誠路",
         "confidence": 86,
-        "timestamp": "2026-05-30T12:47:00",
+        "timestamp": "2026-06-27T12:47:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000002.jpg",
@@ -1021,7 +1021,7 @@ const mockCases = [
         "plate": "AHO-4127",
         "location": "台中市北區精誠路",
         "confidence": 83,
-        "timestamp": "2026-05-25T01:24:00",
+        "timestamp": "2026-06-28T01:24:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
@@ -1056,7 +1056,7 @@ const mockCases = [
         "plate": "GPE-0697",
         "location": "台中市中區五權西路",
         "confidence": 98,
-        "timestamp": "2026-05-27T15:12:00",
+        "timestamp": "2026-06-23T15:12:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000368.jpg",
@@ -1091,7 +1091,7 @@ const mockCases = [
         "plate": "MQR-8479",
         "location": "台中市西屯區公益路",
         "confidence": 99,
-        "timestamp": "2026-05-27T20:58:00",
+        "timestamp": "2026-06-27T20:58:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg",
@@ -1126,7 +1126,7 @@ const mockCases = [
         "plate": "GYG-5009",
         "location": "台中市太平區公益路",
         "confidence": 97,
-        "timestamp": "2026-05-25T18:23:00",
+        "timestamp": "2026-06-29T18:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000420.jpg",
@@ -1161,7 +1161,7 @@ const mockCases = [
         "plate": "LNM-3863",
         "location": "台中市北區文心路四段",
         "confidence": 87,
-        "timestamp": "2026-05-25T11:56:00",
+        "timestamp": "2026-06-27T11:56:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000112.jpg",
@@ -1196,7 +1196,7 @@ const mockCases = [
         "plate": "PWE-8882",
         "location": "台中市南屯區環中路",
         "confidence": 88,
-        "timestamp": "2026-05-25T11:16:00",
+        "timestamp": "2026-06-28T11:16:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000316.jpg",
@@ -1231,7 +1231,7 @@ const mockCases = [
         "plate": "AGN-6451",
         "location": "台中市太平區中清路",
         "confidence": 83,
-        "timestamp": "2026-05-28T20:32:00",
+        "timestamp": "2026-06-29T20:32:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000349.jpg",
@@ -1266,7 +1266,7 @@ const mockCases = [
         "plate": "WPW-5317",
         "location": "台中市北區復興路",
         "confidence": 95,
-        "timestamp": "2026-05-29T16:13:00",
+        "timestamp": "2026-06-30T16:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000259.jpg",
@@ -1301,7 +1301,7 @@ const mockCases = [
         "plate": "FCU-7676",
         "location": "台中市南區公益路",
         "confidence": 96,
-        "timestamp": "2026-05-26T06:24:00",
+        "timestamp": "2026-06-30T06:24:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000359.jpg",
@@ -1336,7 +1336,7 @@ const mockCases = [
         "plate": "ZPK-5969",
         "location": "台中市北區崇德路三段",
         "confidence": 81,
-        "timestamp": "2026-05-30T01:15:00",
+        "timestamp": "2026-06-28T01:15:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000260.jpg",
@@ -1371,7 +1371,7 @@ const mockCases = [
         "plate": "BHR-3687",
         "location": "台中市太平區文心路四段",
         "confidence": 93,
-        "timestamp": "2026-05-26T02:55:00",
+        "timestamp": "2026-06-24T02:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000172.jpg",
@@ -1406,7 +1406,7 @@ const mockCases = [
         "plate": "CPB-5632",
         "location": "台中市北區公益路",
         "confidence": 82,
-        "timestamp": "2026-05-25T12:37:00",
+        "timestamp": "2026-06-26T12:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg",
@@ -1441,7 +1441,7 @@ const mockCases = [
         "plate": "AVP-8791",
         "location": "台中市西屯區中清路",
         "confidence": 88,
-        "timestamp": "2026-05-25T12:10:00",
+        "timestamp": "2026-06-27T12:10:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000064.jpg",
@@ -1476,7 +1476,7 @@ const mockCases = [
         "plate": "VRN-4638",
         "location": "台中市北區崇德路三段",
         "confidence": 93,
-        "timestamp": "2026-05-25T09:23:00",
+        "timestamp": "2026-06-30T09:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000415.jpg",
@@ -1511,7 +1511,7 @@ const mockCases = [
         "plate": "FHN-0301",
         "location": "台中市豐原區崇德路三段",
         "confidence": 96,
-        "timestamp": "2026-05-26T12:35:00",
+        "timestamp": "2026-06-25T12:35:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000312.jpg",
@@ -1546,7 +1546,7 @@ const mockCases = [
         "plate": "JMD-8544",
         "location": "台中市太平區公益路",
         "confidence": 87,
-        "timestamp": "2026-05-31T16:55:00",
+        "timestamp": "2026-06-24T16:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000499.jpg",
@@ -1581,7 +1581,7 @@ const mockCases = [
         "plate": "JTZ-4055",
         "location": "台中市西區黎明路",
         "confidence": 94,
-        "timestamp": "2026-05-30T21:31:00",
+        "timestamp": "2026-06-26T21:31:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000303.jpg",
@@ -1616,7 +1616,7 @@ const mockCases = [
         "plate": "KBF-7685",
         "location": "台中市北屯區公益路",
         "confidence": 92,
-        "timestamp": "2026-05-31T06:01:00",
+        "timestamp": "2026-06-27T06:01:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000215.jpg",
@@ -1651,7 +1651,7 @@ const mockCases = [
         "plate": "MVX-7316",
         "location": "台中市南屯區中清路",
         "confidence": 99,
-        "timestamp": "2026-05-28T15:14:00",
+        "timestamp": "2026-06-28T15:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000085.jpg",
@@ -1686,7 +1686,7 @@ const mockCases = [
         "plate": "XNE-3445",
         "location": "台中市南屯區文心路四段",
         "confidence": 91,
-        "timestamp": "2026-05-31T05:58:00",
+        "timestamp": "2026-06-30T05:58:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000017.jpg",
@@ -1721,7 +1721,7 @@ const mockCases = [
         "plate": "JFE-2783",
         "location": "台中市豐原區公益路",
         "confidence": 93,
-        "timestamp": "2026-05-26T16:37:00",
+        "timestamp": "2026-06-30T16:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000406.jpg",
@@ -1756,7 +1756,7 @@ const mockCases = [
         "plate": "HSJ-6486",
         "location": "台中市北屯區環中路",
         "confidence": 82,
-        "timestamp": "2026-05-27T04:16:00",
+        "timestamp": "2026-06-29T04:16:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000185.jpg",
@@ -1791,7 +1791,7 @@ const mockCases = [
         "plate": "VMJ-2570",
         "location": "台中市豐原區崇德路三段",
         "confidence": 93,
-        "timestamp": "2026-05-30T11:19:00",
+        "timestamp": "2026-06-30T11:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000105.jpg",
@@ -1826,7 +1826,7 @@ const mockCases = [
         "plate": "BIS-7828",
         "location": "台中市中區精誠路",
         "confidence": 82,
-        "timestamp": "2026-05-29T23:12:00",
+        "timestamp": "2026-06-28T23:12:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000054.jpg",
@@ -1861,7 +1861,7 @@ const mockCases = [
         "plate": "TSO-3515",
         "location": "台中市北區公益路",
         "confidence": 75,
-        "timestamp": "2026-05-25T12:37:00",
+        "timestamp": "2026-06-23T12:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000465.jpg",
@@ -1896,7 +1896,7 @@ const mockCases = [
         "plate": "WFW-4854",
         "location": "台中市中區崇德路三段",
         "confidence": 88,
-        "timestamp": "2026-05-27T05:22:00",
+        "timestamp": "2026-06-25T05:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000060.jpg",
@@ -1931,7 +1931,7 @@ const mockCases = [
         "plate": "ODI-3772",
         "location": "台中市西區精誠路",
         "confidence": 87,
-        "timestamp": "2026-05-25T20:34:00",
+        "timestamp": "2026-06-29T20:34:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000439.jpg",
@@ -1966,7 +1966,7 @@ const mockCases = [
         "plate": "BEZ-2183",
         "location": "台中市北區文心路四段",
         "confidence": 91,
-        "timestamp": "2026-05-28T14:13:00",
+        "timestamp": "2026-06-24T14:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000238.jpg",
@@ -2001,7 +2001,7 @@ const mockCases = [
         "plate": "WGZ-7656",
         "location": "台中市西區公益路",
         "confidence": 84,
-        "timestamp": "2026-05-25T20:22:00",
+        "timestamp": "2026-06-26T20:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000402.jpg",
@@ -2036,7 +2036,7 @@ const mockCases = [
         "plate": "SHJ-7624",
         "location": "台中市南區文心路四段",
         "confidence": 84,
-        "timestamp": "2026-05-26T14:29:00",
+        "timestamp": "2026-06-30T14:29:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000470.jpg",
@@ -2071,7 +2071,7 @@ const mockCases = [
         "plate": "LBZ-2084",
         "location": "台中市大里區五權西路",
         "confidence": 80,
-        "timestamp": "2026-05-31T18:21:00",
+        "timestamp": "2026-06-26T18:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000077.jpg",
@@ -2106,7 +2106,7 @@ const mockCases = [
         "plate": "YYN-8157",
         "location": "台中市大里區公益路",
         "confidence": 78,
-        "timestamp": "2026-05-26T13:54:00",
+        "timestamp": "2026-06-28T13:54:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000383.jpg",
@@ -2141,7 +2141,7 @@ const mockCases = [
         "plate": "SWJ-6298",
         "location": "台中市西屯區黎明路",
         "confidence": 92,
-        "timestamp": "2026-05-29T21:48:00",
+        "timestamp": "2026-06-24T21:48:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000115.jpg",
@@ -2176,7 +2176,7 @@ const mockCases = [
         "plate": "KBO-4789",
         "location": "台中市大里區復興路",
         "confidence": 92,
-        "timestamp": "2026-05-25T14:42:00",
+        "timestamp": "2026-06-27T14:42:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000257.jpg",
@@ -2211,7 +2211,7 @@ const mockCases = [
         "plate": "QNN-5459",
         "location": "台中市西區精誠路",
         "confidence": 92,
-        "timestamp": "2026-05-28T13:54:00",
+        "timestamp": "2026-06-30T13:54:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000100.jpg",
@@ -2246,7 +2246,7 @@ const mockCases = [
         "plate": "VNH-6196",
         "location": "台中市大里區環中路",
         "confidence": 84,
-        "timestamp": "2026-05-31T00:20:00",
+        "timestamp": "2026-06-30T00:20:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000155.jpg",
@@ -2281,7 +2281,7 @@ const mockCases = [
         "plate": "MFU-2276",
         "location": "台中市南區文心路四段",
         "confidence": 90,
-        "timestamp": "2026-05-25T15:07:00",
+        "timestamp": "2026-06-28T15:07:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg",
@@ -2316,7 +2316,7 @@ const mockCases = [
         "plate": "LHF-6719",
         "location": "台中市西屯區五權西路",
         "confidence": 88,
-        "timestamp": "2026-05-31T22:52:00",
+        "timestamp": "2026-06-24T22:52:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000337.jpg",
@@ -2351,7 +2351,7 @@ const mockCases = [
         "plate": "XUT-1486",
         "location": "台中市中區復興路",
         "confidence": 91,
-        "timestamp": "2026-05-25T21:45:00",
+        "timestamp": "2026-06-25T21:45:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
@@ -2386,7 +2386,7 @@ const mockCases = [
         "plate": "LAX-7336",
         "location": "台中市太平區中清路",
         "confidence": 96,
-        "timestamp": "2026-05-25T19:18:00",
+        "timestamp": "2026-06-27T19:18:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000097.jpg",
@@ -2421,7 +2421,7 @@ const mockCases = [
         "plate": "CJM-7200",
         "location": "台中市北區崇德路三段",
         "confidence": 83,
-        "timestamp": "2026-05-31T09:36:00",
+        "timestamp": "2026-06-24T09:36:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
@@ -2456,7 +2456,7 @@ const mockCases = [
         "plate": "THY-5498",
         "location": "台中市北區復興路",
         "confidence": 99,
-        "timestamp": "2026-05-29T01:41:00",
+        "timestamp": "2026-06-28T01:41:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000023.jpg",
@@ -2491,7 +2491,7 @@ const mockCases = [
         "plate": "NZT-4415",
         "location": "台中市中區黎明路",
         "confidence": 78,
-        "timestamp": "2026-05-30T12:40:00",
+        "timestamp": "2026-06-29T12:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000117.jpg",
@@ -2526,7 +2526,7 @@ const mockCases = [
         "plate": "KNO-1052",
         "location": "台中市中區黎明路",
         "confidence": 89,
-        "timestamp": "2026-05-31T22:14:00",
+        "timestamp": "2026-06-28T22:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000090.jpg",
@@ -2561,7 +2561,7 @@ const mockCases = [
         "plate": "ANF-7900",
         "location": "台中市豐原區復興路",
         "confidence": 78,
-        "timestamp": "2026-05-27T10:36:00",
+        "timestamp": "2026-06-28T10:36:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000225.jpg",
@@ -2596,7 +2596,7 @@ const mockCases = [
         "plate": "BRY-4855",
         "location": "台中市中區五權西路",
         "confidence": 75,
-        "timestamp": "2026-05-27T08:23:00",
+        "timestamp": "2026-06-26T08:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
@@ -2631,7 +2631,7 @@ const mockCases = [
         "plate": "CID-2386",
         "location": "台中市太平區五權西路",
         "confidence": 97,
-        "timestamp": "2026-05-27T18:37:00",
+        "timestamp": "2026-06-23T18:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000379.jpg",
@@ -2666,7 +2666,7 @@ const mockCases = [
         "plate": "WTQ-2790",
         "location": "台中市西屯區五權西路",
         "confidence": 88,
-        "timestamp": "2026-05-30T14:48:00",
+        "timestamp": "2026-06-29T14:48:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000429.jpg",
@@ -2701,7 +2701,7 @@ const mockCases = [
         "plate": "GNP-8138",
         "location": "台中市西區精誠路",
         "confidence": 81,
-        "timestamp": "2026-05-28T10:08:00",
+        "timestamp": "2026-06-23T10:08:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
@@ -2736,7 +2736,7 @@ const mockCases = [
         "plate": "TOA-2917",
         "location": "台中市太平區文心路四段",
         "confidence": 92,
-        "timestamp": "2026-05-28T11:02:00",
+        "timestamp": "2026-06-23T11:02:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000409.jpg",
@@ -2771,7 +2771,7 @@ const mockCases = [
         "plate": "ACN-6561",
         "location": "台中市豐原區環中路",
         "confidence": 86,
-        "timestamp": "2026-05-31T17:01:00",
+        "timestamp": "2026-06-24T17:01:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
@@ -2806,7 +2806,7 @@ const mockCases = [
         "plate": "COV-3096",
         "location": "台中市南區文心路四段",
         "confidence": 81,
-        "timestamp": "2026-05-30T04:22:00",
+        "timestamp": "2026-06-30T04:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000437.jpg",
@@ -2841,7 +2841,7 @@ const mockCases = [
         "plate": "HPY-1912",
         "location": "台中市太平區公益路",
         "confidence": 97,
-        "timestamp": "2026-05-25T04:53:00",
+        "timestamp": "2026-06-26T04:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000261.jpg",
@@ -2876,7 +2876,7 @@ const mockCases = [
         "plate": "EPT-0917",
         "location": "台中市太平區文心路四段",
         "confidence": 93,
-        "timestamp": "2026-05-29T18:08:00",
+        "timestamp": "2026-06-30T18:08:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000314.jpg",
@@ -2911,7 +2911,7 @@ const mockCases = [
         "plate": "NBH-9257",
         "location": "台中市中區中清路",
         "confidence": 91,
-        "timestamp": "2026-05-31T09:23:00",
+        "timestamp": "2026-06-27T09:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000354.jpg",
@@ -2946,7 +2946,7 @@ const mockCases = [
         "plate": "TQU-0884",
         "location": "台中市南區文心路四段",
         "confidence": 98,
-        "timestamp": "2026-05-30T00:04:00",
+        "timestamp": "2026-06-24T00:04:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000276.jpg",
@@ -2981,7 +2981,7 @@ const mockCases = [
         "plate": "JMT-3956",
         "location": "台中市西屯區復興路",
         "confidence": 77,
-        "timestamp": "2026-05-26T04:33:00",
+        "timestamp": "2026-06-26T04:33:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000267.jpg",
@@ -3016,7 +3016,7 @@ const mockCases = [
         "plate": "DBG-2152",
         "location": "台中市太平區文心路四段",
         "confidence": 91,
-        "timestamp": "2026-05-28T11:55:00",
+        "timestamp": "2026-06-23T11:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000498.jpg",
@@ -3051,7 +3051,7 @@ const mockCases = [
         "plate": "IOG-2332",
         "location": "台中市北區五權西路",
         "confidence": 89,
-        "timestamp": "2026-05-31T21:09:00",
+        "timestamp": "2026-06-26T21:09:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000056.jpg",
@@ -3086,7 +3086,7 @@ const mockCases = [
         "plate": "APT-8446",
         "location": "台中市豐原區黎明路",
         "confidence": 98,
-        "timestamp": "2026-05-30T04:10:00",
+        "timestamp": "2026-06-30T04:10:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000149.jpg",
@@ -3121,7 +3121,7 @@ const mockCases = [
         "plate": "ANP-7647",
         "location": "台中市中區中清路",
         "confidence": 98,
-        "timestamp": "2026-05-31T08:50:00",
+        "timestamp": "2026-06-27T08:50:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000193.jpg",
@@ -3156,7 +3156,7 @@ const mockCases = [
         "plate": "WQB-4061",
         "location": "台中市豐原區五權西路",
         "confidence": 99,
-        "timestamp": "2026-05-31T08:59:00",
+        "timestamp": "2026-06-29T08:59:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000128.jpg",
@@ -3191,7 +3191,7 @@ const mockCases = [
         "plate": "DFZ-6406",
         "location": "台中市南區精誠路",
         "confidence": 99,
-        "timestamp": "2026-05-26T13:38:00",
+        "timestamp": "2026-06-26T13:38:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000314.jpg",
@@ -3226,7 +3226,7 @@ const mockCases = [
         "plate": "CWV-7759",
         "location": "台中市豐原區公益路",
         "confidence": 92,
-        "timestamp": "2026-05-30T18:49:00",
+        "timestamp": "2026-06-29T18:49:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000271.jpg",
@@ -3261,7 +3261,7 @@ const mockCases = [
         "plate": "AUV-2591",
         "location": "台中市北屯區文心路四段",
         "confidence": 96,
-        "timestamp": "2026-05-27T05:44:00",
+        "timestamp": "2026-06-29T05:44:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
@@ -3296,7 +3296,7 @@ const mockCases = [
         "plate": "IRH-0870",
         "location": "台中市豐原區中清路",
         "confidence": 91,
-        "timestamp": "2026-05-28T08:10:00",
+        "timestamp": "2026-06-25T08:10:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000241.jpg",
@@ -3331,7 +3331,7 @@ const mockCases = [
         "plate": "SPJ-1720",
         "location": "台中市北屯區黎明路",
         "confidence": 82,
-        "timestamp": "2026-05-31T13:53:00",
+        "timestamp": "2026-06-24T13:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000020.jpg",
@@ -3366,7 +3366,7 @@ const mockCases = [
         "plate": "SCK-0842",
         "location": "台中市西屯區五權西路",
         "confidence": 94,
-        "timestamp": "2026-05-25T20:14:00",
+        "timestamp": "2026-06-28T20:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000413.jpg",
@@ -3401,7 +3401,7 @@ const mockCases = [
         "plate": "VIJ-5775",
         "location": "台中市北屯區台灣大道二段",
         "confidence": 77,
-        "timestamp": "2026-05-31T19:59:00",
+        "timestamp": "2026-06-29T19:59:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000050.jpg",
@@ -3436,7 +3436,7 @@ const mockCases = [
         "plate": "FLS-8298",
         "location": "台中市北區五權西路",
         "confidence": 97,
-        "timestamp": "2026-05-26T05:01:00",
+        "timestamp": "2026-06-27T05:01:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000196.jpg",
@@ -3471,7 +3471,7 @@ const mockCases = [
         "plate": "NYN-5436",
         "location": "台中市豐原區五權西路",
         "confidence": 97,
-        "timestamp": "2026-05-31T16:21:00",
+        "timestamp": "2026-06-30T16:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000418.jpg",
@@ -3506,7 +3506,7 @@ const mockCases = [
         "plate": "XQQ-3624",
         "location": "台中市南區黎明路",
         "confidence": 98,
-        "timestamp": "2026-05-26T04:04:00",
+        "timestamp": "2026-06-24T04:04:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000413.jpg",
@@ -3541,7 +3541,7 @@ const mockCases = [
         "plate": "LHY-0610",
         "location": "台中市太平區台灣大道二段",
         "confidence": 81,
-        "timestamp": "2026-05-29T05:22:00",
+        "timestamp": "2026-06-27T05:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
@@ -3576,7 +3576,7 @@ const mockCases = [
         "plate": "QTQ-9516",
         "location": "台中市豐原區台灣大道二段",
         "confidence": 84,
-        "timestamp": "2026-05-28T04:50:00",
+        "timestamp": "2026-06-26T04:50:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000178.jpg",
@@ -3611,7 +3611,7 @@ const mockCases = [
         "plate": "OBH-9255",
         "location": "台中市中區文心路四段",
         "confidence": 86,
-        "timestamp": "2026-05-27T04:03:00",
+        "timestamp": "2026-06-26T04:03:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000416.jpg",
@@ -3646,7 +3646,7 @@ const mockCases = [
         "plate": "AXB-4299",
         "location": "台中市北區環中路",
         "confidence": 81,
-        "timestamp": "2026-05-26T00:52:00",
+        "timestamp": "2026-06-30T00:52:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000104.jpg",
@@ -3681,7 +3681,7 @@ const mockCases = [
         "plate": "OHT-1895",
         "location": "台中市北屯區五權西路",
         "confidence": 86,
-        "timestamp": "2026-05-26T09:21:00",
+        "timestamp": "2026-06-25T09:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000392.jpg",
@@ -3716,7 +3716,7 @@ const mockCases = [
         "plate": "IPZ-5789",
         "location": "台中市太平區精誠路",
         "confidence": 97,
-        "timestamp": "2026-05-29T05:44:00",
+        "timestamp": "2026-06-26T05:44:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000372.jpg",
@@ -3751,7 +3751,7 @@ const mockCases = [
         "plate": "OHR-2058",
         "location": "台中市西區崇德路三段",
         "confidence": 89,
-        "timestamp": "2026-05-28T08:57:00",
+        "timestamp": "2026-06-28T08:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000330.jpg",
@@ -3786,7 +3786,7 @@ const mockCases = [
         "plate": "ROI-8763",
         "location": "台中市南屯區台灣大道二段",
         "confidence": 92,
-        "timestamp": "2026-05-25T20:29:00",
+        "timestamp": "2026-06-29T20:29:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000384.jpg",
@@ -3821,7 +3821,7 @@ const mockCases = [
         "plate": "ZLQ-7138",
         "location": "台中市西屯區公益路",
         "confidence": 91,
-        "timestamp": "2026-05-26T11:37:00",
+        "timestamp": "2026-06-25T11:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000435.jpg",
@@ -3856,7 +3856,7 @@ const mockCases = [
         "plate": "NHL-7963",
         "location": "台中市豐原區中清路",
         "confidence": 82,
-        "timestamp": "2026-05-31T15:20:00",
+        "timestamp": "2026-06-28T15:20:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000043.jpg",
@@ -3891,7 +3891,7 @@ const mockCases = [
         "plate": "ATY-3118",
         "location": "台中市西區復興路",
         "confidence": 94,
-        "timestamp": "2026-05-31T19:57:00",
+        "timestamp": "2026-06-28T19:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000207.jpg",
@@ -3926,7 +3926,7 @@ const mockCases = [
         "plate": "UBS-1661",
         "location": "台中市南屯區精誠路",
         "confidence": 87,
-        "timestamp": "2026-05-28T11:57:00",
+        "timestamp": "2026-06-23T11:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000059.jpg",
@@ -3961,7 +3961,7 @@ const mockCases = [
         "plate": "XEE-5694",
         "location": "台中市北屯區精誠路",
         "confidence": 86,
-        "timestamp": "2026-05-26T04:31:00",
+        "timestamp": "2026-06-27T04:31:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
@@ -3996,7 +3996,7 @@ const mockCases = [
         "plate": "AZT-6709",
         "location": "台中市西屯區黎明路",
         "confidence": 96,
-        "timestamp": "2026-05-30T06:29:00",
+        "timestamp": "2026-06-27T06:29:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
@@ -4031,7 +4031,7 @@ const mockCases = [
         "plate": "ZQX-1929",
         "location": "台中市中區台灣大道二段",
         "confidence": 94,
-        "timestamp": "2026-05-30T19:23:00",
+        "timestamp": "2026-06-28T19:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000165.jpg",
@@ -4066,7 +4066,7 @@ const mockCases = [
         "plate": "RZP-0136",
         "location": "台中市南屯區精誠路",
         "confidence": 82,
-        "timestamp": "2026-05-29T08:08:00",
+        "timestamp": "2026-06-29T08:08:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000435.jpg",
@@ -4101,7 +4101,7 @@ const mockCases = [
         "plate": "AAY-8624",
         "location": "台中市南區復興路",
         "confidence": 95,
-        "timestamp": "2026-05-31T16:52:00",
+        "timestamp": "2026-06-29T16:52:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000098.jpg",
@@ -4136,7 +4136,7 @@ const mockCases = [
         "plate": "PLZ-4761",
         "location": "台中市北區環中路",
         "confidence": 77,
-        "timestamp": "2026-05-28T17:24:00",
+        "timestamp": "2026-06-25T17:24:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg",
@@ -4171,7 +4171,7 @@ const mockCases = [
         "plate": "ODH-0043",
         "location": "台中市中區中清路",
         "confidence": 76,
-        "timestamp": "2026-05-31T13:29:00",
+        "timestamp": "2026-06-24T13:29:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000055.jpg",
@@ -4206,7 +4206,7 @@ const mockCases = [
         "plate": "YIG-4714",
         "location": "台中市南區精誠路",
         "confidence": 76,
-        "timestamp": "2026-05-25T09:58:00",
+        "timestamp": "2026-06-28T09:58:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000249.jpg",
@@ -4241,7 +4241,7 @@ const mockCases = [
         "plate": "XOQ-6164",
         "location": "台中市中區公益路",
         "confidence": 99,
-        "timestamp": "2026-05-28T18:34:00",
+        "timestamp": "2026-06-27T18:34:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000057.jpg",
@@ -4276,7 +4276,7 @@ const mockCases = [
         "plate": "AMK-1913",
         "location": "台中市南屯區公益路",
         "confidence": 91,
-        "timestamp": "2026-05-28T19:06:00",
+        "timestamp": "2026-06-26T19:06:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000236.jpg",
@@ -4311,7 +4311,7 @@ const mockCases = [
         "plate": "TQO-6292",
         "location": "台中市西區台灣大道二段",
         "confidence": 90,
-        "timestamp": "2026-05-30T09:01:00",
+        "timestamp": "2026-06-25T09:01:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000023.jpg",
@@ -4346,7 +4346,7 @@ const mockCases = [
         "plate": "XGI-9826",
         "location": "台中市中區公益路",
         "confidence": 93,
-        "timestamp": "2026-05-25T05:21:00",
+        "timestamp": "2026-06-30T05:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000456.jpg",
@@ -4381,7 +4381,7 @@ const mockCases = [
         "plate": "WOL-1096",
         "location": "台中市豐原區公益路",
         "confidence": 94,
-        "timestamp": "2026-05-29T15:13:00",
+        "timestamp": "2026-06-28T15:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000044.jpg",
@@ -4416,7 +4416,7 @@ const mockCases = [
         "plate": "NRB-9896",
         "location": "台中市南區崇德路三段",
         "confidence": 76,
-        "timestamp": "2026-05-31T02:01:00",
+        "timestamp": "2026-06-26T02:01:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000144.jpg",
@@ -4451,7 +4451,7 @@ const mockCases = [
         "plate": "IUZ-5947",
         "location": "台中市中區中清路",
         "confidence": 93,
-        "timestamp": "2026-05-27T13:59:00",
+        "timestamp": "2026-06-29T13:59:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000084.jpg",
@@ -4486,7 +4486,7 @@ const mockCases = [
         "plate": "LQA-8871",
         "location": "台中市大里區復興路",
         "confidence": 79,
-        "timestamp": "2026-05-31T21:03:00",
+        "timestamp": "2026-06-26T21:03:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000119.jpg",
@@ -4521,7 +4521,7 @@ const mockCases = [
         "plate": "NZQ-1026",
         "location": "台中市南區五權西路",
         "confidence": 77,
-        "timestamp": "2026-05-28T03:19:00",
+        "timestamp": "2026-06-30T03:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000499.jpg",
@@ -4556,7 +4556,7 @@ const mockCases = [
         "plate": "UWK-6707",
         "location": "台中市南屯區公益路",
         "confidence": 80,
-        "timestamp": "2026-05-28T04:06:00",
+        "timestamp": "2026-06-28T04:06:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000184.jpg",
@@ -4591,7 +4591,7 @@ const mockCases = [
         "plate": "SGR-4683",
         "location": "台中市西屯區復興路",
         "confidence": 93,
-        "timestamp": "2026-05-28T00:36:00",
+        "timestamp": "2026-06-25T00:36:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000396.jpg",
@@ -4626,7 +4626,7 @@ const mockCases = [
         "plate": "LOS-4548",
         "location": "台中市南屯區中清路",
         "confidence": 87,
-        "timestamp": "2026-05-28T15:19:00",
+        "timestamp": "2026-06-23T15:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000313.jpg",
@@ -4661,7 +4661,7 @@ const mockCases = [
         "plate": "SXG-8512",
         "location": "台中市中區中清路",
         "confidence": 83,
-        "timestamp": "2026-05-26T02:11:00",
+        "timestamp": "2026-06-27T02:11:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000269.jpg",
@@ -4696,7 +4696,7 @@ const mockCases = [
         "plate": "ODH-0491",
         "location": "台中市北區台灣大道二段",
         "confidence": 83,
-        "timestamp": "2026-05-26T23:24:00",
+        "timestamp": "2026-06-26T23:24:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000183.jpg",
@@ -4731,7 +4731,7 @@ const mockCases = [
         "plate": "SQU-6623",
         "location": "台中市西屯區環中路",
         "confidence": 88,
-        "timestamp": "2026-05-30T03:13:00",
+        "timestamp": "2026-06-29T03:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
@@ -4766,7 +4766,7 @@ const mockCases = [
         "plate": "TBM-4865",
         "location": "台中市西屯區崇德路三段",
         "confidence": 98,
-        "timestamp": "2026-05-27T11:47:00",
+        "timestamp": "2026-06-25T11:47:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000202.jpg",
@@ -4801,7 +4801,7 @@ const mockCases = [
         "plate": "XDR-6251",
         "location": "台中市北區五權西路",
         "confidence": 83,
-        "timestamp": "2026-05-29T07:51:00",
+        "timestamp": "2026-06-27T07:51:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000495.jpg",
@@ -4836,7 +4836,7 @@ const mockCases = [
         "plate": "TXI-8350",
         "location": "台中市西區黎明路",
         "confidence": 78,
-        "timestamp": "2026-05-31T13:46:00",
+        "timestamp": "2026-06-26T13:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000420.jpg",
@@ -4871,7 +4871,7 @@ const mockCases = [
         "plate": "UFT-9971",
         "location": "台中市北區精誠路",
         "confidence": 97,
-        "timestamp": "2026-05-30T10:30:00",
+        "timestamp": "2026-06-26T10:30:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000464.jpg",
@@ -4906,7 +4906,7 @@ const mockCases = [
         "plate": "QMK-4025",
         "location": "台中市豐原區精誠路",
         "confidence": 93,
-        "timestamp": "2026-05-25T07:46:00",
+        "timestamp": "2026-06-26T07:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000407.jpg",
@@ -4941,7 +4941,7 @@ const mockCases = [
         "plate": "GJR-1647",
         "location": "台中市南屯區文心路四段",
         "confidence": 86,
-        "timestamp": "2026-05-25T18:13:00",
+        "timestamp": "2026-06-25T18:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000362.jpg",
@@ -4976,7 +4976,7 @@ const mockCases = [
         "plate": "XDE-3284",
         "location": "台中市大里區崇德路三段",
         "confidence": 88,
-        "timestamp": "2026-05-28T07:15:00",
+        "timestamp": "2026-06-27T07:15:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000331.jpg",
@@ -5011,7 +5011,7 @@ const mockCases = [
         "plate": "RXY-9185",
         "location": "台中市大里區文心路四段",
         "confidence": 86,
-        "timestamp": "2026-05-26T09:49:00",
+        "timestamp": "2026-06-27T09:49:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000007.jpg",
@@ -5046,7 +5046,7 @@ const mockCases = [
         "plate": "ZXQ-1707",
         "location": "台中市大里區台灣大道二段",
         "confidence": 87,
-        "timestamp": "2026-05-29T05:14:00",
+        "timestamp": "2026-06-26T05:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000370.jpg",
@@ -5081,7 +5081,7 @@ const mockCases = [
         "plate": "HDE-5415",
         "location": "台中市豐原區復興路",
         "confidence": 79,
-        "timestamp": "2026-05-27T18:25:00",
+        "timestamp": "2026-06-29T18:25:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000070.jpg",
@@ -5116,7 +5116,7 @@ const mockCases = [
         "plate": "CFL-6256",
         "location": "台中市西區中清路",
         "confidence": 87,
-        "timestamp": "2026-05-31T18:11:00",
+        "timestamp": "2026-06-27T18:11:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000454.jpg",
@@ -5151,7 +5151,7 @@ const mockCases = [
         "plate": "NSJ-7574",
         "location": "台中市北屯區復興路",
         "confidence": 84,
-        "timestamp": "2026-05-26T23:28:00",
+        "timestamp": "2026-06-23T23:28:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000221.jpg",
@@ -5186,7 +5186,7 @@ const mockCases = [
         "plate": "TAH-9992",
         "location": "台中市北屯區崇德路三段",
         "confidence": 82,
-        "timestamp": "2026-05-27T19:06:00",
+        "timestamp": "2026-06-25T19:06:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000275.jpg",
@@ -5221,7 +5221,7 @@ const mockCases = [
         "plate": "HZH-8518",
         "location": "台中市中區公益路",
         "confidence": 92,
-        "timestamp": "2026-05-29T05:12:00",
+        "timestamp": "2026-06-25T05:12:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000322.jpg",
@@ -5256,7 +5256,7 @@ const mockCases = [
         "plate": "PAS-4207",
         "location": "台中市中區復興路",
         "confidence": 97,
-        "timestamp": "2026-05-28T01:53:00",
+        "timestamp": "2026-06-28T01:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000149.jpg",
@@ -5291,7 +5291,7 @@ const mockCases = [
         "plate": "OIG-3364",
         "location": "台中市北區公益路",
         "confidence": 89,
-        "timestamp": "2026-05-28T03:42:00",
+        "timestamp": "2026-06-27T03:42:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000479.jpg",
@@ -5326,7 +5326,7 @@ const mockCases = [
         "plate": "OON-4033",
         "location": "台中市大里區台灣大道二段",
         "confidence": 80,
-        "timestamp": "2026-05-29T12:57:00",
+        "timestamp": "2026-06-30T12:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000036.jpg",
@@ -5361,7 +5361,7 @@ const mockCases = [
         "plate": "DNR-4356",
         "location": "台中市西屯區台灣大道二段",
         "confidence": 78,
-        "timestamp": "2026-05-28T10:08:00",
+        "timestamp": "2026-06-29T10:08:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000180.jpg",
@@ -5396,7 +5396,7 @@ const mockCases = [
         "plate": "JAY-2384",
         "location": "台中市北區五權西路",
         "confidence": 78,
-        "timestamp": "2026-05-27T06:48:00",
+        "timestamp": "2026-06-27T06:48:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000438.jpg",
@@ -5431,7 +5431,7 @@ const mockCases = [
         "plate": "ASO-6038",
         "location": "台中市南屯區精誠路",
         "confidence": 93,
-        "timestamp": "2026-05-30T02:08:00",
+        "timestamp": "2026-06-23T02:08:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000107.jpg",
@@ -5466,7 +5466,7 @@ const mockCases = [
         "plate": "CWP-1084",
         "location": "台中市西區精誠路",
         "confidence": 87,
-        "timestamp": "2026-05-27T06:34:00",
+        "timestamp": "2026-06-29T06:34:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000492.jpg",
@@ -5501,7 +5501,7 @@ const mockCases = [
         "plate": "WXN-9187",
         "location": "台中市豐原區公益路",
         "confidence": 96,
-        "timestamp": "2026-05-25T14:21:00",
+        "timestamp": "2026-06-24T14:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000148.jpg",
@@ -5536,7 +5536,7 @@ const mockCases = [
         "plate": "GNO-5773",
         "location": "台中市太平區文心路四段",
         "confidence": 82,
-        "timestamp": "2026-05-29T03:02:00",
+        "timestamp": "2026-06-26T03:02:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
@@ -5571,7 +5571,7 @@ const mockCases = [
         "plate": "AXB-0321",
         "location": "台中市北區公益路",
         "confidence": 97,
-        "timestamp": "2026-05-25T12:55:00",
+        "timestamp": "2026-06-24T12:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000028.jpg",
@@ -5606,7 +5606,7 @@ const mockCases = [
         "plate": "MXU-6093",
         "location": "台中市北區崇德路三段",
         "confidence": 81,
-        "timestamp": "2026-05-28T01:47:00",
+        "timestamp": "2026-06-25T01:47:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000002.jpg",
@@ -5641,7 +5641,7 @@ const mockCases = [
         "plate": "FEK-7694",
         "location": "台中市大里區五權西路",
         "confidence": 77,
-        "timestamp": "2026-05-28T13:02:00",
+        "timestamp": "2026-06-24T13:02:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000455.jpg",
@@ -5676,7 +5676,7 @@ const mockCases = [
         "plate": "EHE-2645",
         "location": "台中市北屯區精誠路",
         "confidence": 94,
-        "timestamp": "2026-05-30T16:05:00",
+        "timestamp": "2026-06-26T16:05:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000495.jpg",
@@ -5711,7 +5711,7 @@ const mockCases = [
         "plate": "UUG-5688",
         "location": "台中市北屯區復興路",
         "confidence": 96,
-        "timestamp": "2026-05-28T22:02:00",
+        "timestamp": "2026-06-29T22:02:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000404.jpg",
@@ -5746,7 +5746,7 @@ const mockCases = [
         "plate": "MMJ-6439",
         "location": "台中市北屯區精誠路",
         "confidence": 90,
-        "timestamp": "2026-05-29T12:50:00",
+        "timestamp": "2026-06-27T12:50:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000361.jpg",
@@ -5781,7 +5781,7 @@ const mockCases = [
         "plate": "NSD-2396",
         "location": "台中市太平區台灣大道二段",
         "confidence": 99,
-        "timestamp": "2026-05-31T08:25:00",
+        "timestamp": "2026-06-27T08:25:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
@@ -5816,7 +5816,7 @@ const mockCases = [
         "plate": "CDU-6170",
         "location": "台中市太平區黎明路",
         "confidence": 89,
-        "timestamp": "2026-05-25T00:26:00",
+        "timestamp": "2026-06-25T00:26:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000469.jpg",
@@ -5851,7 +5851,7 @@ const mockCases = [
         "plate": "QSY-2541",
         "location": "台中市南屯區台灣大道二段",
         "confidence": 82,
-        "timestamp": "2026-05-27T08:50:00",
+        "timestamp": "2026-06-24T08:50:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000112.jpg",
@@ -5886,7 +5886,7 @@ const mockCases = [
         "plate": "PBU-6493",
         "location": "台中市豐原區公益路",
         "confidence": 95,
-        "timestamp": "2026-05-27T16:21:00",
+        "timestamp": "2026-06-29T16:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000018.jpg",
@@ -5921,7 +5921,7 @@ const mockCases = [
         "plate": "JGI-7613",
         "location": "台中市北區黎明路",
         "confidence": 83,
-        "timestamp": "2026-05-28T01:00:00",
+        "timestamp": "2026-06-24T01:00:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000183.jpg",
@@ -5956,7 +5956,7 @@ const mockCases = [
         "plate": "VKP-4407",
         "location": "台中市南區精誠路",
         "confidence": 98,
-        "timestamp": "2026-05-26T00:59:00",
+        "timestamp": "2026-06-26T00:59:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000409.jpg",
@@ -5991,7 +5991,7 @@ const mockCases = [
         "plate": "BKK-1699",
         "location": "台中市南屯區公益路",
         "confidence": 95,
-        "timestamp": "2026-05-29T09:37:00",
+        "timestamp": "2026-06-23T09:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000442.jpg",
@@ -6026,7 +6026,7 @@ const mockCases = [
         "plate": "WJK-9721",
         "location": "台中市西屯區台灣大道二段",
         "confidence": 90,
-        "timestamp": "2026-05-28T11:40:00",
+        "timestamp": "2026-06-25T11:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000467.jpg",
@@ -6061,7 +6061,7 @@ const mockCases = [
         "plate": "VUT-1152",
         "location": "台中市西區文心路四段",
         "confidence": 81,
-        "timestamp": "2026-05-31T05:19:00",
+        "timestamp": "2026-06-23T05:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000015.jpg",
@@ -6096,7 +6096,7 @@ const mockCases = [
         "plate": "CQO-1029",
         "location": "台中市北屯區五權西路",
         "confidence": 85,
-        "timestamp": "2026-05-31T22:40:00",
+        "timestamp": "2026-06-23T22:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000422.jpg",
@@ -6131,7 +6131,7 @@ const mockCases = [
         "plate": "CML-6139",
         "location": "台中市北區環中路",
         "confidence": 99,
-        "timestamp": "2026-05-30T11:04:00",
+        "timestamp": "2026-06-24T11:04:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000444.jpg",
@@ -6166,7 +6166,7 @@ const mockCases = [
         "plate": "WAY-0986",
         "location": "台中市西區環中路",
         "confidence": 81,
-        "timestamp": "2026-05-28T10:22:00",
+        "timestamp": "2026-06-28T10:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000291.jpg",
@@ -6201,7 +6201,7 @@ const mockCases = [
         "plate": "ZIW-1912",
         "location": "台中市北區公益路",
         "confidence": 99,
-        "timestamp": "2026-05-28T19:02:00",
+        "timestamp": "2026-06-23T19:02:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000209.jpg",
@@ -6236,7 +6236,7 @@ const mockCases = [
         "plate": "IZV-2164",
         "location": "台中市北區五權西路",
         "confidence": 83,
-        "timestamp": "2026-05-29T17:29:00",
+        "timestamp": "2026-06-29T17:29:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000239.jpg",
@@ -6271,7 +6271,7 @@ const mockCases = [
         "plate": "SVY-9407",
         "location": "台中市南區環中路",
         "confidence": 81,
-        "timestamp": "2026-05-25T02:53:00",
+        "timestamp": "2026-06-24T02:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000329.jpg",
@@ -6306,7 +6306,7 @@ const mockCases = [
         "plate": "XLZ-7330",
         "location": "台中市大里區環中路",
         "confidence": 81,
-        "timestamp": "2026-05-26T07:27:00",
+        "timestamp": "2026-06-28T07:27:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000472.jpg",
@@ -6341,7 +6341,7 @@ const mockCases = [
         "plate": "ETR-4580",
         "location": "台中市豐原區復興路",
         "confidence": 97,
-        "timestamp": "2026-05-31T08:45:00",
+        "timestamp": "2026-06-25T08:45:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
@@ -6376,7 +6376,7 @@ const mockCases = [
         "plate": "WFV-8548",
         "location": "台中市南屯區精誠路",
         "confidence": 90,
-        "timestamp": "2026-05-30T23:23:00",
+        "timestamp": "2026-06-26T23:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000230.jpg",
@@ -6411,7 +6411,7 @@ const mockCases = [
         "plate": "GXL-6286",
         "location": "台中市北區台灣大道二段",
         "confidence": 86,
-        "timestamp": "2026-05-26T11:16:00",
+        "timestamp": "2026-06-26T11:16:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000036.jpg",
@@ -6446,7 +6446,7 @@ const mockCases = [
         "plate": "ZFT-9616",
         "location": "台中市太平區文心路四段",
         "confidence": 84,
-        "timestamp": "2026-05-31T08:18:00",
+        "timestamp": "2026-06-30T08:18:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000387.jpg",
@@ -6481,7 +6481,7 @@ const mockCases = [
         "plate": "XNT-6004",
         "location": "台中市南屯區崇德路三段",
         "confidence": 84,
-        "timestamp": "2026-05-26T03:15:00",
+        "timestamp": "2026-06-27T03:15:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg",
@@ -6516,7 +6516,7 @@ const mockCases = [
         "plate": "CMT-6572",
         "location": "台中市西區中清路",
         "confidence": 86,
-        "timestamp": "2026-05-25T09:36:00",
+        "timestamp": "2026-06-25T09:36:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000319.jpg",
@@ -6551,7 +6551,7 @@ const mockCases = [
         "plate": "PIG-8195",
         "location": "台中市豐原區台灣大道二段",
         "confidence": 94,
-        "timestamp": "2026-05-28T16:43:00",
+        "timestamp": "2026-06-24T16:43:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000189.jpg",
@@ -6586,7 +6586,7 @@ const mockCases = [
         "plate": "MCD-4425",
         "location": "台中市中區精誠路",
         "confidence": 85,
-        "timestamp": "2026-05-30T03:41:00",
+        "timestamp": "2026-06-30T03:41:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000283.jpg",
@@ -6621,7 +6621,7 @@ const mockCases = [
         "plate": "AZY-0811",
         "location": "台中市豐原區黎明路",
         "confidence": 77,
-        "timestamp": "2026-05-25T06:55:00",
+        "timestamp": "2026-06-28T06:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000134.jpg",
@@ -6656,7 +6656,7 @@ const mockCases = [
         "plate": "ZXA-7611",
         "location": "台中市西區崇德路三段",
         "confidence": 87,
-        "timestamp": "2026-05-29T12:49:00",
+        "timestamp": "2026-06-28T12:49:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000116.jpg",
@@ -6691,7 +6691,7 @@ const mockCases = [
         "plate": "PHL-1056",
         "location": "台中市西區精誠路",
         "confidence": 80,
-        "timestamp": "2026-05-30T03:17:00",
+        "timestamp": "2026-06-29T03:17:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000336.jpg",
@@ -6726,7 +6726,7 @@ const mockCases = [
         "plate": "FPX-1591",
         "location": "台中市西屯區環中路",
         "confidence": 81,
-        "timestamp": "2026-05-27T23:15:00",
+        "timestamp": "2026-06-29T23:15:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000440.jpg",
@@ -6761,7 +6761,7 @@ const mockCases = [
         "plate": "RCZ-1698",
         "location": "台中市南區崇德路三段",
         "confidence": 86,
-        "timestamp": "2026-05-28T05:33:00",
+        "timestamp": "2026-06-23T05:33:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000448.jpg",
@@ -6796,7 +6796,7 @@ const mockCases = [
         "plate": "JUQ-7530",
         "location": "台中市南區五權西路",
         "confidence": 88,
-        "timestamp": "2026-05-30T14:17:00",
+        "timestamp": "2026-06-23T14:17:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000141.jpg",
@@ -6831,7 +6831,7 @@ const mockCases = [
         "plate": "ZTJ-0233",
         "location": "台中市中區中清路",
         "confidence": 87,
-        "timestamp": "2026-05-29T15:13:00",
+        "timestamp": "2026-06-23T15:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000462.jpg",
@@ -6866,7 +6866,7 @@ const mockCases = [
         "plate": "RIH-8435",
         "location": "台中市南屯區台灣大道二段",
         "confidence": 93,
-        "timestamp": "2026-05-26T21:17:00",
+        "timestamp": "2026-06-29T21:17:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000200.jpg",
@@ -6901,7 +6901,7 @@ const mockCases = [
         "plate": "QQK-8580",
         "location": "台中市北屯區五權西路",
         "confidence": 97,
-        "timestamp": "2026-05-29T10:22:00",
+        "timestamp": "2026-06-29T10:22:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000178.jpg",
@@ -6936,7 +6936,7 @@ const mockCases = [
         "plate": "YHS-5612",
         "location": "台中市南屯區文心路四段",
         "confidence": 88,
-        "timestamp": "2026-05-29T04:45:00",
+        "timestamp": "2026-06-27T04:45:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
@@ -6971,7 +6971,7 @@ const mockCases = [
         "plate": "ALB-0846",
         "location": "台中市北屯區台灣大道二段",
         "confidence": 92,
-        "timestamp": "2026-05-31T21:23:00",
+        "timestamp": "2026-06-23T21:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000182.jpg",
@@ -7006,7 +7006,7 @@ const mockCases = [
         "plate": "YYE-2780",
         "location": "台中市中區環中路",
         "confidence": 83,
-        "timestamp": "2026-05-28T12:18:00",
+        "timestamp": "2026-06-27T12:18:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000249.jpg",
@@ -7041,7 +7041,7 @@ const mockCases = [
         "plate": "URU-8986",
         "location": "台中市豐原區復興路",
         "confidence": 79,
-        "timestamp": "2026-05-31T21:42:00",
+        "timestamp": "2026-06-25T21:42:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000448.jpg",
@@ -7076,7 +7076,7 @@ const mockCases = [
         "plate": "AKJ-2503",
         "location": "台中市西區五權西路",
         "confidence": 85,
-        "timestamp": "2026-05-26T22:46:00",
+        "timestamp": "2026-06-29T22:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000291.jpg",
@@ -7111,7 +7111,7 @@ const mockCases = [
         "plate": "ZKZ-3878",
         "location": "台中市南屯區精誠路",
         "confidence": 87,
-        "timestamp": "2026-05-28T21:00:00",
+        "timestamp": "2026-06-29T21:00:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000210.jpg",
@@ -7146,7 +7146,7 @@ const mockCases = [
         "plate": "LOP-1183",
         "location": "台中市北屯區復興路",
         "confidence": 86,
-        "timestamp": "2026-05-27T15:16:00",
+        "timestamp": "2026-06-26T15:16:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000037.jpg",
@@ -7181,7 +7181,7 @@ const mockCases = [
         "plate": "PVJ-6877",
         "location": "台中市太平區五權西路",
         "confidence": 90,
-        "timestamp": "2026-05-27T20:34:00",
+        "timestamp": "2026-06-26T20:34:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000379.jpg",
@@ -7216,7 +7216,7 @@ const mockCases = [
         "plate": "VEL-1988",
         "location": "台中市豐原區精誠路",
         "confidence": 96,
-        "timestamp": "2026-05-31T18:11:00",
+        "timestamp": "2026-06-28T18:11:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000332.jpg",
@@ -7251,7 +7251,7 @@ const mockCases = [
         "plate": "EPP-6119",
         "location": "台中市中區復興路",
         "confidence": 96,
-        "timestamp": "2026-05-25T04:27:00",
+        "timestamp": "2026-06-29T04:27:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000231.jpg",
@@ -7286,7 +7286,7 @@ const mockCases = [
         "plate": "HNK-7006",
         "location": "台中市北屯區公益路",
         "confidence": 94,
-        "timestamp": "2026-05-31T13:44:00",
+        "timestamp": "2026-06-27T13:44:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000061.jpg",
@@ -7321,7 +7321,7 @@ const mockCases = [
         "plate": "HUK-1392",
         "location": "台中市豐原區環中路",
         "confidence": 77,
-        "timestamp": "2026-05-28T04:50:00",
+        "timestamp": "2026-06-23T04:50:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000058.jpg",
@@ -7356,7 +7356,7 @@ const mockCases = [
         "plate": "VOX-1151",
         "location": "台中市南屯區中清路",
         "confidence": 97,
-        "timestamp": "2026-05-27T07:55:00",
+        "timestamp": "2026-06-29T07:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000016.jpg",
@@ -7391,7 +7391,7 @@ const mockCases = [
         "plate": "NMO-5799",
         "location": "台中市大里區環中路",
         "confidence": 89,
-        "timestamp": "2026-05-25T11:46:00",
+        "timestamp": "2026-06-24T11:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000206.jpg",
@@ -7426,7 +7426,7 @@ const mockCases = [
         "plate": "OQK-5560",
         "location": "台中市大里區台灣大道二段",
         "confidence": 86,
-        "timestamp": "2026-05-25T00:56:00",
+        "timestamp": "2026-06-24T00:56:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000329.jpg",
@@ -7461,7 +7461,7 @@ const mockCases = [
         "plate": "NHG-4336",
         "location": "台中市北屯區五權西路",
         "confidence": 99,
-        "timestamp": "2026-05-26T19:46:00",
+        "timestamp": "2026-06-24T19:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000299.jpg",
@@ -7496,7 +7496,7 @@ const mockCases = [
         "plate": "KOJ-0570",
         "location": "台中市北屯區五權西路",
         "confidence": 78,
-        "timestamp": "2026-05-26T01:17:00",
+        "timestamp": "2026-06-27T01:17:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000074.jpg",
@@ -7531,7 +7531,7 @@ const mockCases = [
         "plate": "PRS-6832",
         "location": "台中市西屯區環中路",
         "confidence": 98,
-        "timestamp": "2026-05-26T05:05:00",
+        "timestamp": "2026-06-28T05:05:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000242.jpg",
@@ -7566,7 +7566,7 @@ const mockCases = [
         "plate": "PDK-1539",
         "location": "台中市豐原區精誠路",
         "confidence": 81,
-        "timestamp": "2026-05-26T09:48:00",
+        "timestamp": "2026-06-28T09:48:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000146.jpg",
@@ -7601,7 +7601,7 @@ const mockCases = [
         "plate": "XFP-7023",
         "location": "台中市西區中清路",
         "confidence": 83,
-        "timestamp": "2026-05-28T06:17:00",
+        "timestamp": "2026-06-25T06:17:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
@@ -7636,7 +7636,7 @@ const mockCases = [
         "plate": "YIH-8765",
         "location": "台中市太平區黎明路",
         "confidence": 91,
-        "timestamp": "2026-05-28T04:55:00",
+        "timestamp": "2026-06-24T04:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000422.jpg",
@@ -7671,7 +7671,7 @@ const mockCases = [
         "plate": "ACY-4659",
         "location": "台中市北區台灣大道二段",
         "confidence": 93,
-        "timestamp": "2026-05-27T03:21:00",
+        "timestamp": "2026-06-30T03:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000131.jpg",
@@ -7706,7 +7706,7 @@ const mockCases = [
         "plate": "ZQL-2515",
         "location": "台中市南區崇德路三段",
         "confidence": 81,
-        "timestamp": "2026-05-31T23:57:00",
+        "timestamp": "2026-06-28T23:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg",
@@ -7741,7 +7741,7 @@ const mockCases = [
         "plate": "HZU-5458",
         "location": "台中市豐原區黎明路",
         "confidence": 95,
-        "timestamp": "2026-05-28T04:08:00",
+        "timestamp": "2026-06-28T04:08:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000500.jpg",
@@ -7776,7 +7776,7 @@ const mockCases = [
         "plate": "EBI-4130",
         "location": "台中市西屯區五權西路",
         "confidence": 78,
-        "timestamp": "2026-05-26T10:11:00",
+        "timestamp": "2026-06-27T10:11:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000431.jpg",
@@ -7811,7 +7811,7 @@ const mockCases = [
         "plate": "NML-3662",
         "location": "台中市中區復興路",
         "confidence": 83,
-        "timestamp": "2026-05-27T21:39:00",
+        "timestamp": "2026-06-30T21:39:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000186.jpg",
@@ -7846,7 +7846,7 @@ const mockCases = [
         "plate": "VJY-3875",
         "location": "台中市西區環中路",
         "confidence": 87,
-        "timestamp": "2026-05-28T06:46:00",
+        "timestamp": "2026-06-29T06:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000163.jpg",
@@ -7881,7 +7881,7 @@ const mockCases = [
         "plate": "TAF-4447",
         "location": "台中市北屯區復興路",
         "confidence": 85,
-        "timestamp": "2026-05-31T00:52:00",
+        "timestamp": "2026-06-24T00:52:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg",
@@ -7916,7 +7916,7 @@ const mockCases = [
         "plate": "AKM-6770",
         "location": "台中市南屯區崇德路三段",
         "confidence": 85,
-        "timestamp": "2026-05-28T09:40:00",
+        "timestamp": "2026-06-23T09:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000376.jpg",
@@ -7951,7 +7951,7 @@ const mockCases = [
         "plate": "KOT-7553",
         "location": "台中市西區台灣大道二段",
         "confidence": 89,
-        "timestamp": "2026-05-26T18:28:00",
+        "timestamp": "2026-06-25T18:28:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg",
@@ -7986,7 +7986,7 @@ const mockCases = [
         "plate": "FFG-3626",
         "location": "台中市北屯區精誠路",
         "confidence": 75,
-        "timestamp": "2026-05-30T00:05:00",
+        "timestamp": "2026-06-23T00:05:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000321.jpg",
@@ -8021,7 +8021,7 @@ const mockCases = [
         "plate": "YRM-4415",
         "location": "台中市北屯區崇德路三段",
         "confidence": 92,
-        "timestamp": "2026-05-28T00:15:00",
+        "timestamp": "2026-06-27T00:15:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000313.jpg",
@@ -8056,7 +8056,7 @@ const mockCases = [
         "plate": "SIA-8179",
         "location": "台中市南屯區公益路",
         "confidence": 80,
-        "timestamp": "2026-05-26T01:10:00",
+        "timestamp": "2026-06-29T01:10:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000316.jpg",
@@ -8091,7 +8091,7 @@ const mockCases = [
         "plate": "UZG-7692",
         "location": "台中市南區環中路",
         "confidence": 82,
-        "timestamp": "2026-05-27T22:29:00",
+        "timestamp": "2026-06-28T22:29:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000458.jpg",
@@ -8126,7 +8126,7 @@ const mockCases = [
         "plate": "HUI-2783",
         "location": "台中市西屯區文心路四段",
         "confidence": 95,
-        "timestamp": "2026-05-31T02:28:00",
+        "timestamp": "2026-06-23T02:28:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000410.jpg",
@@ -8161,7 +8161,7 @@ const mockCases = [
         "plate": "RGK-1456",
         "location": "台中市西屯區中清路",
         "confidence": 95,
-        "timestamp": "2026-05-28T10:53:00",
+        "timestamp": "2026-06-23T10:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000225.jpg",
@@ -8196,7 +8196,7 @@ const mockCases = [
         "plate": "JDY-9712",
         "location": "台中市西屯區復興路",
         "confidence": 77,
-        "timestamp": "2026-05-25T01:04:00",
+        "timestamp": "2026-06-23T01:04:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000315.jpg",
@@ -8231,7 +8231,7 @@ const mockCases = [
         "plate": "WFG-5276",
         "location": "台中市西屯區復興路",
         "confidence": 98,
-        "timestamp": "2026-05-29T02:40:00",
+        "timestamp": "2026-06-28T02:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000230.jpg",
@@ -8266,7 +8266,7 @@ const mockCases = [
         "plate": "XYZ-1727",
         "location": "台中市北區文心路四段",
         "confidence": 86,
-        "timestamp": "2026-05-26T12:52:00",
+        "timestamp": "2026-06-29T12:52:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000383.jpg",
@@ -8301,7 +8301,7 @@ const mockCases = [
         "plate": "IGO-3084",
         "location": "台中市西區台灣大道二段",
         "confidence": 92,
-        "timestamp": "2026-05-27T14:59:00",
+        "timestamp": "2026-06-23T14:59:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000030.jpg",
@@ -8336,7 +8336,7 @@ const mockCases = [
         "plate": "VME-7528",
         "location": "台中市北屯區復興路",
         "confidence": 89,
-        "timestamp": "2026-05-26T05:52:00",
+        "timestamp": "2026-06-23T05:52:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000219.jpg",
@@ -8371,7 +8371,7 @@ const mockCases = [
         "plate": "SID-4221",
         "location": "台中市南區崇德路三段",
         "confidence": 89,
-        "timestamp": "2026-05-31T23:21:00",
+        "timestamp": "2026-06-24T23:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000460.jpg",
@@ -8406,7 +8406,7 @@ const mockCases = [
         "plate": "OVZ-5409",
         "location": "台中市西屯區崇德路三段",
         "confidence": 86,
-        "timestamp": "2026-05-30T18:14:00",
+        "timestamp": "2026-06-30T18:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000462.jpg",
@@ -8441,7 +8441,7 @@ const mockCases = [
         "plate": "RGO-2429",
         "location": "台中市南區中清路",
         "confidence": 89,
-        "timestamp": "2026-05-30T09:28:00",
+        "timestamp": "2026-06-26T09:28:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000042.jpg",
@@ -8476,7 +8476,7 @@ const mockCases = [
         "plate": "WYO-4151",
         "location": "台中市西區黎明路",
         "confidence": 96,
-        "timestamp": "2026-05-26T01:55:00",
+        "timestamp": "2026-06-25T01:55:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000440.jpg",
@@ -8511,7 +8511,7 @@ const mockCases = [
         "plate": "EVV-9114",
         "location": "台中市西區台灣大道二段",
         "confidence": 82,
-        "timestamp": "2026-05-28T07:35:00",
+        "timestamp": "2026-06-28T07:35:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000045.jpg",
@@ -8546,7 +8546,7 @@ const mockCases = [
         "plate": "XKC-3750",
         "location": "台中市西屯區精誠路",
         "confidence": 82,
-        "timestamp": "2026-05-30T04:20:00",
+        "timestamp": "2026-06-27T04:20:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000393.jpg",
@@ -8581,7 +8581,7 @@ const mockCases = [
         "plate": "KHX-8522",
         "location": "台中市中區文心路四段",
         "confidence": 84,
-        "timestamp": "2026-05-26T01:43:00",
+        "timestamp": "2026-06-28T01:43:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000298.jpg",
@@ -8616,7 +8616,7 @@ const mockCases = [
         "plate": "XOD-9115",
         "location": "台中市北屯區復興路",
         "confidence": 98,
-        "timestamp": "2026-05-30T09:57:00",
+        "timestamp": "2026-06-24T09:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000215.jpg",
@@ -8651,7 +8651,7 @@ const mockCases = [
         "plate": "XKC-6738",
         "location": "台中市中區崇德路三段",
         "confidence": 99,
-        "timestamp": "2026-05-31T21:13:00",
+        "timestamp": "2026-06-29T21:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000309.jpg",
@@ -8686,7 +8686,7 @@ const mockCases = [
         "plate": "FGO-0752",
         "location": "台中市中區環中路",
         "confidence": 96,
-        "timestamp": "2026-05-30T07:38:00",
+        "timestamp": "2026-06-25T07:38:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000473.jpg",
@@ -8721,7 +8721,7 @@ const mockCases = [
         "plate": "RKP-4585",
         "location": "台中市北屯區台灣大道二段",
         "confidence": 78,
-        "timestamp": "2026-05-28T05:12:00",
+        "timestamp": "2026-06-23T05:12:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000461.jpg",
@@ -8756,7 +8756,7 @@ const mockCases = [
         "plate": "BBE-2277",
         "location": "台中市豐原區文心路四段",
         "confidence": 92,
-        "timestamp": "2026-05-29T11:44:00",
+        "timestamp": "2026-06-24T11:44:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000494.jpg",
@@ -8791,7 +8791,7 @@ const mockCases = [
         "plate": "VIE-7449",
         "location": "台中市大里區中清路",
         "confidence": 94,
-        "timestamp": "2026-05-30T04:48:00",
+        "timestamp": "2026-06-29T04:48:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000403.jpg",
@@ -8826,7 +8826,7 @@ const mockCases = [
         "plate": "GHC-1625",
         "location": "台中市豐原區黎明路",
         "confidence": 78,
-        "timestamp": "2026-05-29T08:35:00",
+        "timestamp": "2026-06-29T08:35:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000420.jpg",
@@ -8861,7 +8861,7 @@ const mockCases = [
         "plate": "QRD-1846",
         "location": "台中市中區台灣大道二段",
         "confidence": 87,
-        "timestamp": "2026-05-27T09:09:00",
+        "timestamp": "2026-06-30T09:09:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000137.jpg",
@@ -8896,7 +8896,7 @@ const mockCases = [
         "plate": "RKC-2833",
         "location": "台中市南屯區黎明路",
         "confidence": 83,
-        "timestamp": "2026-05-29T06:59:00",
+        "timestamp": "2026-06-28T06:59:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000063.jpg",
@@ -8931,7 +8931,7 @@ const mockCases = [
         "plate": "ECM-1159",
         "location": "台中市西區文心路四段",
         "confidence": 80,
-        "timestamp": "2026-05-30T21:35:00",
+        "timestamp": "2026-06-23T21:35:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000425.jpg",
@@ -8966,7 +8966,7 @@ const mockCases = [
         "plate": "GFL-9852",
         "location": "台中市中區復興路",
         "confidence": 76,
-        "timestamp": "2026-05-25T22:03:00",
+        "timestamp": "2026-06-26T22:03:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000371.jpg",
@@ -9001,7 +9001,7 @@ const mockCases = [
         "plate": "FCR-1459",
         "location": "台中市西屯區台灣大道二段",
         "confidence": 94,
-        "timestamp": "2026-05-26T23:01:00",
+        "timestamp": "2026-06-23T23:01:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000348.jpg",
@@ -9036,7 +9036,7 @@ const mockCases = [
         "plate": "DLE-6721",
         "location": "台中市西區台灣大道二段",
         "confidence": 76,
-        "timestamp": "2026-05-27T02:43:00",
+        "timestamp": "2026-06-28T02:43:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000310.jpg",
@@ -9071,7 +9071,7 @@ const mockCases = [
         "plate": "UUK-6998",
         "location": "台中市南區台灣大道二段",
         "confidence": 83,
-        "timestamp": "2026-05-30T07:42:00",
+        "timestamp": "2026-06-30T07:42:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000160.jpg",
@@ -9106,7 +9106,7 @@ const mockCases = [
         "plate": "DBU-3156",
         "location": "台中市南區台灣大道二段",
         "confidence": 98,
-        "timestamp": "2026-05-31T23:57:00",
+        "timestamp": "2026-06-28T23:57:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000152.jpg",
@@ -9141,7 +9141,7 @@ const mockCases = [
         "plate": "OZY-7811",
         "location": "台中市北區台灣大道二段",
         "confidence": 97,
-        "timestamp": "2026-05-30T04:00:00",
+        "timestamp": "2026-06-25T04:00:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000040.jpg",
@@ -9176,7 +9176,7 @@ const mockCases = [
         "plate": "VZE-7071",
         "location": "台中市北屯區台灣大道二段",
         "confidence": 86,
-        "timestamp": "2026-05-31T00:37:00",
+        "timestamp": "2026-06-24T00:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000038.jpg",
@@ -9211,7 +9211,7 @@ const mockCases = [
         "plate": "FXE-9457",
         "location": "台中市北屯區五權西路",
         "confidence": 79,
-        "timestamp": "2026-05-30T20:19:00",
+        "timestamp": "2026-06-27T20:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000005.jpg",
@@ -9246,7 +9246,7 @@ const mockCases = [
         "plate": "WTI-5830",
         "location": "台中市太平區文心路四段",
         "confidence": 85,
-        "timestamp": "2026-05-27T08:19:00",
+        "timestamp": "2026-06-24T08:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000433.jpg",
@@ -9281,7 +9281,7 @@ const mockCases = [
         "plate": "UFJ-8129",
         "location": "台中市大里區環中路",
         "confidence": 75,
-        "timestamp": "2026-05-29T12:05:00",
+        "timestamp": "2026-06-29T12:05:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000477.jpg",
@@ -9316,7 +9316,7 @@ const mockCases = [
         "plate": "OSX-9337",
         "location": "台中市中區公益路",
         "confidence": 85,
-        "timestamp": "2026-05-25T14:14:00",
+        "timestamp": "2026-06-29T14:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000475.jpg",
@@ -9351,7 +9351,7 @@ const mockCases = [
         "plate": "LLA-8116",
         "location": "台中市西區崇德路三段",
         "confidence": 88,
-        "timestamp": "2026-05-31T06:46:00",
+        "timestamp": "2026-06-27T06:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000457.jpg",
@@ -9386,7 +9386,7 @@ const mockCases = [
         "plate": "ZIL-6208",
         "location": "台中市大里區台灣大道二段",
         "confidence": 86,
-        "timestamp": "2026-05-27T00:37:00",
+        "timestamp": "2026-06-23T00:37:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000238.jpg",
@@ -9421,7 +9421,7 @@ const mockCases = [
         "plate": "SUL-3508",
         "location": "台中市北區中清路",
         "confidence": 83,
-        "timestamp": "2026-05-25T13:16:00",
+        "timestamp": "2026-06-23T13:16:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000288.jpg",
@@ -9456,7 +9456,7 @@ const mockCases = [
         "plate": "XZR-2564",
         "location": "台中市大里區中清路",
         "confidence": 76,
-        "timestamp": "2026-05-27T04:33:00",
+        "timestamp": "2026-06-30T04:33:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000471.jpg",
@@ -9491,7 +9491,7 @@ const mockCases = [
         "plate": "JDT-6133",
         "location": "台中市中區五權西路",
         "confidence": 93,
-        "timestamp": "2026-05-27T10:14:00",
+        "timestamp": "2026-06-28T10:14:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000210.jpg",
@@ -9526,7 +9526,7 @@ const mockCases = [
         "plate": "HES-2964",
         "location": "台中市中區中清路",
         "confidence": 94,
-        "timestamp": "2026-05-30T07:26:00",
+        "timestamp": "2026-06-26T07:26:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000056.jpg",
@@ -9561,7 +9561,7 @@ const mockCases = [
         "plate": "FVZ-7177",
         "location": "台中市中區中清路",
         "confidence": 98,
-        "timestamp": "2026-05-27T14:54:00",
+        "timestamp": "2026-06-27T14:54:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000047.jpg",
@@ -9596,7 +9596,7 @@ const mockCases = [
         "plate": "SWM-4849",
         "location": "台中市西屯區中清路",
         "confidence": 81,
-        "timestamp": "2026-05-26T16:21:00",
+        "timestamp": "2026-06-28T16:21:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000462.jpg",
@@ -9631,7 +9631,7 @@ const mockCases = [
         "plate": "VPB-2199",
         "location": "台中市西區黎明路",
         "confidence": 85,
-        "timestamp": "2026-05-25T01:50:00",
+        "timestamp": "2026-06-27T01:50:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000064.jpg",
@@ -9666,7 +9666,7 @@ const mockCases = [
         "plate": "JKU-7701",
         "location": "台中市南區崇德路三段",
         "confidence": 90,
-        "timestamp": "2026-05-28T05:51:00",
+        "timestamp": "2026-06-26T05:51:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000480.jpg",
@@ -9701,7 +9701,7 @@ const mockCases = [
         "plate": "EPQ-1808",
         "location": "台中市北區文心路四段",
         "confidence": 82,
-        "timestamp": "2026-05-30T15:04:00",
+        "timestamp": "2026-06-25T15:04:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000227.jpg",
@@ -9736,7 +9736,7 @@ const mockCases = [
         "plate": "IWM-7881",
         "location": "台中市北區黎明路",
         "confidence": 78,
-        "timestamp": "2026-05-27T21:23:00",
+        "timestamp": "2026-06-27T21:23:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000417.jpg",
@@ -9771,7 +9771,7 @@ const mockCases = [
         "plate": "MLS-8373",
         "location": "台中市西屯區中清路",
         "confidence": 85,
-        "timestamp": "2026-05-25T20:53:00",
+        "timestamp": "2026-06-28T20:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000079.jpg",
@@ -9806,7 +9806,7 @@ const mockCases = [
         "plate": "CAG-7367",
         "location": "台中市南屯區台灣大道二段",
         "confidence": 99,
-        "timestamp": "2026-05-28T05:07:00",
+        "timestamp": "2026-06-23T05:07:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000124.jpg",
@@ -9841,7 +9841,7 @@ const mockCases = [
         "plate": "HTY-1335",
         "location": "台中市西屯區精誠路",
         "confidence": 89,
-        "timestamp": "2026-05-30T15:10:00",
+        "timestamp": "2026-06-29T15:10:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000218.jpg",
@@ -9876,7 +9876,7 @@ const mockCases = [
         "plate": "SYN-6890",
         "location": "台中市北區精誠路",
         "confidence": 95,
-        "timestamp": "2026-05-27T18:00:00",
+        "timestamp": "2026-06-30T18:00:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000464.jpg",
@@ -9911,7 +9911,7 @@ const mockCases = [
         "plate": "SHJ-1671",
         "location": "台中市西區公益路",
         "confidence": 92,
-        "timestamp": "2026-05-27T11:19:00",
+        "timestamp": "2026-06-24T11:19:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000299.jpg",
@@ -9946,7 +9946,7 @@ const mockCases = [
         "plate": "XWR-9190",
         "location": "台中市北區復興路",
         "confidence": 91,
-        "timestamp": "2026-05-30T09:53:00",
+        "timestamp": "2026-06-28T09:53:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000288.jpg",
@@ -9981,7 +9981,7 @@ const mockCases = [
         "plate": "ZGB-7018",
         "location": "台中市北區環中路",
         "confidence": 91,
-        "timestamp": "2026-05-27T20:47:00",
+        "timestamp": "2026-06-29T20:47:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000244.jpg",
@@ -10016,7 +10016,7 @@ const mockCases = [
         "plate": "BYJ-8058",
         "location": "台中市北區台灣大道二段",
         "confidence": 80,
-        "timestamp": "2026-05-26T02:45:00",
+        "timestamp": "2026-06-25T02:45:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000176.jpg",
@@ -10051,7 +10051,7 @@ const mockCases = [
         "plate": "AUD-3379",
         "location": "台中市南屯區黎明路",
         "confidence": 88,
-        "timestamp": "2026-05-29T09:44:00",
+        "timestamp": "2026-06-28T09:44:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000382.jpg",
@@ -10086,7 +10086,7 @@ const mockCases = [
         "plate": "CLG-9654",
         "location": "台中市南區崇德路三段",
         "confidence": 76,
-        "timestamp": "2026-05-28T03:09:00",
+        "timestamp": "2026-06-25T03:09:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000433.jpg",
@@ -10121,7 +10121,7 @@ const mockCases = [
         "plate": "EKP-9323",
         "location": "台中市西屯區公益路",
         "confidence": 79,
-        "timestamp": "2026-05-31T04:40:00",
+        "timestamp": "2026-06-30T04:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000192.jpg",
@@ -10156,7 +10156,7 @@ const mockCases = [
         "plate": "VTB-4776",
         "location": "台中市南區崇德路三段",
         "confidence": 99,
-        "timestamp": "2026-05-31T07:13:00",
+        "timestamp": "2026-06-24T07:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000396.jpg",
@@ -10191,7 +10191,7 @@ const mockCases = [
         "plate": "HSF-5429",
         "location": "台中市大里區五權西路",
         "confidence": 90,
-        "timestamp": "2026-05-31T18:13:00",
+        "timestamp": "2026-06-28T18:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000153.jpg",
@@ -10226,7 +10226,7 @@ const mockCases = [
         "plate": "DDY-1010",
         "location": "台中市北屯區台灣大道二段",
         "confidence": 78,
-        "timestamp": "2026-05-27T14:56:00",
+        "timestamp": "2026-06-28T14:56:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000496.jpg",
@@ -10261,7 +10261,7 @@ const mockCases = [
         "plate": "VLE-7236",
         "location": "台中市南區黎明路",
         "confidence": 87,
-        "timestamp": "2026-05-28T17:56:00",
+        "timestamp": "2026-06-29T17:56:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000220.jpg",
@@ -10296,7 +10296,7 @@ const mockCases = [
         "plate": "HOU-5490",
         "location": "台中市南區崇德路三段",
         "confidence": 97,
-        "timestamp": "2026-05-26T04:13:00",
+        "timestamp": "2026-06-28T04:13:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000147.jpg",
@@ -10331,7 +10331,7 @@ const mockCases = [
         "plate": "NER-7392",
         "location": "台中市中區五權西路",
         "confidence": 93,
-        "timestamp": "2026-05-28T01:49:00",
+        "timestamp": "2026-06-25T01:49:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000328.jpg",
@@ -10366,7 +10366,7 @@ const mockCases = [
         "plate": "MRO-6889",
         "location": "台中市西區文心路四段",
         "confidence": 97,
-        "timestamp": "2026-05-31T08:46:00",
+        "timestamp": "2026-06-24T08:46:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000008.jpg",
@@ -10401,7 +10401,7 @@ const mockCases = [
         "plate": "NGZ-4318",
         "location": "台中市大里區文心路四段",
         "confidence": 94,
-        "timestamp": "2026-05-31T00:40:00",
+        "timestamp": "2026-06-28T00:40:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000059.jpg",
@@ -10436,7 +10436,7 @@ const mockCases = [
         "plate": "RRJ-6596",
         "location": "台中市大里區五權西路",
         "confidence": 87,
-        "timestamp": "2026-05-27T14:07:00",
+        "timestamp": "2026-06-25T14:07:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000354.jpg",
@@ -10471,7 +10471,7 @@ const mockCases = [
         "plate": "PKA-1768",
         "location": "台中市西屯區黎明路",
         "confidence": 87,
-        "timestamp": "2026-05-28T00:02:00",
+        "timestamp": "2026-06-30T00:02:00",
         "images": [
             {
                 "src": "https://c01.twipcam.com/cam/snapshot/tpe-000135.jpg",
