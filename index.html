@@ -5,204 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 交通違規通報管理系統</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            400: '#5a82df',
+                            500: '#3662D8',
+                            600: '#3662D8',
+                            700: '#284eab',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="h-screen flex overflow-hidden">
+<body class="h-screen flex overflow-hidden bg-gray-50">
 
-<aside id="sidebar-panel" class="w-64 border-r border-gray-800 flex flex-col p-4 space-y-6 flex-shrink-0 bg-[#0d1117] transition-all duration-300">
-    <div class="flex flex-col space-y-3 p-2 border-b border-gray-800 pb-4">
-        <div id="sidebar-user-info" class="flex items-center space-x-3 transition-opacity duration-200 w-full relative">
-            <div onclick="window.location.href='admin.html';"
-                 title="點擊切換至：系統管理模組"
-                 class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/10 cursor-pointer hover:bg-blue-500 transition-colors group">
-                <i class="fas fa-user-shield text-white text-sm group-hover:scale-110 transition-transform"></i>
+<!-- 側邊欄 -->
+<aside id="sidebar-panel" class="w-64 border-r border-gray-200 flex flex-col p-4 space-y-6 flex-shrink-0 bg-gray-50 transition-all duration-300">
+    <div class="flex flex-col space-y-3 p-2 border-b border-gray-200 pb-4">
+        <!-- 李執法官、直角黑底圖示 -->
+        <div id="sidebar-user-info" class="flex items-center space-x-3 w-full relative">
+            <!-- 左側圖示 -->
+            <div class="w-11 h-11 bg-black flex items-center justify-center flex-shrink-0">
+                <i class="far fa-user text-white text-xl"></i>
             </div>
-
+            <!-- 右側文字 -->
             <div class="sidebar-text flex-1 min-w-0 pr-6">
-                <p class="text-sm font-bold whitespace-nowrap truncate">警員 某韋坪 #0123</p>
-                <p class="text-[10px] text-gray-500 whitespace-nowrap truncate">交通大隊 (審查人員)</p>
+                <p class="text-base font-bold whitespace-nowrap text-[#1a2332] tracking-wide">林警官</p>
+                <p class="text-xs text-gray-500 whitespace-nowrap mt-0.5">交通分隊一組</p>
             </div>
-
-            <button id="toggle-sidebar" onclick="app.toggleSidebar()"
-                    title="切換側邊欄狀態"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white p-1 rounded hover:bg-gray-800 transition flex-shrink-0 z-30">
+            <!-- 縮放按鈕 -->
+            <button id="toggle-sidebar" onclick="app.toggleSidebar()" class="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 p-1">
                 <i id="toggle-icon" class="fas fa-angle-left text-xs"></i>
             </button>
         </div>
     </div>
 
-    <nav class="flex-1 space-y-2">
-        <a href="#" id="nav-all" class="sidebar-active flex items-center justify-between p-3 rounded-lg text-blue-400" onclick="app.filterCases('all', this)">
-            <span class="flex items-center"><i class="fas fa-home w-5 text-center mr-3"></i><span class="sidebar-text">各地通報案件</span></span>
-            <span id="total-cases-count" class="sidebar-text bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">0</span>
-        </a>
+    <div class="flex-1 overflow-y-auto custom-scrollbar pr-2">
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 pl-2 flex items-center gap-2">
+            <i class="fas fa-check-shield"></i> 審查模式
+        </p>
+        <nav class="space-y-1 mb-6">
+            <a href="index.html" class="sidebar-active flex items-center p-3 font-medium shadow-sm" onclick="app.filterCases('all', this)">
+                <i class="fas fa-check-square w-5 text-center mr-3"></i><span class="sidebar-text">案件審核</span>
+            </a>
+            <a href="dashboard.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+                <i class="fas fa-users w-5 text-center mr-3"></i><span class="sidebar-text">審核人員統計</span>
+            </a>
+            <a href="history.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+                <i class="fas fa-history w-5 text-center mr-3"></i><span class="sidebar-text">歷史案件</span>
+            </a>
+        </nav>
 
-        <div id="sidebar-sub-menu" class="pl-8 space-y-1 text-sm text-gray-500 transition-all duration-200">
-            <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('high', this)">
-                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                確信違規 (<span id="high-confidence-count">0</span>)
-            </p>
-            <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('mid', this)">
-                <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
-                疑似違規 (<span id="mid-confidence-count">0</span>)
-            </p>
-            <p class="filter-item flex items-center hover:text-white cursor-pointer transition p-2 rounded-lg" onclick="app.filterCases('low', this)">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
-                邊界案例 (<span id="low-confidence-count">0</span>)
-            </p>
-        </div>
-
-        <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
-            <i class="fas fa-chart-line w-5 text-center mr-3"></i><span class="sidebar-text">數據儀表板</span>
-        </a>
-        <a href="history.html" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition text-gray-400 hover:text-white">
-            <i class="fas fa-file-alt w-5 text-center mr-3"></i><span class="sidebar-text">歷史案件</span>
-        </a>
-    </nav>
-
-    <div class="text-xs text-green-500 flex items-center p-2">
-        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse flex-shrink-0"></span>
-        <span class="sidebar-text">AI Server: Online</span>
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 pl-2 flex items-center gap-2">
+            觀測模式
+        </p>
+        <nav class="space-y-1">
+            <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+                <i class="fas fa-border-all w-5 text-center mr-3"></i><span class="sidebar-text">數據監測中心</span>
+            </a>
+            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+                <i class="fas fa-chart-line w-5 text-center mr-3"></i><span class="sidebar-text">趨勢預測分析</span>
+            </a>
+            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+                <i class="fas fa-clipboard-list w-5 text-center mr-3"></i><span class="sidebar-text">監測紀錄</span>
+            </a>
+        </nav>
     </div>
 </aside>
 
-<section class="w-[380px] border-r border-gray-800 flex flex-col flex-shrink-0 bg-black/10">
-    <div class="p-4 border-b border-gray-800">
-        <div class="flex items-stretch gap-2">
-            <div class="relative flex-1">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                <input type="text" id="keyword-search" aria-label="搜尋案號或車牌" oninput="app.applyFilters()" class="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-blue-500" placeholder="搜尋案號、車牌...">
-            </div>
-            <div class="relative">
-                <button onclick="app.toggleFilterPanel()" class="h-full bg-gray-800 hover:bg-gray-700 text-gray-300 px-3.5 rounded-lg border border-gray-700 transition flex items-center justify-center">
-                    <i class="fas fa-sliders text-sm"></i>
-                </button>
+<!-- 中間列表區塊 -->
+<section class="w-[340px] border-r border-gray-200 flex flex-col flex-shrink-0 bg-gray-50">
+    <div class="p-6 pb-2">
+        <!-- 搜尋列 -->
+        <div class="relative mb-6">
+            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input type="text" id="keyword-search" oninput="app.applyFilters()" class="w-full bg-gray-200 border-transparent py-3 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition text-gray-700 placeholder-gray-400 font-medium" placeholder="搜尋案件編號或路段...">
+        </div>
 
-                <div id="filter-panel" class="hidden absolute right-0 mt-2 w-72 bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl z-50 p-4 space-y-4">
-                    <div>
-                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">違規樣態</p>
-                        <div class="grid grid-cols-1 gap-2 text-xs">
-                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-                                <input type="checkbox" value="超速" onchange="app.applyFilters()" class="filter-type rounded border-gray-700 bg-gray-900 text-blue-600">
-                                <span>超速行駛</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-                                <input type="checkbox" value="闖紅燈" onchange="app.applyFilters()" class="filter-type rounded border-gray-700 bg-gray-900 text-blue-600">
-                                <span>闖紅燈</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-                                <input type="checkbox" value="違規停車" onchange="app.applyFilters()" class="filter-type rounded border-gray-700 bg-gray-900 text-blue-600">
-                                <span>違規停車</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="border-t border-gray-800 pt-3">
-                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">路段篩選</p>
-                        <div class="grid grid-cols-1 gap-2 text-xs">
-                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-                                <input type="checkbox" value="環中路" onchange="app.applyFilters()" class="filter-location rounded border-gray-700 bg-gray-900 text-blue-600">
-                                <span>環中路</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-                                <input type="checkbox" value="黎明路" onchange="app.applyFilters()" class="filter-location rounded border-gray-700 bg-gray-900 text-blue-600">
-                                <span>黎明路</span>
-                            </label>
-                        </div>
-                    </div>
-                    <button onclick="app.resetFilters()" class="w-full py-1.5 bg-gray-800 hover:bg-red-900/30 text-red-400 text-[10px] rounded transition font-bold uppercase">重設篩選</button>
-                </div>
+        <!-- 按鈕切換篩選器 -->
+        <div class="mb-4">
+            <div class="flex justify-between items-center text-xs text-gray-400 font-bold uppercase tracking-widest mb-3">
+                <span>分級篩選</span>
+                <i class="fas fa-sliders-h cursor-pointer hover:text-gray-600" onclick="app.toggleFilterPanel()"></i>
+            </div>
+
+            <!-- 按鈕切換篩選器 -->
+            <div class="flex bg-gray-200 p-1 text-center font-bold text-xs shadow-inner">
+                <button class="filter-btn flex-1 py-2 text-red-600 bg-red-50 border border-red-100 shadow-sm transition-all" onclick="app.filterCases('high', this)">
+                    <div class="text-[10px] mb-0.5 opacity-80">確信違規</div>
+                    <div class="text-xl font-extrabold" id="high-confidence-count">0</div>
+                </button>
+                <button class="filter-btn flex-1 py-2 text-gray-400 border border-transparent transition-all hover:text-gray-600" onclick="app.filterCases('mid', this)">
+                    <div class="text-[10px] mb-0.5 opacity-80">疑似違規</div>
+                    <div class="text-xl font-extrabold" id="mid-confidence-count">0</div>
+                </button>
+                <button class="filter-btn flex-1 py-2 text-gray-400 border border-transparent transition-all hover:text-gray-600" onclick="app.filterCases('low', this)">
+                    <div class="text-[10px] mb-0.5 opacity-80">邊界案例</div>
+                    <div class="text-xl font-extrabold" id="low-confidence-count">0</div>
+                </button>
             </div>
         </div>
     </div>
+
     <div id="category-notch" class="transition-all duration-300"></div>
-    <div id="case-list" class="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
+    <div id="case-list" class="flex-1 overflow-y-auto px-6 py-2 space-y-4 custom-scrollbar pb-6">
+        <!-- JS動態生成案件卡片 -->
     </div>
 </section>
 
-<section class="flex-1 flex flex-col min-w-[600px] bg-[#0d1117] relative">
-
-    <div id="detail-scroll-area" class="flex-1 overflow-y-auto custom-scrollbar p-8">
-        <header class="mb-8" id="detail-header">
-        </header>
-
-        <div class="space-y-6">
-            <div id="evidence-grid">
-            </div>
-
-            <div id="analysis-container">
-                <ul id="ai-report-list" class="hidden"></ul>
-            </div>
+<!-- 右側詳細視圖 -->
+<section class="flex-1 flex flex-col w-full bg-white relative overflow-hidden">
+    <div id="detail-scroll-area" class="flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10 bg-white w-full">
+        <header class="mb-8" id="detail-header"></header>
+        <div class="space-y-6 w-full max-w-full mx-auto">
+            <div id="evidence-grid" class="w-full"></div>
+            <div id="analysis-container" class="w-full"></div>
         </div>
     </div>
 
-    <footer class="shrink-0 p-6 border-t border-gray-800 flex justify-between items-center bg-[#0d1117] z-10 shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
-        <button
-                onclick="app.cancelCase()"
-                class="group flex items-center text-red-400 hover:bg-red-900/30 px-6 py-2 rounded-lg font-medium transition"
-        >
+    <footer class="shrink-0 p-5 px-10 border-t border-gray-200 flex justify-between items-center bg-white z-10">
+        <!-- 修改此處：將撤銷案件按鈕改為灰色系[cite: 7] -->
+        <button onclick="app.cancelCase()" class="group flex items-center text-gray-500 hover:text-gray-800 hover:bg-gray-100 px-6 py-2.5 font-bold transition border border-transparent hover:border-gray-300">
             <span>撤銷案件</span>
-            <span class="ml-2 bg-red-500/20 text-[10px] px-1.5 py-0.5 rounded border border-red-500/30 group-hover:bg-red-500/40 transition">Delete</span>
+            <span class="ml-2 bg-gray-100 text-[10px] px-2 py-0.5 border border-gray-200 text-gray-500 group-hover:bg-gray-200 group-hover:border-gray-300 group-hover:text-gray-700 transition">Del</span>
         </button>
 
-        <button onclick="app.openTicket()" class="relative flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg shadow-blue-900/20 group">
+        <button onclick="app.openTicket()" class="relative flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 font-bold transition shadow-lg shadow-blue-600/20 group">
             <span>案件成立</span>
-            <span class="ml-2 bg-blue-500 text-[10px] px-1.5 py-0.5 rounded border border-blue-400 group-hover:bg-white group-hover:text-blue-600 transition">Enter</span>
+            <span class="ml-3 bg-white/20 text-[10px] px-2 py-0.5 border border-white/30 transition">Enter</span>
         </button>
     </footer>
 </section>
 
-<div id="lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex items-center justify-center p-4 cursor-pointer is-modal">
-    <img id="lightbox-img" src="" alt="違規影像燈箱檢視" class="max-w-full max-h-full rounded shadow-2xl transition-transform duration-300">
+<!-- 撤銷燈箱與 Modal -->
+<div id="lightbox" class="fixed inset-0 bg-black/90 z-[9999] hidden flex items-center justify-center p-4 cursor-pointer is-modal">
+    <img id="lightbox-img" src="" alt="違規影像燈箱檢視" class="max-w-full max-h-full shadow-2xl transition-transform duration-300">
     <div class="absolute top-5 right-8 text-white/50 text-2xl hover:text-white"><i class="fas fa-times"></i></div>
 </div>
 
-<div id="cancel-modal" class="fixed inset-0 bg-black/80 z-[9999] hidden flex items-center justify-center p-4 transition-opacity duration-300 is-modal">
-    <div class="bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-transform scale-95 md:scale-100">
-        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
-            <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
-            確認撤銷案件
+<div id="cancel-modal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4 transition-opacity duration-300 is-modal">
+    <div class="bg-white border border-gray-200 shadow-2xl w-full max-w-md p-6 transform transition-transform scale-95 md:scale-100">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+            <i class="fas fa-exclamation-triangle text-gray-500 mr-2"></i>確認撤銷案件
         </h3>
-
         <div class="space-y-3 mb-6">
-            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+            <label class="flex items-center justify-between cursor-pointer p-3 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition group">
                 <div class="flex items-center space-x-3">
-                    <input type="radio" name="cancel-reason" value="車牌模糊無法辨識" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900">
-                    <span class="text-gray-300 group-hover:text-white transition">車牌模糊無法辨識</span>
+                    <input type="radio" name="cancel-reason" value="車牌模糊無法辨識" class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-600">
+                    <span class="text-gray-700 font-medium">車牌模糊無法辨識</span>
                 </div>
-                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm">1</kbd>
+                <kbd class="px-2 py-1 text-[10px] font-mono font-bold text-gray-400 bg-gray-100 border border-gray-200">1</kbd>
             </label>
-
-            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+            <label class="flex items-center justify-between cursor-pointer p-3 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition group">
                 <div class="flex items-center space-x-3">
-                    <input type="radio" name="cancel-reason" value="未達明顯違規標準" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900">
-                    <span class="text-gray-300 group-hover:text-white transition">未達明顯違規標準</span>
+                    <input type="radio" name="cancel-reason" value="未達明顯違規標準" class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-600">
+                    <span class="text-gray-700 font-medium">未達明顯違規標準</span>
                 </div>
-                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm">2</kbd>
+                <kbd class="px-2 py-1 text-[10px] font-mono font-bold text-gray-400 bg-gray-100 border border-gray-200">2</kbd>
             </label>
-
-            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+            <label class="flex items-center justify-between cursor-pointer p-3 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition group">
                 <div class="flex items-center space-x-3">
-                    <input type="radio" name="cancel-reason" value="系統誤判(非目標車輛)" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900">
-                    <span class="text-gray-300 group-hover:text-white transition">系統誤判 (非目標車輛)</span>
+                    <input type="radio" name="cancel-reason" value="系統誤判(非目標車輛)" class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-600">
+                    <span class="text-gray-700 font-medium">系統誤判 (非目標車輛)</span>
                 </div>
-                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm">3</kbd>
+                <kbd class="px-2 py-1 text-[10px] font-mono font-bold text-gray-400 bg-gray-100 border border-gray-200">3</kbd>
             </label>
-
-            <label class="flex items-center justify-between cursor-pointer p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition group">
+            <label class="flex items-center justify-between cursor-pointer p-3 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition group">
                 <div class="flex items-center space-x-3 w-full">
-                    <input type="radio" name="cancel-reason" value="other" class="form-radio h-4 w-4 text-red-600 bg-gray-900 border-gray-700 focus:ring-red-600 focus:ring-offset-gray-900" onchange="document.getElementById('other-reason-input').focus()">
-                    <span class="text-gray-300 group-hover:text-white transition whitespace-nowrap">其他原因</span>
-                    <input type="text" id="other-reason-input" class="flex-1 bg-gray-900 border border-gray-700 rounded-md py-1.5 px-3 text-sm focus:outline-none focus:border-red-500 text-white transition-colors" placeholder="請輸入具體撤銷原因..." onclick="document.querySelector('input[value=\'other\']').checked = true">
+                    <input type="radio" name="cancel-reason" value="other" class="form-radio h-4 w-4 text-blue-600 focus:ring-blue-600" onchange="document.getElementById('other-reason-input').focus()">
+                    <span class="text-gray-700 font-medium whitespace-nowrap">其他</span>
+                    <input type="text" id="other-reason-input" class="flex-1 bg-gray-100 border-transparent py-1.5 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-colors" placeholder="輸入具體原因..." onclick="document.querySelector('input[value=\'other\']').checked = true">
                 </div>
-                <kbd class="px-2 py-1 text-xs font-mono font-semibold text-gray-500 bg-[#0d1117] border border-gray-700 rounded shadow-sm ml-3">4</kbd>
+                <kbd class="px-2 py-1 text-[10px] font-mono font-bold text-gray-400 bg-gray-100 border border-gray-200 ml-3">4</kbd>
             </label>
         </div>
-
-        <div class="flex justify-end space-x-3 pt-2 border-t border-gray-800">
-            <button onclick="app.closeCancelModal()" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition font-medium">取消</button>
-            <button onclick="app.confirmCancelCase()" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition shadow-lg shadow-red-900/20 font-medium flex items-center">
-                <i class="fas fa-trash-alt mr-2"></i>確認撤銷
+        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-100">
+            <button onclick="app.closeCancelModal()" class="px-4 py-2 text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition font-bold">取消</button>
+            <button onclick="app.confirmCancelCase()" class="px-6 py-2 bg-gray-700 hover:bg-gray-800 text-white transition shadow-lg shadow-gray-700/20 font-bold flex items-center">
+                確認撤銷
             </button>
         </div>
     </div>

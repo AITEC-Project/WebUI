@@ -1,304 +1,424 @@
-/**
- * 審核人員專屬儀表板 - 核心邏輯 (dashboard.js)
- */
-
 const DashboardApp = {
     charts: {
-        trend: null,
-        result: null,
-        levelTrend: null // 新增分級折線圖實例
+        goal: null,
+        trend: null
     },
 
-    // 側邊欄收合邏輯同步
+    // 指定當前登入或查看的警員名稱
+    currentAuditor: '葉警員',
+
+    // 每日目標件數
+    dailyTarget: 450,
+
     toggleSidebar() {
         const sidebar = document.getElementById('sidebar-panel');
+        if (!sidebar) return;
+
+        const isCollapsed = sidebar.classList.contains('w-20');
         const toggleIcon = document.getElementById('toggle-icon');
         const userInfo = document.getElementById('sidebar-user-info');
         const texts = document.querySelectorAll('.sidebar-text');
         const navItems = document.querySelectorAll('nav > a');
 
-        if (!sidebar) return;
-
-        const isCollapsed = sidebar.classList.contains('w-20');
-
         if (!isCollapsed) {
             sidebar.classList.remove('w-64', 'p-4');
             sidebar.classList.add('w-20', 'p-2');
-            if (userInfo) userInfo.classList.add('justify-center');
+
+            if (userInfo) {
+                userInfo.classList.add('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
+            }
             texts.forEach(el => el.classList.add('hidden'));
             navItems.forEach(item => {
                 item.classList.remove('justify-between');
                 item.classList.add('justify-center');
                 item.querySelector('i')?.classList.remove('mr-3');
             });
-            if (toggleIcon) toggleIcon.className = 'fas fa-angle-right text-xs';
+            if (toggleIcon) { toggleIcon.classList.remove('fa-angle-left'); toggleIcon.classList.add('fa-angle-right'); }
         } else {
             sidebar.classList.remove('w-20', 'p-2');
             sidebar.classList.add('w-64', 'p-4');
-            if (userInfo) userInfo.classList.remove('justify-center');
+
+            if (userInfo) {
+                userInfo.classList.remove('justify-center');
+                userInfo.querySelector('.flex-shrink-0')?.classList.add('mr-3');
+            }
             texts.forEach(el => el.classList.remove('hidden'));
             navItems.forEach(item => {
                 item.classList.remove('justify-center');
-                if (item.id === 'nav-all') item.classList.add('justify-between');
                 item.querySelector('i')?.classList.add('mr-3');
             });
-            if (toggleIcon) toggleIcon.className = 'fas fa-angle-left text-xs';
+            if (toggleIcon) { toggleIcon.classList.remove('fa-angle-right'); toggleIcon.classList.add('fa-angle-left'); }
         }
     },
 
     init() {
-        this.updateMetrics();
-    },
+        this.allCases = (typeof mockCases !== 'undefined') ? mockCases : [];
+        this.auditorCases = this.getAuditorCases();
 
-    updateMetrics() {
-        // 從 data.js 中取得 mockCases 作為資料來源
-        const data = (typeof mockCases !== 'undefined') ? mockCases : [];
+        const quotaLabel = document.getElementById('goal-quota-label');
+        if (quotaLabel) quotaLabel.innerText = `Daily quota: ${this.dailyTarget} units`;
 
-        // 統計各狀態數量 (模擬當日工作量)
-        const pending = data.filter(c => c.status === 'pending').length;
-        const verified = data.filter(c => c.status === 'verified').length;
-        const canceled = data.filter(c => c.status === 'canceled' || c.status === 'cancelled' || c.status === 'rejected').length;
-
-        const reviewed = verified + canceled;
-        const total = pending + reviewed;
-
-        // 計算比率
-        const compRate = total === 0 ? 0 : ((reviewed / total) * 100).toFixed(1);
-        const cancRate = reviewed === 0 ? 0 : ((canceled / reviewed) * 100).toFixed(1);
-
-        // 更新 UI 數字
-        document.getElementById('kpi-total').innerText = total;
-        document.getElementById('kpi-pending').innerText = pending;
-        document.getElementById('kpi-reviewed').innerText = reviewed;
-        document.getElementById('kpi-comp-rate').innerText = compRate + '%';
-        document.getElementById('kpi-cancel-rate').innerText = cancRate + '%';
-
-        // 更新進度條寬度
-        const bar = document.getElementById('kpi-comp-bar');
-        if(bar) bar.style.width = compRate + '%';
-
-        // 渲染三大圖表
-        this.renderResultChart(verified, canceled);
+        this.calculateAndRenderMetrics();
+        this.renderGoalChart();
         this.renderTrendChart();
-        this.renderLevelTrendChart(data); // 執行分級動態折線圖
+        this.renderRecentTable();
     },
 
-    // 全新開發：三級分級動態折線圖 (每3小時分區統計)
-    // 全新開發：三級分級動態折線圖 (近3天 72小時，每3小時分區統計，共 24 格)
-    renderLevelTrendChart(data) {
-        const ctx = document.getElementById('levelTrendChart');
-        if (!ctx) return;
-        if (this.charts.levelTrend) this.charts.levelTrend.destroy();
-
-        // 1. 產生 72 小時 (共 24 格) 的 X 軸標籤
-        const labels = [];
-        for (let d = 2; d >= 0; d--) {
-            const date = new Date();
-            date.setDate(date.getDate() - d);
-            const mmdd = `${date.getMonth() + 1}/${date.getDate()}`;
-            // 每天的 8 個時段
-            labels.push(
-                `${mmdd} 00-03h`, `${mmdd} 03-06h`, `${mmdd} 06-09h`, `${mmdd} 09-12h`,
-                `${mmdd} 12-15h`, `${mmdd} 15-18h`, `${mmdd} 18-21h`, `${mmdd} 21-24h`
-            );
-        }
-
-        // 2. 初始化 24 格的數據計數器
-        let highLine = new Array(24).fill(0); // 確信違規 (>=90)
-        let midLine = new Array(24).fill(0);  // 疑似違規 (80-89)
-        let lowLine = new Array(24).fill(0);  // 邊界案例 (<80)
-
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-        // 3. 解析 mockCases 內所有案件的時間與分級
-        data.forEach(c => {
-            const d = new Date(c.timestamp || c.date);
-            if (isNaN(d.getTime())) return;
-
-            const caseDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-            // 計算與今天的差距天數 (0=今天, 1=昨天, 2=前天)
-            const diffDays = Math.round((today - caseDay) / (1000 * 60 * 60 * 24));
-
-            if (diffDays >= 0 && diffDays <= 2) {
-                // 將天數映射到 24 格中：前天(索引0~7)、昨天(索引8~15)、今天(索引16~23)
-                const dayOffset = (2 - diffDays) * 8;
-                const hourIdx = Math.floor(d.getHours() / 3);
-                const finalIdx = dayOffset + hourIdx;
-
-                const conf = c.confidence || 85;
-                if (conf >= 90) {
-                    highLine[finalIdx]++;
-                } else if (conf >= 80) {
-                    midLine[finalIdx]++;
-                } else {
-                    lowLine[finalIdx]++;
-                }
-            }
-        });
-
-        // 4. 防呆機制：若外部無真實時間資料，生成一組 3 天份的動態波動曲線
-        const isAllZero = highLine.every(v => v === 0) && midLine.every(v => v === 0);
-        if (isAllZero) {
-            // 前天、昨天、今天的模擬尖離峰數據 (共 24 筆)
-            highLine = [5, 8, 12, 20, 25, 18, 22, 10,  7, 10, 15, 28, 35, 20, 30, 15,  12, 6, 18, 32, 45, 28, 55, 22];
-            midLine  = [2, 4, 6, 12, 15, 10, 14, 6,   3,  5,  8, 16, 20, 12, 18,  8,   8, 4, 12, 22, 26, 18, 35, 14];
-            lowLine  = [1, 2, 3,  5,  8,  4,  6, 2,   1,  2,  4,  8, 10,  5,  8,  4,   4, 2,  6, 10, 12,  7, 15,  6];
-        }
-
-        // 建立滑順從左到右「動態延伸畫出」的 Delay 參數
-        let animationDelayed = false;
-
-        this.charts.levelTrend = new Chart(ctx.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: '確信違規 (≥90%)',
-                        data: highLine,
-                        borderColor: '#10b981', // 綠色
-                        backgroundColor: 'rgba(16, 185, 129, 0.05)',
-                        borderWidth: 2.5,
-                        tension: 0.35,
-                        pointBackgroundColor: '#10b981',
-                        pointRadius: 3, // 因為節點變多，稍微縮小圓點
-                        fill: true
-                    },
-                    {
-                        label: '疑似違規 (80-89%)',
-                        data: midLine,
-                        borderColor: '#f59e0b', // 黃色
-                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
-                        borderWidth: 2.5,
-                        tension: 0.35,
-                        pointBackgroundColor: '#f59e0b',
-                        pointRadius: 3,
-                        fill: true
-                    },
-                    {
-                        label: '邊界案例 (<80%)',
-                        data: lowLine,
-                        borderColor: '#ef4444', // 紅色
-                        backgroundColor: 'rgba(239, 68, 68, 0.05)',
-                        borderWidth: 2.5,
-                        tension: 0.35,
-                        pointBackgroundColor: '#ef4444',
-                        pointRadius: 3,
-                        fill: true
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    onComplete: () => { animationDelayed = true; },
-                    delay: (context) => {
-                        let delay = 0;
-                        if (context.type === 'data' && context.mode === 'default' && !animationDelayed) {
-                            // 配合節點變多，加快渲染速度，讓骨牌畫出特效更流暢
-                            delay = context.dataIndex * 60 + context.datasetIndex * 150;
-                        }
-                        return delay;
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        align: 'end',
-                        labels: { color: '#8b949e', font: { size: 11 }, boxWidth: 10, padding: 10 }
-                    },
-                    tooltip: { mode: 'index', intersect: false }
-                },
-                scales: {
-                    x: {
-                        grid: { color: '#1f2937', borderDash: [2, 4] },
-                        // X軸標籤太擠時，Chart.js 會自動隱藏部分標籤，這裡設定最多顯示所有節點
-                        ticks: { color: '#8b949e', font: { size: 10 }, maxRotation: 45, minRotation: 45 }
-                    },
-                    y: {
-                        grid: { color: '#1f2937' },
-                        ticks: { color: '#8b949e', font: { size: 10 } },
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+    getAuditorCases() {
+        const cases = this.allCases;
+        const hasAuditorField = cases.some(c => 'auditor' in c);
+        if (!hasAuditorField) return cases;
+        return cases.filter(c => c.auditor === this.currentAuditor);
     },
 
-    renderResultChart(verified, canceled) {
-        const ctx = document.getElementById('reviewResultChart');
+    getDateStr(c) {
+        return c.timestamp ? c.timestamp.substring(0, 10) : null;
+    },
+
+    getCaseDuration(c) {
+        if (!c.images || c.images.length === 0) return null;
+        const times = c.images.map(img => img.time || 0);
+        return Math.max(...times);
+    },
+
+    calculateAndRenderMetrics() {
+        const cases = this.auditorCases;
+        const processed = cases.filter(c => c.status !== 'pending');
+        const verified = cases.filter(c => c.status === 'verified');
+        const rejected = cases.filter(c => c.status === 'rejected');
+
+        const dateStrs = cases.map(c => this.getDateStr(c)).filter(Boolean).sort();
+        const latestDateStr = dateStrs[dateStrs.length - 1] || null;
+        const latestMonth = latestDateStr ? latestDateStr.substring(0, 7) : null;
+        const casesThisMonth = latestMonth
+            ? cases.filter(c => (this.getDateStr(c) || '').startsWith(latestMonth))
+            : cases;
+
+        const totalCasesEl = document.getElementById('total-cases-display');
+        if (totalCasesEl) totalCasesEl.innerText = casesThisMonth.length.toLocaleString();
+
+        const accuracy = processed.length > 0 ? (verified.length / processed.length) * 100 : 0;
+        const accuracyEl = document.getElementById('accuracy-display');
+        if (accuracyEl) accuracyEl.innerText = `${accuracy.toFixed(1)}%`;
+
+        const todayStr = latestDateStr;
+        const todayCases = todayStr ? cases.filter(c => this.getDateStr(c) === todayStr) : [];
+        const completedToday = todayCases.filter(c => c.status !== 'pending').length;
+        const remainingToday = Math.max(0, this.dailyTarget - completedToday);
+        const percent = Math.min(100, Math.round((completedToday / this.dailyTarget) * 100));
+
+        const goalPercentEl = document.getElementById('goal-percent');
+        const goalCompletedEl = document.getElementById('goal-completed');
+        const goalRemainingEl = document.getElementById('goal-remaining');
+        if (goalPercentEl) goalPercentEl.innerText = `${percent}%`;
+        if (goalCompletedEl) goalCompletedEl.innerText = completedToday;
+        if (goalRemainingEl) goalRemainingEl.innerText = remainingToday;
+
+        this.metricData = { completed: completedToday, remaining: remainingToday };
+
+        this.renderTypeDistribution(processed);
+        this.renderConfidenceDistribution(processed);
+        this.renderProcessingTimeCard(cases, latestDateStr);
+
+        const anomalyRate = processed.length > 0 ? (rejected.length / processed.length) * 100 : 0;
+        const anomalyEl = document.getElementById('anomaly-rate-display');
+        if (anomalyEl) anomalyEl.innerText = `${anomalyRate.toFixed(1)}%`;
+    },
+
+    renderProcessingTimeCard(cases, latestDateStr) {
+        const avgTimeEl = document.getElementById('avg-processing-time');
+        const compareEl = document.getElementById('processing-time-compare');
+
+        const withDuration = cases.filter(c => c.status !== 'pending' && this.getCaseDuration(c) !== null);
+
+        if (withDuration.length === 0) {
+            if (avgTimeEl) avgTimeEl.innerText = '--';
+            if (compareEl) compareEl.innerText = '尚無足夠資料';
+            return;
+        }
+
+        const avgAll = withDuration.reduce((sum, c) => sum + this.getCaseDuration(c), 0) / withDuration.length;
+        if (avgTimeEl) avgTimeEl.innerText = avgAll.toFixed(1);
+
+        if (!compareEl || !latestDateStr) return;
+
+        const latestDate = new Date(latestDateStr);
+        const thisWeekStart = new Date(latestDate); thisWeekStart.setDate(latestDate.getDate() - 6);
+        const lastWeekEnd = new Date(thisWeekStart); lastWeekEnd.setDate(thisWeekStart.getDate() - 1);
+        const lastWeekStart = new Date(lastWeekEnd); lastWeekStart.setDate(lastWeekEnd.getDate() - 6);
+
+        const inRange = (dateStr, start, end) => {
+            const d = new Date(dateStr);
+            return d >= start && d <= end;
+        };
+
+        const thisWeekCases = withDuration.filter(c => inRange(this.getDateStr(c), thisWeekStart, latestDate));
+        const lastWeekCases = withDuration.filter(c => inRange(this.getDateStr(c), lastWeekStart, lastWeekEnd));
+
+        if (thisWeekCases.length === 0 || lastWeekCases.length === 0) {
+            compareEl.innerHTML = `<i class="fas fa-minus mr-1.5"></i> 上週資料不足以比較`;
+            return;
+        }
+
+        const thisWeekAvg = thisWeekCases.reduce((sum, c) => sum + this.getCaseDuration(c), 0) / thisWeekCases.length;
+        const lastWeekAvg = lastWeekCases.reduce((sum, c) => sum + this.getCaseDuration(c), 0) / lastWeekCases.length;
+        const diff = lastWeekAvg - thisWeekAvg;
+
+        if (diff > 0.05) {
+            compareEl.innerHTML = `<i class="fas fa-arrow-trend-down mr-1.5"></i> 比上週快了 ${diff.toFixed(1)} 秒`;
+        } else if (diff < -0.05) {
+            compareEl.innerHTML = `<i class="fas fa-arrow-trend-up mr-1.5"></i> 比上週慢了 ${Math.abs(diff).toFixed(1)} 秒`;
+        } else {
+            compareEl.innerHTML = `<i class="fas fa-minus mr-1.5"></i> 與上週持平`;
+        }
+    },
+
+    renderTypeDistribution(processedCases) {
+        const container = document.getElementById('type-distribution-container');
+        if (!container) return;
+
+        if (!processedCases || processedCases.length === 0) {
+            container.innerHTML = `<div class="text-xs text-gray-400 font-bold">尚無分佈資料</div>`;
+            return;
+        }
+
+        const typeCounts = {};
+        processedCases.forEach(c => {
+            const t = c.type || '其他';
+            typeCounts[t] = (typeCounts[t] || 0) + 1;
+        });
+
+        const total = processedCases.length;
+        const styles = [
+            { textClass: 'text-blue-600', barBg: 'bg-blue-50', barFill: 'bg-blue-600' },
+            { textClass: 'text-gray-900', barBg: 'bg-gray-100', barFill: 'bg-gray-900' },
+            { textClass: 'text-orange-500', barBg: 'bg-orange-50', barFill: 'bg-orange-400' },
+            { textClass: 'text-gray-500', barBg: 'bg-gray-100', barFill: 'bg-gray-300' }
+        ];
+
+        const sortedEntries = Object.entries(typeCounts).sort((a, b) => b[1] - a[1]).slice(0, 4);
+
+        let index = 0;
+        let html = '';
+        for (const [typeName, count] of sortedEntries) {
+            const percentage = Math.round((count / total) * 100);
+            const style = styles[index % styles.length];
+
+            html += `
+                <div class="space-y-1.5">
+                    <div class="flex justify-between text-xs">
+                        <span class="font-bold text-gray-700">${typeName}</span>
+                        <span class="font-extrabold ${style.textClass}">${percentage}%</span>
+                    </div>
+                    <div class="w-full ${style.barBg} rounded-full h-2">
+                        <div class="${style.barFill} h-2 rounded-full" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            `;
+            index++;
+        }
+        container.innerHTML = html;
+    },
+
+    renderConfidenceDistribution(processedCases) {
+        const container = document.getElementById('confidence-distribution-container');
+        if (!container) return;
+
+        if (!processedCases || processedCases.length === 0) {
+            container.innerHTML = `<div class="text-xs text-gray-400 font-bold">尚無分級資料</div>`;
+            return;
+        }
+
+        let high = 0, mid = 0, low = 0;
+        processedCases.forEach(c => {
+            const conf = c.confidence || 0;
+            if (conf >= 90) high++;
+            else if (conf >= 80) mid++;
+            else low++;
+        });
+
+        const total = processedCases.length;
+
+        const data = [
+            { label: '確信違規 (≥90%)', count: high, textClass: 'text-red-600', barBg: 'bg-red-50', barFill: 'bg-red-500' },
+            { label: '疑似違規 (80%-89%)', count: mid, textClass: 'text-yellow-600', barBg: 'bg-yellow-50', barFill: 'bg-yellow-500' },
+            { label: '邊界案例 (<80%)', count: low, textClass: 'text-green-600', barBg: 'bg-green-50', barFill: 'bg-green-500' }
+        ];
+
+        let html = '';
+        data.forEach(item => {
+            const percentage = total > 0 ? Math.round((item.count / total) * 100) : 0;
+            html += `
+                <div class="space-y-1.5 mt-[2px]">
+                    <div class="flex justify-between text-xs">
+                        <span class="font-bold text-gray-700">${item.label}</span>
+                        <span class="font-extrabold ${item.textClass}">${percentage}%</span>
+                    </div>
+                    <div class="w-full ${item.barBg} rounded-full h-2">
+                        <div class="${item.barFill} h-2 rounded-full" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    },
+
+    renderRecentTable() {
+        const tbody = document.getElementById('recent-audit-tbody');
+        if (!tbody) return;
+
+        const recentCases = [...this.auditorCases]
+            .filter(c => c.status !== 'pending')
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .slice(0, 5);
+
+        if (recentCases.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-400 font-bold">目前尚無${this.currentAuditor}的審核紀錄</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = recentCases.map(c => {
+            const isVerified = c.status === 'verified';
+            const statusBadge = isVerified
+                ? `<span class="text-green-600 font-bold text-xs tracking-wider">VERIFIED</span>`
+                : `<span class="text-red-500 font-bold text-xs tracking-wider">REJECTED</span>`;
+
+            const timeStr = c.timestamp ? c.timestamp.replace('T', ' ').substring(0, 16) : '--';
+            const duration = this.getCaseDuration(c);
+            const durationStr = duration !== null ? `${duration}s` : '--';
+
+            return `
+                <tr class="hover:bg-gray-50/80 transition">
+                    <td class="p-4 pl-6 font-extrabold text-blue-600">#${c.id}</td>
+                    <td class="p-4 font-bold text-gray-900">${c.type || '未分類'}</td>
+                    <td class="p-4 text-xs font-mono text-gray-500">${timeStr}</td>
+                    <td class="p-4 text-xs font-mono text-gray-500">${durationStr}</td>
+                    <td class="p-4 pr-6 text-right">${statusBadge}</td>
+                </tr>
+            `;
+        }).join('');
+    },
+
+    renderGoalChart() {
+        const ctx = document.getElementById('goalDoughnutChart');
         if (!ctx) return;
-        if (this.charts.result) this.charts.result.destroy();
+        if (this.charts.goal) this.charts.goal.destroy();
 
-        const hasData = (verified + canceled) > 0;
+        const completed = this.metricData?.completed || 0;
+        const remaining = this.metricData?.remaining ?? this.dailyTarget;
 
-        this.charts.result = new Chart(ctx.getContext('2d'), {
+        this.charts.goal = new Chart(ctx.getContext('2d'), {
             type: 'doughnut',
             data: {
-                labels: ["已成立", "已撤銷"],
+                labels: ['已完成', '剩餘'],
                 datasets: [{
-                    data: hasData ? [verified, canceled] : [1, 0],
-                    backgroundColor: hasData ? ['#10b981', '#ef4444'] : ['#1f2937', '#1f2937'],
-                    borderColor: '#0d1117',
-                    borderWidth: 2
+                    data: [completed, remaining],
+                    backgroundColor: ['#3662D8', '#EFF6FF'],
+                    borderWidth: 0,
+                    hoverOffset: 2
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { color: '#e6edf3', font: { size: 11 }, padding: 10 } },
-                    tooltip: { enabled: hasData }
-                },
-                cutout: '70%'
+                cutout: '80%',
+                plugins: { legend: { display: false }, tooltip: { enabled: false } }
             }
         });
     },
 
     renderTrendChart() {
-        const ctx = document.getElementById('reviewTrendChart');
+        const ctx = document.getElementById('performanceTrendChart');
         if (!ctx) return;
         if (this.charts.trend) this.charts.trend.destroy();
 
-        const labels = [];
-        for (let i = 6; i >= 0; i--) {
-            const d = new Date();
-            d.setDate(d.getDate() - i);
-            labels.push(`${d.getMonth() + 1}/${d.getDate()}`);
+        const weekdayMap = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+        const personalDates = [...new Set(this.auditorCases.map(c => this.getDateStr(c)).filter(Boolean))].sort();
+        const last7Dates = personalDates.slice(-7);
+
+        const labels = last7Dates.map(d => weekdayMap[new Date(d).getDay()]);
+        const personalData = last7Dates.map(d =>
+            this.auditorCases.filter(c => this.getDateStr(c) === d && c.status !== 'pending').length
+        );
+
+        const hasAuditorField = this.allCases.some(c => 'auditor' in c);
+        let teamData = null;
+        if (hasAuditorField) {
+            const auditors = [...new Set(this.allCases.map(c => c.auditor).filter(Boolean))];
+            teamData = last7Dates.map(d => {
+                const dayCases = this.allCases.filter(c => this.getDateStr(c) === d && c.status !== 'pending');
+                return auditors.length > 0 ? dayCases.length / auditors.length : 0;
+            });
         }
 
-        const fakeVerifiedData = [45, 52, 38, 60, 48, 55, parseInt(document.getElementById('kpi-reviewed').innerText) || 42];
-        const fakeCanceledData = [5, 8, 3, 10, 6, 4, 5];
+        const peakIndex = personalData.length > 0
+            ? personalData.indexOf(Math.max(...personalData))
+            : -1;
+        const peakMarkerData = personalData.map((v, i) => (i === peakIndex ? v : null));
+
+        const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(229, 231, 235, 1)');
+        gradient.addColorStop(1, 'rgba(249, 250, 251, 0.2)');
+
+        const datasets = [
+            {
+                label: '個人產能',
+                data: personalData,
+                borderColor: 'transparent',
+                backgroundColor: gradient,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0
+            },
+            {
+                label: '標記點',
+                data: peakMarkerData,
+                borderColor: '#111827',
+                backgroundColor: '#111827',
+                borderWidth: 2,
+                pointRadius: 4,
+                showLine: false
+            }
+        ];
+
+        if (teamData) {
+            datasets.push({
+                label: '團隊平均',
+                data: teamData,
+                borderColor: '#9CA3AF',
+                backgroundColor: 'transparent',
+                borderDash: [4, 4],
+                borderWidth: 2,
+                tension: 0.4,
+                pointRadius: 0,
+                fill: false
+            });
+        }
+
+        const maxVal = Math.max(1, ...personalData, ...(teamData || [0]));
 
         this.charts.trend = new Chart(ctx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    { label: '案件成立', data: fakeVerifiedData, backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 4 },
-                    { label: '案件撤銷', data: fakeCanceledData, backgroundColor: 'rgba(239, 68, 68, 0.8)', borderRadius: 4 }
-                ]
-            },
+            type: 'line',
+            data: { labels, datasets },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: { legend: { position: 'top', align: 'end', labels: { color: '#8b949e', boxWidth: 12 } } },
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
                 scales: {
-                    x: { stacked: true, grid: { display: false }, ticks: { color: '#8b949e' } },
-                    y: { stacked: true, grid: { color: '#1f2937' }, ticks: { color: '#8b949e' }, beginAtZero: true }
+                    x: { grid: { display: false }, ticks: { color: '#9CA3AF', font: { size: 10, weight: 'bold' } } },
+                    y: { display: false, beginAtZero: true, max: maxVal * 1.2 }
                 }
             }
         });
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    DashboardApp.init();
-});
-
 window.app = {
     toggleSidebar: () => DashboardApp.toggleSidebar()
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    DashboardApp.init();
+});

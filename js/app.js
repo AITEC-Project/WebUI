@@ -30,28 +30,35 @@ const TimeUtils = {
 
 const UIRenderer = {
     createCaseItemHTML(c) {
-        const absoluteTime = TimeUtils.formatFullTime(c.timestamp).substring(0, 16);
+        const d = new Date(c.timestamp);
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const day = d.getDate().toString().padStart(2, '0');
+        const hours = d.getHours().toString().padStart(2, '0');
+        const minutes = d.getMinutes().toString().padStart(2, '0');
+        const seconds = d.getSeconds().toString().padStart(2, '0');
+
+        const displayTime = `${month}/${day} ${hours}:${minutes}:${seconds}`;
+
+        // 根據信心指數對應紅、黃、綠分類背景與邊框
+        let confidenceClass = 'bg-red-50 border-red-100 text-red-600';
+        if (c.confidence >= 90) {
+            confidenceClass = 'bg-red-50 border-red-100';
+        } else if (c.confidence >= 80) {
+            confidenceClass = 'bg-yellow-50 border-yellow-100';
+        } else {
+            confidenceClass = 'bg-green-50 border-green-100';
+        }
 
         return `
-            <div class="card-bg p-3 rounded-lg border border-transparent hover:border-blue-500 cursor-pointer transition group" 
+            <div id="case-card-${c.id}" class="case-card ${confidenceClass} py-3 px-4 border cursor-pointer transition-all duration-200 group" 
                  onclick="app.handleCaseClick('${c.id}')">
-                <div class="flex items-center space-x-3">
-                    <div class="w-16 h-12 bg-gray-800 rounded overflow-hidden flex-shrink-0">
-                        <img src="${c.images[0]?.src || ''}" alt="Case ${c.id}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-bold text-gray-200">#${c.id}</span>
-                            <span class="text-[10px] text-gray-500 font-mono tracking-tighter">${absoluteTime}</span>
-                        </div>
-                        <div class="mt-0.5 space-y-0.5">
-                            <p class="text-[11px] text-gray-300 font-medium">車牌：${c.plate}</p>
-                            <p class="text-[10px] text-gray-400 truncate flex items-center">
-                                <i class="fas fa-map-marker-alt text-gray-500 mr-1 text-[9px]"></i>
-                                ${c.location || '未知地點'}
-                            </p>
-                        </div>
-                    </div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <span class="text-[9px] font-bold text-gray-400 tracking-wider case-card-id uppercase">CASE #${c.id}</span>
+                    <span class="text-[10px] font-bold text-gray-500 case-card-time">${displayTime}</span>
+                </div>
+                <div class="text-xl font-extrabold text-gray-900 mb-1 tracking-widest case-card-plate">${c.plate}</div>
+                <div class="text-[11px] font-medium text-gray-500 flex items-center case-card-loc">
+                    <i class="fas fa-map-marker-alt mr-1.5 opacity-70"></i>${c.location || '未知地點'}
                 </div>
             </div>
         `;
@@ -60,71 +67,65 @@ const UIRenderer = {
     renderDetail(c) {
         if (!c) return;
 
-        // 清空或隱藏原本最上方的標頭區域
         const headerArea = document.getElementById('detail-header');
         if (headerArea) {
             headerArea.innerHTML = '';
             headerArea.className = 'hidden';
         }
 
-        // 渲染證物區塊
         const evidenceBox = document.getElementById('evidence-grid');
         if (evidenceBox) {
-            // 【修改重點 1】外層改為 items-stretch，讓左右兩欄高度切齊
-            evidenceBox.className = "card-bg p-4 rounded-2xl border border-gray-800 shadow-xl space-y-3";
+            evidenceBox.className = "space-y-4 w-full";
             evidenceBox.innerHTML = `
-                <div class="flex flex-col md:flex-row gap-4 h-auto items-stretch">
-                    <div class="w-full md:w-[60%] flex flex-col gap-2">
-                        <div class="relative rounded-xl overflow-hidden bg-black border border-gray-700 aspect-video">
+                <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 w-full items-start">
+                    <!-- 左側影片區塊 -->
+                    <div class="xl:col-span-7 flex flex-col gap-2 w-full">
+                        <div class="relative overflow-hidden bg-black aspect-video shadow-lg w-full">
                             <video id="main-video-view" class="w-full h-full object-cover" controls autoplay muted loop>
                                 <source src="${c.video}" type="video/mp4">
                             </video>
                         </div>
-                        
                         <div class="w-full px-1 mt-1">
-                            <div class="relative w-full h-1.5 bg-gray-800 rounded-full cursor-pointer hover:h-2 transition-all group" id="custom-progress-container">
-                                <div id="custom-progress-bar" class="absolute top-0 left-0 h-full bg-gray-500 rounded-full pointer-events-none transition-all duration-75 w-0"></div>
+                            <div class="relative w-full h-1.5 bg-gray-200 cursor-pointer hover:h-2 transition-all group" id="custom-progress-container">
+                                <div id="custom-progress-bar" class="absolute top-0 left-0 h-full bg-blue-500 pointer-events-none transition-all duration-75 w-0"></div>
                                 <div id="marker-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
-                            </div>
-                            <div class="flex justify-between text-[9px] text-gray-500 mt-1.5 px-1 font-mono uppercase tracking-wider">
                             </div>
                         </div>
                     </div>
                     
-                    <div class="w-full md:w-[40%] flex flex-col justify-between gap-2">
-                        
-                        <div class="flex flex-col gap-2">
-                            <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-700 bg-black cursor-pointer group" 
+                    <!-- 右側照片與縮圖區塊 -->
+                    <div class="xl:col-span-5 flex flex-col justify-between gap-3 w-full">
+                        <div class="flex flex-col gap-3 w-full">
+                            <div class="relative w-full aspect-video overflow-hidden bg-black cursor-pointer group shadow-lg" 
                                  onclick="app.openLightbox(document.getElementById('main-img-view').src)">
                                 <img id="main-img-view" src="${c.images[0]?.src || ''}" alt="違規關鍵幀" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-                                
-                                <div class="absolute top-2 left-2 bg-black/70 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm flex items-center border border-gray-600">
+                                <div class="absolute top-3 left-3 bg-black/70 text-white text-[10px] px-2 py-1 backdrop-blur-sm flex items-center border border-gray-600">
                                     <i class="fas fa-camera mr-1.5 text-blue-400"></i>
                                     <span id="img-time-tag">${c.images[0]?.time || '0'}</span>s
                                 </div>
-                                
                                 <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
                                     <i class="fas fa-search-plus text-white text-3xl drop-shadow-lg"></i>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-2">
+                            <div class="grid grid-cols-3 gap-2 w-full">
                                 ${c.images.slice(0, 3).map((img, idx) => `
-                                    <div class="thumbnail-item relative aspect-video rounded-lg overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-800'} cursor-pointer transition-all hover:border-gray-500" 
+                                    <div class="thumbnail-item relative aspect-video overflow-hidden border-2 ${idx === 0 ? 'border-blue-500 shadow-md' : 'border-transparent opacity-70'} cursor-pointer transition-all hover:opacity-100 bg-black" 
                                          onclick="app.switchPhoto(${idx}, '${img.src}', ${img.time}, this)">
-                                        <img src="${img.src}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition">
-                                        <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded font-bold">${idx + 1}</span>
-                                        <div class="absolute bottom-1 right-1 bg-black/70 text-[8px] text-white px-1.5 rounded">${img.time}s</div>
+                                        <img src="${img.src}" class="w-full h-full object-cover transition">
+                                        <span class="absolute top-1 left-1 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 shadow font-bold">${idx + 1}</span>
                                     </div>
                                 `).join('')}
                             </div>
                         </div>
 
-                        <div class="mt-1 text-[10px] px-0.5 flex items-center gap-1.5 text-gray-500">
-                            <span class="flex items-center gap-1.5 text-gray-400">關鍵幀擷取微調</span>
+                        <div class="mt-1 text-[10px] px-1 flex items-center gap-1.5 text-gray-500 font-medium">
+                            <span class="flex items-center gap-1.5 text-gray-400">
+                                <i class="fas fa-sliders-h text-blue-400"></i>關鍵幀微調
+                            </span>
                             <span class="font-mono">
-                                <span class="bg-gray-800 text-gray-300 px-1 py-0.5 rounded border border-gray-700 text-[9px]">←</span> 
-                                <span class="bg-gray-800 text-gray-300 px-1 py-0.5 rounded border border-gray-700 text-[9px]">→</span> 鍵 (±0.1s)
+                                ：<span class="bg-gray-100 text-gray-500 px-1 py-0.5 border border-gray-200">←</span> 
+                                <span class="bg-gray-100 text-gray-500 px-1 py-0.5 border border-gray-200">→</span> 鍵 (±0.1s)
                             </span>
                         </div>
                     </div>
@@ -134,25 +135,44 @@ const UIRenderer = {
 
         const analysisArea = document.getElementById('analysis-container');
         if (analysisArea) {
-            const envData = c.aiReport.find(item => item.type === 'ai' && item.text.includes('物件辨識'));
-            const description = envData ? envData.text.replace('物件辨識：', '') : '';
+            const description = c.description || '受處分人駕駛該車輛，違規事實明確。';
+
+            let badgeClass = '';
+            let badgeText = '';
+            if (c.confidence >= 90) {
+                badgeClass = 'bg-red-50 text-red-600 border-red-200';
+                badgeText = '確信違規';
+            } else if (c.confidence >= 80) {
+                badgeClass = 'bg-yellow-50 text-yellow-600 border-yellow-200';
+                badgeText = '疑似違規';
+            } else {
+                badgeClass = 'bg-green-50 text-green-600 border-green-200';
+                badgeText = '邊界案例';
+            }
 
             analysisArea.innerHTML = `
-                <div class="mt-6 space-y-4">
-                    <div class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/20">
-                        <h3 class="text-blue-400 font-bold mb-2 flex items-center text-sm">
-                            <i class="fas fa-file-alt mr-2"></i> 違規敘述
-                        </h3>
-                        <p class="text-white text-lg font-semibold">${c.type}</p>
-                        
-                        ${description ? `<p class="text-gray-400 text-sm mt-1 leading-relaxed">${description}</p>` : ''}
-                    </div>
+                <div class="mt-4 bg-white p-5 border border-gray-100 shadow-sm w-full relative">
                     
-                    <div class="p-4 rounded-xl bg-purple-500/5 border border-purple-500/20">
-                        <h3 class="text-purple-400 font-bold mb-2 flex items-center text-sm">
-                            <i class="fas fa-gavel mr-2"></i> 適用法條
-                        </h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">${c.legalBasis}</p>
+                    <div class="absolute top-5 right-5 border px-2.5 py-1 text-base font-extrabold tracking-widest ${badgeClass}">
+                        ${badgeText}
+                    </div>
+
+                    <!-- 使用 divide-y divide-gray-200 來自動生成均勻的灰色分隔線 -->
+                    <div class="flex flex-col divide-y divide-gray-200">
+                        <div class="flex flex-col pb-4 gap-1.5 pr-28">
+                            <span class="text-sm text-[#54595D] font-bold tracking-wider">違規樣態</span>
+                            <span class="text-lg text-gray-900 font-extrabold font-mono text-left">${c.type}</span>
+                        </div>
+                        
+                        <div class="flex flex-col py-4 gap-1.5">
+                            <span class="text-sm text-[#54595D] font-bold tracking-wider">違規法條</span>
+                            <span class="text-base text-blue-600 font-bold tracking-wide text-left">${c.legalBasis}</span>
+                        </div>
+                        
+                        <div class="flex flex-col pt-4 gap-1.5">
+                            <span class="text-sm text-[#54595D] font-bold tracking-wider whitespace-nowrap">情境描述</span>
+                            <span class="text-base text-gray-900 font-extrabold font-mono leading-relaxed text-left">${description}</span>
+                        </div>
                     </div>
                 </div>
             `;
@@ -166,7 +186,7 @@ const app = {
         pendingCases: [],
         filteredCases: [],
         selectedCaseId: null,
-        currentLevel: 'all',
+        currentLevel: 'high',
         hotkeysInitialized: false,
         isSidebarCollapsed: false,
         currentKeyframeIdx: 0
@@ -179,8 +199,13 @@ const app = {
         const rawData = await ApiService.fetchCases();
         this.state.allCases = rawData;
         this.state.pendingCases = rawData.filter(c => c.status === 'pending');
+
         this.applyFilters();
         this.updateStatistics();
+
+        const certainBtn = document.querySelector('.filter-btn');
+        if(certainBtn) this.filterCases('high', certainBtn);
+
         if (!this.state.hotkeysInitialized) {
             this.initHotkeys();
             this.state.hotkeysInitialized = true;
@@ -205,13 +230,11 @@ const app = {
             const cancelModal = document.getElementById('cancel-modal');
             if (cancelModal && !cancelModal.classList.contains('hidden')) {
                 const isTyping = document.activeElement.tagName === 'INPUT' && document.activeElement.type === 'text';
-
                 if (isTyping) {
                     if (e.key === 'Enter') { e.preventDefault(); this.confirmCancelCase(); }
                     if (e.key === 'Escape') { e.preventDefault(); this.closeCancelModal(); }
                     return;
                 }
-
                 const radios = document.querySelectorAll('input[name="cancel-reason"]');
                 if (radios.length > 0) {
                     switch (e.key) {
@@ -253,9 +276,7 @@ const app = {
                 }
                 case ' ':
                     e.preventDefault();
-                    if (video) {
-                        video.paused ? video.play() : video.pause();
-                    }
+                    if (video) { video.paused ? video.play() : video.pause(); }
                     break;
                 case 'ArrowRight':
                     e.preventDefault();
@@ -267,57 +288,14 @@ const app = {
                     break;
                 case 'Delete':
                     e.preventDefault();
-                    if (!modal || modal.classList.contains('hidden')) {
-                        this.cancelCase();
-                    }
+                    if (!modal || modal.classList.contains('hidden')) { this.cancelCase(); }
                     break;
                 case 'Enter':
                     e.preventDefault();
-                    if (this.state.selectedCaseId && modal && modal.classList.contains('hidden')) {
-                        this.openTicket();
-                    }
+                    if (this.state.selectedCaseId && modal && modal.classList.contains('hidden')) { this.openTicket(); }
                     break;
             }
         });
-    },
-
-    updateCategoryNotch() {
-        const notch = document.getElementById('category-notch');
-        if (!notch) return;
-
-        if (this.state.isSidebarCollapsed && this.state.currentLevel !== 'all') {
-            let colorClass = '';
-            let labelText = '';
-
-            switch (this.state.currentLevel) {
-                case 'high':
-                    colorClass = 'bg-green-500';
-                    labelText = '確信違規';
-                    break;
-                case 'mid':
-                    colorClass = 'bg-yellow-500';
-                    labelText = '疑似違規';
-                    break;
-                case 'low':
-                    colorClass = 'bg-red-500';
-                    labelText = '邊界案例';
-                    break;
-            }
-
-            notch.innerHTML = `
-                <div class="mx-3 mt-2 p-2 rounded-lg ${colorClass}/10 border border-${colorClass}/30 flex items-center justify-between text-[11px] font-bold">
-                    <span class="flex items-center text-gray-200">
-                        <span class="w-2 h-2 ${colorClass} rounded-full mr-2 animate-pulse"></span>
-                        ${labelText}
-                    </span>
-                    <span class="text-gray-500 font-mono text-[10px]">共 ${this.state.filteredCases.length} 件</span>
-                </div>
-            `;
-            notch.classList.remove('h-0', 'opacity-0');
-        } else {
-            notch.innerHTML = '';
-            notch.classList.add('h-0', 'opacity-0');
-        }
     },
 
     toggleSidebar() {
@@ -326,7 +304,6 @@ const app = {
         const sidebar = document.getElementById('sidebar-panel');
         const toggleIcon = document.getElementById('toggle-icon');
         const userInfo = document.getElementById('sidebar-user-info');
-        const subMenu = document.getElementById('sidebar-sub-menu');
         const texts = document.querySelectorAll('.sidebar-text');
         const navItems = document.querySelectorAll('nav > a');
 
@@ -339,7 +316,6 @@ const app = {
                 userInfo.querySelector('.flex-shrink-0')?.classList.remove('mr-3');
             }
 
-            if (subMenu) subMenu.classList.add('hidden');
             texts.forEach(el => el.classList.add('hidden'));
 
             navItems.forEach(item => {
@@ -361,14 +337,10 @@ const app = {
                 userInfo.querySelector('.flex-shrink-0')?.classList.add('mr-3');
             }
 
-            if (subMenu) subMenu.classList.remove('hidden');
             texts.forEach(el => el.classList.remove('hidden'));
 
             navItems.forEach(item => {
                 item.classList.remove('justify-center');
-                if (item.id === 'nav-all') {
-                    item.classList.add('justify-between');
-                }
                 item.querySelector('i')?.classList.add('mr-3');
             });
 
@@ -377,8 +349,6 @@ const app = {
                 toggleIcon.classList.add('fa-angle-left');
             }
         }
-
-        this.updateCategoryNotch();
     },
 
     handleCaseClick(id) {
@@ -392,12 +362,34 @@ const app = {
         const detailSection = document.getElementById('detail-scroll-area');
         if (detailSection) {
             detailSection.scrollTop = 0;
+            detailSection.className = "flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10 bg-gray-50/50 w-full transition-colors duration-300";
         }
 
-        document.querySelectorAll('#case-list > div').forEach(item => {
-            const isTarget = item.getAttribute('onclick').includes(id);
-            item.classList.toggle('border-blue-500', isTarget);
-            item.classList.toggle('bg-blue-900/10', isTarget);
+        document.querySelectorAll('.case-card').forEach(item => {
+            const cardId = item.id.replace('case-card-', '');
+            const cardData = this.state.allCases.find(c => c.id === cardId);
+            const isTarget = cardId === id;
+
+            item.className = item.className.replace(/bg-\w+-\d+/g, '').replace(/border-\w+-\d+/g, '').replace(/text-\w+-\d+/g, '').replace(/shadow-\w+/g, '').replace(/scale-\[\d+\.\d+\]/g, '');
+
+            if (isTarget) {
+                item.className += " bg-blue-600 text-white shadow-md scale-[1.02] border border-blue-700 py-3 px-4 cursor-pointer transition-all duration-200 group";
+                item.querySelector('.case-card-id').className = "text-[9px] font-bold text-blue-200 tracking-wider case-card-id uppercase";
+                item.querySelector('.case-card-time').className = "text-[10px] font-bold text-blue-100 case-card-time";
+                item.querySelector('.case-card-plate').className = "text-xl font-extrabold text-white mb-1 tracking-widest case-card-plate";
+                item.querySelector('.case-card-loc').className = "text-[11px] font-medium text-blue-100 flex items-center case-card-loc";
+            } else {
+                let defaultBg = 'bg-red-50 border-red-100';
+                if (cardData.confidence >= 90) defaultBg = 'bg-red-50 border-red-100';
+                else if (cardData.confidence >= 80) defaultBg = 'bg-yellow-50 border-yellow-100';
+                else defaultBg = 'bg-green-50 border-green-100';
+
+                item.className += ` ${defaultBg} text-gray-900 py-3 px-4 border cursor-pointer transition-all duration-200 group`;
+                item.querySelector('.case-card-id').className = "text-[9px] font-bold text-gray-400 tracking-wider case-card-id uppercase";
+                item.querySelector('.case-card-time').className = "text-[10px] font-bold text-gray-500 case-card-time";
+                item.querySelector('.case-card-plate').className = "text-xl font-extrabold text-gray-900 mb-1 tracking-widest case-card-plate";
+                item.querySelector('.case-card-loc').className = "text-[11px] font-medium text-gray-500 flex items-center case-card-loc";
+            }
         });
     },
 
@@ -418,7 +410,7 @@ const app = {
                 const marker = document.createElement('div');
 
                 const isActive = idx === (app.state.currentKeyframeIdx || 0);
-                marker.className = `keyframe-marker absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-[#0d1117] shadow cursor-pointer transition-all hover:scale-150 pointer-events-auto ${isActive ? 'bg-blue-500 scale-125 z-20' : 'bg-yellow-500 scale-100 z-10'}`;
+                marker.className = `keyframe-marker absolute top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-white shadow cursor-pointer transition-all hover:scale-150 pointer-events-auto ${isActive ? 'bg-blue-500 scale-125 z-20' : 'bg-gray-400 scale-100 z-10'}`;
                 marker.style.left = `calc(${percent}% - 6px)`;
                 marker.title = `點擊跳至關鍵幀 ${idx + 1} (${img.time}s)`;
 
@@ -461,21 +453,21 @@ const app = {
 
         if (el) {
             Array.from(el.parentElement.children).forEach(t => {
-                t.classList.remove('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
-                t.classList.add('border-gray-800');
+                t.classList.remove('border-blue-500', 'shadow-md', 'opacity-100');
+                t.classList.add('border-transparent', 'opacity-70');
             });
-            el.classList.add('border-blue-500', 'shadow-lg', 'shadow-blue-500/20');
-            el.classList.remove('border-gray-800');
+            el.classList.add('border-blue-500', 'shadow-md', 'opacity-100');
+            el.classList.remove('border-transparent', 'opacity-70');
         }
 
         const markers = document.querySelectorAll('.keyframe-marker');
         markers.forEach((m, mIdx) => {
             if (mIdx === idx) {
-                m.classList.replace('bg-yellow-500', 'bg-blue-500');
+                m.classList.replace('bg-gray-400', 'bg-blue-500');
                 m.classList.replace('scale-100', 'scale-125');
                 m.classList.add('z-20');
             } else {
-                m.classList.replace('bg-blue-500', 'bg-yellow-500');
+                m.classList.replace('bg-blue-500', 'bg-gray-400');
                 m.classList.replace('scale-125', 'scale-100');
                 m.classList.remove('z-20');
             }
@@ -499,12 +491,6 @@ const app = {
         const timeTag = document.getElementById('img-time-tag');
         if (timeTag) timeTag.innerText = newTime;
 
-        const thumbnails = document.querySelectorAll('.thumbnail-item');
-        if (thumbnails[idx]) {
-            const thumbTimeTag = thumbnails[idx].querySelector('div.absolute.bottom-1.right-1');
-            if (thumbTimeTag) thumbTimeTag.innerText = newTime + 's';
-        }
-
         const markers = document.querySelectorAll('.keyframe-marker');
         if (markers[idx] && video.duration) {
             const percent = (newTime / video.duration) * 100;
@@ -512,9 +498,7 @@ const app = {
             markers[idx].title = `點擊跳至關鍵幀 ${idx + 1} (${newTime}s)`;
         }
 
-        if (video._seekHandler) {
-            video.removeEventListener('seeked', video._seekHandler);
-        }
+        if (video._seekHandler) video.removeEventListener('seeked', video._seekHandler);
 
         video._seekHandler = () => {
             if (video.videoWidth && video.videoHeight) {
@@ -523,7 +507,6 @@ const app = {
                 canvas.height = video.videoHeight;
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
                 const newDataUrl = canvas.toDataURL('image/jpeg', 0.8);
 
                 currentCase.images[idx].src = newDataUrl;
@@ -531,6 +514,7 @@ const app = {
                 const mainImg = document.getElementById('main-img-view');
                 if (mainImg) mainImg.src = newDataUrl;
 
+                const thumbnails = document.querySelectorAll('.thumbnail-item');
                 if (thumbnails[idx]) {
                     const thumbImg = thumbnails[idx].querySelector('img');
                     if (thumbImg) thumbImg.src = newDataUrl;
@@ -549,8 +533,6 @@ const app = {
 
     applyFilters() {
         const keyword = document.getElementById('keyword-search').value.toLowerCase();
-        const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(el => el.value);
-        const selectedLocations = Array.from(document.querySelectorAll('.filter-location:checked')).map(el => el.value);
 
         this.state.filteredCases = this.state.pendingCases.filter(c => {
             let matchLevel = true;
@@ -562,10 +544,7 @@ const app = {
                 c.plate.toLowerCase().includes(keyword) ||
                 c.location.toLowerCase().includes(keyword);
 
-            const matchType = selectedTypes.length === 0 || selectedTypes.some(t => c.type.includes(t));
-            const matchLocation = selectedLocations.length === 0 || selectedLocations.some(l => c.location.includes(l));
-
-            return matchLevel && matchKeyword && matchType && matchLocation;
+            return matchLevel && matchKeyword;
         });
 
         this.renderCaseList();
@@ -578,26 +557,28 @@ const app = {
         }
     },
 
-    resetFilters() {
-        document.querySelectorAll('#filter-panel input[type="checkbox"]').forEach(cb => cb.checked = false);
-        document.getElementById('keyword-search').value = '';
-        this.applyFilters();
-    },
-
     filterCases(level, el) {
-        const navAll = document.getElementById('nav-all');
-        if (navAll) {
-            navAll.classList.remove('sidebar-active', 'text-blue-400');
-            navAll.classList.add('text-gray-400');
-        }
-        document.querySelectorAll('.filter-item').forEach(item => item.classList.remove('filter-active'));
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove(
+                'shadow-sm',
+                'text-green-600', 'bg-green-50', 'border-green-100',
+                'text-yellow-600', 'bg-yellow-50', 'border-yellow-100',
+                'text-red-600', 'bg-red-50', 'border-red-100',
+                'border'
+            );
+            btn.classList.add('text-gray-400', 'border-transparent');
+        });
 
         if (el) {
-            if (level === 'all') {
-                el.classList.add('sidebar-active', 'text-blue-400');
-                el.classList.remove('text-gray-400');
-            } else {
-                el.classList.add('filter-active');
+            el.classList.remove('text-gray-400', 'border-transparent');
+            el.classList.add('shadow-sm', 'border');
+
+            if (level === 'high') {
+                el.classList.add('text-red-600', 'bg-red-50', 'border-red-100');
+            } else if (level === 'mid') {
+                el.classList.add('text-yellow-600', 'bg-yellow-50', 'border-yellow-100');
+            } else if (level === 'low') {
+                el.classList.add('text-green-600', 'bg-green-50', 'border-green-100');
             }
         }
 
@@ -606,7 +587,7 @@ const app = {
     },
 
     updateStatistics() {
-        const stats = { total: this.state.pendingCases.length, high: 0, mid: 0, low: 0 };
+        const stats = { high: 0, mid: 0, low: 0 };
         this.state.pendingCases.forEach(c => {
             if (c.confidence >= 90) stats.high++;
             else if (c.confidence >= 80) stats.mid++;
@@ -617,7 +598,6 @@ const app = {
             const el = document.getElementById(id);
             if (el) el.innerText = val;
         };
-        setVal('total-cases-count', stats.total);
         setVal('high-confidence-count', stats.high);
         setVal('mid-confidence-count', stats.mid);
         setVal('low-confidence-count', stats.low);
@@ -643,6 +623,7 @@ const app = {
         const c = this.state.allCases.find(item => item.id === this.state.selectedCaseId);
         if (c && typeof TicketModal !== 'undefined') TicketModal.open(c);
     },
+
     openLightbox(src) {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -653,9 +634,7 @@ const app = {
     },
 
     closeTicket() {
-        if (typeof TicketModal !== 'undefined') {
-            TicketModal.close();
-        }
+        if (typeof TicketModal !== 'undefined') TicketModal.close();
     },
 
     confirmTicket() {
@@ -680,33 +659,21 @@ const app = {
 
     closeCancelModal: function() {
         const modal = document.getElementById('cancel-modal');
-        if (modal) {
-            modal.classList.add('hidden');
-        }
+        if (modal) modal.classList.add('hidden');
     },
 
     confirmCancelCase: function() {
         const selectedRadio = document.querySelector('input[name="cancel-reason"]:checked');
-
-        if (!selectedRadio) {
-            alert('請先選擇撤銷原因！');
-            return;
-        }
+        if (!selectedRadio) { alert('請先選擇撤銷原因！'); return; }
 
         let reason = selectedRadio.value;
-
         if (reason === 'other') {
             const otherInput = document.getElementById('other-reason-input').value.trim();
-            if (!otherInput) {
-                alert('請輸入具體的其他原因！');
-                document.getElementById('other-reason-input').focus();
-                return;
-            }
+            if (!otherInput) { alert('請輸入具體的其他原因！'); document.getElementById('other-reason-input').focus(); return; }
             reason = otherInput;
         }
 
         const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
-
         if (currentCase) {
             currentCase.status = 'canceled';
             currentCase.cancelReason = reason;
@@ -714,8 +681,6 @@ const app = {
             this.state.pendingCases = this.state.allCases.filter(c => c.status === 'pending');
             this.updateStatistics();
             this.applyFilters();
-
-            console.log(`[系統紀錄] 案件 #${currentCase.id} 已撤銷。原因：${reason}`);
 
             this.closeCancelModal();
             alert(`案件 #${currentCase.id} 已成功撤銷。\n紀錄原因：${reason}`);

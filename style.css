@@ -1,10 +1,10 @@
 :root {
-    --bg-main: #0d1117;
-    --bg-card: #161b22;
-    --bg-sidebar-active: #1a2a4e;
-    --text-primary: #e6edf3;
-    --accent-blue: #3b82f6;
-    --border-color: #30363d;
+    --bg-main: #f9fafb;
+    --bg-card: #ffffff;
+    --bg-sidebar-active: #3662D8; /* 改為指定藍色 */
+    --text-primary: #1f2937;
+    --accent-blue: #3662D8;       /* 改為指定藍色 */
+    --border-color: #e5e7eb;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 
 .sidebar-active {
     background-color: var(--bg-sidebar-active);
-    border-left: 4px solid var(--accent-blue);
+    color: white !important;
 }
 
 .card-bg {
@@ -32,12 +32,12 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #30363d;
+    background: #cbd5e1;
     border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #484f58;
+    background: #94a3b8;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -46,28 +46,6 @@ body {
 .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
-}
-
-.detection-box {
-    position: absolute;
-    border: 2px solid #ef4444;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-    pointer-events: none;
-}
-
-.evidence-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.group:hover .evidence-img {
-    transform: scale(1.1);
-}
-
-.detection-box {
-    z-index: 10;
 }
 
 #lightbox.hidden {
@@ -79,13 +57,4 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-.filter-active {
-    background-color: rgba(59, 130, 246, 0.15) !important;
-    color: #3b82f6 !important;
-}
-
-.filter-active .rounded-full {
-    box-shadow: 0 0 5px currentColor;
 }
