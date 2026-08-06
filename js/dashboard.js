@@ -5,7 +5,7 @@ const DashboardApp = {
     },
 
     // 指定當前登入或查看的警員名稱
-    currentAuditor: '葉警員',
+    currentAuditor: '林警員',
 
     // 每日目標件數
     dailyTarget: 450,

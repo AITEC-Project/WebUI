@@ -388,39 +388,42 @@ const AdminApp = {
         });
 
         let labels = Object.keys(typeCounts);
+        let monthlyData = [];
+        let weeklyData = [];
 
         if (labels.length === 0) {
+            // 防呆預設資料
             labels = ['未依標線行駛', '闖紅燈', '違規停車', '超速', '其他'];
+            monthlyData = [120, 85, 150, 60, 30];
+            weeklyData = [35, 20, 45, 15, 8];
+        } else {
+            // 讀取 data.js 中的真實數據
+            monthlyData = labels.map(label => typeCounts[label] || 0);
+            // 由於全部資料皆由 python 生成在近 30 天內，我們模擬近一週為其四分之一
+            weeklyData = monthlyData.map(val => Math.ceil(val / 4));
         }
 
-        const monthlyData = [120, 85, 150, 60, 30];
-        const weeklyData = [35, 20, 45, 15, 8];
-
         this.chart = new Chart(ctx.getContext('2d'), {
-            type: 'line',
+            type: 'bar', // 長條圖
             data: {
                 labels: labels,
                 datasets: [
-                    {
-                        label: '近一個月',
-                        data: monthlyData,
-                        borderColor: '#1e3a8a',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        pointBackgroundColor: '#1e3a8a',
-                        pointRadius: 4,
-                        backgroundColor: 'transparent'
-                    },
+                    // 將「近一週」移到前面
                     {
                         label: '近一週',
                         data: weeklyData,
+                        backgroundColor: '#9CA3AF',
                         borderColor: '#9CA3AF',
-                        borderDash: [5, 5],
-                        borderWidth: 2,
-                        tension: 0.4,
-                        pointBackgroundColor: '#9CA3AF',
-                        pointRadius: 3,
-                        backgroundColor: 'transparent'
+                        borderWidth: 1,
+                        borderRadius: 0 // 維持無圓角設定
+                    },
+                    {
+                        label: '近一個月',
+                        data: monthlyData,
+                        backgroundColor: '#1e3a8a',
+                        borderColor: '#1e3a8a',
+                        borderWidth: 1,
+                        borderRadius: 0 // 維持無圓角設定
                     }
                 ]
             },
@@ -433,7 +436,10 @@ const AdminApp = {
                 },
                 plugins: {
                     legend: { display: false },
-                    tooltip: { enabled: true }
+                    tooltip: {
+                        enabled: true,
+                        cornerRadius: 0 // tooltip 也維持直角
+                    }
                 },
                 scales: {
                     x: {

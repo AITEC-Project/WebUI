@@ -1,69 +1,77 @@
-<div id="ticket-modal" class="fixed inset-0 bg-black/90 z-[10000] hidden flex items-center justify-center p-2 sm:p-4 backdrop-blur-md">
-    <div class="bg-[#161b22] text-[#e6edf3] w-[95vw] max-w-[1600px] max-h-[95vh] rounded-2xl overflow-hidden flex flex-col shadow-2xl border border-gray-800">
+<div id="ticket-modal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-[10000] hidden flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white text-gray-900 w-[95vw] max-w-[1600px] max-h-[95vh] rounded-none overflow-hidden flex flex-col shadow-2xl border border-gray-200">
 
-        <div class="bg-[#1a2a4e] border-b border-blue-500/30 p-5 flex justify-between items-center shadow-lg">
+        <!-- 標題列 -->
+        <div class="bg-gray-50 border-b border-gray-200 p-5 flex justify-between items-center shadow-sm">
             <div class="flex items-center space-x-4">
-                <div class="bg-blue-500/20 p-2 rounded-lg border border-blue-500/40">
-                    <i class="fas fa-file-invoice text-blue-400 text-xl"></i>
+                <div class="bg-blue-50 p-2 rounded-none border border-blue-200">
+                    <i class="fas fa-file-invoice text-blue-600 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-lg font-black text-white tracking-widest uppercase">交通違規舉發預覽</h3>
+                    <h3 class="text-lg font-bold text-gray-900 tracking-widest uppercase">交通違規舉發預覽</h3>
                 </div>
             </div>
-            <button onclick="app.closeTicket()" class="text-gray-400 hover:text-white hover:bg-white/10 w-10 h-10 rounded-full transition flex items-center justify-center">
+            <button onclick="app.closeTicket()" class="text-gray-400 hover:text-gray-700 hover:bg-gray-100 w-10 h-10 rounded-none transition flex items-center justify-center">
                 <i class="fas fa-times text-xl"></i>
             </button>
         </div>
 
-        <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+        <!-- 內容主體 -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar bg-white">
             <div class="grid grid-cols-12 gap-8 lg:gap-12">
 
+                <!-- 左側：違規事實詳情 -->
                 <div class="col-span-12 lg:col-span-5 space-y-8">
                     <section class="space-y-4">
-                        <h4 class="text-[11px] text-blue-500 font-bold uppercase tracking-[0.2em] flex items-center">
-                            <span class="w-1 h-3 bg-blue-500 mr-2 rounded-full"></span> 違規事實詳情
+                        <h4 class="text-[10px] text-blue-600 font-extrabold uppercase tracking-widest flex items-center">
+                            <span class="w-8 h-0.5 bg-blue-600 mr-3 inline-block"></span> 違規事實詳情
                         </h4>
-                        <div class="bg-black/40 p-6 rounded-2xl border border-gray-800 space-y-4 shadow-inner">
+                        <div class="bg-gray-50 p-6 rounded-none border border-gray-200 space-y-4 shadow-sm">
 
-                            <div class="flex items-center border-b border-gray-800 pb-3">
-                                <span class="text-gray-500 text-sm shrink-0">違規單號</span>
+                            <div class="flex items-center border-b border-gray-200 pb-3">
+                                <span class="text-gray-500 text-sm font-bold shrink-0">違規單號</span>
                                 <div class="flex-grow"></div>
-                                <span class="text-blue-400 font-mono font-bold text-lg" id="m-id">--</span>
+                                <span class="text-blue-600 font-mono font-extrabold text-lg" id="m-id">--</span>
                             </div>
 
-                            <div class="flex items-center border-b border-gray-800 pb-3">
-                                <span class="text-gray-500 text-sm shrink-0">舉發車牌</span>
+                            <div class="flex items-center border-b border-gray-200 pb-3">
+                                <span class="text-gray-500 text-sm font-bold shrink-0">舉發車牌</span>
                                 <div class="flex-grow"></div>
-                                <span class="text-white font-black text-xl tracking-wider border border-white/20 px-2 py-0.5 rounded bg-white/5" id="m-plate">--</span>
+                                <span class="text-gray-900 font-black text-xl tracking-wider border border-gray-200 px-3 py-1 rounded-none bg-white shadow-sm font-mono" id="m-plate">--</span>
                             </div>
 
-                            <div class="flex items-center border-b border-gray-800 pb-3">
-                                <span class="text-gray-500 text-sm shrink-0">違規發生時間</span>
-                                <div class="flex-grow"></div> <span class="text-gray-100 font-mono font-semibold" id="m-time">--</span>
+                            <div class="flex items-center border-b border-gray-200 pb-3">
+                                <span class="text-gray-500 text-sm font-bold shrink-0">違規發生時間</span>
+                                <div class="flex-grow"></div>
+                                <span class="text-gray-900 font-mono font-bold text-sm" id="m-time">--</span>
                             </div>
 
-                            <div class="flex items-center border-b border-gray-800 pb-3">
-                                <span class="text-gray-500 text-sm shrink-0">舉發路段地點</span>
-                                <div class="flex-grow"></div> <span class="text-gray-100 font-semibold text-right" id="m-location">--</span>
+                            <div class="flex items-center border-b border-gray-200 pb-3">
+                                <span class="text-gray-500 text-sm font-bold shrink-0">舉發路段地點</span>
+                                <div class="flex-grow"></div>
+                                <span class="text-gray-900 font-bold text-sm text-right" id="m-location">--</span>
                             </div>
 
-                            <div class="flex items-start border-b border-gray-800 pb-3">
-                                <span class="text-gray-500 text-sm shrink-0 mt-0.5">違規行為敘述</span>
-                                <div class="flex-grow"></div> <span class="text-gray-100 font-semibold text-right max-w-[60%]" id="m-type">--</span>
+                            <div class="flex items-start border-b border-gray-200 pb-3">
+                                <span class="text-gray-500 text-sm font-bold shrink-0 mt-0.5">違規行為敘述</span>
+                                <div class="flex-grow"></div>
+                                <span class="text-gray-900 font-bold text-sm text-right max-w-[60%]" id="m-type">--</span>
                             </div>
 
-                            <div class="flex items-start border-b border-gray-800 pb-3">
-                                <span class="text-gray-500 text-sm shrink-0 mt-0.5">法規條文</span>
-                                <div class="flex-grow"></div> <span class="text-gray-400 text-xs text-right max-w-[70%] italic leading-relaxed" id="m-legal">--</span>
+                            <div class="flex items-start border-b border-gray-200 pb-3">
+                                <span class="text-gray-500 text-sm font-bold shrink-0 mt-0.5">法規條文</span>
+                                <div class="flex-grow"></div>
+                                <span class="text-gray-500 text-xs text-right max-w-[70%] italic leading-relaxed" id="m-legal">--</span>
                             </div>
                         </div>
                     </section>
                 </div>
 
+                <!-- 右側：執法採證影像 -->
                 <div class="col-span-12 lg:col-span-7 flex flex-col space-y-6">
                     <section class="flex-1 space-y-4">
-                        <h4 class="text-[11px] text-gray-500 font-bold uppercase tracking-[0.2em] flex items-center">
-                            <i class="fas fa-camera-retro mr-2"></i> 執法採證影像
+                        <h4 class="text-[10px] text-gray-500 font-extrabold uppercase tracking-widest flex items-center">
+                            <i class="fas fa-camera-retro mr-2 text-blue-600"></i> 執法採證影像
                         </h4>
 
                         <div class="grid grid-cols-2 gap-4" id="m-images"></div>
@@ -73,15 +81,17 @@
             </div>
         </div>
 
-        <div class="bg-[#0d1117] p-6 border-t border-gray-800 flex justify-end items-center space-x-6">
+        <!-- 底部按鈕列 -->
+        <div class="bg-gray-50 p-6 border-t border-gray-200 flex justify-end items-center space-x-4">
             <div class="flex space-x-3">
-                <button onclick="app.closeTicket()" class="px-6 py-3 text-sm text-gray-400 hover:text-white transition font-bold uppercase tracking-widest hover:bg-white/5 rounded-xl">
+                <button onclick="app.closeTicket()" class="px-6 py-2.5 text-sm text-gray-600 font-bold hover:bg-gray-200 transition uppercase tracking-widest rounded-none border border-gray-300 bg-white">
                     取消 <span class="ml-2 text-[10px] opacity-50 font-normal">ESC</span>
                 </button>
 
-                <button onclick="app.confirmTicket()" class="px-10 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-black text-sm transition shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center">
+                <!-- 已將背景改為指定之系統藍色 (#3662D8) -->
+                <button onclick="app.confirmTicket()" class="px-8 py-2.5 bg-[#3662D8] hover:bg-[#284eab] text-white rounded-none font-bold text-sm transition shadow-md shadow-blue-500/20 flex items-center">
                     <span>案件成立</span>
-                    <span class="ml-3 px-1.5 py-0.5 bg-white/20 rounded text-[10px] border border-white/30 font-medium">Enter</span>
+                    <span class="ml-3 px-1.5 py-0.5 bg-white/20 rounded-none text-[10px] border border-white/30 font-medium">Enter</span>
                 </button>
             </div>
         </div>

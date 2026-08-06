@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歷史案件調閱 - 管理者後台</title>
+    <title>個人歷史案件調閱 - 管理者後台</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Tailwind Config 覆寫為指定的藍色與字體 -->
@@ -50,17 +50,16 @@
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 0; }
         .stat-card { border: 1px solid #E5E7EB; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border-radius: 0; }
-        /* 針對橫向進度條的樣式 */
         .progress-bar-container { width: 60px; height: 4px; background-color: #E5E7EB; border-radius: 0; overflow: hidden; margin-top: 4px; }
         .progress-bar-fill { height: 100%; border-radius: 0; }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden font-sans">
 
-<!-- 左側側邊欄 (與 admin.html 統一) -->
+<!-- 左側側邊欄 -->
 <aside id="sidebar-panel" class="w-64 border-r border-gray-200 flex flex-col p-4 space-y-6 flex-shrink-0 bg-gray-50 transition-all duration-300 z-50">
     <div class="flex flex-col space-y-3 p-2 border-b border-gray-200 pb-4">
-        <!-- 林警官、直角黑底圖示 -->
+        <!-- 林警官 -->
         <div id="sidebar-user-info" class="flex items-center space-x-3 w-full relative">
             <div class="w-11 h-11 bg-black flex items-center justify-center flex-shrink-0 cursor-pointer" onclick="window.location.href='index.html';">
                 <i class="far fa-user text-white text-xl"></i>
@@ -98,10 +97,10 @@
             <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
                 <i class="fas fa-border-all w-5 text-center mr-3"></i><span class="sidebar-text">數據監測中心</span>
             </a>
-            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+            <a href="devices.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
                 <i class="fas fa-chart-line w-5 text-center mr-3"></i><span class="sidebar-text">趨勢預測分析</span>
             </a>
-            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
+            <a href="records.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition font-medium">
                 <i class="fas fa-clipboard-list w-5 text-center mr-3"></i><span class="sidebar-text">監測紀錄</span>
             </a>
         </nav>
@@ -111,14 +110,66 @@
 <!-- 主畫面區塊 -->
 <main class="flex-1 flex flex-col overflow-hidden bg-gray-50">
     <header class="p-10 pb-6">
-        <div class="mb-8">
-            <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-1 flex items-center">
-                <span class="w-8 h-0.5 bg-blue-600 mr-3 inline-block"></span>ARCHIVE & RECORDS
-            </p>
-            <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">歷史案件調閱</h1>
-            <p class="text-sm text-gray-500 mt-2 max-w-3xl leading-relaxed">
-                系統完整記錄所有已結案之科技執法案件。依據行政程序法存證規範，此處詳列由人工覆核及 AI 判定之執法歷程，提供具備法律效益的歷史檔案。
-            </p>
+        <div class="flex flex-col xl:flex-row justify-between items-start gap-8 mb-8">
+
+            <!-- 左側：標題與描述 -->
+            <div class="max-w-2xl">
+                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-1 flex items-center">
+                    <span class="w-8 h-0.5 bg-blue-600 mr-3 inline-block"></span>MY ARCHIVE & RECORDS
+                </p>
+                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">個人歷史案件調閱</h1>
+                <p class="text-sm text-gray-500 mt-2 leading-relaxed">
+                    此處詳列由您 (林警官) 親自完成人工覆核之執法歷程。若發現誤判或接獲民眾申訴，可點擊操作欄位重新審查並更新系統紀錄。
+                </p>
+            </div>
+
+            <!-- 右側：統計區塊 -->
+            <div class="flex gap-4 shrink-0 w-full xl:w-auto overflow-x-auto pb-2 xl:pb-0">
+                <!-- PERSONAL ACCURACY -->
+                <div class="bg-gray-50 border border-gray-200 p-4 rounded-none flex flex-col justify-between h-28 w-48 relative overflow-hidden shadow-sm">
+                    <div class="flex justify-between items-start z-10">
+                        <span class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">PERSONAL ACCURACY</span>
+                        <span class="text-[10px] font-bold text-green-500">+1.2%</span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-gray-900 z-10">98.5%</div>
+                    <!-- 裝飾用小長條圖 -->
+                    <div class="absolute bottom-4 right-4 flex items-end space-x-1 opacity-60">
+                        <div class="w-1.5 h-3 bg-blue-300 rounded-none"></div>
+                        <div class="w-1.5 h-5 bg-blue-400 rounded-none"></div>
+                        <div class="w-1.5 h-8 bg-blue-500 rounded-none"></div>
+                        <div class="w-1.5 h-6 bg-blue-600 rounded-none"></div>
+                    </div>
+                </div>
+
+                <!-- REVOKE RATE -->
+                <div class="bg-gray-50 border border-gray-200 p-4 rounded-none flex flex-col justify-between h-28 w-48 relative overflow-hidden shadow-sm">
+                    <div class="flex justify-between items-start z-10">
+                        <span class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">REVOKE RATE</span>
+                        <span class="text-[10px] font-bold text-red-500">-0.3%</span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-gray-900 z-10">0.85%</div>
+                    <!-- 裝飾用小長條圖 -->
+                    <div class="absolute bottom-4 right-4 flex items-end space-x-1 opacity-60">
+                        <div class="w-1.5 h-6 bg-red-300 rounded-none"></div>
+                        <div class="w-1.5 h-3 bg-red-400 rounded-none"></div>
+                        <div class="w-1.5 h-8 bg-red-500 rounded-none"></div>
+                        <div class="w-1.5 h-2 bg-red-600 rounded-none"></div>
+                    </div>
+                </div>
+
+                <!-- TOTAL REVIEWED -->
+                <div class="bg-blue-600 text-white p-4 rounded-none flex flex-col justify-between h-28 w-56 shadow-md relative overflow-hidden">
+                    <div class="flex justify-between items-start z-10">
+                        <span class="text-[10px] font-bold text-blue-100 tracking-widest uppercase">TOTAL REVIEWED</span>
+                        <i class="far fa-check-circle text-blue-200"></i>
+                    </div>
+                    <div class="z-10">
+                        <div class="text-3xl font-extrabold mb-1">12,408</div>
+                        <span class="text-[9px] font-bold text-blue-200 tracking-widest uppercase bg-white/10 px-2 py-0.5 rounded-none">ALL-TIME CUMULATIVE</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- 頂部過濾列 -->
@@ -141,11 +192,10 @@
             <div class="relative">
                 <button id="advanced-filter-btn" class="flex items-center bg-white border border-gray-200 text-gray-700 rounded-none px-4 py-2.5 hover:bg-gray-50 transition font-bold text-sm h-full select-none">
                     <i class="fas fa-sliders-h text-gray-500 mr-2"></i> 進階篩選
-                    <!-- 顯示啟用幾個條件的徽章 -->
                     <span id="active-filter-count" class="ml-2 bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-none hidden">0</span>
                 </button>
 
-                <!-- 篩選表單面板 (預設隱藏) -->
+                <!-- 篩選表單面板 -->
                 <div id="filter-panel" class="hidden absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-none shadow-2xl z-50 overflow-hidden flex flex-col">
                     <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
                         <h3 class="text-sm font-bold text-gray-800"><i class="fas fa-filter text-blue-600 mr-2"></i>篩選條件</h3>
@@ -173,12 +223,6 @@
                                 <option value="撤銷舉發">撤銷舉發</option>
                             </select>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-500 mb-2 tracking-wide">審核人員</label>
-                            <select id="auditor-filter" class="w-full bg-white border border-gray-200 rounded-none p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold text-gray-700 cursor-pointer shadow-sm">
-                                <option value="all">全部人員</option>
-                            </select>
-                        </div>
                     </div>
 
                     <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-between items-center">
@@ -188,7 +232,7 @@
                 </div>
             </div>
 
-            <!-- 重置全部按鈕 (還原所有包含日期、搜尋與進階條件) -->
+            <!-- 重置全部按鈕 -->
             <button id="reset-filters" class="flex items-center justify-center w-11 h-11 bg-white border border-gray-200 text-blue-600 rounded-none hover:bg-blue-50 transition shrink-0" title="還原所有預設值">
                 <i class="fas fa-redo-alt font-bold"></i>
             </button>
@@ -197,17 +241,16 @@
 
     <div class="flex-1 overflow-y-auto px-10 pb-10 custom-scrollbar">
         <!-- 列表區塊 -->
-        <div class="card-bg border border-gray-200 overflow-hidden mb-8 shadow-sm">
+        <div class="card-bg border border-gray-200 overflow-hidden shadow-sm">
             <table class="w-full text-left border-collapse bg-white">
                 <thead>
                 <tr class="border-b border-gray-100 text-gray-400 text-[10px] uppercase font-extrabold tracking-widest">
-                    <th class="p-5 w-[10%]">案件編號</th>
-                    <th class="p-5 w-[12%]">時間戳記</th>
-                    <th class="p-5 w-[22%]">違規路段</th>
+                    <th class="p-5 w-[12%]">案件編號</th>
+                    <th class="p-5 w-[14%]">時間戳記</th>
+                    <th class="p-5 w-[25%]">違規路段</th>
                     <th class="p-5 w-[16%] text-center">違規車牌</th>
-                    <th class="p-5 w-[15%]">違規樣態</th>
-                    <th class="p-5 w-[10%] text-center">狀態</th>
-                    <th class="p-5 w-[10%] text-center">審核人員</th>
+                    <th class="p-5 w-[16%]">違規樣態</th>
+                    <th class="p-5 w-[12%] text-center">狀態</th>
                     <th class="p-5 w-[5%] text-center">操作</th>
                 </tr>
                 </thead>
@@ -223,53 +266,6 @@
                 </div>
                 <div id="pagination-controls" class="flex items-center space-x-1">
                     <!-- 分頁按鈕將由 JavaScript 動態生成 -->
-                </div>
-            </div>
-        </div>
-
-        <!-- 底部統計區塊 -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
-            <!-- MONTHLY ACCURACY -->
-            <div class="bg-gray-50 border border-gray-200 p-6 rounded-none flex flex-col justify-between h-32 relative overflow-hidden">
-                <div class="flex justify-between items-start z-10">
-                    <span class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">MONTHLY ACCURACY</span>
-                    <span class="text-[10px] font-bold text-green-500">+2.4%</span>
-                </div>
-                <div class="text-4xl font-extrabold text-gray-900 z-10">92.8%</div>
-                <!-- 裝飾用小長條圖 -->
-                <div class="absolute bottom-4 right-4 flex items-end space-x-1 opacity-60">
-                    <div class="w-1.5 h-4 bg-blue-300 rounded-none"></div>
-                    <div class="w-1.5 h-5 bg-blue-400 rounded-none"></div>
-                    <div class="w-1.5 h-8 bg-blue-500 rounded-none"></div>
-                    <div class="w-1.5 h-6 bg-blue-600 rounded-none"></div>
-                </div>
-            </div>
-
-            <!-- APPEAL REVOKE RATE -->
-            <div class="bg-gray-50 border border-gray-200 p-6 rounded-none flex flex-col justify-between h-32 relative overflow-hidden">
-                <div class="flex justify-between items-start z-10">
-                    <span class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">APPEAL REVOKE RATE</span>
-                    <span class="text-[10px] font-bold text-red-500">-0.8%</span>
-                </div>
-                <div class="text-4xl font-extrabold text-gray-900 z-10">1.25%</div>
-                <!-- 裝飾用小長條圖 -->
-                <div class="absolute bottom-4 right-4 flex items-end space-x-1 opacity-60">
-                    <div class="w-1.5 h-6 bg-red-300 rounded-none"></div>
-                    <div class="w-1.5 h-3 bg-red-400 rounded-none"></div>
-                    <div class="w-1.5 h-8 bg-red-500 rounded-none"></div>
-                    <div class="w-1.5 h-2 bg-red-600 rounded-none"></div>
-                </div>
-            </div>
-
-            <!-- TOTAL PROCESSED -->
-            <div class="bg-blue-600 text-white p-6 rounded-none flex flex-col justify-between h-32 shadow-lg shadow-blue-500/20 relative">
-                <div class="flex justify-between items-start z-10">
-                    <span class="text-[10px] font-bold text-blue-100 tracking-widest uppercase">TOTAL PROCESSED</span>
-                    <i class="far fa-check-circle text-blue-200"></i>
-                </div>
-                <div class="z-10">
-                    <div class="text-4xl font-extrabold mb-1">842,912</div>
-                    <span class="text-[9px] font-bold text-blue-200 tracking-widest uppercase bg-white/10 px-2 py-0.5 rounded-none">ALL-TIME CUMULATIVE</span>
                 </div>
             </div>
         </div>

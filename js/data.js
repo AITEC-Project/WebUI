@@ -2,7 +2,7 @@ const mockCases = [
     {
         id: "AA-0000",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "GXQ-3629",
         location: "台中市北屯區環中路",
         confidence: 96,
@@ -22,14 +22,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 GXQ-3629 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 GXQ-3629 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0001",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "MGA-4354",
         location: "台中市南區文心路四段",
         confidence: 90,
@@ -49,9 +49,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 MGA-4354 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 MGA-4354 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0002",
@@ -77,13 +77,13 @@ const mockCases = [
         ],
         video: "video/video01.mp4",
         legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "偵測到該車道地面標線為「雙黃線」，車輛違規跨越雙黃線，偵測到車牌 STP-9968 未依規定車道行駛，跨越禁止變換車道線。",
+        description: "偵測到該車道地面標線為「雙白線」，車輛違規跨越雙白線，偵測到車牌 STP-9968 未依規定車道行駛，跨越禁止變換車道線。",
         auditor: null
     },
     {
         id: "AA-0003",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "VDZ-2252",
         location: "台中市南屯區環中路",
         confidence: 94,
@@ -103,9 +103,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 82km/h，超過該路段限速 40km/h，標的車輛為藍色 SUV，車牌 VDZ-2252 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 VDZ-2252 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0004",
@@ -137,7 +137,7 @@ const mockCases = [
     {
         id: "AA-0005",
         status: "cancelled",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "ZSH-3267",
         location: "台中市南區台灣大道二段",
         confidence: 78,
@@ -157,9 +157,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ZSH-3267 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ZSH-3267 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0006",
@@ -245,7 +245,7 @@ const mockCases = [
     {
         id: "AA-0009",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "KGS-7793",
         location: "台中市西屯區環中路",
         confidence: 96,
@@ -265,9 +265,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 KGS-7793 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 KGS-7793 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0010",
@@ -299,7 +299,7 @@ const mockCases = [
     {
         id: "AA-0011",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "OUI-4636",
         location: "台中市西屯區中清路",
         confidence: 85,
@@ -319,14 +319,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 OUI-4636 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 OUI-4636 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0012",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "ZWA-9747",
         location: "台中市南屯區環中路",
         confidence: 90,
@@ -346,14 +346,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.6 秒，車輛仍強行通過停止線，偵測到車牌 ZWA-9747 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ZWA-9747 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0013",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "JJB-8639",
         location: "台中市西屯區復興路",
         confidence: 88,
@@ -373,14 +373,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 JJB-8639 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 JJB-8639 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0014",
         status: "verified",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "WPQ-7829",
         location: "台中市北區復興路",
         confidence: 75,
@@ -400,14 +400,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 WPQ-7829 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 WPQ-7829 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0015",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "YTP-8087",
         location: "台中市中區黎明路",
         confidence: 99,
@@ -427,14 +427,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 YTP-8087 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 YTP-8087 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0016",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "FXR-7934",
         location: "台中市南區中清路",
         confidence: 96,
@@ -454,14 +454,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 FXR-7934 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 FXR-7934 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0017",
         status: "cancelled",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "RFO-5067",
         location: "台中市南屯區精誠路",
         confidence: 75,
@@ -481,14 +481,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 RFO-5067 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 RFO-5067 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0018",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "MVH-1998",
         location: "台中市豐原區黎明路",
         confidence: 85,
@@ -508,14 +508,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 MVH-1998 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 MVH-1998 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0019",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "EBB-9076",
         location: "台中市太平區台灣大道二段",
         confidence: 81,
@@ -535,14 +535,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 54km/h，超過該路段限速 50km/h，標的車輛為藍色 Hatchback，車牌 EBB-9076 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 EBB-9076 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0020",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "RLP-0797",
         location: "台中市南屯區精誠路",
         confidence: 76,
@@ -562,14 +562,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 53km/h，超過該路段限速 60km/h，標的車輛為銀色 SUV，車牌 RLP-0797 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 RLP-0797 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0021",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "YAV-5909",
         location: "台中市豐原區崇德路三段",
         confidence: 91,
@@ -589,14 +589,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 52km/h，超過該路段限速 50km/h，標的車輛為白色 SUV，車牌 YAV-5909 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 YAV-5909 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0022",
         status: "verified",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "JHC-2395",
         location: "台中市西屯區復興路",
         confidence: 95,
@@ -616,9 +616,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 JHC-2395 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 JHC-2395 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0023",
@@ -643,14 +643,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.9 秒，車輛仍強行通過停止線，偵測到車牌 LVX-3171 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 LVX-3171 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0024",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "AES-0432",
         location: "台中市北區環中路",
         confidence: 81,
@@ -670,14 +670,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 AES-0432 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 AES-0432 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0025",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "JHB-9250",
         location: "台中市太平區復興路",
         confidence: 83,
@@ -697,14 +697,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 58km/h，超過該路段限速 60km/h，標的車輛為銀色 Hatchback，車牌 JHB-9250 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 JHB-9250 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0026",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "SZT-6704",
         location: "台中市西屯區台灣大道二段",
         confidence: 80,
@@ -724,14 +724,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 56km/h，超過該路段限速 40km/h，標的車輛為灰色 Truck，車牌 SZT-6704 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 SZT-6704 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0027",
         status: "pending",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "TCQ-4991",
         location: "台中市南屯區公益路",
         confidence: 82,
@@ -751,8 +751,8 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 TCQ-4991 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 TCQ-4991 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
@@ -778,14 +778,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.1 秒，車輛仍強行通過停止線，偵測到車牌 GLN-4295 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 GLN-4295 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0029",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "AHO-4127",
         location: "台中市北區精誠路",
         confidence: 83,
@@ -805,14 +805,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 AHO-4127 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 AHO-4127 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0030",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "GPE-0697",
         location: "台中市中區五權西路",
         confidence: 98,
@@ -832,14 +832,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 84km/h，超過該路段限速 60km/h，標的車輛為紅色 Sedan，車牌 GPE-0697 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 GPE-0697 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0031",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "MQR-8479",
         location: "台中市西屯區公益路",
         confidence: 99,
@@ -859,14 +859,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 68km/h，超過該路段限速 50km/h，標的車輛為灰色 SUV，車牌 MQR-8479 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 MQR-8479 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0032",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "GYG-5009",
         location: "台中市太平區公益路",
         confidence: 97,
@@ -886,14 +886,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 84km/h，超過該路段限速 40km/h，標的車輛為紅色 Hatchback，車牌 GYG-5009 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 GYG-5009 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0033",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "LNM-3863",
         location: "台中市北區文心路四段",
         confidence: 87,
@@ -913,14 +913,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 LNM-3863 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 LNM-3863 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0034",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "PWE-8882",
         location: "台中市南屯區環中路",
         confidence: 88,
@@ -940,14 +940,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PWE-8882 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 PWE-8882 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0035",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "AGN-6451",
         location: "台中市太平區中清路",
         confidence: 83,
@@ -967,14 +967,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 88km/h，超過該路段限速 40km/h，標的車輛為藍色 SUV，車牌 AGN-6451 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 AGN-6451 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0036",
         status: "pending",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "WPW-5317",
         location: "台中市北區復興路",
         confidence: 95,
@@ -994,14 +994,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 WPW-5317 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 WPW-5317 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0037",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "FCU-7676",
         location: "台中市南區公益路",
         confidence: 96,
@@ -1021,14 +1021,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 FCU-7676 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 FCU-7676 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0038",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "ZPK-5969",
         location: "台中市北區崇德路三段",
         confidence: 81,
@@ -1048,14 +1048,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 50km/h，超過該路段限速 40km/h，標的車輛為紅色 Hatchback，車牌 ZPK-5969 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 ZPK-5969 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0039",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "BHR-3687",
         location: "台中市太平區文心路四段",
         confidence: 93,
@@ -1075,14 +1075,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 BHR-3687 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 BHR-3687 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0040",
         status: "pending",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "CPB-5632",
         location: "台中市北區公益路",
         confidence: 82,
@@ -1102,14 +1102,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 CPB-5632 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 CPB-5632 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0041",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "AVP-8791",
         location: "台中市西屯區中清路",
         confidence: 88,
@@ -1129,14 +1129,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 89km/h，超過該路段限速 50km/h，標的車輛為銀色 Hatchback，車牌 AVP-8791 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 AVP-8791 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0042",
         status: "pending",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "VRN-4638",
         location: "台中市北區崇德路三段",
         confidence: 93,
@@ -1156,14 +1156,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 VRN-4638 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 VRN-4638 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0043",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "FHN-0301",
         location: "台中市豐原區崇德路三段",
         confidence: 96,
@@ -1183,14 +1183,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 63km/h，超過該路段限速 50km/h，標的車輛為紅色 Sedan，車牌 FHN-0301 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 FHN-0301 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0044",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "JMD-8544",
         location: "台中市太平區公益路",
         confidence: 87,
@@ -1210,14 +1210,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 JMD-8544 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 JMD-8544 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0045",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "JTZ-4055",
         location: "台中市西區黎明路",
         confidence: 94,
@@ -1237,14 +1237,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 JTZ-4055 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 JTZ-4055 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0046",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "KBF-7685",
         location: "台中市北屯區公益路",
         confidence: 92,
@@ -1264,14 +1264,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 KBF-7685 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 KBF-7685 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0047",
         status: "pending",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "MVX-7316",
         location: "台中市南屯區中清路",
         confidence: 99,
@@ -1291,14 +1291,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.3 秒，車輛仍強行通過停止線，偵測到車牌 MVX-7316 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 MVX-7316 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0048",
         status: "pending",
-        type: "違規停車",
+        type: "逆向",
         plate: "XNE-3445",
         location: "台中市南屯區文心路四段",
         confidence: 91,
@@ -1318,14 +1318,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 XNE-3445 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 XNE-3445 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0049",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "JFE-2783",
         location: "台中市豐原區公益路",
         confidence: 93,
@@ -1345,14 +1345,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 JFE-2783 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 JFE-2783 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0050",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "HSJ-6486",
         location: "台中市北屯區環中路",
         confidence: 82,
@@ -1372,14 +1372,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 HSJ-6486 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 HSJ-6486 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0051",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "VMJ-2570",
         location: "台中市豐原區崇德路三段",
         confidence: 93,
@@ -1399,14 +1399,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 60km/h，超過該路段限速 60km/h，標的車輛為紅色 Hatchback，車牌 VMJ-2570 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 VMJ-2570 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0052",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "BIS-7828",
         location: "台中市中區精誠路",
         confidence: 82,
@@ -1426,14 +1426,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 BIS-7828 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 BIS-7828 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0053",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "TSO-3515",
         location: "台中市北區公益路",
         confidence: 75,
@@ -1453,9 +1453,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 77km/h，超過該路段限速 60km/h，標的車輛為白色 Truck，車牌 TSO-3515 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 TSO-3515 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0054",
@@ -1480,14 +1480,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.8 秒，車輛仍強行通過停止線，偵測到車牌 WFW-4854 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 WFW-4854 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0055",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "ODI-3772",
         location: "台中市西區精誠路",
         confidence: 87,
@@ -1507,14 +1507,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 3.0 秒，車輛仍強行通過停止線，偵測到車牌 ODI-3772 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ODI-3772 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0056",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "BEZ-2183",
         location: "台中市北區文心路四段",
         confidence: 91,
@@ -1534,14 +1534,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 55km/h，超過該路段限速 60km/h，標的車輛為紅色 Sedan，車牌 BEZ-2183 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 BEZ-2183 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0057",
         status: "verified",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "WGZ-7656",
         location: "台中市西區公益路",
         confidence: 84,
@@ -1561,14 +1561,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.1 秒，車輛仍強行通過停止線，偵測到車牌 WGZ-7656 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 WGZ-7656 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0058",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "SHJ-7624",
         location: "台中市南區文心路四段",
         confidence: 84,
@@ -1588,14 +1588,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.4 秒，車輛仍強行通過停止線，偵測到車牌 SHJ-7624 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 SHJ-7624 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0059",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "LBZ-2084",
         location: "台中市大里區五權西路",
         confidence: 80,
@@ -1615,14 +1615,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 LBZ-2084 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 LBZ-2084 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0060",
         status: "pending",
-        type: "違規停車",
+        type: "逆向",
         plate: "YYN-8157",
         location: "台中市大里區公益路",
         confidence: 78,
@@ -1642,14 +1642,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 YYN-8157 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 YYN-8157 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0061",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "SWJ-6298",
         location: "台中市西屯區黎明路",
         confidence: 92,
@@ -1669,14 +1669,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 73km/h，超過該路段限速 40km/h，標的車輛為銀色 Hatchback，車牌 SWJ-6298 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 SWJ-6298 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0062",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "KBO-4789",
         location: "台中市大里區復興路",
         confidence: 92,
@@ -1696,14 +1696,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 60km/h，超過該路段限速 40km/h，標的車輛為白色 Truck，車牌 KBO-4789 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 KBO-4789 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0063",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "QNN-5459",
         location: "台中市西區精誠路",
         confidence: 92,
@@ -1723,14 +1723,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 QNN-5459 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 QNN-5459 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0064",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "VNH-6196",
         location: "台中市大里區環中路",
         confidence: 84,
@@ -1750,14 +1750,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 VNH-6196 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 VNH-6196 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0065",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "MFU-2276",
         location: "台中市南區文心路四段",
         confidence: 90,
@@ -1777,14 +1777,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 MFU-2276 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 MFU-2276 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0066",
         status: "verified",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "LHF-6719",
         location: "台中市西屯區五權西路",
         confidence: 88,
@@ -1804,9 +1804,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 LHF-6719 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 LHF-6719 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0067",
@@ -1831,14 +1831,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.5 秒，車輛仍強行通過停止線，偵測到車牌 XUT-1486 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 XUT-1486 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0068",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "LAX-7336",
         location: "台中市太平區中清路",
         confidence: 96,
@@ -1858,14 +1858,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 83km/h，超過該路段限速 40km/h，標的車輛為白色 Truck，車牌 LAX-7336 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 LAX-7336 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0069",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "CJM-7200",
         location: "台中市北區崇德路三段",
         confidence: 83,
@@ -1885,14 +1885,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 75km/h，超過該路段限速 60km/h，標的車輛為黑色 SUV，車牌 CJM-7200 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 CJM-7200 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0070",
         status: "pending",
-        type: "違規停車",
+        type: "逆向",
         plate: "THY-5498",
         location: "台中市北區復興路",
         confidence: 99,
@@ -1912,14 +1912,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 THY-5498 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 THY-5498 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0071",
         status: "pending",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "NZT-4415",
         location: "台中市中區黎明路",
         confidence: 78,
@@ -1939,14 +1939,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.6 秒，車輛仍強行通過停止線，偵測到車牌 NZT-4415 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 NZT-4415 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0072",
         status: "verified",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "KNO-1052",
         location: "台中市中區黎明路",
         confidence: 89,
@@ -1966,14 +1966,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 KNO-1052 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 KNO-1052 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0073",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "ANF-7900",
         location: "台中市豐原區復興路",
         confidence: 78,
@@ -1993,14 +1993,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 ANF-7900 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ANF-7900 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0074",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "BRY-4855",
         location: "台中市中區五權西路",
         confidence: 75,
@@ -2020,14 +2020,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.5 秒，車輛仍強行通過停止線，偵測到車牌 BRY-4855 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 BRY-4855 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0075",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "CID-2386",
         location: "台中市太平區五權西路",
         confidence: 97,
@@ -2047,9 +2047,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 CID-2386 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 CID-2386 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0076",
@@ -2074,14 +2074,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.6 秒，車輛仍強行通過停止線，偵測到車牌 WTQ-2790 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 WTQ-2790 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0077",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "GNP-8138",
         location: "台中市西區精誠路",
         confidence: 81,
@@ -2101,14 +2101,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 GNP-8138 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 GNP-8138 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0078",
         status: "pending",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "TOA-2917",
         location: "台中市太平區文心路四段",
         confidence: 92,
@@ -2128,14 +2128,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 TOA-2917 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 TOA-2917 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0079",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "ACN-6561",
         location: "台中市豐原區環中路",
         confidence: 86,
@@ -2155,14 +2155,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.9 秒，車輛仍強行通過停止線，偵測到車牌 ACN-6561 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ACN-6561 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0080",
         status: "cancelled",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "COV-3096",
         location: "台中市南區文心路四段",
         confidence: 81,
@@ -2182,9 +2182,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 COV-3096 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 COV-3096 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0081",
@@ -2209,14 +2209,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 HPY-1912 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 HPY-1912 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0082",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "EPT-0917",
         location: "台中市太平區文心路四段",
         confidence: 93,
@@ -2236,14 +2236,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 EPT-0917 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 EPT-0917 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0083",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "NBH-9257",
         location: "台中市中區中清路",
         confidence: 91,
@@ -2263,14 +2263,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 79km/h，超過該路段限速 40km/h，標的車輛為銀色 Hatchback，車牌 NBH-9257 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 NBH-9257 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0084",
         status: "verified",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "TQU-0884",
         location: "台中市南區文心路四段",
         confidence: 98,
@@ -2290,14 +2290,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.6 秒，車輛仍強行通過停止線，偵測到車牌 TQU-0884 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 TQU-0884 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0085",
         status: "verified",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "JMT-3956",
         location: "台中市西屯區復興路",
         confidence: 77,
@@ -2317,14 +2317,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 JMT-3956 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 JMT-3956 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0086",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "DBG-2152",
         location: "台中市太平區文心路四段",
         confidence: 91,
@@ -2344,14 +2344,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 DBG-2152 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 DBG-2152 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0087",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "IOG-2332",
         location: "台中市北區五權西路",
         confidence: 89,
@@ -2371,14 +2371,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 IOG-2332 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 IOG-2332 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0088",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "APT-8446",
         location: "台中市豐原區黎明路",
         confidence: 98,
@@ -2398,14 +2398,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 APT-8446 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 APT-8446 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0089",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "ANP-7647",
         location: "台中市中區中清路",
         confidence: 98,
@@ -2425,14 +2425,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ANP-7647 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 ANP-7647 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0090",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "WQB-4061",
         location: "台中市豐原區五權西路",
         confidence: 99,
@@ -2452,14 +2452,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 WQB-4061 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 WQB-4061 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0091",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "DFZ-6406",
         location: "台中市南區精誠路",
         confidence: 99,
@@ -2479,14 +2479,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 DFZ-6406 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 DFZ-6406 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0092",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "CWV-7759",
         location: "台中市豐原區公益路",
         confidence: 92,
@@ -2506,14 +2506,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 66km/h，超過該路段限速 40km/h，標的車輛為白色 Truck，車牌 CWV-7759 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 CWV-7759 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0093",
         status: "verified",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "AUV-2591",
         location: "台中市北屯區文心路四段",
         confidence: 96,
@@ -2533,14 +2533,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.2 秒，車輛仍強行通過停止線，偵測到車牌 AUV-2591 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 AUV-2591 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0094",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "IRH-0870",
         location: "台中市豐原區中清路",
         confidence: 91,
@@ -2560,14 +2560,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.6 秒，車輛仍強行通過停止線，偵測到車牌 IRH-0870 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 IRH-0870 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0095",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "SPJ-1720",
         location: "台中市北屯區黎明路",
         confidence: 82,
@@ -2587,14 +2587,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 58km/h，超過該路段限速 50km/h，標的車輛為銀色 Sedan，車牌 SPJ-1720 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 SPJ-1720 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0096",
         status: "pending",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "SCK-0842",
         location: "台中市西屯區五權西路",
         confidence: 94,
@@ -2614,14 +2614,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 SCK-0842 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 SCK-0842 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0097",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "VIJ-5775",
         location: "台中市北屯區台灣大道二段",
         confidence: 77,
@@ -2641,14 +2641,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 VIJ-5775 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 VIJ-5775 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0098",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "FLS-8298",
         location: "台中市北區五權西路",
         confidence: 97,
@@ -2668,14 +2668,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 FLS-8298 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 FLS-8298 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0099",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "NYN-5436",
         location: "台中市豐原區五權西路",
         confidence: 97,
@@ -2695,14 +2695,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 89km/h，超過該路段限速 60km/h，標的車輛為藍色 Hatchback，車牌 NYN-5436 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 NYN-5436 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0100",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "XQQ-3624",
         location: "台中市南區黎明路",
         confidence: 98,
@@ -2722,14 +2722,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 XQQ-3624 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 XQQ-3624 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0101",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "LHY-0610",
         location: "台中市太平區台灣大道二段",
         confidence: 81,
@@ -2749,14 +2749,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 75km/h，超過該路段限速 40km/h，標的車輛為白色 Sedan，車牌 LHY-0610 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 LHY-0610 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0102",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "QTQ-9516",
         location: "台中市豐原區台灣大道二段",
         confidence: 84,
@@ -2776,14 +2776,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 QTQ-9516 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 QTQ-9516 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0103",
         status: "pending",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "OBH-9255",
         location: "台中市中區文心路四段",
         confidence: 86,
@@ -2803,14 +2803,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.9 秒，車輛仍強行通過停止線，偵測到車牌 OBH-9255 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 OBH-9255 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0104",
         status: "verified",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "AXB-4299",
         location: "台中市北區環中路",
         confidence: 81,
@@ -2830,14 +2830,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 AXB-4299 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 AXB-4299 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0105",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "OHT-1895",
         location: "台中市北屯區五權西路",
         confidence: 86,
@@ -2857,9 +2857,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 OHT-1895 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 OHT-1895 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0106",
@@ -2884,14 +2884,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.0 秒，車輛仍強行通過停止線，偵測到車牌 IPZ-5789 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 IPZ-5789 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0107",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "OHR-2058",
         location: "台中市西區崇德路三段",
         confidence: 89,
@@ -2911,8 +2911,8 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 OHR-2058 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 OHR-2058 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
@@ -2938,14 +2938,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.0 秒，車輛仍強行通過停止線，偵測到車牌 ROI-8763 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ROI-8763 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0109",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "ZLQ-7138",
         location: "台中市西屯區公益路",
         confidence: 91,
@@ -2965,14 +2965,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 77km/h，超過該路段限速 50km/h，標的車輛為紅色 Sedan，車牌 ZLQ-7138 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ZLQ-7138 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0110",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "NHL-7963",
         location: "台中市豐原區中清路",
         confidence: 82,
@@ -2992,9 +2992,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 61km/h，超過該路段限速 50km/h，標的車輛為黑色 Hatchback，車牌 NHL-7963 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 NHL-7963 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0111",
@@ -3019,14 +3019,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.6 秒，車輛仍強行通過停止線，偵測到車牌 ATY-3118 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ATY-3118 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0112",
         status: "cancelled",
-        type: "違規停車",
+        type: "逆向",
         plate: "UBS-1661",
         location: "台中市南屯區精誠路",
         confidence: 87,
@@ -3046,14 +3046,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 UBS-1661 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 UBS-1661 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0113",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "XEE-5694",
         location: "台中市北屯區精誠路",
         confidence: 86,
@@ -3073,14 +3073,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 90km/h，超過該路段限速 50km/h，標的車輛為灰色 Hatchback，車牌 XEE-5694 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 XEE-5694 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0114",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "AZT-6709",
         location: "台中市西屯區黎明路",
         confidence: 96,
@@ -3100,14 +3100,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 AZT-6709 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 AZT-6709 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0115",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "ZQX-1929",
         location: "台中市中區台灣大道二段",
         confidence: 94,
@@ -3127,14 +3127,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ZQX-1929 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ZQX-1929 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0116",
         status: "verified",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "RZP-0136",
         location: "台中市南屯區精誠路",
         confidence: 82,
@@ -3154,14 +3154,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 RZP-0136 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 RZP-0136 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0117",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "AAY-8624",
         location: "台中市南區復興路",
         confidence: 95,
@@ -3181,14 +3181,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.5 秒，車輛仍強行通過停止線，偵測到車牌 AAY-8624 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 AAY-8624 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0118",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "PLZ-4761",
         location: "台中市北區環中路",
         confidence: 77,
@@ -3208,14 +3208,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PLZ-4761 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 PLZ-4761 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0119",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "ODH-0043",
         location: "台中市中區中清路",
         confidence: 76,
@@ -3235,14 +3235,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 89km/h，超過該路段限速 50km/h，標的車輛為藍色 Sedan，車牌 ODH-0043 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ODH-0043 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0120",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "YIG-4714",
         location: "台中市南區精誠路",
         confidence: 76,
@@ -3262,14 +3262,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 70km/h，超過該路段限速 60km/h，標的車輛為銀色 Truck，車牌 YIG-4714 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 YIG-4714 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0121",
         status: "verified",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "XOQ-6164",
         location: "台中市中區公益路",
         confidence: 99,
@@ -3289,14 +3289,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 XOQ-6164 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 XOQ-6164 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0122",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "AMK-1913",
         location: "台中市南屯區公益路",
         confidence: 91,
@@ -3316,14 +3316,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 86km/h，超過該路段限速 50km/h，標的車輛為白色 SUV，車牌 AMK-1913 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 AMK-1913 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0123",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "TQO-6292",
         location: "台中市西區台灣大道二段",
         confidence: 90,
@@ -3343,14 +3343,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.3 秒，車輛仍強行通過停止線，偵測到車牌 TQO-6292 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 TQO-6292 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0124",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "XGI-9826",
         location: "台中市中區公益路",
         confidence: 93,
@@ -3370,14 +3370,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.6 秒，車輛仍強行通過停止線，偵測到車牌 XGI-9826 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 XGI-9826 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0125",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "WOL-1096",
         location: "台中市豐原區公益路",
         confidence: 94,
@@ -3397,14 +3397,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 WOL-1096 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 WOL-1096 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0126",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "NRB-9896",
         location: "台中市南區崇德路三段",
         confidence: 76,
@@ -3424,14 +3424,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 76km/h，超過該路段限速 50km/h，標的車輛為灰色 Hatchback，車牌 NRB-9896 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 NRB-9896 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0127",
         status: "pending",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "IUZ-5947",
         location: "台中市中區中清路",
         confidence: 93,
@@ -3451,14 +3451,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.4 秒，車輛仍強行通過停止線，偵測到車牌 IUZ-5947 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 IUZ-5947 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0128",
         status: "pending",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "LQA-8871",
         location: "台中市大里區復興路",
         confidence: 79,
@@ -3478,14 +3478,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 LQA-8871 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 LQA-8871 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0129",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "NZQ-1026",
         location: "台中市南區五權西路",
         confidence: 77,
@@ -3505,14 +3505,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 NZQ-1026 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 NZQ-1026 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0130",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "UWK-6707",
         location: "台中市南屯區公益路",
         confidence: 80,
@@ -3532,14 +3532,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 UWK-6707 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 UWK-6707 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0131",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "SGR-4683",
         location: "台中市西屯區復興路",
         confidence: 93,
@@ -3559,14 +3559,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.0 秒，車輛仍強行通過停止線，偵測到車牌 SGR-4683 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 SGR-4683 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0132",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "LOS-4548",
         location: "台中市南屯區中清路",
         confidence: 87,
@@ -3586,14 +3586,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 LOS-4548 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 LOS-4548 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0133",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "SXG-8512",
         location: "台中市中區中清路",
         confidence: 83,
@@ -3613,14 +3613,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 SXG-8512 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 SXG-8512 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0134",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "ODH-0491",
         location: "台中市北區台灣大道二段",
         confidence: 83,
@@ -3640,14 +3640,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ODH-0491 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 ODH-0491 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0135",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "SQU-6623",
         location: "台中市西屯區環中路",
         confidence: 88,
@@ -3667,14 +3667,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 72km/h，超過該路段限速 50km/h，標的車輛為黑色 SUV，車牌 SQU-6623 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 SQU-6623 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0136",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "TBM-4865",
         location: "台中市西屯區崇德路三段",
         confidence: 98,
@@ -3694,14 +3694,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 TBM-4865 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 TBM-4865 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0137",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "XDR-6251",
         location: "台中市北區五權西路",
         confidence: 83,
@@ -3721,8 +3721,8 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 XDR-6251 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 XDR-6251 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
@@ -3748,14 +3748,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.0 秒，車輛仍強行通過停止線，偵測到車牌 TXI-8350 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 TXI-8350 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0139",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "UFT-9971",
         location: "台中市北區精誠路",
         confidence: 97,
@@ -3775,14 +3775,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.0 秒，車輛仍強行通過停止線，偵測到車牌 UFT-9971 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 UFT-9971 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0140",
         status: "cancelled",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "QMK-4025",
         location: "台中市豐原區精誠路",
         confidence: 93,
@@ -3802,14 +3802,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 QMK-4025 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 QMK-4025 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0141",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "GJR-1647",
         location: "台中市南屯區文心路四段",
         confidence: 86,
@@ -3829,14 +3829,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 GJR-1647 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 GJR-1647 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0142",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "XDE-3284",
         location: "台中市大里區崇德路三段",
         confidence: 88,
@@ -3856,14 +3856,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 72km/h，超過該路段限速 50km/h，標的車輛為銀色 SUV，車牌 XDE-3284 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 XDE-3284 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0143",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "RXY-9185",
         location: "台中市大里區文心路四段",
         confidence: 86,
@@ -3883,14 +3883,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 RXY-9185 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 RXY-9185 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0144",
         status: "pending",
-        type: "違規停車",
+        type: "逆向",
         plate: "ZXQ-1707",
         location: "台中市大里區台灣大道二段",
         confidence: 87,
@@ -3910,14 +3910,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ZXQ-1707 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 ZXQ-1707 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0145",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "HDE-5415",
         location: "台中市豐原區復興路",
         confidence: 79,
@@ -3937,14 +3937,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 HDE-5415 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 HDE-5415 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0146",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "CFL-6256",
         location: "台中市西區中清路",
         confidence: 87,
@@ -3964,14 +3964,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 86km/h，超過該路段限速 50km/h，標的車輛為白色 Sedan，車牌 CFL-6256 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 CFL-6256 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0147",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "NSJ-7574",
         location: "台中市北屯區復興路",
         confidence: 84,
@@ -3991,14 +3991,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 81km/h，超過該路段限速 50km/h，標的車輛為灰色 Hatchback，車牌 NSJ-7574 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 NSJ-7574 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0148",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "TAH-9992",
         location: "台中市北屯區崇德路三段",
         confidence: 82,
@@ -4018,14 +4018,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 73km/h，超過該路段限速 40km/h，標的車輛為藍色 SUV，車牌 TAH-9992 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 TAH-9992 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0149",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "HZH-8518",
         location: "台中市中區公益路",
         confidence: 92,
@@ -4045,14 +4045,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 HZH-8518 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 HZH-8518 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0150",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "PAS-4207",
         location: "台中市中區復興路",
         confidence: 97,
@@ -4072,14 +4072,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PAS-4207 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 PAS-4207 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0151",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "OIG-3364",
         location: "台中市北區公益路",
         confidence: 89,
@@ -4099,14 +4099,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 OIG-3364 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 OIG-3364 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0152",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "OON-4033",
         location: "台中市大里區台灣大道二段",
         confidence: 80,
@@ -4126,14 +4126,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 86km/h，超過該路段限速 60km/h，標的車輛為銀色 Hatchback，車牌 OON-4033 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 OON-4033 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0153",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "DNR-4356",
         location: "台中市西屯區台灣大道二段",
         confidence: 78,
@@ -4153,14 +4153,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 82km/h，超過該路段限速 50km/h，標的車輛為黑色 Truck，車牌 DNR-4356 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 DNR-4356 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0154",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "JAY-2384",
         location: "台中市北區五權西路",
         confidence: 78,
@@ -4180,14 +4180,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 70km/h，超過該路段限速 40km/h，標的車輛為灰色 SUV，車牌 JAY-2384 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 JAY-2384 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0155",
         status: "pending",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "ASO-6038",
         location: "台中市南屯區精誠路",
         confidence: 93,
@@ -4207,14 +4207,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ASO-6038 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ASO-6038 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0156",
         status: "verified",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "CWP-1084",
         location: "台中市西區精誠路",
         confidence: 87,
@@ -4234,14 +4234,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 CWP-1084 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 CWP-1084 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0157",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "WXN-9187",
         location: "台中市豐原區公益路",
         confidence: 96,
@@ -4261,14 +4261,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 77km/h，超過該路段限速 40km/h，標的車輛為銀色 Sedan，車牌 WXN-9187 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 WXN-9187 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0158",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "GNO-5773",
         location: "台中市太平區文心路四段",
         confidence: 82,
@@ -4288,14 +4288,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 79km/h，超過該路段限速 60km/h，標的車輛為藍色 Hatchback，車牌 GNO-5773 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 GNO-5773 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0159",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "AXB-0321",
         location: "台中市北區公益路",
         confidence: 97,
@@ -4315,14 +4315,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 AXB-0321 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 AXB-0321 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0160",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "MXU-6093",
         location: "台中市北區崇德路三段",
         confidence: 81,
@@ -4342,14 +4342,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 59km/h，超過該路段限速 60km/h，標的車輛為銀色 SUV，車牌 MXU-6093 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 MXU-6093 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0161",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "FEK-7694",
         location: "台中市大里區五權西路",
         confidence: 77,
@@ -4369,14 +4369,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.2 秒，車輛仍強行通過停止線，偵測到車牌 FEK-7694 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 FEK-7694 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0162",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "EHE-2645",
         location: "台中市北屯區精誠路",
         confidence: 94,
@@ -4396,14 +4396,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 EHE-2645 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 EHE-2645 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0163",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "UUG-5688",
         location: "台中市北屯區復興路",
         confidence: 96,
@@ -4423,8 +4423,8 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 82km/h，超過該路段限速 50km/h，標的車輛為銀色 SUV，車牌 UUG-5688 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 UUG-5688 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
@@ -4450,14 +4450,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.4 秒，車輛仍強行通過停止線，偵測到車牌 MMJ-6439 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 MMJ-6439 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0165",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "NSD-2396",
         location: "台中市太平區台灣大道二段",
         confidence: 99,
@@ -4477,14 +4477,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 NSD-2396 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 NSD-2396 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0166",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "CDU-6170",
         location: "台中市太平區黎明路",
         confidence: 89,
@@ -4504,9 +4504,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 64km/h，超過該路段限速 40km/h，標的車輛為白色 Sedan，車牌 CDU-6170 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 CDU-6170 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0167",
@@ -4531,14 +4531,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.1 秒，車輛仍強行通過停止線，偵測到車牌 QSY-2541 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 QSY-2541 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0168",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "PBU-6493",
         location: "台中市豐原區公益路",
         confidence: 95,
@@ -4558,14 +4558,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PBU-6493 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 PBU-6493 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0169",
         status: "pending",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "JGI-7613",
         location: "台中市北區黎明路",
         confidence: 83,
@@ -4585,14 +4585,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 JGI-7613 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 JGI-7613 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0170",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "VKP-4407",
         location: "台中市南區精誠路",
         confidence: 98,
@@ -4612,14 +4612,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 VKP-4407 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 VKP-4407 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0171",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "BKK-1699",
         location: "台中市南屯區公益路",
         confidence: 95,
@@ -4639,14 +4639,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 BKK-1699 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 BKK-1699 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0172",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "WJK-9721",
         location: "台中市西屯區台灣大道二段",
         confidence: 90,
@@ -4666,14 +4666,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 WJK-9721 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 WJK-9721 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0173",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "VUT-1152",
         location: "台中市西區文心路四段",
         confidence: 81,
@@ -4693,14 +4693,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 VUT-1152 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 VUT-1152 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0174",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "CQO-1029",
         location: "台中市北屯區五權西路",
         confidence: 85,
@@ -4720,14 +4720,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 CQO-1029 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 CQO-1029 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0175",
         status: "verified",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "CML-6139",
         location: "台中市北區環中路",
         confidence: 99,
@@ -4747,14 +4747,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.6 秒，車輛仍強行通過停止線，偵測到車牌 CML-6139 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 CML-6139 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0176",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "WAY-0986",
         location: "台中市西區環中路",
         confidence: 81,
@@ -4774,14 +4774,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 WAY-0986 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 WAY-0986 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0177",
         status: "verified",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "ZIW-1912",
         location: "台中市北區公益路",
         confidence: 99,
@@ -4801,14 +4801,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ZIW-1912 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ZIW-1912 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0178",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "IZV-2164",
         location: "台中市北區五權西路",
         confidence: 83,
@@ -4828,14 +4828,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 IZV-2164 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 IZV-2164 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0179",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "SVY-9407",
         location: "台中市南區環中路",
         confidence: 81,
@@ -4855,14 +4855,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 68km/h，超過該路段限速 40km/h，標的車輛為白色 SUV，車牌 SVY-9407 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 SVY-9407 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0180",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "XLZ-7330",
         location: "台中市大里區環中路",
         confidence: 81,
@@ -4882,14 +4882,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.2 秒，車輛仍強行通過停止線，偵測到車牌 XLZ-7330 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 XLZ-7330 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0181",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "ETR-4580",
         location: "台中市豐原區復興路",
         confidence: 97,
@@ -4909,14 +4909,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 72km/h，超過該路段限速 50km/h，標的車輛為灰色 Sedan，車牌 ETR-4580 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ETR-4580 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0182",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未依號誌行駛",
         plate: "WFV-8548",
         location: "台中市南屯區精誠路",
         confidence: 90,
@@ -4936,14 +4936,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 WFV-8548 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 WFV-8548 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0183",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "GXL-6286",
         location: "台中市北區台灣大道二段",
         confidence: 86,
@@ -4963,14 +4963,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 GXL-6286 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 GXL-6286 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0184",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "ZFT-9616",
         location: "台中市太平區文心路四段",
         confidence: 84,
@@ -4990,14 +4990,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 83km/h，超過該路段限速 40km/h，標的車輛為藍色 SUV，車牌 ZFT-9616 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 ZFT-9616 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0185",
         status: "pending",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "XNT-6004",
         location: "台中市南屯區崇德路三段",
         confidence: 84,
@@ -5017,14 +5017,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 XNT-6004 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 XNT-6004 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0186",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "CMT-6572",
         location: "台中市西區中清路",
         confidence: 86,
@@ -5044,14 +5044,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 57km/h，超過該路段限速 50km/h，標的車輛為灰色 Truck，車牌 CMT-6572 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 CMT-6572 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0187",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "PIG-8195",
         location: "台中市豐原區台灣大道二段",
         confidence: 94,
@@ -5071,14 +5071,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.1 秒，車輛仍強行通過停止線，偵測到車牌 PIG-8195 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 PIG-8195 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0188",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "MCD-4425",
         location: "台中市中區精誠路",
         confidence: 85,
@@ -5098,14 +5098,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 MCD-4425 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 MCD-4425 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0189",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "AZY-0811",
         location: "台中市豐原區黎明路",
         confidence: 77,
@@ -5125,14 +5125,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.6 秒，車輛仍強行通過停止線，偵測到車牌 AZY-0811 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 AZY-0811 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0190",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "ZXA-7611",
         location: "台中市西區崇德路三段",
         confidence: 87,
@@ -5152,14 +5152,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 ZXA-7611 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 ZXA-7611 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0191",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "PHL-1056",
         location: "台中市西區精誠路",
         confidence: 80,
@@ -5179,14 +5179,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PHL-1056 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 PHL-1056 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0192",
         status: "pending",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "FPX-1591",
         location: "台中市西屯區環中路",
         confidence: 81,
@@ -5206,14 +5206,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 FPX-1591 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 FPX-1591 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0193",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "RCZ-1698",
         location: "台中市南區崇德路三段",
         confidence: 86,
@@ -5233,14 +5233,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 54km/h，超過該路段限速 60km/h，標的車輛為灰色 Hatchback，車牌 RCZ-1698 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 RCZ-1698 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0194",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "JUQ-7530",
         location: "台中市南區五權西路",
         confidence: 88,
@@ -5260,14 +5260,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 JUQ-7530 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 JUQ-7530 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0195",
         status: "pending",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "ZTJ-0233",
         location: "台中市中區中清路",
         confidence: 87,
@@ -5287,14 +5287,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.3 秒，車輛仍強行通過停止線，偵測到車牌 ZTJ-0233 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 ZTJ-0233 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0196",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "RIH-8435",
         location: "台中市南屯區台灣大道二段",
         confidence: 93,
@@ -5314,14 +5314,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 65km/h，超過該路段限速 50km/h，標的車輛為黑色 Hatchback，車牌 RIH-8435 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 RIH-8435 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0197",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "QQK-8580",
         location: "台中市北屯區五權西路",
         confidence: 97,
@@ -5341,14 +5341,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 81km/h，超過該路段限速 40km/h，標的車輛為紅色 Sedan，車牌 QQK-8580 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 QQK-8580 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0198",
         status: "verified",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "YHS-5612",
         location: "台中市南屯區文心路四段",
         confidence: 88,
@@ -5368,14 +5368,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.9 秒，車輛仍強行通過停止線，偵測到車牌 YHS-5612 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 YHS-5612 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0199",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "ALB-0846",
         location: "台中市北屯區台灣大道二段",
         confidence: 92,
@@ -5395,14 +5395,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 56km/h，超過該路段限速 50km/h，標的車輛為白色 SUV，車牌 ALB-0846 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 ALB-0846 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0200",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "YYE-2780",
         location: "台中市中區環中路",
         confidence: 83,
@@ -5422,14 +5422,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 YYE-2780 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 YYE-2780 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0201",
         status: "pending",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "URU-8986",
         location: "台中市豐原區復興路",
         confidence: 79,
@@ -5449,14 +5449,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 URU-8986 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 URU-8986 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0202",
         status: "pending",
-        type: "違規停車",
+        type: "逆向",
         plate: "AKJ-2503",
         location: "台中市西區五權西路",
         confidence: 85,
@@ -5476,14 +5476,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 AKJ-2503 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 AKJ-2503 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0203",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "ZKZ-3878",
         location: "台中市南屯區精誠路",
         confidence: 87,
@@ -5503,14 +5503,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 88km/h，超過該路段限速 60km/h，標的車輛為黑色 SUV，車牌 ZKZ-3878 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 ZKZ-3878 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0204",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "LOP-1183",
         location: "台中市北屯區復興路",
         confidence: 86,
@@ -5530,14 +5530,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 LOP-1183 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 LOP-1183 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0205",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "PVJ-6877",
         location: "台中市太平區五權西路",
         confidence: 90,
@@ -5557,14 +5557,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PVJ-6877 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 PVJ-6877 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0206",
         status: "pending",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "VEL-1988",
         location: "台中市豐原區精誠路",
         confidence: 96,
@@ -5584,14 +5584,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.6 秒，車輛仍強行通過停止線，偵測到車牌 VEL-1988 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 VEL-1988 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0207",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "EPP-6119",
         location: "台中市中區復興路",
         confidence: 96,
@@ -5611,14 +5611,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 EPP-6119 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 EPP-6119 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0208",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "HNK-7006",
         location: "台中市北屯區公益路",
         confidence: 94,
@@ -5638,14 +5638,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 50km/h，超過該路段限速 50km/h，標的車輛為藍色 Truck，車牌 HNK-7006 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 HNK-7006 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0209",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "HUK-1392",
         location: "台中市豐原區環中路",
         confidence: 77,
@@ -5665,14 +5665,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 HUK-1392 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 HUK-1392 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0210",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "VOX-1151",
         location: "台中市南屯區中清路",
         confidence: 97,
@@ -5692,14 +5692,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 VOX-1151 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 VOX-1151 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0211",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "NMO-5799",
         location: "台中市大里區環中路",
         confidence: 89,
@@ -5719,14 +5719,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 NMO-5799 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 NMO-5799 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0212",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "OQK-5560",
         location: "台中市大里區台灣大道二段",
         confidence: 86,
@@ -5746,14 +5746,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 55km/h，超過該路段限速 40km/h，標的車輛為白色 Hatchback，車牌 OQK-5560 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 OQK-5560 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0213",
         status: "pending",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "NHG-4336",
         location: "台中市北屯區五權西路",
         confidence: 99,
@@ -5773,14 +5773,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.3 秒，車輛仍強行通過停止線，偵測到車牌 NHG-4336 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 NHG-4336 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0214",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "KOJ-0570",
         location: "台中市北屯區五權西路",
         confidence: 78,
@@ -5800,14 +5800,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 70km/h，超過該路段限速 40km/h，標的車輛為白色 Truck，車牌 KOJ-0570 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 KOJ-0570 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0215",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "PRS-6832",
         location: "台中市西屯區環中路",
         confidence: 98,
@@ -5827,14 +5827,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PRS-6832 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 PRS-6832 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0216",
         status: "verified",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "PDK-1539",
         location: "台中市豐原區精誠路",
         confidence: 81,
@@ -5854,14 +5854,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.9 秒，車輛仍強行通過停止線，偵測到車牌 PDK-1539 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 PDK-1539 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0217",
         status: "pending",
-        type: "違規停車",
+        type: "違規迴轉",
         plate: "XFP-7023",
         location: "台中市西區中清路",
         confidence: 83,
@@ -5881,14 +5881,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 XFP-7023 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 XFP-7023 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0218",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "YIH-8765",
         location: "台中市太平區黎明路",
         confidence: 91,
@@ -5908,8 +5908,8 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 81km/h，超過該路段限速 60km/h，標的車輛為黑色 Truck，車牌 YIH-8765 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 YIH-8765 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
@@ -5935,14 +5935,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.2 秒，車輛仍強行通過停止線，偵測到車牌 ACY-4659 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ACY-4659 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0220",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "ZQL-2515",
         location: "台中市南區崇德路三段",
         confidence: 81,
@@ -5962,14 +5962,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 ZQL-2515 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 ZQL-2515 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0221",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "HZU-5458",
         location: "台中市豐原區黎明路",
         confidence: 95,
@@ -5989,14 +5989,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 HZU-5458 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 HZU-5458 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0222",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "EBI-4130",
         location: "台中市西屯區五權西路",
         confidence: 78,
@@ -6016,14 +6016,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.8 秒，車輛仍強行通過停止線，偵測到車牌 EBI-4130 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 EBI-4130 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0223",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "NML-3662",
         location: "台中市中區復興路",
         confidence: 83,
@@ -6043,14 +6043,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 87km/h，超過該路段限速 40km/h，標的車輛為紅色 Truck，車牌 NML-3662 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 NML-3662 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0224",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "VJY-3875",
         location: "台中市西區環中路",
         confidence: 87,
@@ -6070,14 +6070,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 53km/h，超過該路段限速 50km/h，標的車輛為白色 Sedan，車牌 VJY-3875 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 VJY-3875 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0225",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "TAF-4447",
         location: "台中市北屯區復興路",
         confidence: 85,
@@ -6097,14 +6097,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 54km/h，超過該路段限速 50km/h，標的車輛為白色 Sedan，車牌 TAF-4447 清晰可見。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 TAF-4447 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0226",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "AKM-6770",
         location: "台中市南屯區崇德路三段",
         confidence: 85,
@@ -6124,14 +6124,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 AKM-6770 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 AKM-6770 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0227",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "KOT-7553",
         location: "台中市西區台灣大道二段",
         confidence: 89,
@@ -6151,14 +6151,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 50km/h，超過該路段限速 50km/h，標的車輛為灰色 Hatchback，車牌 KOT-7553 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 KOT-7553 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0228",
         status: "verified",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "FFG-3626",
         location: "台中市北屯區精誠路",
         confidence: 75,
@@ -6178,14 +6178,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.3 秒，車輛仍強行通過停止線，偵測到車牌 FFG-3626 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 FFG-3626 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0229",
         status: "verified",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "YRM-4415",
         location: "台中市北屯區崇德路三段",
         confidence: 92,
@@ -6205,14 +6205,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.9 秒，車輛仍強行通過停止線，偵測到車牌 YRM-4415 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 YRM-4415 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0230",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "SIA-8179",
         location: "台中市南屯區公益路",
         confidence: 80,
@@ -6232,14 +6232,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 SIA-8179 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 SIA-8179 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0231",
         status: "verified",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "UZG-7692",
         location: "台中市南區環中路",
         confidence: 82,
@@ -6259,14 +6259,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 UZG-7692 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 UZG-7692 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0232",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "HUI-2783",
         location: "台中市西屯區文心路四段",
         confidence: 95,
@@ -6286,14 +6286,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 HUI-2783 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 HUI-2783 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0233",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "RGK-1456",
         location: "台中市西屯區中清路",
         confidence: 95,
@@ -6313,14 +6313,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 RGK-1456 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 RGK-1456 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0234",
         status: "cancelled",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "JDY-9712",
         location: "台中市西屯區復興路",
         confidence: 77,
@@ -6340,14 +6340,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 JDY-9712 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 JDY-9712 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0235",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "WFG-5276",
         location: "台中市西屯區復興路",
         confidence: 98,
@@ -6367,14 +6367,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 WFG-5276 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 WFG-5276 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0236",
         status: "pending",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "XYZ-1727",
         location: "台中市北區文心路四段",
         confidence: 86,
@@ -6394,14 +6394,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 XYZ-1727 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 XYZ-1727 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0237",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "IGO-3084",
         location: "台中市西區台灣大道二段",
         confidence: 92,
@@ -6421,14 +6421,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 81km/h，超過該路段限速 40km/h，標的車輛為灰色 SUV，車牌 IGO-3084 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 IGO-3084 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0238",
         status: "pending",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "VME-7528",
         location: "台中市北屯區復興路",
         confidence: 89,
@@ -6448,14 +6448,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 VME-7528 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 VME-7528 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0239",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "SID-4221",
         location: "台中市南區崇德路三段",
         confidence: 89,
@@ -6475,14 +6475,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 SID-4221 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 SID-4221 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0240",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "OVZ-5409",
         location: "台中市西屯區崇德路三段",
         confidence: 86,
@@ -6502,14 +6502,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 OVZ-5409 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 OVZ-5409 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0241",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "RGO-2429",
         location: "台中市南區中清路",
         confidence: 89,
@@ -6529,14 +6529,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 RGO-2429 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 RGO-2429 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0242",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "違規迴轉",
         plate: "WYO-4151",
         location: "台中市西區黎明路",
         confidence: 96,
@@ -6556,14 +6556,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 61km/h，超過該路段限速 60km/h，標的車輛為紅色 SUV，車牌 WYO-4151 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 WYO-4151 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0243",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "EVV-9114",
         location: "台中市西區台灣大道二段",
         confidence: 82,
@@ -6583,14 +6583,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 74km/h，超過該路段限速 60km/h，標的車輛為灰色 Sedan，車牌 EVV-9114 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 EVV-9114 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0244",
         status: "pending",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "XKC-3750",
         location: "台中市西屯區精誠路",
         confidence: 82,
@@ -6610,14 +6610,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.4 秒，車輛仍強行通過停止線，偵測到車牌 XKC-3750 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 XKC-3750 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0245",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "KHX-8522",
         location: "台中市中區文心路四段",
         confidence: 84,
@@ -6637,14 +6637,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.3 秒，車輛仍強行通過停止線，偵測到車牌 KHX-8522 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 KHX-8522 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0246",
         status: "cancelled",
-        type: "違規停車",
+        type: "逆向",
         plate: "XOD-9115",
         location: "台中市北屯區復興路",
         confidence: 98,
@@ -6664,9 +6664,9 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 XOD-9115 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 XOD-9115 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0247",
@@ -6691,14 +6691,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.6 秒，車輛仍強行通過停止線，偵測到車牌 XKC-6738 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 XKC-6738 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "林警員"
     },
     {
         id: "AA-0248",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "FGO-0752",
         location: "台中市中區環中路",
         confidence: 96,
@@ -6718,14 +6718,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 FGO-0752 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 FGO-0752 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0249",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "RKP-4585",
         location: "台中市北屯區台灣大道二段",
         confidence: 78,
@@ -6745,14 +6745,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 RKP-4585 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 RKP-4585 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0250",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "BBE-2277",
         location: "台中市豐原區文心路四段",
         confidence: 92,
@@ -6772,14 +6772,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 BBE-2277 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 BBE-2277 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0251",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "VIE-7449",
         location: "台中市大里區中清路",
         confidence: 94,
@@ -6799,14 +6799,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.1 秒，車輛仍強行通過停止線，偵測到車牌 VIE-7449 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 VIE-7449 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0252",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "GHC-1625",
         location: "台中市豐原區黎明路",
         confidence: 78,
@@ -6826,14 +6826,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 85km/h，超過該路段限速 50km/h，標的車輛為銀色 Hatchback，車牌 GHC-1625 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 GHC-1625 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0253",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "QRD-1846",
         location: "台中市中區台灣大道二段",
         confidence: 87,
@@ -6853,14 +6853,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 QRD-1846 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 QRD-1846 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0254",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "RKC-2833",
         location: "台中市南屯區黎明路",
         confidence: 83,
@@ -6880,14 +6880,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.7 秒，車輛仍強行通過停止線，偵測到車牌 RKC-2833 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 RKC-2833 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0255",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "ECM-1159",
         location: "台中市西區文心路四段",
         confidence: 80,
@@ -6907,14 +6907,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 ECM-1159 未依地面標線指示行駛。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 ECM-1159 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0256",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "GFL-9852",
         location: "台中市中區復興路",
         confidence: 76,
@@ -6934,14 +6934,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.7 秒，車輛仍強行通過停止線，偵測到車牌 GFL-9852 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 GFL-9852 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0257",
         status: "cancelled",
-        type: "違規停車",
+        type: "未依標誌標線行駛",
         plate: "FCR-1459",
         location: "台中市西屯區台灣大道二段",
         confidence: 94,
@@ -6961,14 +6961,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 FCR-1459 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 FCR-1459 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0258",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "DLE-6721",
         location: "台中市西區台灣大道二段",
         confidence: 76,
@@ -6988,14 +6988,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 DLE-6721 未依地面標線指示行駛。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 DLE-6721 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "王警員"
     },
     {
         id: "AA-0259",
         status: "verified",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "UUK-6998",
         location: "台中市南區台灣大道二段",
         confidence: 83,
@@ -7015,14 +7015,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.5 秒，車輛仍強行通過停止線，偵測到車牌 UUK-6998 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 UUK-6998 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0260",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "DBU-3156",
         location: "台中市南區台灣大道二段",
         confidence: 98,
@@ -7042,14 +7042,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 DBU-3156 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 DBU-3156 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0261",
         status: "verified",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "OZY-7811",
         location: "台中市北區台灣大道二段",
         confidence: 97,
@@ -7069,14 +7069,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.1 秒，車輛仍強行通過停止線，偵測到車牌 OZY-7811 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 OZY-7811 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0262",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "VZE-7071",
         location: "台中市北屯區台灣大道二段",
         confidence: 86,
@@ -7096,14 +7096,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 55km/h，超過該路段限速 50km/h，標的車輛為白色 Sedan，車牌 VZE-7071 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 VZE-7071 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0263",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "FXE-9457",
         location: "台中市北屯區五權西路",
         confidence: 79,
@@ -7123,14 +7123,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 FXE-9457 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 FXE-9457 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
         auditor: null
     },
     {
         id: "AA-0264",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "WTI-5830",
         location: "台中市太平區文心路四段",
         confidence: 85,
@@ -7150,14 +7150,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 WTI-5830 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 WTI-5830 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0265",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "UFJ-8129",
         location: "台中市大里區環中路",
         confidence: 75,
@@ -7177,14 +7177,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 88km/h，超過該路段限速 40km/h，標的車輛為白色 SUV，車牌 UFJ-8129 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 UFJ-8129 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0266",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "逆向",
         plate: "OSX-9337",
         location: "台中市中區公益路",
         confidence: 85,
@@ -7204,14 +7204,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 51km/h，超過該路段限速 50km/h，標的車輛為銀色 SUV，車牌 OSX-9337 清晰可見。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 OSX-9337 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0267",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "LLA-8116",
         location: "台中市西區崇德路三段",
         confidence: 88,
@@ -7231,14 +7231,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.1 秒，車輛仍強行通過停止線，偵測到車牌 LLA-8116 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 LLA-8116 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0268",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "闖紅燈",
         plate: "ZIL-6208",
         location: "台中市大里區台灣大道二段",
         confidence: 86,
@@ -7258,14 +7258,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 89km/h，超過該路段限速 50km/h，標的車輛為灰色 Hatchback，車牌 ZIL-6208 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 ZIL-6208 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0269",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "SUL-3508",
         location: "台中市北區中清路",
         confidence: 83,
@@ -7285,14 +7285,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 70km/h，超過該路段限速 50km/h，標的車輛為灰色 Sedan，車牌 SUL-3508 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 SUL-3508 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0270",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "XZR-2564",
         location: "台中市大里區中清路",
         confidence: 76,
@@ -7312,14 +7312,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.0 秒，車輛仍強行通過停止線，偵測到車牌 XZR-2564 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 XZR-2564 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "王警員"
     },
     {
         id: "AA-0271",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "JDT-6133",
         location: "台中市中區五權西路",
         confidence: 93,
@@ -7339,14 +7339,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 JDT-6133 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 JDT-6133 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0272",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "HES-2964",
         location: "台中市中區中清路",
         confidence: 94,
@@ -7366,14 +7366,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 HES-2964 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 HES-2964 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0273",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "FVZ-7177",
         location: "台中市中區中清路",
         confidence: 98,
@@ -7393,14 +7393,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 FVZ-7177 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 FVZ-7177 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0274",
         status: "cancelled",
-        type: "違規停車",
+        type: "逆向",
         plate: "SWM-4849",
         location: "台中市西屯區中清路",
         confidence: 81,
@@ -7420,14 +7420,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 SWM-4849 佔用機車優先道。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 SWM-4849 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0275",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "VPB-2199",
         location: "台中市西區黎明路",
         confidence: 85,
@@ -7447,14 +7447,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 VPB-2199 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 VPB-2199 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0276",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "JKU-7701",
         location: "台中市南區崇德路三段",
         confidence: 90,
@@ -7474,14 +7474,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.6 秒，車輛仍強行通過停止線，偵測到車牌 JKU-7701 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 JKU-7701 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0277",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "EPQ-1808",
         location: "台中市北區文心路四段",
         confidence: 82,
@@ -7501,14 +7501,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 EPQ-1808 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 EPQ-1808 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0278",
         status: "verified",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "IWM-7881",
         location: "台中市北區黎明路",
         confidence: 78,
@@ -7528,14 +7528,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.1 秒，車輛仍強行通過停止線，偵測到車牌 IWM-7881 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 IWM-7881 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0279",
         status: "pending",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依標誌標線行駛",
         plate: "MLS-8373",
         location: "台中市西屯區中清路",
         confidence: 85,
@@ -7555,14 +7555,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 83km/h，超過該路段限速 50km/h，標的車輛為紅色 Hatchback，車牌 MLS-8373 清晰可見。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 MLS-8373 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     },
     {
         id: "AA-0280",
         status: "cancelled",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未禮讓行人",
         plate: "CAG-7367",
         location: "台中市南屯區台灣大道二段",
         confidence: 99,
@@ -7582,14 +7582,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 78km/h，超過該路段限速 40km/h，標的車輛為藍色 Hatchback，車牌 CAG-7367 清晰可見。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 CAG-7367 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0281",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "違規迴轉",
         plate: "HTY-1335",
         location: "台中市西屯區精誠路",
         confidence: 89,
@@ -7609,14 +7609,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.9 秒，車輛仍強行通過停止線，偵測到車牌 HTY-1335 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 HTY-1335 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "王警員"
     },
     {
         id: "AA-0282",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "SYN-6890",
         location: "台中市北區精誠路",
         confidence: 95,
@@ -7636,14 +7636,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 80km/h，超過該路段限速 40km/h，標的車輛為紅色 SUV，車牌 SYN-6890 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 SYN-6890 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0283",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未依標誌標線行駛",
         plate: "SHJ-1671",
         location: "台中市西區公益路",
         confidence: 92,
@@ -7663,14 +7663,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.3 秒，車輛仍強行通過停止線，偵測到車牌 SHJ-1671 於紅燈狀態下跨越路口。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 SHJ-1671 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
+        auditor: "林警員"
     },
     {
         id: "AA-0284",
         status: "cancelled",
-        type: "違規停車",
+        type: "闖紅燈",
         plate: "XWR-9190",
         location: "台中市北區復興路",
         confidence: 91,
@@ -7690,14 +7690,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 XWR-9190 佔用機車優先道。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 XWR-9190 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0285",
         status: "verified",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "ZGB-7018",
         location: "台中市北區環中路",
         confidence: 91,
@@ -7717,14 +7717,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 ZGB-7018 佔用機車優先道。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 ZGB-7018 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0286",
         status: "pending",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "BYJ-8058",
         location: "台中市北區台灣大道二段",
         confidence: 80,
@@ -7744,14 +7744,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 0.9 秒，車輛仍強行通過停止線，偵測到車牌 BYJ-8058 於紅燈狀態下跨越路口。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 BYJ-8058 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0287",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "未依號誌行駛",
         plate: "AUD-3379",
         location: "台中市南屯區黎明路",
         confidence: 88,
@@ -7771,14 +7771,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.5 秒，車輛仍強行通過停止線，偵測到車牌 AUD-3379 於紅燈狀態下跨越路口。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 AUD-3379 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0288",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "逆向",
         plate: "CLG-9654",
         location: "台中市南區崇德路三段",
         confidence: 76,
@@ -7798,14 +7798,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 CLG-9654 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 CLG-9654 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
         auditor: null
     },
     {
         id: "AA-0289",
         status: "verified",
-        type: "闖紅燈",
+        type: "未禮讓行人",
         plate: "EKP-9323",
         location: "台中市西屯區公益路",
         confidence: 79,
@@ -7825,14 +7825,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 1.0 秒，車輛仍強行通過停止線，偵測到車牌 EKP-9323 於紅燈狀態下跨越路口。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 EKP-9323 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0290",
         status: "verified",
-        type: "超速行駛 (限速 45, 實測 65)",
+        type: "未依號誌行駛",
         plate: "VTB-4776",
         location: "台中市南區崇德路三段",
         confidence: 99,
@@ -7852,14 +7852,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 40 條：汽車駕駛人，行車速度，超過規定之最高時速。",
-        description: "測速雷達偵測該車速為 65km/h，超過該路段限速 40km/h，標的車輛為白色 Hatchback，車牌 VTB-4776 清晰可見。",
-        auditor: "張警員"
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 VTB-4776 車輛於交岔路口未遵守交通號誌指示行駛。",
+        auditor: "王警員"
     },
     {
         id: "AA-0291",
         status: "verified",
-        type: "違規停車",
+        type: "未禮讓行人",
         plate: "HSF-5429",
         location: "台中市大里區五權西路",
         confidence: 90,
@@ -7879,14 +7879,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 HSF-5429 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 HSF-5429 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "林警員"
     },
     {
         id: "AA-0292",
         status: "pending",
-        type: "違規停車",
+        type: "未依號誌行駛",
         plate: "DDY-1010",
         location: "台中市北屯區台灣大道二段",
         confidence: 78,
@@ -7906,14 +7906,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 DDY-1010 佔用機車優先道。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 DDY-1010 車輛於交岔路口未遵守交通號誌指示行駛。",
         auditor: null
     },
     {
         id: "AA-0293",
         status: "verified",
-        type: "違規停車",
+        type: "逆向",
         plate: "VLE-7236",
         location: "台中市南區黎明路",
         confidence: 87,
@@ -7933,14 +7933,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 56 條：汽車駕駛人在禁止臨時停車處所停車。",
-        description: "偵測到車輛於紅線區域靜止超過 3 分鐘，車輛 VLE-7236 佔用機車優先道。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 VLE-7236 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "林警員"
     },
     {
         id: "AA-0294",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "HOU-5490",
         location: "台中市南區崇德路三段",
         confidence: 97,
@@ -7960,14 +7960,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 HOU-5490 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 HOU-5490 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {
         id: "AA-0295",
         status: "verified",
-        type: "未依標誌指示行駛",
+        type: "違規迴轉",
         plate: "NER-7392",
         location: "台中市中區五權西路",
         confidence: 93,
@@ -7987,14 +7987,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 NER-7392 未依地面標線指示行駛。",
-        auditor: "葉警員"
+        legalBasis: "《道路交通管理處罰條例》第 49 條：在設有禁止迴車標誌或劃有分向限制線之路段迴車。",
+        description: "偵測到車牌 NER-7392 車輛於禁止迴轉路段或設有分向限制線之路口違規迴車。",
+        auditor: "林警員"
     },
     {
         id: "AA-0296",
         status: "cancelled",
-        type: "闖紅燈",
+        type: "逆向",
         plate: "MRO-6889",
         location: "台中市西區文心路四段",
         confidence: 97,
@@ -8014,14 +8014,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 53 條：汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者。",
-        description: "紅燈亮起後 2.8 秒，車輛仍強行通過停止線，偵測到車牌 MRO-6889 於紅燈狀態下跨越路口。",
-        auditor: "郭警員"
+        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
+        description: "偵測到車牌 MRO-6889 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        auditor: "黃警員"
     },
     {
         id: "AA-0297",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "闖紅燈",
         plate: "NGZ-4318",
         location: "台中市大里區文心路四段",
         confidence: 94,
@@ -8041,14 +8041,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 NGZ-4318 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 NGZ-4318 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
         id: "AA-0298",
         status: "cancelled",
-        type: "未依標誌指示行駛",
+        type: "未禮讓行人",
         plate: "RRJ-6596",
         location: "台中市大里區五權西路",
         confidence: 87,
@@ -8068,14 +8068,14 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 RRJ-6596 未依地面標線指示行駛。",
-        auditor: "陳警員"
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 RRJ-6596 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
+        auditor: "王警員"
     },
     {
         id: "AA-0299",
         status: "pending",
-        type: "未依標誌指示行駛",
+        type: "未依標誌標線行駛",
         plate: "PKA-1768",
         location: "台中市西屯區黎明路",
         confidence: 87,
@@ -8095,8 +8095,8 @@ const mockCases = [
             }
         ],
         video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "該車道僅准左轉，車輛違規直行，偵測到車牌 PKA-1768 未依地面標線指示行駛。",
+        legalBasis: "《道路交通管理處罰條例》第 48 條第 1 項第 2 款：不依標誌、標線、號誌指示。",
+        description: "偵測到車牌 PKA-1768 車輛違規直行或轉彎，未依地面標誌、標線指示行駛。",
         auditor: null
     }
 ];

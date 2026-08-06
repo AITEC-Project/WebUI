@@ -1,14 +1,13 @@
-const HistoryController = {
+const RecordsController = {
     rawRecords: [],
     filteredRecords: [],
     currentPage: 1,
     pageSize: 10,
-    currentReviewCaseId: null,
 
     init() {
         if (typeof mockCases !== 'undefined') {
-            // 在這裡強制過濾，只顯示已經結案 (非 pending) 且審核者為林警官的紀錄
-            this.rawRecords = mockCases.filter(c => c.status !== 'pending' && c.auditor === '林警員').map(c => {
+            // 不做任何 auditor 過濾，顯示全部人員已結案之紀錄
+            this.rawRecords = mockCases.filter(c => c.status !== 'pending').map(c => {
                 const isVerified = c.status === 'verified';
                 const formattedDate = c.timestamp ? c.timestamp.replace('T', ' ') : '未知時間';
 
@@ -21,7 +20,7 @@ const HistoryController = {
                     plate: c.plate || '未知車牌',
                     status: isVerified ? '裁決確認' : '撤銷舉發',
                     confidence: c.confidence || 0,
-                    image: c.images && c.images.length > 0 ? c.images[0].src : ''
+                    auditor: c.auditor ? c.auditor : '系統自動'
                 };
             });
         }
@@ -76,6 +75,7 @@ const HistoryController = {
     populateFilters() {
         const locations = [...new Set(this.rawRecords.map(r => r.location))].filter(Boolean);
         const types = [...new Set(this.rawRecords.map(r => r.type))].filter(Boolean);
+        const auditors = [...new Set(this.rawRecords.map(r => r.auditor))].filter(Boolean);
 
         const appendOptions = (selectId, items) => {
             const select = document.getElementById(selectId);
@@ -95,6 +95,7 @@ const HistoryController = {
 
         appendOptions('location-filter', locations);
         appendOptions('type-filter', types);
+        appendOptions('auditor-filter', auditors);
     },
 
     setupEventListeners() {
@@ -150,7 +151,7 @@ const HistoryController = {
 
         if (clearFilterBtn) {
             clearFilterBtn.addEventListener('click', () => {
-                ['status-filter', 'location-filter', 'type-filter'].forEach(id => {
+                ['status-filter', 'location-filter', 'type-filter', 'auditor-filter'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.value = 'all';
                 });
@@ -165,7 +166,7 @@ const HistoryController = {
                 if (startDate) startDate.value = pastDateStr;
                 if (endDate) endDate.value = todayStr;
 
-                ['status-filter', 'location-filter', 'type-filter'].forEach(id => {
+                ['status-filter', 'location-filter', 'type-filter', 'auditor-filter'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.value = 'all';
                 });
@@ -187,11 +188,13 @@ const HistoryController = {
         const statusVal = document.getElementById('status-filter')?.value || 'all';
         const locationVal = document.getElementById('location-filter')?.value || 'all';
         const typeVal = document.getElementById('type-filter')?.value || 'all';
+        const auditorVal = document.getElementById('auditor-filter')?.value || 'all';
 
         let activeCount = 0;
         if (statusVal !== 'all') activeCount++;
         if (locationVal !== 'all') activeCount++;
         if (typeVal !== 'all') activeCount++;
+        if (auditorVal !== 'all') activeCount++;
 
         const countBadge = document.getElementById('active-filter-count');
         const filterBtn = document.getElementById('advanced-filter-btn');
@@ -221,8 +224,9 @@ const HistoryController = {
             const matchStatus = (statusVal === 'all') || (r.status === statusVal);
             const matchLocation = (locationVal === 'all') || (r.location === locationVal);
             const matchType = (typeVal === 'all') || (r.type === typeVal);
+            const matchAuditor = (auditorVal === 'all') || (r.auditor === auditorVal);
 
-            return matchKeyword && matchDate && matchStatus && matchLocation && matchType;
+            return matchKeyword && matchDate && matchStatus && matchLocation && matchType && matchAuditor;
         });
 
         this.renderPage(1);
@@ -260,7 +264,7 @@ const HistoryController = {
 
         let html = '';
         const prevDisabled = this.currentPage === 1;
-        html += `<button onclick="HistoryController.renderPage(${this.currentPage - 1})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white ${prevDisabled ? 'text-gray-300 cursor-not-allowed' : 'text-gray-400 hover:bg-gray-50'}" ${prevDisabled ? 'disabled' : ''}><i class="fas fa-chevron-left text-xs"></i></button>`;
+        html += `<button onclick="RecordsController.renderPage(${this.currentPage - 1})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white ${prevDisabled ? 'text-gray-300 cursor-not-allowed' : 'text-gray-400 hover:bg-gray-50'}" ${prevDisabled ? 'disabled' : ''}><i class="fas fa-chevron-left text-xs"></i></button>`;
 
         let startPage = Math.max(1, this.currentPage - 2);
         let endPage = Math.min(totalPages, startPage + 4);
@@ -269,7 +273,7 @@ const HistoryController = {
         }
 
         if (startPage > 1) {
-            html += `<button onclick="HistoryController.renderPage(1)" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs">1</button>`;
+            html += `<button onclick="RecordsController.renderPage(1)" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs">1</button>`;
             if (startPage > 2) html += `<span class="px-2 text-gray-400 text-xs">...</span>`;
         }
 
@@ -277,26 +281,27 @@ const HistoryController = {
             if (i === this.currentPage) {
                 html += `<button class="w-8 h-8 flex items-center justify-center rounded bg-blue-600 text-white font-bold text-xs">${i}</button>`;
             } else {
-                html += `<button onclick="HistoryController.renderPage(${i})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs">${i}</button>`;
+                html += `<button onclick="RecordsController.renderPage(${i})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs">${i}</button>`;
             }
         }
 
         if (endPage < totalPages) {
             if (endPage < totalPages - 1) html += `<span class="px-2 text-gray-400 text-xs">...</span>`;
-            html += `<button onclick="HistoryController.renderPage(${totalPages})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs">${totalPages}</button>`;
+            html += `<button onclick="RecordsController.renderPage(${totalPages})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-bold text-xs">${totalPages}</button>`;
         }
 
         const nextDisabled = this.currentPage === totalPages || total === 0;
-        html += `<button onclick="HistoryController.renderPage(${this.currentPage + 1})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white ${nextDisabled ? 'text-gray-300 cursor-not-allowed' : 'text-gray-400 hover:bg-gray-50'}" ${nextDisabled ? 'disabled' : ''}><i class="fas fa-chevron-right text-xs"></i></button>`;
+        html += `<button onclick="RecordsController.renderPage(${this.currentPage + 1})" class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 bg-white ${nextDisabled ? 'text-gray-300 cursor-not-allowed' : 'text-gray-400 hover:bg-gray-50'}" ${nextDisabled ? 'disabled' : ''}><i class="fas fa-chevron-right text-xs"></i></button>`;
 
         controlsContainer.innerHTML = html;
     },
 
     renderTable(data) {
-        const tbody = document.getElementById('history-table-body');
+        const tbody = document.getElementById('records-table-body');
         if (!tbody) return;
 
         if (data.length === 0) {
+            // 已配合移除操作欄位將 colspan 改為 7
             tbody.innerHTML = `<tr><td colspan="7" class="p-10 text-center text-gray-500 font-bold">沒有符合條件的紀錄</td></tr>`;
             return;
         }
@@ -304,6 +309,8 @@ const HistoryController = {
         tbody.innerHTML = data.map(r => {
             const isVerified = r.status === '裁決確認';
             const statusClass = isVerified ? 'bg-green-50 text-green-600 border border-green-200' : 'bg-red-50 text-red-500 border border-red-200';
+            const auditorInitial = r.auditor !== '系統自動' ? r.auditor.charAt(0) : 'S';
+            const auditorColor = isVerified ? 'bg-blue-100 text-blue-600' : 'bg-gray-200 text-gray-600';
             const [datePart, timePart] = r.date.split(' ');
 
             return `
@@ -315,7 +322,7 @@ const HistoryController = {
                     <div class="text-[10px] text-gray-500 font-mono tracking-widest">${datePart || ''}<br>${timePart || ''}</div>
                 </td>
                 <td class="p-5">
-                    <div class="text-[12px] text-gray-600 font-bold max-w-[250px] truncate" title="${r.location}">${r.location}</div>
+                    <div class="text-[12px] text-gray-600 font-bold max-w-[200px] truncate" title="${r.location}">${r.location}</div>
                 </td>
                 <td class="p-5 text-center">
                     <div class="inline-block border border-gray-200 rounded px-3 py-1.5 bg-gray-50 text-center shadow-sm">
@@ -328,83 +335,20 @@ const HistoryController = {
                 <td class="p-5 text-center">
                     <span class="px-3 py-1.5 rounded-lg text-[10px] font-bold tracking-widest ${statusClass}">${r.status}</span>
                 </td>
-                <td class="p-5 text-center">
-                    <button onclick="HistoryController.openModal('${r.rawId}')" class="text-gray-400 hover:text-blue-600 transition p-2 rounded hover:bg-blue-50" title="重新審查">
-                        <i class="fas fa-file-signature text-lg"></i>
-                    </button>
+                <td class="p-5">
+                    <div class="flex items-center justify-center space-x-2">
+                        <div class="w-6 h-6 rounded-full ${auditorColor} flex items-center justify-center text-[10px] font-bold">${auditorInitial}</div>
+                        <span class="text-xs font-bold text-gray-700">${r.auditor}</span>
+                    </div>
                 </td>
             </tr>
         `}).join('');
-    },
-
-    openModal(caseId) {
-        const c = mockCases.find(x => x.id === caseId);
-        if (!c) return;
-
-        this.currentReviewCaseId = caseId;
-        document.getElementById('modal-case-id').innerText = `#${c.id}`;
-        document.getElementById('modal-plate').innerText = c.plate;
-        document.getElementById('modal-location').innerText = c.location;
-        document.getElementById('modal-type').innerText = c.type;
-        document.getElementById('modal-legal').innerText = c.legalBasis || '《道路交通管理處罰條例》';
-
-        let desc = c.description;
-        if (!desc && c.aiReport) {
-            const aiItem = c.aiReport.find(item => item.type === 'ai' && item.text.includes('物件辨識'));
-            desc = aiItem ? aiItem.text.replace('物件辨識：', '') : '受處分人駕駛該車輛，違規事實明確。';
-        }
-        document.getElementById('modal-desc').innerText = desc || '受處分人駕駛該車輛，違規事實明確。';
-
-        const videoEl = document.getElementById('modal-video');
-        if (videoEl) {
-            videoEl.src = c.video || 'video/video01.mp4';
-            videoEl.play().catch(e => console.log("Video auto-play prevented:", e));
-        }
-
-        const thumbContainer = document.getElementById('modal-thumbnails');
-        if (thumbContainer && c.images) {
-            thumbContainer.innerHTML = c.images.slice(0, 3).map(img => `
-                <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-500 cursor-pointer transition bg-black"
-                     onclick="HistoryController.seekVideo(${img.time})">
-                    <img src="${img.src}" class="w-full h-full object-cover opacity-80 hover:opacity-100">
-                    <span class="absolute top-1 left-1 bg-blue-600 text-white text-[10px] px-1.5 rounded shadow">${img.time}s</span>
-                </div>
-            `).join('');
-        }
-
-        document.getElementById('re-review-modal').classList.remove('hidden');
-    },
-
-    closeModal() {
-        document.getElementById('re-review-modal').classList.add('hidden');
-        this.currentReviewCaseId = null;
-
-        const videoEl = document.getElementById('modal-video');
-        if (videoEl) videoEl.pause();
-    },
-
-    seekVideo(time) {
-        const videoEl = document.getElementById('modal-video');
-        if (videoEl) videoEl.currentTime = time;
-    },
-
-    submitReReview(newStatus) {
-        if (!this.currentReviewCaseId) return;
-
-        const c = mockCases.find(x => x.id === this.currentReviewCaseId);
-        if (c) {
-            c.status = newStatus;
-            this.init();
-            this.closeModal();
-            const statusText = newStatus === 'verified' ? '成立' : '撤銷';
-            alert(`案件 #${c.id} 已經重新審查完畢，當前狀態：已${statusText}。`);
-        }
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => HistoryController.init());
+document.addEventListener('DOMContentLoaded', () => RecordsController.init());
 
-window.HistoryController = HistoryController;
+window.RecordsController = RecordsController;
 window.app = {
-    toggleSidebar: () => HistoryController.toggleSidebar()
+    toggleSidebar: () => RecordsController.toggleSidebar()
 };
