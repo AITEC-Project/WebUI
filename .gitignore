@@ -8,3 +8,4 @@
 /dataSources.local.xml
 # 忽略 Firebase 敏感設定檔
 js/firebase-config.js
+/video
