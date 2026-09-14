@@ -1,10 +1,86 @@
+// 在最上方引入您的 Firebase 設定與 Firestore 方法
+import { db, collection, getDocs, doc, updateDoc, auth, onAuthStateChanged } from "./firebase-config.js";
+
 const ApiService = {
     async fetchCases() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(typeof mockCases !== 'undefined' ? mockCases : []);
-            }, 300);
-        });
+        try {
+            // 1. 取得 YOLO 集合的資料
+            const querySnapshot = await getDocs(collection(db, "stage2_qwen_vlm"));
+            const cases = [];
+
+            // 🌟 在迴圈開始前，先取得當前使用者的真實 JWT Token
+            let realToken = "";
+            const currentUser = auth.currentUser;
+            if (currentUser) {
+                realToken = await currentUser.getIdToken();
+            }
+
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const caseId = data.case_id || docSnap.id;
+
+                let images = [];
+                let videoUrl = "";
+
+                // 🌟 針對特定案件使用本地端檔案
+                if (caseId === "20260808_181318_010") {
+                    videoUrl = `./video/${caseId}_video.mp4`;
+                    images = [
+                        { src: `./video/${caseId}_1.jpg`, time: 0 },
+                        { src: `./video/${caseId}_2.jpg`, time: 0 },
+                        { src: `./video/${caseId}_3.jpg`, time: 0 }
+                    ];
+                } else {
+                    // ☁️ 其他案件走 FastAPI 代理或雲端直連
+                    // 處理照片
+                    if (data.evidence_image_urls && Array.isArray(data.evidence_image_urls)) {
+                        images = data.evidence_image_urls.map((img, index) => {
+                            let proxyImgUrl = "";
+                            if (realToken) {
+                                proxyImgUrl = `http://127.0.0.1:8000/api/image/${caseId}/${index}?token=${realToken}`;
+                            }
+                            return {
+                                src: proxyImgUrl || img.url,
+                                time: img.video_time_sec
+                            };
+                        });
+                    }
+
+                    // 處理影片
+                    if (data.evidence_video) {
+                        if (realToken) {
+                            videoUrl = `http://127.0.0.1:8000/api/video/${caseId}?token=${realToken}`;
+                        }
+                    }
+                }
+
+                // 4. 處理 VLM 與 RAG 的分析描述
+                const description = data.VLM_analysis?.總體說明 || data.VLM_analysis?.主角狀況描述 || "無詳細情境描述";
+                const legalBasis = data.RAG_analysis?.判斷法規 || "相關法規研判中";
+
+                // 5. 轉換為前端系統支援的格式
+                cases.push({
+                    id: caseId,
+                    status: "pending",
+                    type: data.type || "未分類",
+                    plate: data.track_id ? `T-${data.track_id}` : "未知車牌",
+                    location: data.intersection_name || "未知路口",
+                    confidence: 90,
+                    timestamp: data.timestamp ? data.timestamp.replace(' ', 'T') : new Date().toISOString(),
+                    images: images,
+                    video: videoUrl,
+                    legalBasis: legalBasis,
+                    description: description,
+                    auditor: data.auditor || null
+                });
+            });
+
+            return cases.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+        } catch (error) {
+            console.error("Firebase 讀取失敗:", error);
+            return typeof mockCases !== 'undefined' ? mockCases : [];
+        }
     }
 };
 
@@ -39,7 +115,6 @@ const UIRenderer = {
 
         const displayTime = `${month}/${day} ${hours}:${minutes}:${seconds}`;
 
-        // 根據信心指數對應紅、黃、綠分類背景與邊框
         let confidenceClass = 'bg-red-50 border-red-100 text-red-600';
         if (c.confidence >= 90) {
             confidenceClass = 'bg-red-50 border-red-100';
@@ -157,7 +232,6 @@ const UIRenderer = {
                         ${badgeText}
                     </div>
 
-                    <!-- 使用 divide-y divide-gray-200 來自動生成均勻的灰色分隔線 -->
                     <div class="flex flex-col divide-y divide-gray-200">
                         <div class="flex flex-col pb-4 gap-1.5 pr-28">
                             <span class="text-sm text-[#54595D] font-bold tracking-wider">違規樣態</span>
@@ -189,16 +263,18 @@ const app = {
         currentLevel: 'high',
         hotkeysInitialized: false,
         isSidebarCollapsed: false,
-        currentKeyframeIdx: 0
+        currentKeyframeIdx: 0,
+        preloadedImages: [] // 🌟 新增：專門用來存放背景抓取照片的陣列，防止被記憶體回收
     },
 
     async init() {
         if (!document.getElementById('ticket-modal')) {
             await this.loadComponent('ticketModel.html');
         }
+
         const rawData = await ApiService.fetchCases();
         this.state.allCases = rawData;
-        this.state.pendingCases = rawData.filter(c => c.status === 'pending');
+        this.state.pendingCases = rawData.filter(c => !c.auditor);
 
         this.applyFilters();
         this.updateStatistics();
@@ -362,7 +438,7 @@ const app = {
         const detailSection = document.getElementById('detail-scroll-area');
         if (detailSection) {
             detailSection.scrollTop = 0;
-            detailSection.className = "flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10 bg-gray-50/50 w-full transition-colors duration-300";
+            detailSection.className = "flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10 bg-white w-full transition-colors duration-300";
         }
 
         document.querySelectorAll('.case-card').forEach(item => {
@@ -391,6 +467,43 @@ const app = {
                 item.querySelector('.case-card-loc').className = "text-[11px] font-medium text-gray-500 flex items-center case-card-loc";
             }
         });
+
+        // 🚀 啟動滑動視窗：預載下一個案件的 影片與照片！
+        this.preloadNextCase();
+    },
+
+    // 🚀 終極版滑動視窗：同時處理影片與照片預載
+    preloadNextCase() {
+        const currentIndex = this.state.filteredCases.findIndex(c => c.id === this.state.selectedCaseId);
+
+        if (currentIndex !== -1 && currentIndex + 1 < this.state.filteredCases.length) {
+            const nextCase = this.state.filteredCases[currentIndex + 1];
+
+            // 🎬 1. 預載影片 (透過隱藏的 video 標籤)
+            const preloadVideo = document.getElementById('preload-video');
+            if (preloadVideo && nextCase.video) {
+                if (preloadVideo.src !== nextCase.video) {
+                    preloadVideo.src = nextCase.video;
+                    preloadVideo.load();
+                }
+            }
+
+            // 📸 2. 預載照片 (透過在 JS 建立 Image 物件)
+            if (nextCase.images && nextCase.images.length > 0) {
+                // 清空前一次的預載紀錄
+                this.state.preloadedImages = [];
+
+                nextCase.images.forEach(img => {
+                    if (img.src) {
+                        const preloader = new Image();
+                        preloader.src = img.src; // 賦值 src 後，瀏覽器就會自動在背景發送請求去下載照片
+                        this.state.preloadedImages.push(preloader);
+                    }
+                });
+            }
+
+            console.log(`🚀 [滑動視窗] 已在背景預載下一個案件 (#${nextCase.id}) 的影片與 ${nextCase.images.length} 張照片`);
+        }
     },
 
     setupVideoMarkers(caseData) {
@@ -637,13 +750,27 @@ const app = {
         if (typeof TicketModal !== 'undefined') TicketModal.close();
     },
 
-    confirmTicket() {
+    async confirmTicket() {
         const currentCase = this.state.allCases.find(c => c.id === this.state.selectedCaseId);
         this.closeTicket();
+
         if (currentCase) {
-            currentCase.status = 'verified';
-            alert(`案件 #${currentCase.id} 已成立。`);
-            this.init();
+            try {
+                const caseRef = doc(db, "stage2_qwen_vlm", currentCase.id);
+                await updateDoc(caseRef, {
+                    auditor: "林警員"
+                });
+
+                currentCase.auditor = "林警員";
+                this.state.pendingCases = this.state.allCases.filter(c => !c.auditor);
+
+                this.updateStatistics();
+                this.applyFilters();
+
+            } catch (error) {
+                console.error("寫入資料庫失敗:", error);
+                alert("案件成立失敗，請檢查網路連線或資料庫權限設定！");
+            }
         }
     },
 
@@ -677,17 +804,28 @@ const app = {
         if (currentCase) {
             currentCase.status = 'canceled';
             currentCase.cancelReason = reason;
+            currentCase.auditor = "林警員(撤銷)";
 
-            this.state.pendingCases = this.state.allCases.filter(c => c.status === 'pending');
+            this.state.pendingCases = this.state.allCases.filter(c => !c.auditor && c.status === 'pending');
+
             this.updateStatistics();
             this.applyFilters();
-
             this.closeCancelModal();
-            alert(`案件 #${currentCase.id} 已成功撤銷。\n紀錄原因：${reason}`);
         } else {
             this.closeCancelModal();
         }
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => app.init());
+window.app = app;
+window.TimeUtils = TimeUtils;
+
+document.addEventListener('DOMContentLoaded', () => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            app.init();
+        } else {
+            window.location.href = "login.html";
+        }
+    });
+});

@@ -1,3 +1,6 @@
+// 在最上方引入 Firebase 設定與 Firestore 方法
+import { db, collection, getDocs, doc, updateDoc, auth } from "./firebase-config.js";
+
 const HistoryController = {
     rawRecords: [],
     filteredRecords: [],
@@ -5,26 +8,108 @@ const HistoryController = {
     pageSize: 10,
     currentReviewCaseId: null,
 
-    init() {
-        if (typeof mockCases !== 'undefined') {
-            // 在這裡強制過濾，只顯示已經結案 (非 pending) 且審核者為林警官的紀錄
-            this.rawRecords = mockCases.filter(c => c.status !== 'pending' && c.auditor === '林警員').map(c => {
-                const isVerified = c.status === 'verified';
-                const formattedDate = c.timestamp ? c.timestamp.replace('T', ' ') : '未知時間';
+    async init() {
+        let firebaseRecords = [];
 
-                return {
-                    rawId: c.id,
-                    id: `#${c.id}`,
+        try {
+            // 1. 取得 Firebase YOLO 集合的資料
+            const querySnapshot = await getDocs(collection(db, "YOLO"));
+
+            let realToken = "";
+            const currentUser = auth?.currentUser;
+            if (currentUser) {
+                realToken = await currentUser.getIdToken();
+            }
+
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const caseId = data.case_id || docSnap.id;
+
+                // 🎯 核心篩選：只抓取 auditor 為「林警員」的案件
+                if (data.auditor !== "林警員") return;
+
+                let images = [];
+                let videoUrl = "";
+
+                // 處理影片與圖片路徑 (與首頁邏輯一致)
+                if (caseId === "20260808_181318_010") {
+                    videoUrl = `./video/${caseId}_video.mp4`;
+                    images = [
+                        { src: `./video/${caseId}_1.jpg`, time: 0 },
+                        { src: `./video/${caseId}_2.jpg`, time: 0 },
+                        { src: `./video/${caseId}_3.jpg`, time: 0 }
+                    ];
+                } else {
+                    if (data.evidence_image_urls && Array.isArray(data.evidence_image_urls)) {
+                        images = data.evidence_image_urls.map((img, index) => {
+                            let proxyImgUrl = realToken ? `http://127.0.0.1:8000/api/image/${caseId}/${index}?token=${realToken}` : img.url;
+                            return { src: proxyImgUrl, time: img.video_time_sec };
+                        });
+                    }
+                    if (data.evidence_video && realToken) {
+                        videoUrl = `http://127.0.0.1:8000/api/video/${caseId}?token=${realToken}`;
+                    }
+                }
+
+                const formattedDate = data.timestamp ? data.timestamp.replace('T', ' ') : '未知時間';
+
+                // 轉換為歷史紀錄需要的格式
+                firebaseRecords.push({
+                    rawId: caseId,
+                    id: `#${caseId}`,
                     date: formattedDate,
-                    location: c.location || '未知地點',
-                    type: c.type || '未分類',
-                    plate: c.plate || '未知車牌',
-                    status: isVerified ? '裁決確認' : '撤銷舉發',
-                    confidence: c.confidence || 0,
-                    image: c.images && c.images.length > 0 ? c.images[0].src : ''
-                };
+                    location: data.intersection_name || '未知地點',
+                    type: data.type || '未分類',
+                    plate: data.track_id ? `T-${data.track_id}` : '未知車牌',
+                    // 如果有自訂狀態則顯示，否則預設顯示裁決確認
+                    status: data.status === 'canceled' ? '撤銷舉發' : '裁決確認',
+                    confidence: 90,
+                    image: images.length > 0 ? images[0].src : '',
+                    imagesData: images,
+                    video: videoUrl,
+                    description: data.VLM_analysis?.總體說明 || data.VLM_analysis?.主角狀況描述 || "無詳細情境描述",
+                    legalBasis: data.RAG_analysis?.判斷法規 || "相關法規研判中"
+                });
             });
+        } catch (error) {
+            console.error("Firebase 歷史案件讀取失敗:", error);
         }
+
+        // 2. 處理本地 data.js (mockCases) 的資料作為備用/合併
+        let localRecords = [];
+        if (typeof mockCases !== 'undefined') {
+            localRecords = mockCases
+                .filter(c => c.status !== 'pending' && c.auditor === '林警員')
+                .map(c => {
+                    const isVerified = c.status === 'verified';
+                    const formattedDate = c.timestamp ? c.timestamp.replace('T', ' ') : '未知時間';
+
+                    let desc = c.description;
+                    if (!desc && c.aiReport) {
+                        const aiItem = c.aiReport.find(item => item.type === 'ai' && item.text.includes('物件辨識'));
+                        desc = aiItem ? aiItem.text.replace('物件辨識：', '') : '受處分人駕駛該車輛，違規事實明確。';
+                    }
+
+                    return {
+                        rawId: c.id,
+                        id: `#${c.id}`,
+                        date: formattedDate,
+                        location: c.location || '未知地點',
+                        type: c.type || '未分類',
+                        plate: c.plate || '未知車牌',
+                        status: isVerified ? '裁決確認' : '撤銷舉發',
+                        confidence: c.confidence || 0,
+                        image: c.images && c.images.length > 0 ? c.images[0].src : '',
+                        imagesData: c.images,
+                        video: c.video,
+                        description: desc,
+                        legalBasis: c.legalBasis || '《道路交通管理處罰條例》'
+                    };
+                });
+        }
+
+        // 3. 將 Firebase 與本地資料合併，並依照時間由新到舊排序
+        this.rawRecords = [...firebaseRecords, ...localRecords].sort((a, b) => new Date(b.date) - new Date(a.date));
 
         this.populateFilters();
         this.setupEventListeners();
@@ -338,22 +423,17 @@ const HistoryController = {
     },
 
     openModal(caseId) {
-        const c = mockCases.find(x => x.id === caseId);
+        // 從我們合併過後的 rawRecords 中尋找，確保雲端與本地端資料都能順利打開彈窗
+        const c = this.rawRecords.find(x => x.rawId === caseId);
         if (!c) return;
 
         this.currentReviewCaseId = caseId;
-        document.getElementById('modal-case-id').innerText = `#${c.id}`;
+        document.getElementById('modal-case-id').innerText = c.id;
         document.getElementById('modal-plate').innerText = c.plate;
         document.getElementById('modal-location').innerText = c.location;
         document.getElementById('modal-type').innerText = c.type;
-        document.getElementById('modal-legal').innerText = c.legalBasis || '《道路交通管理處罰條例》';
-
-        let desc = c.description;
-        if (!desc && c.aiReport) {
-            const aiItem = c.aiReport.find(item => item.type === 'ai' && item.text.includes('物件辨識'));
-            desc = aiItem ? aiItem.text.replace('物件辨識：', '') : '受處分人駕駛該車輛，違規事實明確。';
-        }
-        document.getElementById('modal-desc').innerText = desc || '受處分人駕駛該車輛，違規事實明確。';
+        document.getElementById('modal-legal').innerText = c.legalBasis;
+        document.getElementById('modal-desc').innerText = c.description;
 
         const videoEl = document.getElementById('modal-video');
         if (videoEl) {
@@ -362,8 +442,8 @@ const HistoryController = {
         }
 
         const thumbContainer = document.getElementById('modal-thumbnails');
-        if (thumbContainer && c.images) {
-            thumbContainer.innerHTML = c.images.slice(0, 3).map(img => `
+        if (thumbContainer && c.imagesData) {
+            thumbContainer.innerHTML = c.imagesData.slice(0, 3).map(img => `
                 <div class="relative aspect-video rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-500 cursor-pointer transition bg-black"
                      onclick="HistoryController.seekVideo(${img.time})">
                     <img src="${img.src}" class="w-full h-full object-cover opacity-80 hover:opacity-100">
@@ -388,16 +468,30 @@ const HistoryController = {
         if (videoEl) videoEl.currentTime = time;
     },
 
-    submitReReview(newStatus) {
+    async submitReReview(newStatus) {
         if (!this.currentReviewCaseId) return;
 
-        const c = mockCases.find(x => x.id === this.currentReviewCaseId);
-        if (c) {
-            c.status = newStatus;
-            this.init();
+        const newStatusText = newStatus === 'verified' ? '裁決確認' : '撤銷舉發';
+        const dbStatusVal = newStatus === 'verified' ? 'verified' : 'canceled';
+
+        try {
+            // 1. 同步更新 Firebase 上的狀態
+            const caseRef = doc(db, "YOLO", this.currentReviewCaseId);
+            await updateDoc(caseRef, {
+                status: dbStatusVal
+            });
+            console.log("Firebase 狀態更新成功");
+        } catch (error) {
+            console.warn("無法更新 Firebase (可能是本地 mockCase 資料):", error);
+        }
+
+        // 2. 更新本地端畫面列表狀態
+        const record = this.rawRecords.find(x => x.rawId === this.currentReviewCaseId);
+        if (record) {
+            record.status = newStatusText;
+            this.applyFilters(); // 重新渲染表格
             this.closeModal();
-            const statusText = newStatus === 'verified' ? '成立' : '撤銷';
-            alert(`案件 #${c.id} 已經重新審查完畢，當前狀態：已${statusText}。`);
+            alert(`案件 ${record.id} 已經重新審查完畢，當前狀態：已${newStatusText === '裁決確認' ? '成立' : '撤銷'}。`);
         }
     }
 };

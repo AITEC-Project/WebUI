@@ -56,28 +56,28 @@ const mockCases = [
     {
         id: "AA-0002",
         status: "pending",
-        type: "未依標誌標線行駛",
+        type: "未禮讓行人",
         plate: "STP-9968",
-        location: "台中市北區文心路四段",
+        location: "北區小東路與勝利路口",
         confidence: 95,
         timestamp: "2026-05-30T13:47:00",
         images: [
             {
-                src: "video/image01.jpg",
-                time: 3
+                src: "video/20260804_015518_001_1.jpg",
+                time: 6.2
             },
             {
-                src: "video/image02.jpg",
-                time: 5
+                src: "video/20260804_015518_001_2.jpg",
+                time: 7.13
             },
             {
-                src: "video/image03.jpg",
-                time: 13
+                src: "video/20260804_015518_001_3.jpg",
+                time: 10.93
             }
         ],
-        video: "video/video01.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "偵測到該車道地面標線為「雙白線」，車輛違規跨越雙白線，偵測到車牌 STP-9968 未依規定車道行駛，跨越禁止變換車道線。",
+        video: "video/20260804_015518_001_video.mp4",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
+        description: "偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離，偵測到車牌 STP-9968 於行人過馬路期間加速通過，且車頭已進入行人通行路徑。",
         auditor: null
     },
     {
@@ -110,28 +110,28 @@ const mockCases = [
     {
         id: "AA-0004",
         status: "pending",
-        type: "未依標誌標線行駛",
+        type: "闖紅燈",
         plate: "PVF-6988",
         location: "台中市大里區中清路",
         confidence: 96,
         timestamp: "2026-05-25T08:06:00",
         images: [
             {
-                src: "video/image04.jpg",
-                time: 1
+                src: "video/20260806_213631_004_1.jpg",
+                time: 3.2
             },
             {
-                src: "video/image05.jpg",
-                time: 2
+                src: "video/20260806_213631_004_2.jpg",
+                time: 3.6
             },
             {
-                src: "video/image06.jpg",
-                time: 12
+                src: "video/20260806_213631_004_3.jpg",
+                time: 14
             }
         ],
-        video: "video/video02.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 48 條：不依標誌、標線、號誌指示。",
-        description: "偵測到該車道地面標線為「雙黃線」，車輛違規跨越雙黃線，偵測到車牌 PVF-6988 未依規定車道行駛，跨越禁止變換車道線。",
+        video: "video/20260806_213631_004_video.mp4",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "PVF-6988 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
@@ -218,28 +218,28 @@ const mockCases = [
     {
         id: "AA-0008",
         status: "pending",
-        type: "未禮讓行人",
+        type: "闖紅燈",
         plate: "FTK-4888",
-        location: "台中市西區復興路",
+        location: "北區西門路與和緯路口",
         confidence: 82,
         timestamp: "2026-05-28T11:43:00",
         images: [
             {
-                src: "video/image13.jpg",
-                time: 3
+                src: "video/20260806_213637_005_1.jpg",
+                time: 5
             },
             {
-                src: "video/image14.jpg",
-                time: 6
+                src: "video/20260806_213637_005_2.jpg",
+                time: 5
             },
             {
-                src: "video/image15.jpg",
-                time: 13
+                src: "video/20260806_213637_005_3.jpg",
+                time: 7
             }
         ],
-        video: "video/video05.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 44 條：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
-        description: "偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離，偵測到車牌 FTK-4888 於行人過馬路期間加速通過，且車頭已進入行人通行路徑。",
+        video: "video/20260806_213637_005_video.mp4",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 FTK-4888 車輛於紅燈亮起後仍強行通過路口，違規事實明確。",
         auditor: null
     },
     {
@@ -272,55 +272,55 @@ const mockCases = [
     {
         id: "AA-0010",
         status: "pending",
-        type: "未禮讓行人",
+        type: "闖紅燈",
         plate: "IBC-0156",
-        location: "台中市北區公益路",
+        location: "永康區復興路與高速二街口",
         confidence: 79,
         timestamp: "2026-05-27T19:06:00",
         images: [
             {
-                src: "video/image16.jpg",
+                src: "video/20260806_203057_003_1.jpg",
+                time: 2
+            },
+            {
+                src: "video/20260806_203057_003_2.jpg",
                 time: 5
             },
             {
-                src: "video/image17.jpg",
-                time: 10
-            },
-            {
-                src: "video/image18.jpg",
-                time: 12
+                src: "video/20260806_203057_003_3.jpg",
+                time: 7
             }
         ],
-        video: "video/video06.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 44 條：汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者。",
-        description: "偵測到行人正於行人穿越道通行，目標車輛未依規定與行人保持 3 公尺（三個枕木紋）以上距離，偵測到車牌 IBC-0156 為特殊車輛。",
+        video: "video/20260806_203057_003_video.mp4",
+        legalBasis: "《道路交通管理處罰條例》第 53 條第 1 項：行經有燈光號誌管制之交岔路口闖紅燈。",
+        description: "偵測到車牌 IBC-0156 車輛於紅燈亮起後仍強行通過路口，違規事實明確。偵測到車牌 IBC-0156 為特殊車輛。",
         auditor: null
     },
     {
         id: "AA-0011",
         status: "pending",
-        type: "逆向",
+        type: "未禮讓行人",
         plate: "OUI-4636",
-        location: "台中市西屯區中清路",
+        location: "中區中華東路三段與崇明路口",
         confidence: 85,
         timestamp: "2026-05-27T01:28:00",
         images: [
             {
-                src: "https://c01.twipcam.com/cam/snapshot/tpe-000058.jpg",
-                time: 1
+                src: "video/20260806_225200_006_1.jpg",
+                time: 0.97
             },
             {
-                src: "https://c01.twipcam.com/cam/snapshot/tpe-000115.jpg",
-                time: 5
+                src: "video/20260806_225200_006_2.jpg",
+                time: 2.17
             },
             {
-                src: "https://c01.twipcam.com/cam/snapshot/tpe-000223.jpg",
-                time: 6
+                src: "video/20260806_225200_006_3.jpg",
+                time: 2.4
             }
         ],
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
-        legalBasis: "《道路交通管理處罰條例》第 45 條第 1 項第 1 款：不按遵行之方向行駛。",
-        description: "偵測到車牌 OUI-4636 車輛駛入對向車道或單行道逆向行駛，產生嚴重碰撞風險。",
+        video: "video/20260806_225200_006_video.mp4",
+        legalBasis: "《道路交通管理處罰條例》第 44 條第 2 項：汽車駕駛人行近行人穿越道，不暫停讓行人先行通過。",
+        description: "偵測到車牌 OUI-4636 車輛行經行人穿越道時，未暫停讓行人優先通行，危害行人安全。",
         auditor: null
     },
     {

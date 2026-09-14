@@ -128,7 +128,7 @@
     </div>
   </header>
 
-  <!-- 網格排版核心 (全部整合進一個 Grid) -->
+  <!-- 網格排版核心 -->
   <div class="grid grid-cols-12 gap-6 w-full">
 
     <!-- ================= 第一排 ================= -->
@@ -144,7 +144,6 @@
       </div>
 
       <div class="flex-1 flex items-center justify-center relative my-4">
-        <!-- 固定寬高避免變形 -->
         <div class="w-44 h-44 relative">
           <canvas id="goalDoughnutChart"></canvas>
           <div class="absolute inset-0 flex flex-col items-center justify-center">
@@ -181,13 +180,12 @@
           <button class="px-3 py-1 text-xs font-bold text-gray-500 hover:text-gray-900">MONTH</button>
         </div>
       </div>
-      <!-- 固定最大高度，避免拉伸變形 -->
       <div class="w-full h-[240px] flex items-center justify-center mt-2 flex-1">
         <canvas id="performanceTrendChart"></canvas>
       </div>
     </div>
 
-    <!-- 3. 右上：案件類型與分級佔比 (拉到第一排) -->
+    <!-- 3. 右上：案件類型與分級佔比 -->
     <div class="col-span-12 xl:col-span-4 card-bg p-6 flex flex-col h-full">
       <div class="flex justify-between items-start mb-6">
         <h3 class="text-lg font-bold text-gray-900">案件與分級佔比</h3>
@@ -195,66 +193,49 @@
       </div>
 
       <div class="flex flex-col sm:flex-row xl:flex-col 2xl:flex-row gap-6 h-full flex-1">
-        <!-- 違規類型分佈 -->
         <div class="flex-1 flex flex-col">
           <h4 class="text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-wider">Violation Types</h4>
-          <div id="type-distribution-container" class="flex-1 space-y-4 flex flex-col justify-center w-full">
-            <!-- JS 動態生成 -->
-          </div>
+          <div id="type-distribution-container" class="flex-1 space-y-4 flex flex-col justify-center w-full"></div>
         </div>
 
-        <!-- 分隔線 (隨父層排版切換橫向或直向) -->
         <div class="hidden sm:block xl:hidden 2xl:block w-px bg-gray-100"></div>
         <div class="block sm:hidden xl:block 2xl:hidden h-px bg-gray-100 w-full"></div>
 
-        <!-- 信心值分級佔比 -->
         <div class="flex-1 flex flex-col">
           <h4 class="text-[10px] font-bold text-gray-400 mb-3 uppercase tracking-wider">Confidence Levels</h4>
-          <div id="confidence-distribution-container" class="flex-1 space-y-4 flex flex-col justify-center w-full">
-            <!-- JS 動態生成 -->
-          </div>
+          <div id="confidence-distribution-container" class="flex-1 space-y-4 flex flex-col justify-center w-full"></div>
         </div>
       </div>
     </div>
 
     <!-- ================= 第二排 ================= -->
 
-    <!-- 4. 左下：個人最近審核紀錄表格 (佔 10 欄) -->
+    <!-- 4. 左下：審核品質與效率分析表格 (交換後，佔 10 欄) -->
     <div class="col-span-12 xl:col-span-10 card-bg flex flex-col overflow-hidden h-full">
       <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white">
-        <h3 class="text-lg font-bold text-gray-900">個人最近審核紀錄</h3>
-        <button class="flex items-center text-xs font-bold text-gray-500 hover:text-gray-900 transition border border-gray-200 px-3 py-1 bg-gray-50">
-          <i class="fas fa-filter mr-1.5"></i> FILTERS
-        </button>
+        <h3 class="text-lg font-bold text-gray-900">審核品質與效率分析</h3>
       </div>
 
       <div class="overflow-x-auto flex-1">
         <table class="w-full text-left border-collapse">
           <thead>
           <tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
-            <th class="p-4 pl-6">案件編號 CASE ID</th>
-            <th class="p-4">違規類型 VIOLATION</th>
-            <th class="p-4">審核時間 TIMESTAMP</th>
-            <th class="p-4">耗時 DURATION</th>
-            <th class="p-4 pr-6 text-right">狀態 STATUS</th>
+            <th class="p-4 pl-6 w-[25%]">案件分級 CASE CLASSIFICATION</th>
+            <th class="p-4 w-[20%]">撤銷率 DISMISSAL</th>
+            <th class="p-4 w-[20%]">修改率 MODIFICATION</th>
+            <th class="p-4 w-[20%]">成立率 ESTABLISHMENT</th>
+            <th class="p-4 pr-6 w-[15%] text-right">平均耗時 AVG. TIME</th>
           </tr>
           </thead>
-          <tbody id="recent-audit-tbody" class="divide-y divide-gray-100 text-sm font-medium text-gray-700">
+          <tbody id="quality-analysis-tbody" class="divide-y divide-gray-100 text-sm font-medium text-gray-700 bg-white">
           <!-- JS 動態填入紀錄 -->
           </tbody>
         </table>
       </div>
-
-      <div class="p-4 bg-gray-50/50 border-t border-gray-100 text-center mt-auto">
-        <a href="history.html" class="inline-flex items-center text-xs font-extrabold text-blue-600 hover:text-blue-700 transition">
-          VIEW FULL ARCHIVE <i class="fas fa-arrow-right ml-1.5"></i>
-        </a>
-      </div>
     </div>
 
-    <!-- 5. 右下：藍卡與白卡 (佔 2 欄，調整文字與內距以適應窄版面) -->
+    <!-- 5. 右下：藍卡與白卡 (佔 2 欄) -->
     <div class="col-span-12 xl:col-span-2 flex flex-col gap-6 h-full">
-
       <!-- 藍卡：平均處理時間 -->
       <div class="dark-card p-5 flex flex-col flex-1 justify-center relative overflow-hidden">
         <i class="fas fa-stopwatch absolute right-3 top-1/2 -translate-y-1/2 text-white/10 text-5xl pointer-events-none"></i>
@@ -283,7 +264,42 @@
           複核誤判數量極低
         </p>
       </div>
+    </div>
 
+    <!-- ================= 第三排 ================= -->
+    <!-- 6. 個人最近審核紀錄表格 (交換後，獨立放滿最底下 12 欄) -->
+    <div class="col-span-12 card-bg flex flex-col overflow-hidden w-full mt-2">
+      <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white">
+        <h3 class="text-lg font-bold text-gray-900">個人最近審核紀錄</h3>
+        <button class="flex items-center text-xs font-bold text-gray-500 hover:text-gray-900 transition border border-gray-200 px-3 py-1 bg-gray-50">
+          <i class="fas fa-filter mr-1.5"></i> FILTERS
+        </button>
+      </div>
+
+      <div class="overflow-x-auto w-full flex-1">
+        <table class="w-full text-left border-collapse">
+          <thead>
+          <tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+            <th class="p-4 pl-6">案件編號 CASE ID</th>
+            <th class="p-4">違規類型 VIOLATION</th>
+            <th class="p-4">審核時間 TIMESTAMP</th>
+            <th class="p-4">修改 MODIFIED</th>
+            <th class="p-4">分級 CONFIDENCE</th>
+            <th class="p-4">耗時 DURATION</th>
+            <th class="p-4 pr-6 text-right">狀態 STATUS</th>
+          </tr>
+          </thead>
+          <tbody id="recent-audit-tbody" class="divide-y divide-gray-100 text-sm font-medium text-gray-700 bg-white">
+          <!-- JS 動態填入紀錄 -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="p-4 bg-gray-50/50 border-t border-gray-100 text-center mt-auto">
+        <a href="history.html" class="inline-flex items-center text-xs font-extrabold text-blue-600 hover:text-blue-700 transition">
+          VIEW FULL ARCHIVE <i class="fas fa-arrow-right ml-1.5"></i>
+        </a>
+      </div>
     </div>
 
   </div>

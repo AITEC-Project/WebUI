@@ -4,10 +4,7 @@ const DashboardApp = {
         trend: null
     },
 
-    // 指定當前登入或查看的警員名稱
     currentAuditor: '林警員',
-
-    // 每日目標件數
     dailyTarget: 450,
 
     toggleSidebar() {
@@ -63,6 +60,7 @@ const DashboardApp = {
         this.renderGoalChart();
         this.renderTrendChart();
         this.renderRecentTable();
+        this.renderQualityAnalysisTable();
     },
 
     getAuditorCases() {
@@ -274,7 +272,8 @@ const DashboardApp = {
             .slice(0, 5);
 
         if (recentCases.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-400 font-bold">目前尚無${this.currentAuditor}的審核紀錄</td></tr>`;
+            // 注意：因為多加了兩欄，這裡的 colspan 要從 5 改成 7
+            tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-400 font-bold">目前尚無${this.currentAuditor}的審核紀錄</td></tr>`;
             return;
         }
 
@@ -288,16 +287,82 @@ const DashboardApp = {
             const duration = this.getCaseDuration(c);
             const durationStr = duration !== null ? `${duration}s` : '--';
 
+            // 🌟 1. 判斷是否有修改 (假設資料庫有 c.modified 欄位，若無預設為否)
+            const isModified = c.modified ? true : false;
+            const modifiedBadge = isModified
+                ? `<span class="text-orange-500 font-extrabold text-sm">是</span>`
+                : `<span class="text-gray-400 font-bold text-sm">否</span>`;
+
+            // 🌟 2. 判斷案件分級 (對應圖表的三個級距)
+            let confBadge = '';
+            const conf = c.confidence || 0;
+            if (conf >= 90) {
+                confBadge = `<span class="text-red-600 font-bold text-sm">確信違規</span>`;
+            } else if (conf >= 80) {
+                confBadge = `<span class="text-yellow-600 font-bold text-sm">疑似違規</span>`;
+            } else {
+                confBadge = `<span class="text-green-600 font-bold text-sm">邊界案例</span>`;
+            }
+
             return `
-                <tr class="hover:bg-gray-50/80 transition">
+                <tr class="hover:bg-gray-50/80 transition border-b border-gray-100 last:border-0">
                     <td class="p-4 pl-6 font-extrabold text-blue-600">#${c.id}</td>
                     <td class="p-4 font-bold text-gray-900">${c.type || '未分類'}</td>
                     <td class="p-4 text-xs font-mono text-gray-500">${timeStr}</td>
+                    <!-- 填入新增的兩個欄位 -->
+                    <td class="p-4">${modifiedBadge}</td>
+                    <td class="p-4">${confBadge}</td>
                     <td class="p-4 text-xs font-mono text-gray-500">${durationStr}</td>
                     <td class="p-4 pr-6 text-right">${statusBadge}</td>
                 </tr>
             `;
         }).join('');
+    },
+
+    // 🌟 這裡修改排版與類別樣式，使之跟個人最近審核紀錄完全一致
+    renderQualityAnalysisTable() {
+        const tbody = document.getElementById('quality-analysis-tbody');
+        if (!tbody) return;
+
+        const analysisData = [
+            {
+                level: '確信違規 (Confirmed)',
+                dismissal: '2.1%',
+                modification: '1.5%',
+                establishment: '96.4%',
+                time: '8s',
+                estColor: 'text-green-600',
+                rowClass: 'text-blue-600 italic font-bold'
+            },
+            {
+                level: '疑似違規 (Suspected)',
+                dismissal: '12.4%',
+                modification: '8.2%',
+                establishment: '79.4%',
+                time: '18s',
+                estColor: 'text-gray-900',
+                rowClass: 'text-blue-600 italic font-bold'
+            },
+            {
+                level: '邊界案例 (Borderline)',
+                dismissal: '24.5%',
+                modification: '15.8%',
+                establishment: '59.7%',
+                time: '32s',
+                estColor: 'text-red-500',
+                rowClass: 'text-blue-600 italic font-bold'
+            }
+        ];
+
+        tbody.innerHTML = analysisData.map(data => `
+            <tr class="hover:bg-gray-50/80 transition">
+                <td class="p-4 pl-6 ${data.rowClass}">${data.level}</td>
+                <td class="p-4 font-bold text-gray-900">${data.dismissal}</td>
+                <td class="p-4 font-bold text-gray-900">${data.modification}</td>
+                <td class="p-4 font-extrabold ${data.estColor}">${data.establishment}</td>
+                <td class="p-4 pr-6 text-right font-extrabold text-gray-900">${data.time}</td>
+            </tr>
+        `).join('');
     },
 
     renderGoalChart() {
