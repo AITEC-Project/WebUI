@@ -1,10 +1,66 @@
 /**
  * 數據監測中心 - 邏輯 (admin.js)
+ * 本頁為 UI 示意原型，資料皆為本機寫死的假資料，不連接任何後端。
  */
 
+const OBSERVATION_DATA = {
+    cameras: [
+        {
+            id: 'C000008', name: '河南路／福星路', direction: '右側車流往臺灣大道',
+            health: 'normal', healthLabel: '正常觀測',
+            lastUpdate: '18:44:05', candidateCount: 18, weekCount: 82,
+            rules: ['禁止左轉', '雙黃線跨越'],
+            ruleCounts: { '禁止左轉': 10, '雙黃線跨越': 8 },
+            weekRuleCounts: { '禁止左轉': 47, '雙黃線跨越': 35 }
+        },
+        {
+            id: 'C000071', name: '崇德路／豐樂路', direction: '右側車流往環中路',
+            health: 'delayed', healthLabel: '資料延遲',
+            lastUpdate: '17:31:40', candidateCount: 9, weekCount: 41,
+            rules: ['標線跨越'],
+            ruleCounts: { '標線跨越': 9 },
+            weekRuleCounts: { '標線跨越': 41 }
+        },
+        {
+            id: 'C000186', name: '五權西路／龍富路', direction: '右側車流往南屯交流道',
+            health: 'normal', healthLabel: '正常觀測',
+            lastUpdate: '18:43:51', candidateCount: 6, weekCount: 29,
+            rules: ['機車進入禁行區'],
+            ruleCounts: { '機車進入禁行區': 6 },
+            weekRuleCounts: { '機車進入禁行區': 29 }
+        }
+    ],
+
+    rules: ['禁止左轉', '雙黃線跨越', '標線跨越', '機車進入禁行區'],
+
+    hourlyToday: [0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2, 3, 5, 4, 3, 2, 1, 1, 0],
+    hourlyWeek: [2, 1, 1, 1, 1, 2, 5, 8, 11, 7, 8, 9, 7, 6, 8, 10, 13, 18, 16, 10, 7, 5, 4, 2],
+
+    recommendations: [
+        {
+            id: 1, cameraId: 'C000008', rule: '禁止左轉',
+            region: '河南路北向入口 → 福星路東側出口', timeRange: '17:00–19:00',
+            reason: '晚尖峰候選較集中，建議優先檢視轉向動線。', action: '優先檢視影像'
+        },
+        {
+            id: 2, cameraId: 'C000008', rule: '雙黃線跨越',
+            region: '河南路近路口中央分隔區', timeRange: '16:00–18:00',
+            reason: '跨越候選集中於同一觀測區域，適合安排人工抽查。', action: '安排區域抽查'
+        },
+        {
+            id: 3, cameraId: 'C000186', rule: '機車進入禁行區',
+            region: '五權西路東向機車禁行區入口', timeRange: '07:00–09:00',
+            reason: '通勤時段有重複候選，建議確認標線可見度與動線。', action: '確認影像與標線'
+        }
+    ]
+};
+
 const AdminApp = {
-    chart: null,
-    map: null,
+    state: {
+        period: 'today',
+        cameraId: 'all',
+        rule: 'all'
+    },
 
     toggleSidebar() {
         const sidebar = document.getElementById('sidebar-panel');
@@ -49,416 +105,238 @@ const AdminApp = {
     },
 
     init() {
-        this.updateTodayStats();
-        this.updateConfidenceDistribution();
-        this.updateCurrentHotspot();
-        this.updateHeatmap();
-        this.renderGeneralStatsChart();
-        this.updateHotspotMap(); // 初始化動態地圖與排行榜
+        this.buildFilterOptions();
+        this.bindFilters();
+        this.render();
     },
 
-    updateTodayStats() {
-        const countEl = document.getElementById('today-case-count');
-        const trendEl = document.getElementById('today-case-trend');
+    /* ---------- 篩選列 ---------- */
 
-        if (!countEl || !trendEl) return;
-
-        if (typeof mockCases === 'undefined' || mockCases.length === 0) {
-            countEl.innerText = '0';
-            trendEl.innerHTML = '<i class="fas fa-minus mr-1 text-[10px]"></i>無資料';
-            return;
-        }
-
-        const dateCounts = {};
-        mockCases.forEach(c => {
-            if (c.timestamp) {
-                const dateStr = c.timestamp.split('T')[0];
-                dateCounts[dateStr] = (dateCounts[dateStr] || 0) + 1;
-            }
+    buildFilterOptions() {
+        const cameraSelect = document.getElementById('filter-camera');
+        OBSERVATION_DATA.cameras.forEach(camera => {
+            const option = document.createElement('option');
+            option.value = camera.id;
+            option.textContent = `${camera.id}・${camera.name}`;
+            cameraSelect.appendChild(option);
         });
 
-        const dates = Object.keys(dateCounts).sort((a, b) => new Date(b) - new Date(a));
-        if (dates.length === 0) return;
-
-        const todayStr = dates[0];
-        const todayCount = dateCounts[todayStr];
-
-        let prevTotal = 0;
-        let prevDays = 0;
-        for (let i = 1; i < dates.length; i++) {
-            prevTotal += dateCounts[dates[i]];
-            prevDays++;
-        }
-
-        countEl.innerText = todayCount.toLocaleString();
-
-        if (prevDays === 0) {
-            trendEl.className = 'text-sm text-gray-400 font-bold flex items-center mb-1';
-            trendEl.innerHTML = `<i class="fas fa-minus mr-1 text-[10px]"></i>無過往數據`;
-            return;
-        }
-
-        const avgCount = prevTotal / prevDays;
-        const percent = ((todayCount - avgCount) / avgCount) * 100;
-        const absPercent = Math.abs(percent).toFixed(1);
-
-        if (percent > 0) {
-            trendEl.className = 'text-sm text-red-500 font-bold flex items-center mb-1';
-            trendEl.innerHTML = `<i class="fas fa-arrow-up mr-1 text-[10px]"></i>${absPercent}%`;
-        } else if (percent < 0) {
-            trendEl.className = 'text-sm text-green-500 font-bold flex items-center mb-1';
-            trendEl.innerHTML = `<i class="fas fa-arrow-down mr-1 text-[10px]"></i>${absPercent}%`;
-        } else {
-            trendEl.className = 'text-sm text-gray-500 font-bold flex items-center mb-1';
-            trendEl.innerHTML = `<i class="fas fa-minus mr-1 text-[10px]"></i>0%`;
-        }
+        const ruleSelect = document.getElementById('filter-rule');
+        OBSERVATION_DATA.rules.forEach(name => {
+            const option = document.createElement('option');
+            option.value = name;
+            option.textContent = name;
+            ruleSelect.appendChild(option);
+        });
     },
 
-    updateConfidenceDistribution() {
-        const avgEl = document.getElementById('confidence-avg');
-        const barContainer = document.getElementById('confidence-distribution-bar');
-
-        if (!avgEl || !barContainer) return;
-
-        let verifiedCases = [];
-        if (typeof mockCases !== 'undefined') {
-            verifiedCases = mockCases.filter(c => c.status === 'verified');
-        }
-
-        if (verifiedCases.length === 0) {
-            avgEl.innerText = '0%';
-            barContainer.innerHTML = '';
-            return;
-        }
-
-        const totalConf = verifiedCases.reduce((sum, c) => sum + (c.confidence || 0), 0);
-        const avgConf = (totalConf / verifiedCases.length).toFixed(1);
-        avgEl.innerText = `${avgConf}%`;
-
-        const buckets = [0, 0, 0, 0, 0];
-        verifiedCases.forEach(c => {
-            const conf = c.confidence || 0;
-            if (conf < 70) buckets[0]++;
-            else if (conf < 80) buckets[1]++;
-            else if (conf < 88) buckets[2]++;
-            else if (conf < 95) buckets[3]++;
-            else buckets[4]++;
+    bindFilters() {
+        document.getElementById('filter-period').addEventListener('change', e => {
+            this.state.period = e.target.value;
+            this.render();
+        });
+        document.getElementById('filter-camera').addEventListener('change', e => {
+            this.state.cameraId = e.target.value;
+            this.render();
+        });
+        document.getElementById('filter-rule').addEventListener('change', e => {
+            this.state.rule = e.target.value;
+            this.render();
         });
 
-        const maxCount = Math.max(...buckets, 1);
-        const colors = ['bg-gray-200', 'bg-gray-300', 'bg-gray-400', 'bg-gray-500', 'bg-blue-800'];
-
-        barContainer.innerHTML = buckets.map((count, i) => {
-            const heightPercent = count === 0 ? 5 : Math.max((count / maxCount) * 100, 10);
-            return `<div class="w-1/5 ${colors[i]}" style="height: ${heightPercent}%" title="區間數量: ${count}"></div>`;
-        }).join('');
-    },
-
-    updateCurrentHotspot() {
-        const nameEl = document.getElementById('hotspot-name');
-        const descEl = document.getElementById('hotspot-desc');
-
-        if (!nameEl || !descEl) return;
-
-        if (typeof mockCases === 'undefined' || mockCases.length === 0) {
-            nameEl.innerText = '無資料';
-            descEl.innerText = '目前無偵測數據';
-            return;
-        }
-
-        const locCounts = {};
-        mockCases.forEach(c => {
-            const loc = c.location || '未知路段';
-            if(!locCounts[loc]) locCounts[loc] = { total: 0, types: {} };
-
-            locCounts[loc].total++;
-            const type = c.type || '其他';
-            locCounts[loc].types[type] = (locCounts[loc].types[type] || 0) + 1;
-        });
-
-        let hotLoc = '';
-        let maxTotal = 0;
-        for (let loc in locCounts) {
-            if (locCounts[loc].total > maxTotal) {
-                maxTotal = locCounts[loc].total;
-                hotLoc = loc;
-            }
-        }
-
-        if (!hotLoc) return;
-
-        let topType = '';
-        let maxTypeCount = 0;
-        const hotLocData = locCounts[hotLoc].types;
-
-        for (let t in hotLocData) {
-            if (hotLocData[t] > maxTypeCount) {
-                maxTypeCount = hotLocData[t];
-                topType = t;
-            }
-        }
-
-        const percent = Math.round((maxTypeCount / maxTotal) * 100);
-
-        nameEl.innerText = hotLoc;
-        descEl.innerText = `主要違規：${topType} `;
-    },
-
-    updateHeatmap() {
-        const container = document.getElementById('time-heatmap-container');
-        const adviceEl = document.getElementById('heatmap-advice');
-
-        if (!container || !adviceEl) return;
-
-        if (typeof mockCases === 'undefined' || mockCases.length === 0) {
-            container.innerHTML = '<div class="w-full flex items-center justify-center text-xs text-gray-400">無數據可供分析</div>';
-            adviceEl.innerText = '目前無偵測數據，建議持續觀察。';
-            return;
-        }
-
-        const hourCounts = Array(24).fill(0);
-        const locationHourCounts = {};
-
-        mockCases.forEach(c => {
-            if (c.timestamp) {
-                const date = new Date(c.timestamp);
-                const hour = date.getHours();
-                if (!isNaN(hour)) {
-                    hourCounts[hour]++;
-                    const loc = c.location || '未知路段';
-                    if (!locationHourCounts[loc]) locationHourCounts[loc] = Array(24).fill(0);
-                    locationHourCounts[loc][hour]++;
-                }
-            }
-        });
-
-        const maxCount = Math.max(...hourCounts, 1);
-        const colors = [
-            'bg-blue-50', 'bg-blue-100', 'bg-blue-200', 'bg-blue-300',
-            'bg-blue-400', 'bg-blue-500', 'bg-blue-600', 'bg-blue-700', 'bg-blue-800'
-        ];
-
-        container.innerHTML = hourCounts.map((count, hour) => {
-            const colorIndex = count === 0 ? 0 : Math.ceil((count / maxCount) * (colors.length - 1));
-            const colorClass = colors[colorIndex];
-            const nextHour = (hour + 1) % 24;
-            const title = `${String(hour).padStart(2, '0')}:00 - ${String(nextHour).padStart(2, '0')}:00 (共 ${count} 宗)`;
-            return `<div class="flex-1 ${colorClass} transition-colors duration-300 border border-gray-100" title="${title}"></div>`;
-        }).join('');
-
-        let peakHour = 0;
-        let peakCount = 0;
-        hourCounts.forEach((count, idx) => {
-            if (count > peakCount) {
-                peakCount = count;
-                peakHour = idx;
-            }
-        });
-
-        let peakLoc = '';
-        let peakLocCount = 0;
-        for (const loc in locationHourCounts) {
-            if (locationHourCounts[loc][peakHour] > peakLocCount) {
-                peakLocCount = locationHourCounts[loc][peakHour];
-                peakLoc = loc;
-            }
-        }
-
-        if (peakCount > 0) {
-            const nextHour = (peakHour + 1) % 24;
-            const timeStr = `${String(peakHour).padStart(2, '0')}:00 - ${String(nextHour).padStart(2, '0')}:00`;
-            adviceEl.innerText = `觀測數據顯示，${peakLoc || '各轄區路段'}於 ${timeStr} 達到違規高峰（共 ${peakCount} 件）。建議加強該時段 AI 優先權重，並考慮動態調整數位執法閾值以維持城市治理效能。`;
-        } else {
-            adviceEl.innerText = '目前數據量平穩，建議維持當前數位執法閾值。';
-        }
-    },
-
-    // 動態分析 5 日內熱點與更新地圖/排行榜 (台中)
-    updateHotspotMap() {
-        const mapContainer = document.getElementById('hotspot-map');
-        const listContainer = document.getElementById('hotspot-ranking-list');
-        if (!mapContainer || typeof L === 'undefined') return;
-
-        // 初始化地圖，定位在台中市中心
-        if (!this.map) {
-            this.map = L.map('hotspot-map', { zoomControl: false }).setView([24.1477, 120.6736], 13);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OSM',
-                subdomains: 'abcd',
-                maxZoom: 20
-            }).addTo(this.map);
-            L.control.zoom({ position: 'bottomright' }).addTo(this.map);
-        } else {
-            // 清除現有標記
-            this.map.eachLayer((layer) => {
-                if (layer instanceof L.CircleMarker) layer.remove();
+        document.querySelectorAll('.period-tabs button').forEach(button => {
+            button.addEventListener('click', () => {
+                this.state.period = button.dataset.period;
+                this.syncFilterControls();
+                this.render();
             });
-        }
-
-        if (typeof mockCases === 'undefined' || mockCases.length === 0) return;
-
-        // 尋找資料中的最新日期，作為「今天」的基準，往回抓 5 天
-        const sortedCases = [...mockCases].filter(c => c.timestamp).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        if (sortedCases.length === 0) return;
-
-        const latestDate = new Date(sortedCases[0].timestamp);
-        const fiveDaysAgo = new Date(latestDate);
-        fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
-
-        // 篩選近 5 天的資料
-        const recentCases = sortedCases.filter(c => new Date(c.timestamp) >= fiveDaysAgo);
-
-        // 根據路口分組並統計數量
-        const locStats = {};
-        recentCases.forEach(c => {
-            const loc = c.location || '未知路段';
-            if (!locStats[loc]) {
-                // 如果 mock 資料沒有 lat/lng，則以台中市為中心生成模擬座標
-                const lat = c.lat || (24.1477 + (Math.random() - 0.5) * 0.05);
-                const lng = c.lng || (120.6736 + (Math.random() - 0.5) * 0.05);
-                locStats[loc] = { name: loc, count: 0, lat: lat, lng: lng };
-            }
-            locStats[loc].count++;
         });
-
-        // 排序取出熱點陣列
-        const hotspots = Object.values(locStats).sort((a, b) => b.count - a.count);
-
-        // 將點位標記在地圖上
-        hotspots.forEach((data, index) => {
-            const isHighRisk = index < 3; // 排名前三視為高風險
-            const color = isHighRisk ? '#dc2626' : '#2563eb';
-            const fillColor = isHighRisk ? '#ef4444' : '#3b82f6';
-            const radius = isHighRisk ? 12 : 8;
-
-            L.circleMarker([data.lat, data.lng], {
-                radius: radius,
-                color: color,
-                fillColor: fillColor,
-                fillOpacity: 0.7,
-                weight: 2
-            }).addTo(this.map).bindPopup(`
-                <div class="font-sans">
-                    <div class="font-bold text-gray-900 border-b border-gray-200 pb-1 mb-1">${data.name}</div>
-                    <div class="text-xs text-gray-600">
-                        狀態: <span class="font-bold ${isHighRisk ? 'text-red-600' : 'text-blue-600'}">${isHighRisk ? '高風險' : '一般'}</span><br>
-                        近5日通報: ${data.count} 宗
-                    </div>
-                </div>
-            `);
-        });
-
-        // 更新排行榜 HTML
-        if (listContainer) {
-            const top3 = hotspots.slice(0, 3);
-            if (top3.length === 0) {
-                listContainer.innerHTML = '<div class="text-xs text-gray-400">近 5 日無違規紀錄</div>';
-                return;
-            }
-
-            listContainer.innerHTML = top3.map((h, i) => `
-                <div class="border border-${i === 0 ? 'gray-200' : 'gray-100'} p-3 flex justify-between items-center group hover:border-blue-300 transition cursor-default">
-                    <div class="flex items-center space-x-3">
-                        <span class="${i === 0 ? 'text-blue-800' : 'text-gray-400'} font-bold text-sm group-hover:text-blue-800">0${i + 1}.</span>
-                        <span class="text-xs ${i === 0 ? 'font-bold text-gray-700' : 'text-gray-600'} group-hover:text-blue-800">${h.name}</span>
-                    </div>
-                    <div class="text-right">
-                        <div class="text-sm font-bold ${i === 0 ? 'text-blue-800' : 'text-gray-600 group-hover:text-blue-800'}">${h.count} 宗</div>
-                    </div>
-                </div>
-            `).join('');
-        }
     },
 
-    renderGeneralStatsChart() {
-        const ctx = document.getElementById('generalStatsChart');
-        if (!ctx) return;
+    syncFilterControls() {
+        document.getElementById('filter-period').value = this.state.period;
+        document.getElementById('filter-camera').value = this.state.cameraId;
+        document.getElementById('filter-rule').value = this.state.rule;
+    },
 
-        if (this.chart) this.chart.destroy();
+    /* ---------- 衍生資料 ---------- */
 
-        let verifiedCases = [];
-        if (typeof mockCases !== 'undefined') {
-            verifiedCases = mockCases.filter(c => c.status === 'verified');
+    getVisibleCameras() {
+        const { cameraId } = this.state;
+        return cameraId === 'all'
+            ? OBSERVATION_DATA.cameras
+            : OBSERVATION_DATA.cameras.filter(camera => camera.id === cameraId);
+    },
+
+    getCount(camera, ruleName) {
+        const isToday = this.state.period === 'today';
+        if (ruleName === 'all') return isToday ? camera.candidateCount : camera.weekCount;
+        return (isToday ? camera.ruleCounts[ruleName] : camera.weekRuleCounts[ruleName]) ?? 0;
+    },
+
+    getHeatData() {
+        return this.state.period === 'today' ? OBSERVATION_DATA.hourlyToday : OBSERVATION_DATA.hourlyWeek;
+    },
+
+    /* ---------- 繪製 ---------- */
+
+    render() {
+        const visibleCameras = this.getVisibleCameras();
+        this.renderScope(visibleCameras);
+        this.renderMetrics(visibleCameras);
+        this.renderCameraTable(visibleCameras);
+        this.renderRecommendations();
+        this.renderDistribution(visibleCameras);
+        this.renderHeatmap();
+        this.renderPeriodTabs();
+    },
+
+    renderScope(visibleCameras) {
+        const range = this.state.period === 'today' ? '08:00–18:44' : '2026/08/31–2026/09/06';
+        document.getElementById('scope-detail').textContent =
+            `${range}・${visibleCameras.length} 個路口`;
+    },
+
+    renderMetrics(visibleCameras) {
+        const healthyCount = visibleCameras.filter(camera => camera.health === 'normal').length;
+        const delayedCount = visibleCameras.filter(camera => camera.health === 'delayed').length;
+        const candidateCount = visibleCameras.reduce(
+            (total, camera) => total + this.getCount(camera, this.state.rule), 0
+        );
+
+        const healthCard = document.getElementById('metric-health');
+        healthCard.querySelector('strong').textContent = `${healthyCount} / ${visibleCameras.length}`;
+        healthCard.querySelector('small').textContent =
+            delayedCount ? `${delayedCount} 個路口資料延遲` : '目前無資料延遲';
+
+        document.querySelector('#metric-candidate strong').textContent = `${candidateCount} 件`;
+
+        document.getElementById('status-summary-pill').textContent =
+            `${healthyCount} 正常・${delayedCount} 延遲`;
+    },
+
+    renderCameraTable(visibleCameras) {
+        const table = document.getElementById('camera-table');
+        table.querySelectorAll('.camera-row:not(.camera-row--head)').forEach(row => row.remove());
+
+        visibleCameras.forEach((camera, index) => {
+            const row = document.createElement('button');
+            row.className = 'camera-row';
+            row.setAttribute('role', 'row');
+            row.innerHTML = `
+                <span class="camera-preview camera-preview--${index + 1}"><i>● LIVE</i><em>示意影像</em></span>
+                <span><strong>${camera.name}</strong><small>${camera.id}・${camera.direction}</small></span>
+                <span><i class="health-dot health-dot--${camera.health}"></i><strong>${camera.healthLabel}</strong><small>最後資料 ${camera.lastUpdate}</small></span>
+                <span><strong>${camera.rules.length} 項</strong><small>${camera.rules.join('、')}</small></span>
+                <span><strong>${this.getCount(camera, 'all')} 件</strong><small>不作風險排名</small></span>
+            `;
+            row.addEventListener('click', () => {
+                this.state.cameraId = camera.id;
+                this.syncFilterControls();
+                this.render();
+            });
+            table.appendChild(row);
+        });
+    },
+
+    renderRecommendations() {
+        const list = document.getElementById('recommendation-list');
+        const { cameraId, rule } = this.state;
+        const visible = OBSERVATION_DATA.recommendations.filter(item =>
+            (cameraId === 'all' || item.cameraId === cameraId) &&
+            (rule === 'all' || item.rule === rule)
+        );
+
+        list.innerHTML = '';
+
+        if (!visible.length) {
+            list.innerHTML = `
+                <div class="empty-state">
+                    <strong>此篩選條件沒有推薦區域</strong>
+                    <span>可切換路口或候選樣態查看其他建議。</span>
+                </div>
+            `;
+            return;
         }
 
-        const typeCounts = {};
-        verifiedCases.forEach(c => {
-            const typeName = c.type || '未分類';
-            typeCounts[typeName] = (typeCounts[typeName] || 0) + 1;
+        visible.forEach((item, index) => {
+            const camera = OBSERVATION_DATA.cameras.find(c => c.id === item.cameraId);
+            const entry = document.createElement('button');
+            entry.className = 'recommendation-item';
+            entry.innerHTML = `
+                <span class="recommendation-rank">${String(index + 1).padStart(2, '0')}</span>
+                <span>
+                    <small>${camera.name}・${item.rule}</small>
+                    <strong>${item.region}</strong>
+                    <em>${item.timeRange}・${item.reason}</em>
+                </span>
+                <b>${item.action}</b>
+            `;
+            entry.addEventListener('click', () => {
+                this.state.cameraId = item.cameraId;
+                this.state.rule = item.rule;
+                this.syncFilterControls();
+                this.render();
+            });
+            list.appendChild(entry);
+        });
+    },
+
+    renderDistribution(visibleCameras) {
+        const distribution = OBSERVATION_DATA.rules
+            .map(name => ({
+                name,
+                count: visibleCameras.reduce((sum, camera) => sum + this.getCount(camera, name), 0)
+            }))
+            .filter(item => this.state.rule === 'all' || item.name === this.state.rule);
+
+        const max = Math.max(...distribution.map(item => item.count), 1);
+        const chart = document.getElementById('bar-chart');
+        chart.innerHTML = '';
+
+        distribution.forEach((item, index) => {
+            const row = document.createElement('button');
+            row.className = 'bar-row';
+            row.innerHTML = `
+                <span>${item.name}</span>
+                <div><i style="width: ${(item.count / max) * 100}%; opacity: ${1 - index * 0.14};"></i></div>
+                <strong>${item.count}</strong>
+            `;
+            row.addEventListener('click', () => {
+                this.state.rule = item.name;
+                this.syncFilterControls();
+                this.render();
+            });
+            chart.appendChild(row);
+        });
+    },
+
+    renderHeatmap() {
+        const data = this.getHeatData();
+        const max = Math.max(...data);
+        const peakHour = data.indexOf(max);
+        const pad = value => String(value).padStart(2, '0');
+
+        const heatmap = document.getElementById('heatmap');
+        heatmap.innerHTML = '';
+
+        data.forEach((count, hour) => {
+            const cell = document.createElement('div');
+            cell.title = `${pad(hour)}:00・${count} 件`;
+            cell.style.opacity = count === 0 ? 0.1 : 0.2 + (count / max) * 0.8;
+            cell.innerHTML = `<span>${hour % 3 === 0 ? pad(hour) : ''}</span>`;
+            heatmap.appendChild(cell);
         });
 
-        let labels = Object.keys(typeCounts);
-        let monthlyData = [];
-        let weeklyData = [];
+        document.getElementById('heatmap-summary-pill').textContent =
+            `較多時段 ${pad(peakHour)}:00–${pad(peakHour + 1)}:00`;
+        document.getElementById('heatmap-note').innerHTML =
+            `<strong>觀測摘要</strong>${pad(peakHour)}:00–${pad(peakHour + 1)}:00 的候選事件較多，共 ${max} 件；僅建議優先安排人工檢視。`;
+    },
 
-        if (labels.length === 0) {
-            // 防呆預設資料
-            labels = ['未依標線行駛', '闖紅燈', '違規停車', '超速', '其他'];
-            monthlyData = [120, 85, 150, 60, 30];
-            weeklyData = [35, 20, 45, 15, 8];
-        } else {
-            // 讀取 data.js 中的真實數據
-            monthlyData = labels.map(label => typeCounts[label] || 0);
-            // 由於全部資料皆由 python 生成在近 30 天內，我們模擬近一週為其四分之一
-            weeklyData = monthlyData.map(val => Math.ceil(val / 4));
-        }
-
-        this.chart = new Chart(ctx.getContext('2d'), {
-            type: 'bar', // 長條圖
-            data: {
-                labels: labels,
-                datasets: [
-                    // 將「近一週」移到前面
-                    {
-                        label: '近一週',
-                        data: weeklyData,
-                        backgroundColor: '#9CA3AF',
-                        borderColor: '#9CA3AF',
-                        borderWidth: 1,
-                        borderRadius: 0 // 維持無圓角設定
-                    },
-                    {
-                        label: '近一個月',
-                        data: monthlyData,
-                        backgroundColor: '#1e3a8a',
-                        borderColor: '#1e3a8a',
-                        borderWidth: 1,
-                        borderRadius: 0 // 維持無圓角設定
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        enabled: true,
-                        cornerRadius: 0 // tooltip 也維持直角
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: { display: false },
-                        ticks: {
-                            color: '#6B7280',
-                            font: { size: 12, weight: 'bold' }
-                        }
-                    },
-                    y: {
-                        display: true,
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0,
-                            color: '#6B7280'
-                        }
-                    }
-                }
-            }
+    renderPeriodTabs() {
+        document.querySelectorAll('.period-tabs button').forEach(button => {
+            button.classList.toggle('active', button.dataset.period === this.state.period);
         });
     }
 };
