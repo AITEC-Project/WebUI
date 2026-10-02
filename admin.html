@@ -481,6 +481,25 @@
             #observation-root .heatmap-panel .panel-heading { display: flex; }
             #observation-root .heatmap { gap: 2px; }
         }
+
+    /* 資料讀取狀態橫幅：讀不到資料時必須明講，空白頁面會被誤讀成「今天沒有候選事件」 */
+    #data-status {
+        margin: 0 24px 16px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+        background: #F9FAFB;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 14px;
+    }
+    #data-status strong { color: #1F2937; font-weight: 600; }
+    #data-status span { color: #6B7280; font-size: 13px; }
+    #data-status[data-kind="error"] { border-color: #FCA5A5; background: #FEF2F2; }
+    #data-status[data-kind="error"] strong { color: #B91C1C; }
+    #data-status[data-kind="empty"] { border-color: #FDE68A; background: #FFFBEB; }
+    #data-status[data-kind="empty"] strong { color: #92400E; }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden font-sans">
@@ -544,17 +563,19 @@
         </div>
         <div class="header-clock">
             <span>最後頁面更新</span>
-            <strong>2026/09/06 18:44:12</strong>
+            <strong id="page-updated-at">—</strong>
             <small>Asia/Taipei</small>
         </div>
     </header>
+
+    <div id="data-status" hidden></div>
 
     <section class="filter-bar" aria-label="資料篩選">
         <label>
             <span>資料期間</span>
             <select id="filter-period">
-                <option value="today">2026/09/06（今日）</option>
-                <option value="week">近 7 個完整觀測日</option>
+                <option value="today" id="period-option-today">最新觀測日</option>
+                <option value="week" id="period-option-week">近 7 個觀測日</option>
             </select>
         </label>
         <label>
@@ -581,7 +602,7 @@
 
     <section class="metric-grid">
         <article id="metric-health" class="metric-card">
-            <span>正常觀測路口</span>
+            <span>已觀測路口</span>
             <strong></strong>
             <small></small>
         </article>
@@ -618,7 +639,7 @@
                 <div>
                     <span class="kicker">FOCUS AREAS</span>
                     <h2>路口推薦區域</h2>
-                    <p>依目前候選分布，提供優先查看的路口動線與區域。</p>
+                    <p>來自日報表的跨路口 μ+2σ 門檻，列出達標的路口與樣態。</p>
                 </div>
             </div>
             <div id="recommendation-list" class="recommendation-list"></div>
@@ -660,6 +681,6 @@
 
 </main>
 
-<script src="js/admin.js"></script>
+<script type="module" src="js/admin.js"></script>
 </body>
 </html>

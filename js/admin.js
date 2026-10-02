@@ -1,58 +1,103 @@
 /**
  * 數據監測中心 - 邏輯 (admin.js)
- * 本頁為 UI 示意原型，資料皆為本機寫死的假資料，不連接任何後端。
+ *
+ * 資料來自 Firebase 專案 observation-e158b 的三個 collection：
+ * observation_cameras、observation_hourly、observation_daily，由觀測系統的
+ * main.py 與 tools/recommend.py 以 Admin SDK 寫入。本頁**只讀不寫**。
+ *
+ * 這三份資料都帶 not_for_enforcement: true，是候選事件的彙總計數，不是違規成立。
  */
 
-const OBSERVATION_DATA = {
-    cameras: [
-        {
-            id: 'C000008', name: '河南路／福星路', direction: '右側車流往臺灣大道',
-            health: 'normal', healthLabel: '正常觀測',
-            lastUpdate: '18:44:05', candidateCount: 18, weekCount: 82,
-            rules: ['禁止左轉', '雙黃線跨越'],
-            ruleCounts: { '禁止左轉': 10, '雙黃線跨越': 8 },
-            weekRuleCounts: { '禁止左轉': 47, '雙黃線跨越': 35 }
-        },
-        {
-            id: 'C000071', name: '崇德路／豐樂路', direction: '右側車流往環中路',
-            health: 'delayed', healthLabel: '資料延遲',
-            lastUpdate: '17:31:40', candidateCount: 9, weekCount: 41,
-            rules: ['標線跨越'],
-            ruleCounts: { '標線跨越': 9 },
-            weekRuleCounts: { '標線跨越': 41 }
-        },
-        {
-            id: 'C000186', name: '五權西路／龍富路', direction: '右側車流往南屯交流道',
-            health: 'normal', healthLabel: '正常觀測',
-            lastUpdate: '18:43:51', candidateCount: 6, weekCount: 29,
-            rules: ['機車進入禁行區'],
-            ruleCounts: { '機車進入禁行區': 6 },
-            weekRuleCounts: { '機車進入禁行區': 29 }
-        }
-    ],
+import { db, collection, getDocs } from './firebase-observation.js';
 
-    rules: ['禁止左轉', '雙黃線跨越', '標線跨越', '機車進入禁行區'],
+/**
+ * 後端的 rule_name 是 snake_case 英文，本頁顯示中文。這份對照表由前端維護，
+ * 後端新增規則時要同步；查不到就原樣顯示 rule_name，不猜一個中文名。
+ */
+const RULE_LABELS = {
+    illegal_left_turn: '禁止左轉',
+    double_yellow_crossing: '雙黃線跨越',
+    lane_crossing: '標線跨越',
+    motorcycle_prohibited_lane: '機車進入禁行區'
+};
 
-    hourlyToday: [0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2, 3, 5, 4, 3, 2, 1, 1, 0],
-    hourlyWeek: [2, 1, 1, 1, 1, 2, 5, 8, 11, 7, 8, 9, 7, 6, 8, 10, 13, 18, 16, 10, 7, 5, 4, 2],
+const ruleLabel = name => RULE_LABELS[name] ?? name;
+const pad = value => String(value).padStart(2, '0');
 
-    recommendations: [
-        {
-            id: 1, cameraId: 'C000008', rule: '禁止左轉',
-            region: '河南路北向入口 → 福星路東側出口', timeRange: '17:00–19:00',
-            reason: '晚尖峰候選較集中，建議優先檢視轉向動線。', action: '優先檢視影像'
-        },
-        {
-            id: 2, cameraId: 'C000008', rule: '雙黃線跨越',
-            region: '河南路近路口中央分隔區', timeRange: '16:00–18:00',
-            reason: '跨越候選集中於同一觀測區域，適合安排人工抽查。', action: '安排區域抽查'
-        },
-        {
-            id: 3, cameraId: 'C000186', rule: '機車進入禁行區',
-            region: '五權西路東向機車禁行區入口', timeRange: '07:00–09:00',
-            reason: '通勤時段有重複候選，建議確認標線可見度與動線。', action: '確認影像與標線'
-        }
-    ]
+const Store = {
+    cameras: [],
+    hourly: [],
+    daily: [],
+    dates: [],
+
+    async load() {
+        const [cameraSnap, hourlySnap, dailySnap] = await Promise.all([
+            getDocs(collection(db, 'observation_cameras')),
+            getDocs(collection(db, 'observation_hourly')),
+            getDocs(collection(db, 'observation_daily'))
+        ]);
+
+        this.cameras = cameraSnap.docs
+            .map(doc => doc.data())
+            .sort((a, b) => String(a.camera_id).localeCompare(String(b.camera_id)));
+        this.hourly = hourlySnap.docs.map(doc => doc.data());
+        this.daily = dailySnap.docs.map(doc => doc.data());
+        this.dates = [...new Set(this.hourly.map(row => row.date))].sort();
+    },
+
+    /**
+     * 「今日」取**資料裡最新的一天**，不是瀏覽器的今天。
+     *
+     * 事件時間走影像時間軸（錄影起始時刻 + 軌跡偏移），影片回放的日期與牆上時鐘
+     * 可以差很遠；用系統日期篩選會讓整頁在回放資料上變成全空。
+     */
+    activeDates(period) {
+        if (!this.dates.length) return [];
+        return period === 'today' ? this.dates.slice(-1) : this.dates.slice(-7);
+    },
+
+    ruleNames() {
+        const names = new Set();
+        this.cameras.forEach(camera => (camera.enabled_rules ?? []).forEach(name => names.add(name)));
+        this.hourly.forEach(row => Object.keys(row.counts ?? {}).forEach(name => names.add(name)));
+        return [...names].sort();
+    },
+
+    rowsFor(cameraIds, dates) {
+        return this.hourly.filter(row =>
+            cameraIds.includes(row.camera_id) && dates.includes(row.date));
+    },
+
+    countOf(row, ruleName) {
+        const counts = row.counts ?? {};
+        if (ruleName === 'all') return Object.values(counts).reduce((sum, value) => sum + value, 0);
+        return counts[ruleName] ?? 0;
+    },
+
+    total(cameraIds, dates, ruleName) {
+        return this.rowsFor(cameraIds, dates)
+            .reduce((sum, row) => sum + this.countOf(row, ruleName), 0);
+    },
+
+    hourlySeries(cameraIds, dates, ruleName) {
+        const series = new Array(24).fill(0);
+        this.rowsFor(cameraIds, dates).forEach(row => {
+            series[row.hour] += this.countOf(row, ruleName);
+        });
+        return series;
+    },
+
+    /** 日報表的 recommendations 逐列：{date, rule_name, camera_id, event_count, threshold}。 */
+    recommendations(dates) {
+        return this.daily
+            .filter(report => dates.includes(report.date))
+            .flatMap(report => report.recommendations ?? []);
+    },
+
+    cameraName(cameraId) {
+        const camera = this.cameras.find(item => item.camera_id === cameraId);
+        return camera ? camera.name : cameraId;
+    }
 };
 
 const AdminApp = {
@@ -104,30 +149,77 @@ const AdminApp = {
         }
     },
 
-    init() {
+    async init() {
+        this.setStatus('loading', '正在讀取 Firestore…', '');
+
+        try {
+            await Store.load();
+        } catch (error) {
+            // 讀不到就明講讀不到。讓頁面停在空白會讓人以為「今天沒有候選事件」。
+            const hint = error?.code === 'permission-denied'
+                ? '這是 Firestore 安全規則拒絕，不是沒有資料。請確認 observation_* 三個 collection 的 read 規則已部署。'
+                : '請確認網路連線，以及 js/firebase-observation-config.js 的專案設定。';
+            this.setStatus('error', `讀取 Firestore 失敗：${error?.code ?? error?.message ?? error}`, hint);
+            return;
+        }
+
+        if (!Store.cameras.length) {
+            this.setStatus('empty', '尚無任何路口資料。', '請先在觀測系統端帶 --credentials 執行 main.py。');
+        } else if (!Store.dates.length) {
+            this.setStatus('empty', '已讀到路口清單，但尚無任何小時統計。', '路口已發佈，但該次執行沒有產生候選事件。');
+        } else {
+            this.clearStatus();
+        }
+
         this.buildFilterOptions();
         this.bindFilters();
         this.render();
+    },
+
+    setStatus(kind, message, hint) {
+        const banner = document.getElementById('data-status');
+        if (!banner) return;
+        banner.hidden = false;
+        banner.dataset.kind = kind;
+        banner.innerHTML = `<strong>${message}</strong>${hint ? `<span>${hint}</span>` : ''}`;
+    },
+
+    clearStatus() {
+        const banner = document.getElementById('data-status');
+        if (banner) banner.hidden = true;
     },
 
     /* ---------- 篩選列 ---------- */
 
     buildFilterOptions() {
         const cameraSelect = document.getElementById('filter-camera');
-        OBSERVATION_DATA.cameras.forEach(camera => {
+        Store.cameras.forEach(camera => {
             const option = document.createElement('option');
-            option.value = camera.id;
-            option.textContent = `${camera.id}・${camera.name}`;
+            option.value = camera.camera_id;
+            option.textContent = `${camera.camera_id}・${camera.name}`;
             cameraSelect.appendChild(option);
         });
 
         const ruleSelect = document.getElementById('filter-rule');
-        OBSERVATION_DATA.rules.forEach(name => {
+        Store.ruleNames().forEach(name => {
             const option = document.createElement('option');
             option.value = name;
-            option.textContent = name;
+            option.textContent = ruleLabel(name);
             ruleSelect.appendChild(option);
         });
+
+        // 期間選項的文字由資料決定，不寫死日期。
+        const todayOption = document.getElementById('period-option-today');
+        const weekOption = document.getElementById('period-option-week');
+        const latest = Store.dates[Store.dates.length - 1];
+        if (todayOption) todayOption.textContent = latest ? `${latest}（最新觀測日）` : '最新觀測日';
+        if (weekOption) weekOption.textContent = `近 ${Math.min(Store.dates.length, 7)} 個觀測日`;
+
+        const updatedAt = document.getElementById('page-updated-at');
+        if (updatedAt) {
+            const stamps = Store.cameras.map(camera => camera.last_observed_at).filter(Boolean).sort();
+            updatedAt.textContent = stamps.length ? stamps[stamps.length - 1].slice(0, 19).replace('T', ' ') : '尚無觀測';
+        }
     },
 
     bindFilters() {
@@ -164,74 +256,86 @@ const AdminApp = {
     getVisibleCameras() {
         const { cameraId } = this.state;
         return cameraId === 'all'
-            ? OBSERVATION_DATA.cameras
-            : OBSERVATION_DATA.cameras.filter(camera => camera.id === cameraId);
+            ? Store.cameras
+            : Store.cameras.filter(camera => camera.camera_id === cameraId);
     },
 
-    getCount(camera, ruleName) {
-        const isToday = this.state.period === 'today';
-        if (ruleName === 'all') return isToday ? camera.candidateCount : camera.weekCount;
-        return (isToday ? camera.ruleCounts[ruleName] : camera.weekRuleCounts[ruleName]) ?? 0;
-    },
-
-    getHeatData() {
-        return this.state.period === 'today' ? OBSERVATION_DATA.hourlyToday : OBSERVATION_DATA.hourlyWeek;
+    /**
+     * 健康度只分「有沒有觀測紀錄」，不設逾時門檻。
+     *
+     * last_observed_at 在影像時間軸上，拿它跟瀏覽器的現在時刻相減在影片回放時
+     * 沒有意義；憑空定一個「超過 N 小時算延遲」會產生看似精確的假狀態。
+     */
+    cameraHealth(camera) {
+        const observed = Boolean(camera.last_observed_at);
+        return {
+            health: observed ? 'normal' : 'delayed',
+            healthLabel: observed ? '已觀測' : '尚無觀測',
+            lastUpdate: observed ? camera.last_observed_at.slice(11, 19) : '—'
+        };
     },
 
     /* ---------- 繪製 ---------- */
 
     render() {
         const visibleCameras = this.getVisibleCameras();
-        this.renderScope(visibleCameras);
-        this.renderMetrics(visibleCameras);
-        this.renderCameraTable(visibleCameras);
-        this.renderRecommendations();
-        this.renderDistribution(visibleCameras);
-        this.renderHeatmap();
+        const dates = Store.activeDates(this.state.period);
+        this.renderScope(visibleCameras, dates);
+        this.renderMetrics(visibleCameras, dates);
+        this.renderCameraTable(visibleCameras, dates);
+        this.renderRecommendations(dates);
+        this.renderDistribution(visibleCameras, dates);
+        this.renderHeatmap(visibleCameras, dates);
         this.renderPeriodTabs();
     },
 
-    renderScope(visibleCameras) {
-        const range = this.state.period === 'today' ? '08:00–18:44' : '2026/08/31–2026/09/06';
+    renderScope(visibleCameras, dates) {
+        const range = dates.length === 0
+            ? '無觀測資料'
+            : dates.length === 1
+                ? dates[0]
+                : `${dates[0]}–${dates[dates.length - 1]}`;
         document.getElementById('scope-detail').textContent =
             `${range}・${visibleCameras.length} 個路口`;
     },
 
-    renderMetrics(visibleCameras) {
-        const healthyCount = visibleCameras.filter(camera => camera.health === 'normal').length;
-        const delayedCount = visibleCameras.filter(camera => camera.health === 'delayed').length;
-        const candidateCount = visibleCameras.reduce(
-            (total, camera) => total + this.getCount(camera, this.state.rule), 0
-        );
+    renderMetrics(visibleCameras, dates) {
+        const observedCount = visibleCameras.filter(camera => this.cameraHealth(camera).health === 'normal').length;
+        const pendingCount = visibleCameras.length - observedCount;
+        const cameraIds = visibleCameras.map(camera => camera.camera_id);
+        const candidateCount = Store.total(cameraIds, dates, this.state.rule);
 
         const healthCard = document.getElementById('metric-health');
-        healthCard.querySelector('strong').textContent = `${healthyCount} / ${visibleCameras.length}`;
+        healthCard.querySelector('strong').textContent = `${observedCount} / ${visibleCameras.length}`;
         healthCard.querySelector('small').textContent =
-            delayedCount ? `${delayedCount} 個路口資料延遲` : '目前無資料延遲';
+            pendingCount ? `${pendingCount} 個路口尚無觀測紀錄` : '所有路口皆有觀測紀錄';
 
         document.querySelector('#metric-candidate strong').textContent = `${candidateCount} 件`;
 
         document.getElementById('status-summary-pill').textContent =
-            `${healthyCount} 正常・${delayedCount} 延遲`;
+            `${observedCount} 已觀測・${pendingCount} 尚無`;
     },
 
-    renderCameraTable(visibleCameras) {
+    renderCameraTable(visibleCameras, dates) {
         const table = document.getElementById('camera-table');
         table.querySelectorAll('.camera-row:not(.camera-row--head)').forEach(row => row.remove());
 
         visibleCameras.forEach((camera, index) => {
+            const { health, healthLabel, lastUpdate } = this.cameraHealth(camera);
+            const rules = camera.enabled_rules ?? [];
+            const count = Store.total([camera.camera_id], dates, 'all');
             const row = document.createElement('button');
             row.className = 'camera-row';
             row.setAttribute('role', 'row');
             row.innerHTML = `
                 <span class="camera-preview camera-preview--${index + 1}"><i>● LIVE</i><em>示意影像</em></span>
-                <span><strong>${camera.name}</strong><small>${camera.id}・${camera.direction}</small></span>
-                <span><i class="health-dot health-dot--${camera.health}"></i><strong>${camera.healthLabel}</strong><small>最後資料 ${camera.lastUpdate}</small></span>
-                <span><strong>${camera.rules.length} 項</strong><small>${camera.rules.join('、')}</small></span>
-                <span><strong>${this.getCount(camera, 'all')} 件</strong><small>不作風險排名</small></span>
+                <span><strong>${camera.name}</strong><small>${camera.camera_id}${camera.direction ? `・${camera.direction}` : ''}</small></span>
+                <span><i class="health-dot health-dot--${health}"></i><strong>${healthLabel}</strong><small>最後資料 ${lastUpdate}</small></span>
+                <span><strong>${rules.length} 項</strong><small>${rules.map(ruleLabel).join('、') || '未啟用規則'}</small></span>
+                <span><strong>${count} 件</strong><small>不作風險排名</small></span>
             `;
             row.addEventListener('click', () => {
-                this.state.cameraId = camera.id;
+                this.state.cameraId = camera.camera_id;
                 this.syncFilterControls();
                 this.render();
             });
@@ -239,12 +343,12 @@ const AdminApp = {
         });
     },
 
-    renderRecommendations() {
+    renderRecommendations(dates) {
         const list = document.getElementById('recommendation-list');
         const { cameraId, rule } = this.state;
-        const visible = OBSERVATION_DATA.recommendations.filter(item =>
-            (cameraId === 'all' || item.cameraId === cameraId) &&
-            (rule === 'all' || item.rule === rule)
+        const visible = Store.recommendations(dates).filter(item =>
+            (cameraId === 'all' || item.camera_id === cameraId) &&
+            (rule === 'all' || item.rule_name === rule)
         );
 
         list.innerHTML = '';
@@ -252,29 +356,28 @@ const AdminApp = {
         if (!visible.length) {
             list.innerHTML = `
                 <div class="empty-state">
-                    <strong>此篩選條件沒有推薦區域</strong>
-                    <span>可切換路口或候選樣態查看其他建議。</span>
+                    <strong>此範圍沒有超過門檻的路口</strong>
+                    <span>推薦來自日報表的跨路口 μ+2σ 門檻；目前沒有任何路口達標。</span>
                 </div>
             `;
             return;
         }
 
         visible.forEach((item, index) => {
-            const camera = OBSERVATION_DATA.cameras.find(c => c.id === item.cameraId);
             const entry = document.createElement('button');
             entry.className = 'recommendation-item';
             entry.innerHTML = `
                 <span class="recommendation-rank">${String(index + 1).padStart(2, '0')}</span>
                 <span>
-                    <small>${camera.name}・${item.rule}</small>
-                    <strong>${item.region}</strong>
-                    <em>${item.timeRange}・${item.reason}</em>
+                    <small>${Store.cameraName(item.camera_id)}・${ruleLabel(item.rule_name)}</small>
+                    <strong>候選事件 ${item.event_count} 件，達當日門檻 ${item.threshold}</strong>
+                    <em>${item.date}・門檻為跨路口 μ+2σ，僅供安排人工檢視的先後順序</em>
                 </span>
-                <b>${item.action}</b>
+                <b>${item.event_count} 件</b>
             `;
             entry.addEventListener('click', () => {
-                this.state.cameraId = item.cameraId;
-                this.state.rule = item.rule;
+                this.state.cameraId = item.camera_id;
+                this.state.rule = item.rule_name;
                 this.syncFilterControls();
                 this.render();
             });
@@ -282,12 +385,10 @@ const AdminApp = {
         });
     },
 
-    renderDistribution(visibleCameras) {
-        const distribution = OBSERVATION_DATA.rules
-            .map(name => ({
-                name,
-                count: visibleCameras.reduce((sum, camera) => sum + this.getCount(camera, name), 0)
-            }))
+    renderDistribution(visibleCameras, dates) {
+        const cameraIds = visibleCameras.map(camera => camera.camera_id);
+        const distribution = Store.ruleNames()
+            .map(name => ({ name, count: Store.total(cameraIds, dates, name) }))
             .filter(item => this.state.rule === 'all' || item.name === this.state.rule);
 
         const max = Math.max(...distribution.map(item => item.count), 1);
@@ -298,7 +399,7 @@ const AdminApp = {
             const row = document.createElement('button');
             row.className = 'bar-row';
             row.innerHTML = `
-                <span>${item.name}</span>
+                <span>${ruleLabel(item.name)}</span>
                 <div><i style="width: ${(item.count / max) * 100}%; opacity: ${1 - index * 0.14};"></i></div>
                 <strong>${item.count}</strong>
             `;
@@ -311,11 +412,10 @@ const AdminApp = {
         });
     },
 
-    renderHeatmap() {
-        const data = this.getHeatData();
+    renderHeatmap(visibleCameras, dates) {
+        const cameraIds = visibleCameras.map(camera => camera.camera_id);
+        const data = Store.hourlySeries(cameraIds, dates, this.state.rule);
         const max = Math.max(...data);
-        const peakHour = data.indexOf(max);
-        const pad = value => String(value).padStart(2, '0');
 
         const heatmap = document.getElementById('heatmap');
         heatmap.innerHTML = '';
@@ -323,14 +423,24 @@ const AdminApp = {
         data.forEach((count, hour) => {
             const cell = document.createElement('div');
             cell.title = `${pad(hour)}:00・${count} 件`;
-            cell.style.opacity = count === 0 ? 0.1 : 0.2 + (count / max) * 0.8;
+            // max 為 0 時不做正規化：除以 0 會讓整排色深變成 NaN 而全部消失。
+            cell.style.opacity = max === 0 || count === 0 ? 0.1 : 0.2 + (count / max) * 0.8;
             cell.innerHTML = `<span>${hour % 3 === 0 ? pad(hour) : ''}</span>`;
             heatmap.appendChild(cell);
         });
 
-        document.getElementById('heatmap-summary-pill').textContent =
-            `較多時段 ${pad(peakHour)}:00–${pad(peakHour + 1)}:00`;
-        document.getElementById('heatmap-note').innerHTML =
+        const summary = document.getElementById('heatmap-summary-pill');
+        const note = document.getElementById('heatmap-note');
+
+        if (max === 0) {
+            summary.textContent = '此範圍無候選事件';
+            note.innerHTML = '<strong>觀測摘要</strong>此範圍內沒有候選事件，無時段分布可看。';
+            return;
+        }
+
+        const peakHour = data.indexOf(max);
+        summary.textContent = `較多時段 ${pad(peakHour)}:00–${pad(peakHour + 1)}:00`;
+        note.innerHTML =
             `<strong>觀測摘要</strong>${pad(peakHour)}:00–${pad(peakHour + 1)}:00 的候選事件較多，共 ${max} 件；僅建議優先安排人工檢視。`;
     },
 
