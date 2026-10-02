@@ -12,13 +12,16 @@
  *
  * 只匯出讀取需要的東西。observation_* 三個 collection 由 Python 端的 Admin SDK
  * 寫入，前端不該有任何寫入路徑，因此不匯出 setDoc / updateDoc。
+ *
+ * 讀取用 onSnapshot 監聽，資料一更新頁面就重繪，不必重新整理（SPEC_J §1、
+ * §6.1 原本的規劃；先前實作曾改用一次性的 getDocs，SPEC_N M10 改回）。
  */
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {
     getFirestore,
     collection,
-    getDocs,
+    onSnapshot,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { firebaseConfig } from './firebase-observation-config.js';
 
@@ -26,4 +29,4 @@ import { firebaseConfig } from './firebase-observation-config.js';
 const observationApp = initializeApp(firebaseConfig, 'observation');
 const db = getFirestore(observationApp);
 
-export { db, collection, getDocs };
+export { db, collection, onSnapshot };

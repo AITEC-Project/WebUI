@@ -8,7 +8,7 @@
  * 這三份資料都帶 not_for_enforcement: true，是候選事件的彙總計數，不是違規成立。
  */
 
-import { db, collection, getDocs } from './firebase-observation.js';
+import { db, collection, onSnapshot } from './firebase-observation.js';
 
 /**
  * 後端的 rule_name 是 snake_case 英文，本頁顯示中文。這份對照表由前端維護，
@@ -30,19 +30,45 @@ const Store = {
     daily: [],
     dates: [],
 
-    async load() {
-        const [cameraSnap, hourlySnap, dailySnap] = await Promise.all([
-            getDocs(collection(db, 'observation_cameras')),
-            getDocs(collection(db, 'observation_hourly')),
-            getDocs(collection(db, 'observation_daily'))
-        ]);
+    /**
+     * 監聽三個 collection（SPEC_N M10）。每次快照只換掉該 collection 的陣列，
+     * 衍生的 dates 照同一規則重算。
+     *
+     * 首次繪製等三個 collection 的第一次快照都到齊才呼叫 onUpdate：只到一部分
+     * 就畫，會先閃一次「尚無資料」的空狀態。之後任一 collection 更新就呼叫。
+     *
+     * 讀取量：每次開頁的第一次快照會讀整個 observation_hourly，文件數隨部署
+     * 天數線性增加；本期不加日期篩選。
+     */
+    subscribe(onUpdate, onError) {
+        const sources = {
+            cameras: 'observation_cameras',
+            hourly: 'observation_hourly',
+            daily: 'observation_daily'
+        };
+        const received = new Set();
+        Object.entries(sources).forEach(([key, name]) => {
+            onSnapshot(
+                collection(db, name),
+                snapshot => {
+                    this.apply(key, snapshot.docs.map(doc => doc.data()));
+                    received.add(key);
+                    if (received.size === Object.keys(sources).length) onUpdate();
+                },
+                onError
+            );
+        });
+    },
 
-        this.cameras = cameraSnap.docs
-            .map(doc => doc.data())
-            .sort((a, b) => String(a.camera_id).localeCompare(String(b.camera_id)));
-        this.hourly = hourlySnap.docs.map(doc => doc.data());
-        this.daily = dailySnap.docs.map(doc => doc.data());
-        this.dates = [...new Set(this.hourly.map(row => row.date))].sort();
+    apply(key, rows) {
+        if (key === 'cameras') {
+            this.cameras = rows.sort((a, b) => String(a.camera_id).localeCompare(String(b.camera_id)));
+        } else if (key === 'hourly') {
+            this.hourly = rows;
+            this.dates = [...new Set(rows.map(row => row.date))].sort();
+        } else {
+            this.daily = rows;
+        }
     },
 
     /**
@@ -149,20 +175,27 @@ const AdminApp = {
         }
     },
 
-    async init() {
+    /** 監聽錯誤；有值後狀態列固定顯示錯誤，不再被之後的快照蓋掉。 */
+    loadError: null,
+
+    init() {
         this.setStatus('loading', '正在讀取 Firestore…', '');
+        // 篩選只綁一次：refresh() 每次資料更新都會跑，放在那裡會重複綁定（SPEC_N W4）。
+        this.bindFilters();
+        Store.subscribe(() => this.refresh(), error => this.showLoadError(error));
+    },
 
-        try {
-            await Store.load();
-        } catch (error) {
-            // 讀不到就明講讀不到。讓頁面停在空白會讓人以為「今天沒有候選事件」。
-            const hint = error?.code === 'permission-denied'
-                ? '這是 Firestore 安全規則拒絕，不是沒有資料。請確認 observation_* 三個 collection 的 read 規則已部署。'
-                : '請確認網路連線，以及 js/firebase-observation-config.js 的專案設定。';
-            this.setStatus('error', `讀取 Firestore 失敗：${error?.code ?? error?.message ?? error}`, hint);
-            return;
-        }
+    /** 資料更新時重算一切衍生畫面；使用者目前的篩選盡量保留（SPEC_N §9.2）。 */
+    refresh() {
+        this.updateDataStatus();
+        this.buildFilterOptions();
+        this.reconcileState();
+        this.syncFilterControls();
+        this.render();
+    },
 
+    updateDataStatus() {
+        if (this.loadError) return;
         if (!Store.cameras.length) {
             this.setStatus('empty', '尚無任何路口資料。', '請先在觀測系統端帶 --credentials 執行 main.py。');
         } else if (!Store.dates.length) {
@@ -170,10 +203,38 @@ const AdminApp = {
         } else {
             this.clearStatus();
         }
+    },
 
-        this.buildFilterOptions();
-        this.bindFilters();
-        this.render();
+    /**
+     * Firestore 監聽出錯後就停止、不再送更新；本期不自動重新訂閱（SPEC_N §9.4）。
+     * 停的只是出錯的那個 collection，另外兩個仍會更新，所以措辭是「部分資料」。
+     * 已畫出的資料留在畫面上，狀態列明講讀取失敗並請使用者重新整理。
+     */
+    showLoadError(error) {
+        // 讀不到就明講讀不到。讓頁面停在空白會讓人以為「今天沒有候選事件」。
+        this.loadError = error;
+        const hint = error?.code === 'permission-denied'
+            ? '這是 Firestore 安全規則拒絕，不是沒有資料。請確認 observation_* 三個 collection 的 read 規則已部署。'
+            : '請確認網路連線，以及 js/firebase-observation-config.js 的專案設定。';
+        this.setStatus(
+            'error',
+            `讀取 Firestore 失敗：${error?.code ?? error?.message ?? error}`,
+            `${hint}部分資料已停止自動更新，請重新整理頁面。`
+        );
+    },
+
+    /**
+     * 篩選指向的路口或規則在新資料裡已不存在時改回「全部」（SPEC_N N-D15）；
+     * 否則下拉選單沒有對應選項，畫面卻還照舊篩選。
+     */
+    reconcileState() {
+        if (this.state.cameraId !== 'all'
+            && !Store.cameras.some(camera => camera.camera_id === this.state.cameraId)) {
+            this.state.cameraId = 'all';
+        }
+        if (this.state.rule !== 'all' && !Store.ruleNames().includes(this.state.rule)) {
+            this.state.rule = 'all';
+        }
     },
 
     setStatus(kind, message, hint) {
@@ -192,7 +253,9 @@ const AdminApp = {
     /* ---------- 篩選列 ---------- */
 
     buildFilterOptions() {
+        // 每次重建前先清掉 JS 產生的選項，只留 admin.html 的靜態「全部」（SPEC_N W3）。
         const cameraSelect = document.getElementById('filter-camera');
+        cameraSelect.querySelectorAll('option:not([value="all"])').forEach(option => option.remove());
         Store.cameras.forEach(camera => {
             const option = document.createElement('option');
             option.value = camera.camera_id;
@@ -201,6 +264,7 @@ const AdminApp = {
         });
 
         const ruleSelect = document.getElementById('filter-rule');
+        ruleSelect.querySelectorAll('option:not([value="all"])').forEach(option => option.remove());
         Store.ruleNames().forEach(name => {
             const option = document.createElement('option');
             option.value = name;
