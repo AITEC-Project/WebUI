@@ -6,10 +6,6 @@
     <title>數據監測中心 - 管理者後台</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 引入 Leaflet 地圖庫的 CSS 與 JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <!-- Tailwind Config 覆寫為指定的藍色與字體 -->
     <script>
         tailwind.config = {
@@ -47,19 +43,463 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="style.css">
     <style>
         body { background-color: #F9FAFB; color: #111827; }
-        .card-bg { background-color: #ffffff; border: 1px solid #E5E7EB; border-radius: 0; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 0; }
-        .stat-card { border: 1px solid #E5E7EB; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border-radius: 0; }
 
-        .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-            border-radius: 0 !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+        /* ===== 數據監測中心主內容區（樣式限定在 #observation-root 內，不影響側邊欄與其他頁面） ===== */
+        #observation-root {
+            color-scheme: light;
+            --ink: #17243a;
+            --muted: #667085;
+            --subtle: #8b95a7;
+            --line: #dde3eb;
+            --canvas: #f3f6fa;
+            --panel: #ffffff;
+            --blue: #2864dc;
+            --blue-soft: #edf4ff;
+            --green: #168766;
+            --amber: #c97713;
+            --shadow: 0 5px 22px rgba(26, 39, 61, 0.06);
+
+            padding: 26px clamp(20px, 2.3vw, 38px) 36px;
+            color: var(--ink);
+            background: var(--canvas);
+            font-family: 'Noto Sans TC', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 14px;
         }
+
+        #observation-root button,
+        #observation-root select { color: inherit; font: inherit; }
+        #observation-root button { border: 0; }
+        #observation-root h1,
+        #observation-root h2,
+        #observation-root p { margin-top: 0; }
+
+        #observation-root .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 21px;
+        }
+        #observation-root h1 { margin-bottom: 0; color: #182b49; font-size: 25px; letter-spacing: 0.01em; }
+
+        #observation-root .header-clock { display: grid; justify-items: end; gap: 2px; color: var(--muted); }
+        #observation-root .header-clock span,
+        #observation-root .header-clock small { color: var(--subtle); font-size: 10px; }
+        #observation-root .header-clock strong { color: #34435b; font-size: 13px; }
+
+        #observation-root .filter-bar {
+            display: grid;
+            grid-template-columns: 1.05fr 1.35fr 1fr;
+            gap: 12px;
+            padding: 15px 16px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 0;
+        }
+        #observation-root .filter-bar label { min-width: 0; display: grid; gap: 6px; }
+        #observation-root .filter-bar label > span { color: #596579; font-size: 11px; font-weight: 600; }
+        #observation-root .filter-bar select {
+            width: 100%;
+            min-width: 0;
+            height: 38px;
+            padding: 0 34px 0 11px;
+            background: #fbfcfe;
+            border: 1px solid #d5dce6;
+            border-radius: 0;
+            outline: none;
+        }
+        #observation-root .filter-bar select:focus {
+            border-color: #83aaf3;
+            box-shadow: 0 0 0 3px rgba(55, 111, 221, 0.12);
+        }
+
+        #observation-root .scope-strip {
+            min-height: 39px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 8px 16px;
+            color: #5d687a;
+            background: #f9fbfd;
+            border: 1px solid var(--line);
+            border-top: 0;
+            border-radius: 0;
+            font-size: 11px;
+        }
+        #observation-root .scope-strip > div { display: flex; align-items: center; gap: 8px; }
+        #observation-root .scope-dot {
+            width: 7px;
+            height: 7px;
+            flex: 0 0 7px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(22, 135, 102, 0.12);
+        }
+
+        #observation-root .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+        #observation-root .metric-card {
+            min-width: 0;
+            min-height: 119px;
+            display: grid;
+            align-content: center;
+            gap: 6px;
+            padding: 18px 19px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 0;
+            box-shadow: var(--shadow);
+        }
+        #observation-root .metric-card > span { color: #5b6779; font-size: 12px; font-weight: 600; }
+        #observation-root .metric-card strong { color: #20334f; font-size: clamp(22px, 2vw, 28px); line-height: 1.25; }
+        #observation-root .metric-card small { color: var(--subtle); font-size: 11px; line-height: 1.5; }
+
+        #observation-root .workspace-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(370px, 0.85fr);
+            gap: 16px;
+        }
+
+        #observation-root .panel {
+            min-width: 0;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        #observation-root .panel-heading {
+            min-height: 84px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid #e8ecf1;
+        }
+        #observation-root .kicker {
+            display: block;
+            margin-bottom: 4px;
+            color: #7590ba;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+        }
+        #observation-root .panel-heading h2 { margin-bottom: 4px; color: #263a57; font-size: 16px; }
+        #observation-root .panel-heading p { margin-bottom: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+        #observation-root .summary-pill {
+            flex: 0 0 auto;
+            margin-top: 5px;
+            padding: 5px 9px;
+            color: #536175;
+            background: #f4f7fa;
+            border: 1px solid #e1e6ed;
+            border-radius: 0;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        #observation-root .camera-table { min-width: 780px; }
+        #observation-root .camera-row {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 128px minmax(180px, 1.35fr) minmax(125px, 0.85fr) minmax(140px, 1fr) minmax(100px, 0.7fr);
+            align-items: center;
+            gap: 13px;
+            padding: 14px 20px;
+            color: inherit;
+            background: #fff;
+            border-bottom: 1px solid #edf0f4;
+            text-align: left;
+        }
+        #observation-root button.camera-row { cursor: pointer; }
+        #observation-root button.camera-row:hover { background: #f8faff; }
+        #observation-root .camera-row:last-child { border-bottom: 0; }
+        #observation-root .camera-row--head {
+            min-height: 38px;
+            padding-block: 9px;
+            color: #778295;
+            background: #f8fafc;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        #observation-root .camera-row > span { min-width: 0; display: block; }
+        #observation-root .camera-row strong,
+        #observation-root .camera-row small { display: block; }
+        #observation-root .camera-row strong {
+            overflow: hidden;
+            color: #2b3c56;
+            font-size: 12px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        #observation-root .camera-row small {
+            margin-top: 4px;
+            overflow: hidden;
+            color: #8993a3;
+            font-size: 10px;
+            line-height: 1.4;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #observation-root .health-dot {
+            width: 7px;
+            height: 7px;
+            display: inline-block;
+            margin-right: 7px;
+            border-radius: 50%;
+            vertical-align: 1px;
+        }
+        #observation-root .health-dot--normal { background: var(--green); }
+        #observation-root .health-dot--delayed { background: var(--amber); }
+
+        #observation-root .camera-preview {
+            position: relative;
+            width: 118px;
+            height: 66px;
+            overflow: hidden;
+            display: block;
+            background-color: #6f7b83;
+            background-image:
+                linear-gradient(28deg, transparent 42%, rgba(238, 238, 226, 0.85) 43%, rgba(238, 238, 226, 0.85) 45%, transparent 46%),
+                linear-gradient(92deg, transparent 44%, rgba(244, 244, 231, 0.8) 45%, rgba(244, 244, 231, 0.8) 47%, transparent 48%),
+                linear-gradient(28deg, transparent 34%, #3f474c 35%, #3f474c 60%, transparent 61%),
+                linear-gradient(92deg, transparent 34%, #464f55 35%, #464f55 63%, transparent 64%),
+                linear-gradient(180deg, #788a77 0%, #697b68 100%);
+            border: 1px solid #cad1d8;
+            border-radius: 0;
+            box-shadow: inset 0 0 20px rgba(16, 26, 34, 0.22);
+        }
+        #observation-root .camera-preview--2 { filter: saturate(0.8) brightness(0.92); }
+        #observation-root .camera-preview--3 { filter: sepia(0.08) brightness(1.03); }
+        #observation-root .camera-preview i,
+        #observation-root .camera-preview em {
+            position: absolute;
+            z-index: 1;
+            padding: 2px 4px;
+            color: #fff;
+            background: rgba(17, 29, 39, 0.7);
+            border-radius: 0;
+            font-size: 7px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1;
+        }
+        #observation-root .camera-preview i { top: 5px; left: 5px; color: #ffdfdf; }
+        #observation-root .camera-preview em { right: 5px; bottom: 5px; color: #e7ebef; }
+
+        #observation-root .recommendation-list { padding: 5px 17px 0; }
+        #observation-root .recommendation-item {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 34px minmax(0, 1fr);
+            align-items: start;
+            gap: 10px;
+            padding: 15px 2px;
+            color: inherit;
+            background: transparent;
+            border-bottom: 1px solid #edf0f4;
+            text-align: left;
+            cursor: pointer;
+        }
+        #observation-root .recommendation-item:hover strong { color: var(--blue); }
+        #observation-root .recommendation-rank {
+            width: 31px;
+            height: 31px;
+            display: grid;
+            place-items: center;
+            color: #3769bf;
+            background: var(--blue-soft);
+            border: 1px solid #dae7fb;
+            border-radius: 0;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        #observation-root .recommendation-item > span:nth-child(2) { min-width: 0; display: grid; gap: 4px; }
+        #observation-root .recommendation-item small,
+        #observation-root .recommendation-item em {
+            color: #7c8798;
+            font-size: 9px;
+            font-style: normal;
+            line-height: 1.55;
+        }
+        #observation-root .recommendation-item strong { color: #2e405c; font-size: 11px; line-height: 1.45; }
+        #observation-root .recommendation-item b {
+            grid-column: 2;
+            justify-self: start;
+            padding: 4px 7px;
+            color: #3462b1;
+            background: #f1f6ff;
+            border-radius: 0;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        #observation-root .empty-state {
+            min-height: 170px;
+            display: grid;
+            place-content: center;
+            gap: 6px;
+            color: var(--muted);
+            text-align: center;
+        }
+        #observation-root .empty-state strong { color: #435168; font-size: 12px; }
+        #observation-root .empty-state span { font-size: 10px; }
+
+        #observation-root .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        #observation-root .period-tabs {
+            flex: 0 0 auto;
+            display: flex;
+            padding: 2px;
+            background: #f1f4f8;
+            border-radius: 0;
+        }
+        #observation-root .period-tabs button {
+            padding: 5px 9px;
+            color: #7a8494;
+            background: transparent;
+            border-radius: 0;
+            font-size: 9px;
+            cursor: pointer;
+        }
+        #observation-root .period-tabs button.active {
+            color: #244e95;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(31, 48, 76, 0.14);
+        }
+
+        #observation-root .bar-chart { display: grid; gap: 15px; padding: 20px; }
+        #observation-root .bar-row {
+            display: grid;
+            grid-template-columns: 106px minmax(0, 1fr) 28px;
+            align-items: center;
+            gap: 12px;
+            padding: 0;
+            color: inherit;
+            background: transparent;
+            text-align: left;
+            cursor: pointer;
+        }
+        #observation-root .bar-row > span {
+            overflow: hidden;
+            color: #526075;
+            font-size: 11px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        #observation-root .bar-row > div { height: 10px; overflow: hidden; background: #edf1f6; border-radius: 0; }
+        #observation-root .bar-row i { height: 100%; display: block; background: #3974df; border-radius: 0; }
+        #observation-root .bar-row strong { color: #36465e; font-size: 11px; text-align: right; }
+
+        #observation-root .heatmap {
+            display: grid;
+            grid-template-columns: repeat(24, minmax(5px, 1fr));
+            gap: 4px;
+            padding: 24px 20px 6px;
+        }
+        #observation-root .heatmap > div {
+            position: relative;
+            height: 62px;
+            background: #2467dc;
+            border-radius: 0;
+        }
+        #observation-root .heatmap span {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 50%;
+            color: #8993a3;
+            font-size: 8px;
+            transform: translateX(-50%);
+        }
+
+        #observation-root .observation-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 27px 20px 19px;
+            padding: 11px 13px;
+            color: #526075;
+            background: var(--blue-soft);
+            border: 1px solid #dae7fb;
+            border-radius: 0;
+        }
+        #observation-root .observation-note > span {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 18px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: #4c7fd7;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        #observation-root .observation-note p { margin: 0; font-size: 10px; line-height: 1.6; }
+        #observation-root .observation-note strong { display: block; color: #355a99; font-size: 10px; }
+
+        @media (max-width: 1250px) {
+            #observation-root .workspace-grid { grid-template-columns: 1fr; }
+            #observation-root .status-panel { overflow-x: auto; }
+        }
+
+        @media (max-width: 980px) {
+            #observation-root .filter-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            #observation-root .analytics-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 680px) {
+            #observation-root { padding: 18px 13px 28px; }
+            #observation-root .page-header { display: block; }
+            #observation-root .header-clock { display: none; }
+            #observation-root .filter-bar,
+            #observation-root .metric-grid { grid-template-columns: 1fr; }
+            #observation-root .scope-strip,
+            #observation-root .scope-strip > div { align-items: flex-start; flex-direction: column; }
+            #observation-root .panel-heading { display: block; }
+            #observation-root .panel-heading > :last-child { margin-top: 10px; }
+            #observation-root .recommendation-panel .panel-heading,
+            #observation-root .distribution-panel .panel-heading,
+            #observation-root .heatmap-panel .panel-heading { display: flex; }
+            #observation-root .heatmap { gap: 2px; }
+        }
+
+    /* 資料讀取狀態橫幅：讀不到資料時必須明講，空白頁面會被誤讀成「今天沒有候選事件」 */
+    #data-status {
+        margin: 0 24px 16px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+        background: #F9FAFB;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 14px;
+    }
+    #data-status strong { color: #1F2937; font-weight: 600; }
+    #data-status span { color: #6B7280; font-size: 13px; }
+    #data-status[data-kind="error"] { border-color: #FCA5A5; background: #FEF2F2; }
+    #data-status[data-kind="error"] strong { color: #B91C1C; }
+    #data-status[data-kind="empty"] { border-color: #FDE68A; background: #FFFBEB; }
+    #data-status[data-kind="empty"] strong { color: #92400E; }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden font-sans">
@@ -115,263 +555,132 @@
 </aside>
 
 <!-- 主內容區 -->
-<main class="flex-1 flex flex-col overflow-y-auto bg-gray-50 p-6 custom-scrollbar">
+<main id="observation-root" class="flex-1 overflow-y-auto custom-scrollbar">
 
-    <!-- 頂部四大指標 -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-
-        <div class="stat-card bg-white p-6 flex flex-col justify-between">
-            <div class="flex justify-between items-start mb-4">
-                <span class="text-xs text-gray-500 font-bold tracking-wider">今日通報件數</span>
-                <i class="fas fa-chart-bar text-blue-600 text-lg"></i>
-            </div>
-            <div class="flex items-end space-x-3 mb-2">
-                <span id="today-case-count" class="text-4xl font-serif font-bold text-gray-900">-</span>
-                <span id="today-case-trend" class="text-sm text-gray-400 font-bold flex items-center mb-1">...</span>
-            </div>
-            <div class="w-full h-0.5 bg-gray-200 mt-2"><div class="h-0.5 bg-blue-600 w-3/4"></div></div>
+    <header class="page-header">
+        <div>
+            <h1>數據監測中心</h1>
         </div>
-
-        <div class="stat-card bg-white p-6 flex flex-col justify-between">
-            <div class="flex justify-between items-start mb-4">
-                <span class="text-xs text-gray-500 font-bold tracking-wider">案件信心值分佈</span>
-                <i class="fas fa-check-circle text-blue-600 text-lg"></i>
-            </div>
-            <div class="flex justify-between items-end mb-2">
-                <span id="confidence-avg" class="text-4xl font-serif font-bold text-gray-900">-</span>
-                <div class="text-[10px] text-gray-400 text-right font-bold leading-tight">
-                    <div>成立案件</div>
-                    <div>平均信心值</div>
-                </div>
-            </div>
-            <div id="confidence-distribution-bar" class="flex items-end space-x-1 h-6 mt-2"></div>
+        <div class="header-clock">
+            <span>最後頁面更新</span>
+            <strong id="page-updated-at">—</strong>
+            <small>Asia/Taipei</small>
         </div>
+    </header>
 
-        <div class="stat-card bg-white p-6 flex flex-col justify-between">
-            <div class="flex justify-between items-start mb-4">
-                <span class="text-xs text-gray-500 font-bold tracking-wider">平均審核時效</span>
-                <i class="fas fa-stopwatch text-blue-600 text-lg"></i>
-            </div>
-            <div class="flex items-end space-x-2 mb-2">
-                <span class="text-4xl font-serif font-bold text-gray-900">42s</span>
-                <span class="text-sm text-red-500 font-bold flex items-center mb-1"><i class="fas fa-exclamation-triangle mr-1 text-[10px]"></i>+3s</span>
-            </div>
-            <div class="text-xs text-red-500 mt-2 font-bold tracking-wider">高峰時段警示</div>
+    <div id="data-status" hidden></div>
+
+    <section class="filter-bar" aria-label="資料篩選">
+        <label>
+            <span>資料期間</span>
+            <select id="filter-period">
+                <option value="today" id="period-option-today">最新觀測日</option>
+                <option value="week" id="period-option-week">近 7 個觀測日</option>
+            </select>
+        </label>
+        <label>
+            <span>觀測路口</span>
+            <select id="filter-camera">
+                <option value="all">全部已啟用路口</option>
+            </select>
+        </label>
+        <label>
+            <span>候選樣態</span>
+            <select id="filter-rule">
+                <option value="all">全部候選樣態</option>
+            </select>
+        </label>
+    </section>
+
+    <section class="scope-strip">
+        <div>
+            <span class="scope-dot"></span>
+            <strong>本次顯示範圍</strong>
+            <span id="scope-detail"></span>
         </div>
+    </section>
 
-        <div class="stat-card bg-blue-800 text-white p-6 flex flex-col justify-between relative overflow-hidden">
-            <div class="flex justify-between items-start mb-4 z-10">
-                <span class="text-xs text-blue-200 font-bold tracking-wider">當前熱點分析</span>
-                <i class="fas fa-project-diagram text-blue-200 text-lg"></i>
-            </div>
-            <div class="z-10">
-                <div id="hotspot-name" class="text-lg font-bold mb-1">-</div>
-                <div id="hotspot-desc" class="text-xs text-blue-100 leading-relaxed mb-4">正在載入數據...</div>
-            </div>
-            <div class="flex justify-between items-end z-10">
-                <span class="text-[10px] text-blue-300">#lib_v8log_parse</span>
-                <button class="bg-white text-blue-800 text-xs font-bold px-3 py-1.5 shadow-sm">即時監看</button>
-            </div>
-            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-blue-700 rounded-full opacity-50"></div>
-        </div>
+    <section class="metric-grid">
+        <article id="metric-health" class="metric-card">
+            <span>已觀測路口</span>
+            <strong></strong>
+            <small></small>
+        </article>
+        <article id="metric-candidate" class="metric-card">
+            <span>候選事件</span>
+            <strong></strong>
+            <small>候選事件不等同違規成立</small>
+        </article>
+    </section>
 
-    </div>
-
-    <!-- 中間區塊：路口衝突觀測與風險評估 -->
-    <div class="card-bg p-8 mb-6 flex flex-col">
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold text-gray-900 mb-1">路口觀測統計數據</h2>
-            <p class="text-xs text-gray-500 tracking-wider">路口衝突觀測與風險評估</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- 左側 2x2 Grid -->
-            <div class="md:col-span-2 grid grid-cols-2 gap-4">
-                <!-- PET -->
-                <div class="border border-gray-200 p-5 flex flex-col justify-between relative bg-gray-50/50">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold text-gray-500 tracking-wider">平均 PET (車與車)</span>
-                        <i class="fas fa-tachometer-alt text-blue-600"></i>
-                    </div>
-                    <div class="flex items-baseline space-x-2 mt-4 mb-2">
-                        <span class="text-3xl font-serif font-bold text-gray-900">1.8s</span>
-                        <span class="text-xs font-bold text-red-600">低於安全值</span>
-                    </div>
-                    <div class="absolute bottom-5 left-5 right-5 h-1 bg-red-600 w-12"></div>
+    <section class="workspace-grid">
+        <article class="panel status-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="kicker">OBSERVATION STATUS</span>
+                    <h2>路口觀測與資料狀態</h2>
+                    <p>從即時影像預覽確認視角與資料狀態，再查看候選事件。</p>
                 </div>
-
-                <!-- TTC -->
-                <div class="border border-gray-200 p-5 flex flex-col justify-between relative bg-gray-50/50">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-bold text-gray-500 tracking-wider">平均 TTC (人與車)</span>
-                        <i class="fas fa-walking text-blue-600"></i>
-                    </div>
-                    <div class="flex items-baseline space-x-2 mt-4 mb-2">
-                        <span class="text-3xl font-serif font-bold text-gray-900">2.4s</span>
-                        <span class="text-xs font-bold text-blue-700">正常範圍</span>
-                    </div>
-                    <div class="absolute bottom-5 left-5 right-5 h-1 bg-blue-700 w-12"></div>
-                </div>
-
-                <!-- High-Risk Time -->
-                <div class="border border-gray-200 p-5 flex flex-col justify-between bg-gray-50/50 min-h-[140px]">
-                    <span class="text-xs font-bold text-gray-500 tracking-wider mb-2">高風險時段</span>
-                    <span class="text-lg font-serif italic text-gray-900 mb-4">17:00 - 19:00</span>
-                    <div class="flex items-end justify-between h-14 mt-auto space-x-1 w-2/3">
-                        <div class="w-1/5 bg-blue-200 h-1/4"></div>
-                        <div class="w-1/5 bg-blue-400 h-2/4"></div>
-                        <div class="w-1/5 bg-blue-500 h-[60%]"></div>
-                        <div class="w-1/5 bg-red-600 h-full relative flex justify-center">
-                            <span class="absolute -top-4 text-[9px] font-bold text-red-600">MAX</span>
-                        </div>
-                        <div class="w-1/5 bg-blue-300 h-2/4"></div>
-                    </div>
-                </div>
-
-                <!-- Enforcement Comparison -->
-                <div class="border border-gray-200 p-5 flex flex-col justify-between bg-gray-50/50">
-                    <span class="text-xs font-bold text-gray-500 tracking-wider mb-3">執法對比分析</span>
-                    <span class="text-base font-bold text-gray-900 mb-3 tracking-widest">衝突 vs 舉發</span>
-                    <div class="space-y-3 mt-auto">
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="text-gray-600">潛在衝突事件</span>
-                            <span class="font-bold text-gray-900 text-sm">428 案</span>
-                        </div>
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="text-gray-900 font-bold">實際舉發案件</span>
-                            <span class="font-bold text-blue-700 text-sm">312 案</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[10px] text-gray-400 border-t border-gray-200 pt-2 mt-1">
-                            <span>轉換率: 72.8%</span>
-                            <span>事故率: 1.2%</span>
-                        </div>
-                    </div>
+                <span id="status-summary-pill" class="summary-pill"></span>
+            </div>
+            <div id="camera-table" class="camera-table" role="table" aria-label="路口觀測狀態">
+                <div class="camera-row camera-row--head" role="row">
+                    <span>影像預覽</span>
+                    <span>路口</span>
+                    <span>資料狀態</span>
+                    <span>啟用樣態</span>
+                    <span>候選事件</span>
                 </div>
             </div>
+        </article>
 
-            <!-- 右側代表性事件重播 -->
-            <div class="md:col-span-1 border border-gray-200 bg-gray-50/30 flex flex-col h-full">
-                <div class="flex justify-between items-center p-3 border-b border-gray-200 bg-white">
-                    <span class="text-xs font-bold text-gray-500 tracking-wider">代表性事件重播</span>
-                    <a href="#" class="text-[10px] font-bold text-blue-700 hover:underline">完整觀測報告 <i class="fas fa-arrow-right ml-1"></i></a>
-                </div>
-
-                <!-- Video Player -->
-                <div class="h-40 bg-black relative flex justify-center items-center overflow-hidden">
-                    <video src="video/video05.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-90"></video>
-                    <!-- Timestamp -->
-                    <div class="absolute bottom-2 right-2 text-[10px] text-gray-500 font-mono bg-white/70 px-1 z-10">2024-05-20 18:24:33</div>
-                </div>
-
-                <div class="p-4 bg-white flex-1">
-                    <h4 class="text-sm font-bold text-gray-900 mb-2">行人與轉彎車輛衝突 (TTC: 1.2s)</h4>
-                    <p class="text-[11px] text-gray-500 leading-relaxed">
-                        系統偵測到左轉車輛未禮讓行人穿越道上之行人，觸發高風險警示。已標記為候選事件 #EVT-B82。
-                    </p>
+        <article class="panel recommendation-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="kicker">FOCUS AREAS</span>
+                    <h2>路口推薦區域</h2>
+                    <p>來自日報表的跨路口 μ+2σ 門檻，列出達標的路口與樣態。</p>
                 </div>
             </div>
-        </div>
+            <div id="recommendation-list" class="recommendation-list"></div>
+        </article>
+    </section>
 
-        <!-- 底部總覽標籤 -->
-        <div class="flex items-center mt-6 border-t border-gray-100 pt-5">
-            <i class="far fa-list-alt text-blue-600 mr-2"></i>
-            <span class="text-xs text-gray-500 font-bold mr-4">潛在衝突候選事件總覽 (今日)</span>
-
-            <div class="flex space-x-3">
-                <div class="border border-gray-200 px-3 py-1.5 flex items-center space-x-2 bg-gray-50/50">
-                    <span class="w-2 h-2 rounded-full bg-red-600"></span>
-                    <span class="text-xs font-bold text-gray-900">124</span>
-                    <span class="text-[10px] text-gray-500">車與車衝突</span>
+    <section class="analytics-grid">
+        <article class="panel distribution-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="kicker">EVENT DISTRIBUTION</span>
+                    <h2>候選事件樣態分布</h2>
+                    <p>數量依目前篩選範圍計算。</p>
                 </div>
-                <div class="border border-gray-200 px-3 py-1.5 flex items-center space-x-2 bg-gray-50/50">
-                    <span class="w-2 h-2 rounded-full bg-blue-700"></span>
-                    <span class="text-xs font-bold text-gray-900">86</span>
-                    <span class="text-[10px] text-gray-500">人車衝突</span>
-                </div>
-                <div class="border border-gray-200 px-3 py-1.5 flex items-center space-x-2 bg-gray-50/50">
-                    <span class="w-2 h-2 rounded-full bg-yellow-600"></span>
-                    <span class="text-xs font-bold text-gray-900">42</span>
-                    <span class="text-[10px] text-gray-500">非號誌化路口衝突</span>
+                <div class="period-tabs">
+                    <button data-period="today">今日</button>
+                    <button data-period="week">近 7 日</button>
                 </div>
             </div>
-        </div>
-    </div>
+            <div id="bar-chart" class="bar-chart"></div>
+        </article>
 
-    <!-- 下半部主要圖表區 -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-        <div class="md:col-span-2 flex flex-col gap-6">
-            <div class="card-bg p-8 flex flex-col relative h-[400px]">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-1">違規樣態統計數據</h2>
-                        <p class="text-xs text-gray-500 tracking-wider">違規案件類型分佈趨勢宏觀數據報告</p>
-                    </div>
-                    <div class="flex text-xs font-bold shadow-sm overflow-hidden border border-gray-200">
-                        <button class="bg-gray-100 text-gray-500 px-4 py-2 border-r border-gray-200 hover:bg-gray-200 transition">週報表</button>
-                        <button class="bg-blue-800 text-white px-4 py-2 hover:bg-blue-700 transition">月報表</button>
-                    </div>
+        <article class="panel heatmap-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="kicker">HOURLY COUNTS</span>
+                    <h2>候選事件時段分布</h2>
+                    <p>顏色表示事件次數，不表示道路風險。</p>
                 </div>
-                <div class="flex-1 w-full relative mt-4">
-                    <canvas id="generalStatsChart"></canvas>
-                </div>
+                <span id="heatmap-summary-pill" class="summary-pill"></span>
             </div>
-
-            <div class="card-bg p-8 flex flex-col">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-bold text-gray-900">違規時段熱力分析</h3>
-                    <div class="flex items-center space-x-3 text-[10px] text-gray-500">
-                        <span class="flex items-center"><span class="w-3 h-3 bg-blue-50 mr-1 border border-gray-200"></span>低頻度</span>
-                        <span class="flex items-center"><span class="w-3 h-3 bg-blue-800 mr-1"></span>高頻度</span>
-                    </div>
-                </div>
-
-                <div id="time-heatmap-container" class="w-full h-24 flex gap-1 mb-6"></div>
-
-                <div class="bg-blue-50/50 p-6 flex items-start space-x-4 border border-blue-100/50">
-                    <i class="fas fa-lightbulb text-blue-600 mt-1"></i>
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-900 mb-2">數位拓展建議</h4>
-                        <p id="heatmap-advice" class="text-xs text-gray-600 leading-loose">正在分析數據...</p>
-                    </div>
-                </div>
+            <div id="heatmap" class="heatmap"></div>
+            <div class="observation-note">
+                <span>i</span>
+                <p id="heatmap-note"></p>
             </div>
-        </div>
+        </article>
+    </section>
 
-        <!-- 違規熱點地圖區塊 -->
-        <div class="md:col-span-1 flex flex-col gap-6">
-            <div class="card-bg flex flex-col h-full">
-
-                <div class="p-8 pb-4">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2">違規熱點空間分析</h2>
-                    <p class="text-xs text-gray-500 tracking-wider">Violation Hotspots Observation (近5日)</p>
-                </div>
-
-                <div class="flex-1 relative border-y border-gray-100 min-h-[300px] z-0" id="hotspot-map">
-                    <div class="absolute bottom-4 left-4 bg-white/90 p-3 shadow-sm border border-gray-200 text-[10px] text-gray-800 space-y-2 z-[1000] backdrop-blur-sm">
-                        <div class="flex items-center"><div class="w-2.5 h-2.5 bg-red-500 mr-2 border border-red-700"></div>高風險路口 (TOP 3)</div>
-                        <div class="flex items-center"><div class="w-2.5 h-2.5 bg-blue-600 mr-2 border border-blue-800"></div>一般密度路段</div>
-                    </div>
-                </div>
-
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h4 class="text-xs font-bold text-gray-500 tracking-widest">路口事件排行 TOP 3</h4>
-                        <i class="fas fa-sort-amount-down text-blue-600"></i>
-                    </div>
-
-                    <div id="hotspot-ranking-list" class="space-y-3">
-                        <div class="text-xs text-gray-400">正在載入數據...</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
 </main>
 
-<script src="js/data.js"></script>
-<script src="js/admin.js"></script>
+<script type="module" src="js/admin.js"></script>
 </body>
 </html>
